@@ -1,0 +1,74 @@
+{
+  "MonetariaBcra": {
+    "description": "Auto imported from components/monetaria/bcra.vue"
+  },
+  "MonetariaBox": {
+    "description": "Auto imported from components/monetaria/box.vue"
+  },
+  "MonetariaCambio": {
+    "description": "Auto imported from components/monetaria/cambio.vue"
+  },
+  "MonetariaMae": {
+    "description": "Auto imported from components/monetaria/mae.vue"
+  },
+  "MonetariaRofex": {
+    "description": "Auto imported from components/monetaria/rofex.vue"
+  },
+  "MonetariaTasa": {
+    "description": "Auto imported from components/monetaria/tasa.vue"
+  },
+  "MonetariaTcrm": {
+    "description": "Auto imported from components/monetaria/tcrm.vue"
+  },
+  "ChartsBar": {
+    "description": "Auto imported from components/charts/bar.js"
+  },
+  "ChartsLine": {
+    "description": "Auto imported from components/charts/line.js"
+  },
+  "ExternoBox": {
+    "description": "Auto imported from components/externo/box.vue"
+  },
+  "ExternoExpo": {
+    "description": "Auto imported from components/externo/expo.vue"
+  },
+  "ExternoIce": {
+    "description": "Auto imported from components/externo/ice.vue"
+  },
+  "ExternoImpo": {
+    "description": "Auto imported from components/externo/impo.vue"
+  },
+  "ExternoSaldo": {
+    "description": "Auto imported from components/externo/saldo.vue"
+  },
+  "ActividadBox": {
+    "description": "Auto imported from components/actividad/box.vue"
+  },
+  "ActividadEmae": {
+    "description": "Auto imported from components/actividad/emae.vue"
+  },
+  "ActividadIpi": {
+    "description": "Auto imported from components/actividad/ipi.vue"
+  },
+  "ActividadIsac": {
+    "description": "Auto imported from components/actividad/isac.vue"
+  },
+  "ActividadUcii": {
+    "description": "Auto imported from components/actividad/ucii.vue"
+  },
+  "PreciosBox": {
+    "description": "Auto imported from components/precios/box.vue"
+  },
+  "PreciosEmp": {
+    "description": "Auto imported from components/precios/emp.vue"
+  },
+  "PreciosIpc": {
+    "description": "Auto imported from components/precios/ipc.vue"
+  },
+  "PreciosRem": {
+    "description": "Auto imported from components/precios/rem.vue"
+  },
+  "PreciosSal": {
+    "description": "Auto imported from components/precios/sal.vue"
+  }
+}
