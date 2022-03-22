@@ -1,22 +1,14 @@
 <template>
   <div style="position:relative">
 <h4 class="chartitle"><strong>EMAE</strong>: Estimador Mensual de Actividad Economica <br>Frecuencia Mensual<br>Base 2004 </h4>
-      <div class="double">
-        <charts-line
+         <charts-line
             :data="chartData"
             :options="chartOptions"
             :height="420"
           />
-        <h4 class="chartitlealberto"><strong>EMAE</strong><br>Gestión Fernandez</h4>
-          <charts-line
-            :data="chartDataAlberto"
-            :options="chartOptionsAlberto"
-            :height="420"
-          />
-        </div>
+        
    
-       </div>
-    </section>
+     </section>
 
   </div>
 </template>
@@ -113,7 +105,7 @@ export default {
               color: "#ddd"
             },
             ticks: { 
-              fontColor: "#888", fontSize: 13, max: "2019/01/01"},
+              fontColor: "#888", fontSize: 13,},
             time: {
               tooltipFormat: 'DD/MM/YY',
               unit: 'year',
