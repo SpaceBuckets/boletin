@@ -20,21 +20,6 @@
   "ChartsLine": {
     "description": "Auto imported from components/charts/line.js"
   },
-  "ActividadBox": {
-    "description": "Auto imported from components/actividad/box.vue"
-  },
-  "ActividadEmae": {
-    "description": "Auto imported from components/actividad/emae.vue"
-  },
-  "ActividadIpi": {
-    "description": "Auto imported from components/actividad/ipi.vue"
-  },
-  "ActividadIsac": {
-    "description": "Auto imported from components/actividad/isac.vue"
-  },
-  "ActividadUcii": {
-    "description": "Auto imported from components/actividad/ucii.vue"
-  },
   "MonetariaBcra": {
     "description": "Auto imported from components/monetaria/bcra.vue"
   },
@@ -55,6 +40,21 @@
   },
   "MonetariaTcrm": {
     "description": "Auto imported from components/monetaria/tcrm.vue"
+  },
+  "ActividadBox": {
+    "description": "Auto imported from components/actividad/box.vue"
+  },
+  "ActividadEmae": {
+    "description": "Auto imported from components/actividad/emae.vue"
+  },
+  "ActividadIpi": {
+    "description": "Auto imported from components/actividad/ipi.vue"
+  },
+  "ActividadIsac": {
+    "description": "Auto imported from components/actividad/isac.vue"
+  },
+  "ActividadUcii": {
+    "description": "Auto imported from components/actividad/ucii.vue"
   },
   "PreciosBox": {
     "description": "Auto imported from components/precios/box.vue"

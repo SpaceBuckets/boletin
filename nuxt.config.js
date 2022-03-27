@@ -4,14 +4,14 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'beo',
+    title: 'Boletin Extraoficial',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Esta colección de indicadores intenta develar de donde viene y hacia donde va la macroeconomía Argentina.' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
