@@ -24,7 +24,7 @@
           </div>
         </div>
 
-        <component v-show="`externo-${currActive}`" :is="`externo-${currActive}`"/>
+        <component :is="`externo-${currActive}`"/>
 
       </div>
     </section>
