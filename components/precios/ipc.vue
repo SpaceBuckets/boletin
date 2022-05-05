@@ -1,7 +1,7 @@
 <template>
 <div style="position:relative">
-<h4 class="chartitle"><strong>IPC</strong>: Indice de Precios al Consumidor <br>Frecuencia Mensual<br>Base 2016 </h4>
-           <charts-line
+        <h4 class="chartitle"><strong>IPC</strong>: Indice de Precios al Consumidor <br>Frecuencia Mensual<br>Base 2016 </h4>
+          <charts-line
             :key="$state.updated"
             :data="chartData"
             :options="chartOptions"
@@ -34,7 +34,7 @@ import ipcPatagonia from "../../json/ipc/patagonia/d.json";
             backgroundColor: "#2E78D240",
             label: "Desestacionalizado",
             data: ipc,
-            borderColor: "#2E78D250",
+            borderColor: "#2E78D2",
             pointRadius: 0,
             borderWidth: 0,
             type: 'bar'

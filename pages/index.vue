@@ -169,6 +169,7 @@ export default {
   position: relative;
   padding: 20px;
   overflow: hidden;
+  display: none;
    &:after {
     content:"";
     background: #000;

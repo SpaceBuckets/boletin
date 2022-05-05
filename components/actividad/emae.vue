@@ -1,6 +1,6 @@
 <template>
   <div style="position:relative">
-<h4 class="chartitle"><strong>EMAE</strong>: Estimador Mensual de Actividad Economica <br>Frecuencia Mensual<br>Base 2004 </h4>
+  <h4 class="chartitle"><strong>EMAE</strong>: Estimador Mensual de Actividad Economica <br>Frecuencia Mensual<br>Base 2004 </h4>
          <charts-line
             :data="chartData"
             :options="chartOptions"

@@ -42,7 +42,7 @@ export default {
   margin: 0 auto;
   background: #000;
    //height: 100vh;
-  max-width: 1440px;
+  //max-width: 1440px;
 }
 html {
   box-sizing: border-box;
@@ -193,12 +193,13 @@ section {
   //float: left;
   width: 100%;
     //min-height: 500px;
-    max-width: 1440px;
+    //max-width: 1440px;
     margin: 0px auto;
    border-bottom: 1px dotted #aaa;
   padding-bottom: 30px;
   padding-top: 30px;
   background: #fff;
+  min-height: 485px;
 }
 
 .realrto {

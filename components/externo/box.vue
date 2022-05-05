@@ -35,7 +35,7 @@
 <script>
 
 import saldoDates from "../../json/impo/dolar/dates.json";
- import iceDates from "../../json/expo/ice/dates.json";
+import iceDates from "../../json/expo/ice/dates.json";
 import expoDates from "../../json/impo/precio/dates.json";
 import impoDates from "../../json/impo/dolar/dates.json";
 
