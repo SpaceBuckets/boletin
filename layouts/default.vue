@@ -39,10 +39,10 @@ export default {
 <style lang="scss">
  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 .content-container {
-  margin: 0 auto;
-  background: #000;
+  margin: 20px auto;
+  //background: #000;
    //height: 100vh;
-  //max-width: 1440px;
+  max-width: 1440px;
 }
 html {
   box-sizing: border-box;
@@ -52,8 +52,7 @@ html {
 }
 
 header {
-  background: #151515;
-
+background: #000;
    position: fixed;
   top: 0;
   height: 60px;
@@ -71,7 +70,7 @@ header {
  
 }
 
-h1 {
+header h1 {
 
   text-align: left;
   margin: 0;
@@ -79,7 +78,7 @@ h1 {
 
   padding: 0 20px;
   a {
-   color: #fff;
+   color: #ddd;
      font-family: 'Montserrat', sans-serif;
   font-size: 22px;
   text-decoration: none;
@@ -88,7 +87,7 @@ h1 {
  
   span {
     font-weight: 400;
-    color:#ddd;
+    color:#fff;
   }  
   }
 
@@ -97,8 +96,8 @@ h1 {
 body {
   font-family: arial, helvetica, sans-serif;
   background: rgb(245 246 250);
-  background: #000;
- 
+  background: #F7F5F0;
+ background: #89B6E0;
   margin: 0;
   font-size: 15px;
   padding: 0;
@@ -109,7 +108,7 @@ body {
 p {
   margin-top: 0;
   line-height: 1.4;
-  color: #4a4a4a;
+  color: #262626;
 }
  
 
@@ -149,7 +148,7 @@ p {
   flex-direction: column;
   //justify-content: space-between;
   h2 {
-    padding: 0 20px 10px;
+    padding: 0 0 10px;
         font-weight: 500;
    }
   > * {
@@ -161,11 +160,11 @@ p {
   }
   .redesc,
   .relist div {
-    padding: 10px 20px;
-    border-bottom: 1px solid #eee;
+    padding: 10px 20px 10px 0;
+    border-bottom: 1px solid #F7F5F0;
     cursor: pointer;
     opacity: 1;
-    color: #666;
+    color: #888;
     &:hover {
             color: #111;
      }
@@ -194,12 +193,22 @@ section {
   width: 100%;
     //min-height: 500px;
     //max-width: 1440px;
-    margin: 0px auto;
-   border-bottom: 1px dotted #aaa;
-  padding-bottom: 30px;
-  padding-top: 30px;
-  background: #fff;
-  min-height: 485px;
+    //border-bottom: 1px dotted #aaa;
+  padding: 25px;
+  padding-top: 40px;
+    background: #fff;
+  min-height: 480px;
+    border-top: 2px solid #F7F5F0;
+
+     //border-radius: 10px;
+
+
+}
+
+.section-container div:first-child section {
+      border-top: 0;
+  padding-top: 25px;
+
 }
 
 .realrto {
@@ -242,9 +251,9 @@ section {
     &:first-child {
       max-width: 340px !important;
       padding-left: 0;
-      border-right: 1px solid #eee;
+      border-right: 2px solid #F7F5F0;
       + div {
-        padding: 0 15px;
+        padding: 0 0 0 15px;
        }
     }
   }
@@ -257,13 +266,12 @@ h4 {
   text-overflow: ellipsis;
   font-weight: normal;
   position: absolute;
-  color: #333;
+  color: #aaa;
   background: #fff;
   padding: 1px 10px;
   left: 20px;
-  border-radius: 50px;
-  opacity: 0.8;
-  top: 5px;
+  font-size: 12px;
+    top: 5px;
 }
 .acti-wrap {
   overflow: auto;
@@ -286,7 +294,7 @@ em {
 p {
   margin-top: 0;
   line-height: 1.4;
-  color: #4a4a4a;
+  color: #262626;
 }
 
 .descripshon {
@@ -326,6 +334,8 @@ a {
 }
 
 
+
+
 h2 {
   margin: 0;
   font-size: 22px;
@@ -333,6 +343,8 @@ h2 {
   font-weight: 400;
   padding-right: 10px;
   font-family: "Montserrat", sans-serif;
+   padding-bottom: 30px;
+  font-weight: 500;
   i {
     display: block;
     font-size: 14px;
@@ -349,8 +361,7 @@ h2 {
     font-weight: 600;
   }
 }
-
-.flex-title {
+ .flex-title {
   display: flex;
   justify-content: space-between;
   align-items: center;

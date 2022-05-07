@@ -6,6 +6,11 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
+- `<ActividadBox>` | `<actividad-box>` (components/actividad/box.vue)
+- `<ActividadEmae>` | `<actividad-emae>` (components/actividad/emae.vue)
+- `<ActividadIpi>` | `<actividad-ipi>` (components/actividad/ipi.vue)
+- `<ActividadIsac>` | `<actividad-isac>` (components/actividad/isac.vue)
+- `<ActividadUcii>` | `<actividad-ucii>` (components/actividad/ucii.vue)
 - `<ChartsBar>` | `<charts-bar>` (components/charts/bar.js)
 - `<ChartsLine>` | `<charts-line>` (components/charts/line.js)
 - `<ExternoBox>` | `<externo-box>` (components/externo/box.vue)
@@ -13,11 +18,6 @@ You can directly use them in pages and other components without the need to impo
 - `<ExternoIce>` | `<externo-ice>` (components/externo/ice.vue)
 - `<ExternoImpo>` | `<externo-impo>` (components/externo/impo.vue)
 - `<ExternoSaldo>` | `<externo-saldo>` (components/externo/saldo.vue)
-- `<ActividadBox>` | `<actividad-box>` (components/actividad/box.vue)
-- `<ActividadEmae>` | `<actividad-emae>` (components/actividad/emae.vue)
-- `<ActividadIpi>` | `<actividad-ipi>` (components/actividad/ipi.vue)
-- `<ActividadIsac>` | `<actividad-isac>` (components/actividad/isac.vue)
-- `<ActividadUcii>` | `<actividad-ucii>` (components/actividad/ucii.vue)
 - `<MonetariaBcra>` | `<monetaria-bcra>` (components/monetaria/bcra.vue)
 - `<MonetariaBox>` | `<monetaria-box>` (components/monetaria/box.vue)
 - `<MonetariaCambio>` | `<monetaria-cambio>` (components/monetaria/cambio.vue)

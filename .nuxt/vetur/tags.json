@@ -1,4 +1,19 @@
 {
+  "ActividadBox": {
+    "description": "Auto imported from components/actividad/box.vue"
+  },
+  "ActividadEmae": {
+    "description": "Auto imported from components/actividad/emae.vue"
+  },
+  "ActividadIpi": {
+    "description": "Auto imported from components/actividad/ipi.vue"
+  },
+  "ActividadIsac": {
+    "description": "Auto imported from components/actividad/isac.vue"
+  },
+  "ActividadUcii": {
+    "description": "Auto imported from components/actividad/ucii.vue"
+  },
   "ChartsBar": {
     "description": "Auto imported from components/charts/bar.js"
   },
@@ -19,21 +34,6 @@
   },
   "ExternoSaldo": {
     "description": "Auto imported from components/externo/saldo.vue"
-  },
-  "ActividadBox": {
-    "description": "Auto imported from components/actividad/box.vue"
-  },
-  "ActividadEmae": {
-    "description": "Auto imported from components/actividad/emae.vue"
-  },
-  "ActividadIpi": {
-    "description": "Auto imported from components/actividad/ipi.vue"
-  },
-  "ActividadIsac": {
-    "description": "Auto imported from components/actividad/isac.vue"
-  },
-  "ActividadUcii": {
-    "description": "Auto imported from components/actividad/ucii.vue"
   },
   "MonetariaBcra": {
     "description": "Auto imported from components/monetaria/bcra.vue"

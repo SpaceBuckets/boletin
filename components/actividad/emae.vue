@@ -101,29 +101,27 @@ export default {
             offset: true,
             position: 'bottom',
             gridLines: {
-              color: "#eee", zeroLineColor: '#eee', drawBorder: false, offsetGridLines: false, borderDash: [2, 2],
-              color: "#ddd"
+              color: "#F7F5F0", zeroLineColor: '#eee', drawBorder: false, offsetGridLines: false,
             },
             ticks: { 
-              fontColor: "#888", fontSize: 13,},
+              fontColor: "#aaa", fontSize: 13,},
             time: {
               tooltipFormat: 'DD/MM/YY',
               unit: 'year',
             }
           }],
           yAxes: [{
-            ticks: { suggestedMax: 175,suggestedMin: 85, fontColor: "#888",                          display: false,
+            ticks: { suggestedMax: 175,suggestedMin: 85, fontColor: "#aaa",                  
  },
             gridLines: { 
-              color: "#eee", 
+              color: "#F7F5F0", 
               lineWidth: 1, 
-              drawBorder: false,     
-                   
+                    zeroLineColor: '#333',
             },
             scaleLabel: {
-              display: false,
-              labelString: 'Base 2004 = 100',
-              fontColor: "#888"
+               labelString: 'Base 2004 = 100',
+              fontColor: "#aaa",
+              display: "true"
             },
             position: "right",
 
@@ -152,19 +150,21 @@ export default {
             offset: true,
             position: 'bottom',
             gridLines: {
-              color: "#eee", zeroLineColor: '#eee', drawBorder: false, offsetGridLines: false, borderDash: [2, 2],
-              color: "#ddd"
+                            color: "#F7F5F0"
+, zeroLineColor: '#eee', drawBorder: false, offsetGridLines: false, 
+              color: "#F7F5F0"
             },
-            ticks: { fontColor: "#888", fontSize: 13,min: "2020/01/01",max: "2023/06/10" },
+            ticks: { fontColor: "#aaa", fontSize: 13,min: "2020/01/01",max: "2023/06/10" },
             time: {
               tooltipFormat: 'DD/MM/YY',
               unit: 'year',
             }
           }],
           yAxes: [{
-            ticks: { suggestedMax: 175,suggestedMin: 85, fontColor: "#888", },
+            ticks: { suggestedMax: 175,suggestedMin: 85, fontColor: "#aaa", },
             gridLines: { 
-              color: "#eee", 
+                            color: "#F7F5F0"
+, 
               lineWidth: 1, 
               drawBorder: false,          
             },

@@ -172,23 +172,25 @@ export default {
             offset: true,
             position: 'bottom',
             gridLines: {
-              color: "#eee", zeroLineColor: '#eee', drawBorder: false, offsetGridLines: false, borderDash: [2, 2],
-              color: "#ddd"
+                            color: "#F7F5F0"
+, zeroLineColor: '#eee', drawBorder: false, offsetGridLines: false, 
+              color: "#F7F5F0"
             },
-            ticks: { fontColor: "#888", fontSize: 13, },
+            ticks: { fontColor: "#aaa", fontSize: 13, },
             time: {
               tooltipFormat: 'DD/MM/YY',
               unit: 'year',
             }
           }],
           yAxes: [{
-            ticks: { suggestedMin: 0,suggestedMax: 100,fontColor: "#888",
+            ticks: { suggestedMin: 0,suggestedMax: 100,fontColor: "#aaa",
             callback: function(value, index, values) {
                                 return value + '%';
                         } 
                         },
             gridLines: { 
-              color: "#eee", 
+                            color: "#F7F5F0"
+, 
               lineWidth: 1, 
               drawBorder: false,          
             },
