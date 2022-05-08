@@ -1,6 +1,7 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
- 
+var xlsx = require('node-xlsx');
+
 global.emae = {
   estacional: 'https://apis.datos.gob.ar/series/api/series/?ids=143.3_NO_PR_2004_A_31&limit=5000&format=json',
   tendencia: 'https://apis.datos.gob.ar/series/api/series/?ids=143.3_NO_PR_2004_A_28&limit=5000&format=json',
@@ -114,6 +115,47 @@ global.rem = {
   interanualipc: 'https://apis.datos.gob.ar/series/api/series/?collapse=month&collapse_aggregation=avg&ids=148.3_INIVELNAL_DICI_M_26&limit=5000&representation_mode=percent_change_a_year_ago&format=json'
 }
 
+
+
+
+
+
+ 
+async function getTCRM() {
+
+  const resA = await fetch('http://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xls');
+  console.log("⧖ Downloading ITCRMSerie.xls...")
+  var emaeB = await resA.arrayBuffer();
+  var obj = xlsx.parse(emaeB);
+
+  var dateITRCM = []
+  var valITCRM = []
+  var valITCRB = []
+  var valITCRUS = []
+
+  for (let i = 0; i < obj[0].data.length; i++) {
+    var date = new Date(Date.UTC(0, 0, obj[0].data[i][0]));
+
+    if (date != 'Invalid Date') {
+      dateITRCM.push(date.toLocaleDateString("en-CA"))
+      valITCRM.push(obj[0].data[i][1])
+      valITCRB.push(obj[0].data[i][2])
+      valITCRUS.push(obj[0].data[i][5])
+
+    }
+  }
+
+
+
+
+  fs.writeFileSync(`./json/monetaria/tcrm/dates.json`, JSON.stringify(dateITRCM));
+  fs.writeFileSync(`./json/monetaria/tcrm/itcrm.json`, JSON.stringify(valITCRM));
+  fs.writeFileSync(`./json/monetaria/tcrm/itcrb.json`, JSON.stringify(valITCRB));
+  fs.writeFileSync(`./json/monetaria/tcrm/itcrus.json`, JSON.stringify(valITCRUS));
+  console.log(`♥ [monetaria] TRCM updated`)
+
+}
+
 async function masterDb(kpis) {
 
   for (let e = 0; e < kpis.length; e++) {
@@ -123,7 +165,6 @@ async function masterDb(kpis) {
       var tempDataBase = [];
       const resB = await fetch(value);
       var emaeB = await resB.json();
-  
       for (let i = 0; i < emaeB.data.length; i++) {
         if (kpis[e] === "ipc" || kpis[e] === 'empleo' || kpis[e] === 'rem') {
           var valor = emaeB.data[i][1]*100
@@ -133,21 +174,6 @@ async function masterDb(kpis) {
         }
         tempDates.push(emaeB.data[i][0]);
       }
-/*       try {
-        const data = fs.readFileSync(`./json/${kpis[e]}/${key}/dates.json`, "utf8");
-        if(data === JSON.stringify(tempDates)) {
-          console.log(`♦ [${kpis[e]}] ${key} skipped`)
-
-        } else {
-          fs.writeFileSync(`./json/${kpis[e]}/${key}/dates.json`, JSON.stringify(tempDates));
-          fs.writeFileSync(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
-          console.log(`♥ [${kpis[e]}] ${key} updated`)
-
-        }
- 
-      } catch (err) {
-        console.error(err);
-      } */
       fs.writeFileSync(`./json/${kpis[e]}/${key}/dates.json`, JSON.stringify(tempDates));
       fs.writeFileSync(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
       console.log(`♥ [${kpis[e]}] ${key} updated`)
@@ -157,7 +183,7 @@ async function masterDb(kpis) {
 }
  
  
-masterDb([
+ masterDb([
   'emae',
   'ipi',
   'isac',
@@ -169,4 +195,6 @@ masterDb([
   'rofex',
   'rem',
   'monetaria',
-]);
+]); 
+
+getTCRM()

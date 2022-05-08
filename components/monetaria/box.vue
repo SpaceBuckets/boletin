@@ -51,7 +51,7 @@ export default {
         cambio: cambioDates[cambioDates.length - 1].replace(/-/g, "/").split('/').reverse().join('/'),
         tcrm: trcmDates[trcmDates.length - 1].replace(/-/g, "/").split('/').reverse().join('/'),
         mae: maeDates[maeDates.length - 1].replace(/-/g, "/").split('/').reverse().join('/'),
-        rofex: rofexDates[rofexDates.length - 1].replace(/-/g, "/").split('/').reverse().join('/'),
+        //rofex: rofexDates[rofexDates.length - 1].replace(/-/g, "/").split('/').reverse().join('/'),
         bcra: bcraDates[bcraDates.length - 1].replace(/-/g, "/").split('/').reverse().join('/')
       },      
       econdesc: {
@@ -63,7 +63,7 @@ export default {
         cambio: "Tipo(s) de Cambio",
         tcrm: "Tipo de Cambio Real Multilateral",
         mae: "Volumen MAE",
-        rofex: 'Dolar Futuro',
+        //rofex: 'Dolar Futuro',
         bcra: 'Reservas Internacionales USD',
         },
     };

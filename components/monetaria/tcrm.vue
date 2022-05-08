@@ -16,7 +16,9 @@
 
 <script>
 
-import trcm from "../../json/monetaria/tcrm/d.json";
+import trcm from "../../json/monetaria/tcrm/itcrm.json";
+import trcus from "../../json/monetaria/tcrm/itcrus.json";
+import trcb from "../../json/monetaria/tcrm/itcrb.json";
  import trcmDates from "../../json/monetaria/tcrm/dates.json";
 
 export default {
@@ -33,7 +35,23 @@ export default {
             borderColor: '#2E78D2',
             pointRadius: 0,
             borderWidth: 1.5,
-          },       
+          }, 
+          {
+            backgroundColor: 'rgba(46,120,210,0)',
+            label: "Desestacionalizado",
+            data: trcus,
+            borderColor: "rgba(46,120,210,0.25)",
+            pointRadius: 0,
+            borderWidth: 1.5,
+          },   
+          {
+            backgroundColor: 'rgba(46,120,210,0)',
+            label: "Desestacionalizado",
+            data: trcb,
+            borderColor: "rgba(46,120,210,0.25)",
+            pointRadius: 0,
+            borderWidth: 1.5,
+          },                             
         ],
       },     
       chartOptions: {
@@ -65,7 +83,7 @@ export default {
             }
           }],
           yAxes: [{
-            ticks: { suggestedMin: 60,fontColor: "#aaa", },
+            ticks: { suggestedMin: 0,suggestedMax: 200,fontColor: "#aaa", },
             gridLines: { 
                             color: "#F7F5F0"
 , 
@@ -73,9 +91,9 @@ export default {
               drawBorder: false,          
             },
             scaleLabel: {
-              display: false,
+              display: true,
               labelString: 'Base 2004 = 100',
-              fontColor: "#888"
+              fontColor: "#aaa"
             },
             position: "right",
           },

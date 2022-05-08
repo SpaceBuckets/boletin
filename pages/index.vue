@@ -110,22 +110,7 @@ export default {
 				 transform: translateX(0) ;
 		}       
 }
-  #sun {
-    position: absolute;
-    display: none;
-    top: -300px;
-    right: -50px;
-    width: 800px;
-    height: auto;
-    transform-origin: center;
-    padding: 20px;
-    //transition: 5s ease-in;
-    transform: translateY(0%) rotate(180deg);
-    animation: rotatesun 550s infinite linear;
-    &:hover {
-      //transform: translateY(-25%)
-    }
-  }
+
 
 .left .rupil {
    animation: rotatepup 2s infinite ease-in;
@@ -136,7 +121,7 @@ export default {
    border-radius: 2px;
   //max-width: 1440px;
      box-shadow: 0px 0px 15px 5px rgba(109,145,179,0.5);
-  margin: 0 auto 25px;
+  margin: 0 auto 10px;
    background: #fff;
   position: relative;
   padding: 20px 25px;

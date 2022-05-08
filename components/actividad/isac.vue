@@ -82,7 +82,7 @@ export default {
             }
           }],
           yAxes: [{
-            ticks: {   fontColor: "#aaa", },
+            ticks: {  suggestedMin: 20,suggestedMax: 250, fontColor: "#aaa", },
             gridLines: { 
                             color: "#F7F5F0"
 , 
@@ -92,7 +92,7 @@ export default {
             scaleLabel: {
               display: true,
               labelString: 'Base 2004 = 100',
-              fontColor: "#888"
+              fontColor: "#aaa"
             },
             position: "right",
           },

@@ -111,7 +111,7 @@ export default {
             }
           }],
           yAxes: [{
-            ticks: { suggestedMax: 175,suggestedMin: 85, fontColor: "#aaa",                  
+            ticks: { suggestedMax: 180,suggestedMin: 80, fontColor: "#aaa",                  
  },
             gridLines: { 
               color: "#F7F5F0", 

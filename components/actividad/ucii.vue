@@ -195,7 +195,7 @@ export default {
               drawBorder: false,          
             },
             scaleLabel: {
-              display: true,
+              display: false,
               labelString: 'Porcentaje',
               fontColor: "#888"
             },

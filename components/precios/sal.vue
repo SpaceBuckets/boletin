@@ -73,7 +73,8 @@ export default {
             }
           }],
           yAxes: [{
-            ticks: { fontColor: "#aaa", },
+            ticks: { suggestedMin: 550000,suggestedMin: 650000, fontColor: "#aaa",       },           
+
             gridLines: { 
                             color: "#F7F5F0"
 , 
