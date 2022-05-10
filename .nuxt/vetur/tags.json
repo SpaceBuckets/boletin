@@ -35,21 +35,6 @@
   "ExternoSaldo": {
     "description": "Auto imported from components/externo/saldo.vue"
   },
-  "PreciosBox": {
-    "description": "Auto imported from components/precios/box.vue"
-  },
-  "PreciosEmp": {
-    "description": "Auto imported from components/precios/emp.vue"
-  },
-  "PreciosIpc": {
-    "description": "Auto imported from components/precios/ipc.vue"
-  },
-  "PreciosRem": {
-    "description": "Auto imported from components/precios/rem.vue"
-  },
-  "PreciosSal": {
-    "description": "Auto imported from components/precios/sal.vue"
-  },
   "MonetariaBcra": {
     "description": "Auto imported from components/monetaria/bcra.vue"
   },
@@ -70,5 +55,20 @@
   },
   "MonetariaTcrm": {
     "description": "Auto imported from components/monetaria/tcrm.vue"
+  },
+  "PreciosBox": {
+    "description": "Auto imported from components/precios/box.vue"
+  },
+  "PreciosEmp": {
+    "description": "Auto imported from components/precios/emp.vue"
+  },
+  "PreciosIpc": {
+    "description": "Auto imported from components/precios/ipc.vue"
+  },
+  "PreciosRem": {
+    "description": "Auto imported from components/precios/rem.vue"
+  },
+  "PreciosSal": {
+    "description": "Auto imported from components/precios/sal.vue"
   }
 }

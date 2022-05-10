@@ -147,7 +147,7 @@ async function getTCRM() {
 
 
 
-
+  console.log(dateITRCM)
   fs.writeFileSync(`./json/monetaria/tcrm/dates.json`, JSON.stringify(dateITRCM));
   fs.writeFileSync(`./json/monetaria/tcrm/itcrm.json`, JSON.stringify(valITCRM));
   fs.writeFileSync(`./json/monetaria/tcrm/itcrb.json`, JSON.stringify(valITCRB));
@@ -157,35 +157,37 @@ async function getTCRM() {
 }
 
 async function masterDb(kpis) {
-
-  for (let e = 0; e < kpis.length; e++) {
-    for (let [key, value] of Object.entries(global[`${kpis[e]}`])) {
-
-      var tempDates = [];
-      var tempDataBase = [];
-      const resB = await fetch(value);
-      var emaeB = await resB.json();
-      for (let i = 0; i < emaeB.data.length; i++) {
-        if (kpis[e] === "ipc" || kpis[e] === 'empleo' || kpis[e] === 'rem') {
-          var valor = emaeB.data[i][1]*100
-          tempDataBase.push(valor.toFixed(2));
-        } else {
-          tempDataBase.push(emaeB.data[i][1]);
+  if (kpis !== 'tcrm') {
+    for (let e = 0; e < kpis.length; e++) {
+      for (let [key, value] of Object.entries(global[`${kpis[e]}`])) {
+  
+        var tempDates = [];
+        var tempDataBase = [];
+        const resB = await fetch(value);
+        var emaeB = await resB.json();
+        for (let i = 0; i < emaeB.data.length; i++) {
+          if (kpis[e] === "ipc" || kpis[e] === 'empleo' || kpis[e] === 'rem') {
+            var valor = emaeB.data[i][1]*100
+            tempDataBase.push(valor.toFixed(2));
+          } else {
+            tempDataBase.push(emaeB.data[i][1]);
+          }
+          tempDates.push(emaeB.data[i][0]);
         }
-        tempDates.push(emaeB.data[i][0]);
+        fs.writeFileSync(`./json/${kpis[e]}/${key}/dates.json`, JSON.stringify(tempDates));
+        fs.writeFileSync(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
+        console.log(`♥ [${kpis[e]}] ${key} updated`)
+        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](100)
       }
-      fs.writeFileSync(`./json/${kpis[e]}/${key}/dates.json`, JSON.stringify(tempDates));
-      fs.writeFileSync(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
-      console.log(`♥ [${kpis[e]}] ${key} updated`)
-      await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](100)
     }
   }
+ 
 }
  
  
  masterDb([
   'emae',
-  'ipi',
+/*   'ipi',
   'isac',
   'expo',
   'impo',
@@ -194,7 +196,7 @@ async function masterDb(kpis) {
   'ucii',
   'rofex',
   'rem',
-  'monetaria',
-]); 
+  'monetaria', */
+ ]); 
 
 getTCRM()
