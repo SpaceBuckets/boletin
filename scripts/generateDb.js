@@ -148,6 +148,9 @@ async function getTCRM() {
 
 
   console.log(dateITRCM)
+  console.log(valITCRM)
+  console.log(valITCRB)
+  console.log(valITCRUS)
   fs.writeFileSync(`./json/monetaria/tcrm/dates.json`, JSON.stringify(dateITRCM));
   fs.writeFileSync(`./json/monetaria/tcrm/itcrm.json`, JSON.stringify(valITCRM));
   fs.writeFileSync(`./json/monetaria/tcrm/itcrb.json`, JSON.stringify(valITCRB));
