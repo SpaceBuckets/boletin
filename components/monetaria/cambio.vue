@@ -16,10 +16,9 @@
 
 <script>
 
-import cambio from "../../json/monetaria/cambio/d.json";
-import adr from "../../json/monetaria/adr/d.json";
-import blue from "../../json/monetaria/blue/d.json";
-  import trcmDates from "../../json/monetaria/cambio/dates.json";
+import cambio from "../../json/monetaria/blue/usd.json";
+ import adr from "../../json/monetaria/blue/blue.json";
+  import trcmDates from "../../json/monetaria/blue/dates.json";
 
 export default {
   data() {
@@ -115,9 +114,7 @@ export default {
     };
   },
   mounted() {
-     for (let i = 0; i < cambio.length; i++) {
-           this.megarray.push(Math.abs((cambio[i] - adr[i])/cambio[i] * 100).toFixed(2))
-     }
+ 
  
   }
 };

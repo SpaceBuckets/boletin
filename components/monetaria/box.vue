@@ -35,7 +35,7 @@
 <script>
 
 import bcraDates from "../../json/monetaria/reservas/dates.json";
-import cambioDates from "../../json/monetaria/cambio/dates.json";
+import cambioDates from "../../json/monetaria/blue/dates.json";
 import maeDates from "../../json/rofex/mae/dates.json";
 import rofexDates from "../../json/rofex/t1/dates.json";
 import tasaDates from "../../json/monetaria/tasa/dates.json";
@@ -48,7 +48,7 @@ export default {
       currActive: 'cambio',
       econdates: {
         tasa: tasaDates[tasaDates.length - 1].replace(/-/g, "/").split('/').reverse().join('/'),
-        cambio: cambioDates[cambioDates.length - 1].replace(/-/g, "/").split('/').reverse().join('/'),
+        cambio: cambioDates[cambioDates.length-1].replace(/-/g, "/").split('/').reverse().join('/'),
         tcrm: trcmDates[trcmDates.length - 1].replace(/-/g, "/").split('/').reverse().join('/'),
         mae: maeDates[maeDates.length - 1].replace(/-/g, "/").split('/').reverse().join('/'),
         //rofex: rofexDates[rofexDates.length - 1].replace(/-/g, "/").split('/').reverse().join('/'),

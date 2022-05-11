@@ -36,13 +36,13 @@ global.isac = {
 }
 
 global.monetaria = {
-  tcrm: 'https://apis.datos.gob.ar/series/api/series/?ids=116.4_TCRZE_2015_D_36_4&limit=5000&start_date=2009-01-01&format=json',
+  //tcrm: 'https://apis.datos.gob.ar/series/api/series/?ids=116.4_TCRZE_2015_D_36_4&limit=5000&start_date=2009-01-01&format=json',
   tasa: 'https://apis.datos.gob.ar/series/api/series/?ids=89.2_TS_INTE_PM_0_D_16&limit=5000&format=json',  
   badlar: 'https://apis.datos.gob.ar/series/api/series/?ids=89.2_TS_INTELAR_0_D_20&limit=5000&start_date=2016-01-02&format=json',
   plazo: 'https://apis.datos.gob.ar/series/api/series/?ids=89.1_TIPF35D_0_0_35&limit=5000&start_date=2016-01-01&format=json',
   call: 'https://apis.datos.gob.ar/series/api/series/?ids=89.2_TS_INTEALL_0_D_18&limit=5000&start_date=2016-01-02&format=json',
-  cambio: 'https://apis.datos.gob.ar/series/api/series/?ids=92.2_TIPO_CAMBIION_0_0_21_24&limit=5000&start_date=2018-01-01&format=json',
-  adr: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_T_CAMBIDRS_D_0_0_29&limit=5000&start_date=2018-01-01&format=json',
+  //cambio: 'https://apis.datos.gob.ar/series/api/series/?ids=92.2_TIPO_CAMBIION_0_0_21_24&limit=5000&start_date=2018-01-01&format=json',
+  //adr: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_T_CAMBIDRS_D_0_0_29&limit=5000&start_date=2018-01-01&format=json',
   reservas: 'https://apis.datos.gob.ar/series/api/series/?ids=92.1_RID_0_0_32&limit=5000&format=json'
 }
 
@@ -145,12 +145,6 @@ async function getTCRM() {
     }
   }
 
-
-
-  console.log(dateITRCM)
-  console.log(valITCRM)
-  console.log(valITCRB)
-  console.log(valITCRUS)
   fs.writeFileSync(`./json/monetaria/tcrm/dates.json`, JSON.stringify(dateITRCM));
   fs.writeFileSync(`./json/monetaria/tcrm/itcrm.json`, JSON.stringify(valITCRM));
   fs.writeFileSync(`./json/monetaria/tcrm/itcrb.json`, JSON.stringify(valITCRB));
@@ -158,6 +152,33 @@ async function getTCRM() {
   console.log(`♥ [monetaria] TRCM updated`)
 
 }
+
+async function getUSD() {
+
+  const resA = await fetch('https://api.bluelytics.com.ar/v2/evolution.json');
+  console.log("⧖ Downloading evolution.json...")
+  var emaeB = await resA.json();
+  var dateUSD = []
+  var valUSD = []
+  var valBlue = []
+  for (let i = 0; i < emaeB.length; i++) {
+    dateUSD.push(emaeB[i].date)
+    if (emaeB[i].source === 'Oficial') {
+      valUSD.push(emaeB[i].value_sell)
+    }
+    if (emaeB[i].source === 'Blue') {
+      valBlue.push(emaeB[i].value_sell)
+    }
+
+  }
+  dateUSD = [...new Set(dateUSD)]
+  fs.writeFileSync(`./json/monetaria/blue/dates.json`, JSON.stringify(dateUSD));
+  fs.writeFileSync(`./json/monetaria/blue/blue.json`, JSON.stringify(valBlue));
+  fs.writeFileSync(`./json/monetaria/blue/usd.json`, JSON.stringify(valUSD));
+   console.log(`♥ [monetaria] Dolar/blue updated`)
+
+}
+
 
 async function masterDb(kpis) {
   if (kpis !== 'tcrm') {
@@ -190,7 +211,7 @@ async function masterDb(kpis) {
  
  masterDb([
   'emae',
-/*   'ipi',
+   'ipi',
   'isac',
   'expo',
   'impo',
@@ -199,7 +220,8 @@ async function masterDb(kpis) {
   'ucii',
   'rofex',
   'rem',
-  'monetaria', */
+  'monetaria',
  ]); 
 
 getTCRM()
+getUSD()

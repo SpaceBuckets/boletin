@@ -3,7 +3,6 @@
     "name": "index",
     "path": "/",
     "component": "/Users/agustin.capeletto/fed/beo/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_5514d34d"
+    "chunkName": "pages/index"
   }
 ]
