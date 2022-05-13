@@ -253,7 +253,7 @@ async function masterDb(kpis) {
 }
  
  
-/*  masterDb([
+masterDb([
   'emae',
    'ipi',
   'isac',
@@ -268,5 +268,5 @@ async function masterDb(kpis) {
  ]); 
 
 getTCRM()
-getUSD() */
+getUSD()
 getBRCASaldo()
