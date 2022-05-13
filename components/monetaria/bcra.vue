@@ -2,7 +2,7 @@
 <div style="position:relative">
 <h4 class="chartitle"><strong>BCRA</strong>. Reservas internacionales en millones de dólares.<br>Frecuencia Mensual </h4>
 
-           <charts-bar
+           <charts-line
             :key="$state.updated"
             :data="chartData"
             :options="chartOptions"
@@ -17,7 +17,7 @@
 <script>
 
 import trcm from "../../json/monetaria/reservas/d.json";
- import trcmDates from "../../json/monetaria/reservas/dates.json";
+ import trcmDates from "../../json/monetaria/compras/diariadates.json";
 
 export default {
   data() {
@@ -27,10 +27,10 @@ export default {
         datasets: [
  
           {
-            backgroundColor: 'rgba(46,120,210,0)',
+            backgroundColor: 'rgba(46,120,210,0.1)',
             label: "Desestacionalizado",
             data: trcm,
-            borderColor: 'rgba(46,120,210,0.5)',
+            borderColor: '#2E78D2',
             pointRadius: 0,
             borderWidth: 1.5,
           },       

@@ -89,6 +89,7 @@ export default {
           }],
           yAxes: [{
             ticks: { fontColor: "#aaa",
+            
                  callback: function(value, index, values) {
                                 return '$' +value;
                         }  },

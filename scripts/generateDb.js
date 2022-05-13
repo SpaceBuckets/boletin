@@ -43,7 +43,7 @@ global.monetaria = {
   call: 'https://apis.datos.gob.ar/series/api/series/?ids=89.2_TS_INTEALL_0_D_18&limit=5000&start_date=2016-01-02&format=json',
   //cambio: 'https://apis.datos.gob.ar/series/api/series/?ids=92.2_TIPO_CAMBIION_0_0_21_24&limit=5000&start_date=2018-01-01&format=json',
   //adr: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_T_CAMBIDRS_D_0_0_29&limit=5000&start_date=2018-01-01&format=json',
-  reservas: 'https://apis.datos.gob.ar/series/api/series/?ids=92.1_RID_0_0_32&limit=5000&format=json'
+  //reservas: 'https://apis.datos.gob.ar/series/api/series/?ids=92.1_RID_0_0_32&limit=5000&format=json'
 }
 
 global.expo = {
@@ -175,9 +175,53 @@ async function getUSD() {
   fs.writeFileSync(`./json/monetaria/blue/dates.json`, JSON.stringify(dateUSD));
   fs.writeFileSync(`./json/monetaria/blue/blue.json`, JSON.stringify(valBlue));
   fs.writeFileSync(`./json/monetaria/blue/usd.json`, JSON.stringify(valUSD));
-   console.log(`♥ [monetaria] Dolar/blue updated`)
+  console.log(`♥ [monetaria] Dolar/blue updated`)
 
 }
+
+async function getBRCASaldo() {
+
+  const resA = await fetch('http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm');
+   console.log("⧖ Downloading series.xlsm...")
+   var emaeB = await resA.arrayBuffer();
+
+  var obj = xlsx.parse(emaeB);
+   var dateUSD = []
+   var valUSD = []
+   var valRes = []
+
+  for (let i = 0; i < obj[2].data.length; i++) {
+    var date = new Date(Date.UTC(0, 0, obj[2].data[i][0]));
+    if (date != 'Invalid Date') {
+      dateUSD.push(date.toLocaleDateString("en-CA"))
+      valUSD.push(obj[2].data[i][7].toFixed(2))
+      valRes.push(obj[2].data[i][3])
+
+    }
+
+
+  }
+
+  var foundArr = []
+  for (let e = 0; e < dateUSD.length; e++) {
+    if (dateUSD[e] === '2003-01-01') {
+      foundArr.push(e)
+    }
+  }
+
+
+  fs.writeFileSync(`./json/monetaria/reservas/d.json`, JSON.stringify(valRes.slice(0,foundArr[0])));
+
+  fs.writeFileSync(`./json/monetaria/compras/diariadates.json`, JSON.stringify(dateUSD.slice(0,foundArr[0])));
+  fs.writeFileSync(`./json/monetaria/compras/mensualdates.json`, JSON.stringify(dateUSD.slice(foundArr[0],foundArr[1])));
+  fs.writeFileSync(`./json/monetaria/compras/anualdates.json`, JSON.stringify(dateUSD.slice(foundArr[1])));
+  fs.writeFileSync(`./json/monetaria/compras/diaria.json`, JSON.stringify(valUSD.slice(0,foundArr[0])));
+  fs.writeFileSync(`./json/monetaria/compras/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0],foundArr[1])));
+  fs.writeFileSync(`./json/monetaria/compras/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
+
+ 
+}
+
 
 
 async function masterDb(kpis) {
@@ -209,7 +253,7 @@ async function masterDb(kpis) {
 }
  
  
- masterDb([
+/*  masterDb([
   'emae',
    'ipi',
   'isac',
@@ -224,4 +268,5 @@ async function masterDb(kpis) {
  ]); 
 
 getTCRM()
-getUSD()
+getUSD() */
+getBRCASaldo()
