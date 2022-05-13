@@ -7,7 +7,6 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "node --experimental-json-modules scripts/generateDb && nuxt generate",
-    "regenerate": "node --experimental-json-modules scripts/generateDb"
   },
   "dependencies": {
     "chart.js": "^2.9.4",
