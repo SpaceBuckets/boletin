@@ -38,7 +38,7 @@ import bcraDates from "../../json/monetaria/reservas/dates.json";
 import cambioDates from "../../json/monetaria/blue/dates.json";
 import maeDates from "../../json/rofex/mae/dates.json";
 import rofexDates from "../../json/rofex/t1/dates.json";
-import tasaDates from "../../json/monetaria/tasa/dates.json";
+import tasaDates from "../../json/monetaria/tasas/tasadates.json";
 import trcmDates from "../../json/monetaria/tcrm/dates.json";
 import comprasDates from "../../json/monetaria/compras/diariadates.json";
 
@@ -65,14 +65,14 @@ export default {
       econ: {
         tasa: "Tasa de Política Monetaria",
         cambio: "Tipo(s) de Cambio",
+        brecha: 'Brecha USD',
         tcrm: "Tipo de Cambio Real Multilateral",
-        mae: "Volumen MAE",
+        //mae: "Volumen MAE",
         //rofex: 'Dolar Futuro',
         bcra: 'Reservas Internacionales USD',
         comprasdiarias: 'BCRA. Compras Diarias USD',
         comprasmensual: 'BCRA. Compras Mensuales USD',
-        comprasanual: 'BCRA. Compras Anuales USD'
-
+        comprasanual: 'BCRA. Compras Anuales USD',
         },
     };
   },

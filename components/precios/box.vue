@@ -55,6 +55,8 @@ export default {
         },
       econ: {
         ipc: "Índice de precios al consumidor",
+        ipchistorico: "Inflación Histórica intermensual",
+        ipchistorico2: "Inflación Histórica interanual",
         rem: 'Expectativa IPC interanual',
         sal: "Asalariados sector privado",
         emp: "Tasa de desempleo",

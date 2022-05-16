@@ -2,11 +2,11 @@
 <div style="position:relative">
 <h4 class="chartitle"><strong>BCRA</strong>. Compras de divisas (USD)<br>Frecuencia anual </h4>
 
-           <charts-line
+           <charts-bar
             :key="$state.updated"
             :data="chartData"
             :options="chartOptions"
-            :height="420"
+            :height="460"
           />
        </div>
     </section>
@@ -27,8 +27,8 @@ export default {
         labels: trcmDates,
         datasets: [
           {
-            borderColor: "#2E78D2",
-            backgroundColor: "rgba(46,120,210,0.10)",
+            borderColor: "transparent",
+            backgroundColor: colours,
             label: "Desestacionalizado",
             data: cambio,
             pointRadius: 0,
@@ -62,7 +62,7 @@ export default {
           xAxes: [
             {
               type: "time",
-              offset: false,
+              offset: true,
               position: "bottom",
               gridLines: {
                 color: "#F7F5F0",

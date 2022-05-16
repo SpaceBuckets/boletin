@@ -6,7 +6,7 @@
             :key="$state.updated"
             :data="chartData"
             :options="chartOptions"
-            :height="420"
+            :height="460"
           />
        </div>
     </section>

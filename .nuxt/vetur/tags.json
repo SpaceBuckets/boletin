@@ -1,18 +1,60 @@
 {
+  "Asalariados": {
+    "description": "Auto imported from components/asalariados.vue"
+  },
+  "Brecha": {
+    "description": "Auto imported from components/brecha.vue"
+  },
+  "Cambio": {
+    "description": "Auto imported from components/cambio.vue"
+  },
+  "Comprasbcra": {
+    "description": "Auto imported from components/comprasbcra.vue"
+  },
+  "Desempleo": {
+    "description": "Auto imported from components/desempleo.vue"
+  },
+  "Emae": {
+    "description": "Auto imported from components/emae.vue"
+  },
+  "Embi": {
+    "description": "Auto imported from components/embi.vue"
+  },
+  "Ice": {
+    "description": "Auto imported from components/ice.vue"
+  },
+  "Intercambio": {
+    "description": "Auto imported from components/intercambio.vue"
+  },
+  "Ipc": {
+    "description": "Auto imported from components/ipc.vue"
+  },
+  "Ipi": {
+    "description": "Auto imported from components/ipi.vue"
+  },
+  "Isac": {
+    "description": "Auto imported from components/isac.vue"
+  },
+  "Mae": {
+    "description": "Auto imported from components/mae.vue"
+  },
+  "Rem": {
+    "description": "Auto imported from components/rem.vue"
+  },
+  "Reservas": {
+    "description": "Auto imported from components/reservas.vue"
+  },
+  "Tasa": {
+    "description": "Auto imported from components/tasa.vue"
+  },
+  "Tcrm": {
+    "description": "Auto imported from components/tcrm.vue"
+  },
+  "Ucii": {
+    "description": "Auto imported from components/ucii.vue"
+  },
   "ActividadBox": {
     "description": "Auto imported from components/actividad/box.vue"
-  },
-  "ActividadEmae": {
-    "description": "Auto imported from components/actividad/emae.vue"
-  },
-  "ActividadIpi": {
-    "description": "Auto imported from components/actividad/ipi.vue"
-  },
-  "ActividadIsac": {
-    "description": "Auto imported from components/actividad/isac.vue"
-  },
-  "ActividadUcii": {
-    "description": "Auto imported from components/actividad/ucii.vue"
   },
   "ChartsBar": {
     "description": "Auto imported from components/charts/bar.js"
@@ -20,64 +62,34 @@
   "ChartsLine": {
     "description": "Auto imported from components/charts/line.js"
   },
-  "PreciosBox": {
-    "description": "Auto imported from components/precios/box.vue"
-  },
-  "PreciosEmp": {
-    "description": "Auto imported from components/precios/emp.vue"
-  },
-  "PreciosIpc": {
-    "description": "Auto imported from components/precios/ipc.vue"
-  },
-  "PreciosRem": {
-    "description": "Auto imported from components/precios/rem.vue"
-  },
-  "PreciosSal": {
-    "description": "Auto imported from components/precios/sal.vue"
-  },
   "ExternoBox": {
     "description": "Auto imported from components/externo/box.vue"
   },
   "ExternoExpo": {
     "description": "Auto imported from components/externo/expo.vue"
   },
-  "ExternoIce": {
-    "description": "Auto imported from components/externo/ice.vue"
-  },
   "ExternoImpo": {
     "description": "Auto imported from components/externo/impo.vue"
   },
-  "ExternoSaldo": {
-    "description": "Auto imported from components/externo/saldo.vue"
+  "PreciosBox": {
+    "description": "Auto imported from components/precios/box.vue"
   },
-  "MonetariaBcra": {
-    "description": "Auto imported from components/monetaria/bcra.vue"
+  "PreciosIpc": {
+    "description": "Auto imported from components/precios/ipc.vue"
+  },
+  "PreciosIpchistorico2": {
+    "description": "Auto imported from components/precios/ipchistorico2.vue"
   },
   "MonetariaBox": {
     "description": "Auto imported from components/monetaria/box.vue"
   },
-  "MonetariaCambio": {
-    "description": "Auto imported from components/monetaria/cambio.vue"
-  },
   "MonetariaComprasanual": {
     "description": "Auto imported from components/monetaria/comprasanual.vue"
-  },
-  "MonetariaComprasdiarias": {
-    "description": "Auto imported from components/monetaria/comprasdiarias.vue"
   },
   "MonetariaComprasmensual": {
     "description": "Auto imported from components/monetaria/comprasmensual.vue"
   },
-  "MonetariaMae": {
-    "description": "Auto imported from components/monetaria/mae.vue"
-  },
   "MonetariaRofex": {
     "description": "Auto imported from components/monetaria/rofex.vue"
-  },
-  "MonetariaTasa": {
-    "description": "Auto imported from components/monetaria/tasa.vue"
-  },
-  "MonetariaTcrm": {
-    "description": "Auto imported from components/monetaria/tcrm.vue"
   }
 }

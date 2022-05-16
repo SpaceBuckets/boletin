@@ -60,6 +60,7 @@ export default {
         expo: "Exportaciones",
         impo: "Importaciones",
         ice: "Indice de Condiciones Externas",
+        embi: "Riesgo Pais"
         //emp: "Tasa de desempleo",
         //cbt: "Canasta Basica Total y Alimentaria",
         },
