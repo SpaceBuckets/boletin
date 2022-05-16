@@ -6,15 +6,43 @@
       </h2>
  
     </div>
-           <charts-line
+  
+<div class="chartcont">
+
+   <div class="flexedtable">
+       <p>El UCII es un <strong>indicador provisorio de la evolución del PBI</strong> que ofrece una pauta de la actividad económica real. Se elabora con información parcial calculando la <strong>suma del valor agregado de las actividades económicas</strong>.</p> 
+        <p>Fuente: INDEC</p>
+        <div>
+          <div>
+            <div>Fecha</div>
+            <div>Deses.</div>
+            <div>Variacion</div>
+           </div>
+        </div>
+<!--         <div class="flexedcontent">
+          <div
+            v-for="(dates, i) in chartData.labels.slice().reverse()"
+            :key="`aa${i}`"
+          >
+            <div>{{ dates.slice(0, -3) }}</div>
+            <div>
+              {{ chartData.datasets[0].data.slice().reverse()[i].toFixed(2) }}
+            </div>
+            <div>
+              {{ chartData.datasets[1].data.slice().reverse()[i].toFixed(2) }}
+            </div>
+ 
+          </div>
+        </div> -->
+
+      </div>
+                 <charts-line
             :key="$state.updated"
             :data="chartData"
             :options="chartOptions"
             :height="460"
           />
-       </div>
-    </section>
-
+</div>
   </div>
 </template>
 
