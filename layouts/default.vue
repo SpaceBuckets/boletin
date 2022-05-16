@@ -7,6 +7,7 @@
       <div class="renav">
         <a href="" class="active">Macroeconomia</a>
         <a href="">Urbanismo</a>
+ 
       </div>
       <svg
         id="pepe"
@@ -14,6 +15,7 @@
         xmlns:xlink="http://www.w3.org/1999/xlink"
         width="504px"
         height="504px"
+        @click="$state.isOpen = !$state.isOpen"
         viewBox="-50 -50 100 100"
       >
         <g id="sun">
@@ -90,10 +92,12 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap");
 
 #pepe {
-  top: 0;
+  top: -3px;
   right: 10px;
-  width: 60px;
+  width: 50px;
   height: auto;
+  z-index: 9999999;
+  position: relative;
 }
 
 .content-container {
@@ -184,7 +188,7 @@ body {
   font-size: 15px;
   padding: 10px;
   padding-top: 60px;
-  padding-left: 300px;
+  //padding-right: 300px;
 }
 
 p {
@@ -411,8 +415,8 @@ a {
 .title-container {
   padding-right: 10px;
   padding-bottom: 20px;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #f7f5f0;
+  //margin-bottom: 15px;
+  //border-bottom: 2px solid #f7f5f0;
   display: flex;
   justify-content: space-between;
   > * { flex: 1; max-width: max-content; }

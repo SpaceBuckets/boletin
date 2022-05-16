@@ -1,5 +1,27 @@
 <template>
   <div>
+
+          <div class="navigator" :class="{active: $state.isOpen}">
+        <h5>Indicadores</h5>
+        <div class="separator" v-for="(kpi, i) in $state.indicadores">
+          <div v-if="i === 'actividad'">Actividad Económica</div>
+          <div v-if="i === 'precios'">Precios y Salarios</div>
+          <div v-if="i === 'monetaria'">Política Monetaria</div>
+          <div v-if="i === 'externo'">Sector Externo</div>
+          <label v-for="(pepe, e) in kpi">
+            <input
+              type="checkbox"
+              :checked="$state.selectedkpis.includes(e)"
+              @click="setCheck(e)"
+            />
+
+            <span>{{ pepe }}</span>
+          </label>
+        </div>
+
+      </div>
+                    <div class="backdrop" :class="{active: $state.isOpen}" @click="$state.isOpen = !$state.isOpen"></div>
+
     <div class="headbert">
       <div style="display: flex">
         <div>
@@ -37,26 +59,10 @@
         </div>
       </div>
     </div>
-    <div class="section-container">
-      <div class="navigator">
-        <h5>Indicadores</h5>
-        <div class="separator" v-for="(kpi, i) in $state.indicadores">
-          <div v-if="i === 'actividad'">Actividad Económica</div>
-          <div v-if="i === 'precios'">Precios y Salarios</div>
-          <div v-if="i === 'monetaria'">Política Monetaria</div>
-          <div v-if="i === 'externo'">Sector Externo</div>
-          <label v-for="(pepe, e) in kpi">
-            <input
-              type="checkbox"
-              :checked="$state.selectedkpis.includes(e)"
-              @click="setCheck(e)"
-            />
 
-            <span>{{ pepe }}</span>
-          </label>
-        </div>
-      </div>
-      <div>
+
+    <div class="section-container">
+            <div>
         <section
           v-for="(repepes, currActive) in $state.selectedkpis"
           :ref="repepes"
@@ -71,6 +77,7 @@
 
         <externo-box /> -->
       </div>
+
     </div>
   </div>
 </template>
@@ -119,21 +126,40 @@ export default {
 .section-container {
   display: flex;
   gap: 10px;
-  padding-bottom: 400px;
+  padding-bottom: 100px;
+  max-width: 1440px;
+  margin: 0 auto;
   > div {
     flex: 1;
   }
 }
-
+.backdrop {
+  display: none;
+      &.active {
+      position: fixed;
+       top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: block;
+    z-index: 9;
+    }
+}
 .navigator {
   background: #fff;
-  max-width: 290px;
-  border-radius: 2px;
+  max-width: 350px;
   position: fixed;
-  top: 70px;
-  left: 0;
+  top: 60px;
+  right: 0;
   bottom: 0;
   overflow: auto;
+  z-index: 999999;
+  display: none;
+  &.active {
+    display: block;
+
+  }
   .separator > div {
     padding: 8px 30px 8px 15px;
     background: #f7f5f0;
@@ -203,14 +229,14 @@ export default {
 .headbert {
   width: 100%;
   border-radius: 2px;
-  //max-width: 1440px;
+  max-width: 1440px;
   //box-shadow: 0px 0px 15px 5px rgba(109,145,179,0.5);
   margin: 0 auto 10px;
   background: #fff;
   position: relative;
   padding: 20px 25px;
   overflow: hidden;
-  display: none;
+  //display: none;
   > div {
     display: flex;
     > * {

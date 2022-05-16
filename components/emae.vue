@@ -20,9 +20,10 @@
       </div>
     </div>
     <div class="chartcont">
-      <charts-line :data="chartData" :options="chartOptions" :height="460" />
 
       <div class="flexedtable">
+       <p>El EMAE es un <strong>indicador provisorio de la evolución del PBI</strong> que ofrece una pauta de la actividad económica real. Se elabora con información parcial calculando la <strong>suma del valor agregado de las actividades económicas</strong>.</p> 
+        <p>Fuente: INDEC</p>
         <div>
           <div>
             <div>Fecha</div>
@@ -46,6 +47,8 @@
           </div>
         </div>
       </div>
+            <charts-line :data="chartData" :options="chartOptions" :height="460" />
+
     </div>
   </div>
 </template>
@@ -166,7 +169,7 @@ export default {
                 fontColor: "#aaa",
                 display: false,
               },
-              position: "left",
+              position: "right",
             },
           ],
         },
@@ -273,13 +276,13 @@ export default {
   .flexedtable {
     flex: 1;
     padding: 0;
-    padding-left: 20px;
-    margin-left: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
     max-width: 300px;
-    border-left: 2px solid #f7f5f0;
+    border-right: 2px solid #f7f5f0;
 
     > div {
-      max-height: 420px;
+      max-height: 230px;
       overflow: auto;
       display: flex;
       &.flexedcontent {
@@ -291,7 +294,7 @@ export default {
         > div {
           flex: 1;
           border-bottom: 1px solid #f7f5f0;
-          padding: 10px 10px;
+          padding: 10px 0;
           text-align: right;
           color: #555;
 

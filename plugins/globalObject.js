@@ -2,7 +2,8 @@ import Vue from 'vue'
 
 const state = {
   updated: 0,
-  selectedkpis: ["emae",'ucii'],
+  isOpen: false,
+  selectedkpis: ["emae",'ipi','ucii','cambio','tcrm','reservas','tasa','intercambio','embi','ipc','desempleo','asalariados'],
   indicadores: {
     actividad: {
       emae: "EMAE (Estimador Mensual de Actividad Económica)",
