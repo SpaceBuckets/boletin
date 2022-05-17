@@ -5,7 +5,7 @@
         <a href="/">BOLETIN<span>EXTRAOFICIAL</span></a>
       </h1>
       <div class="renav">
-        <nuxt-link to="actividad-economica">Actividad Económica</nuxt-link>
+        <nuxt-link to="/">Actividad Económica</nuxt-link>
         <nuxt-link to="cuentas-nacionales">Cuentas Nacionales</nuxt-link>
         <nuxt-link to="politica-monetaria">Política Monetaria</nuxt-link>
         <nuxt-link to="precios-salarios">Precios y Salarios</nuxt-link>
@@ -148,6 +148,7 @@ export default {
 }
 html {
   box-sizing: border-box;
+  font-family: arial, helvetica, sans-serif;
   * {
     color: #262626;
   }
@@ -226,7 +227,7 @@ body {
   background: #000;
   margin: 0;
   font-size: 15px;
-  padding: 10px;
+  padding: 0px;
   padding-top: 60px;
   //padding-right: 300px;
 }
@@ -529,7 +530,7 @@ a {
 .headbert {
   width: 100%;
   border-radius: 2px;
-  max-width: 1440px;
+  //max-width: 1440px;
   //box-shadow: 0px 0px 15px 5px rgba(109,145,179,0.5);
   margin: 0 auto 10px;
   background: #fff;

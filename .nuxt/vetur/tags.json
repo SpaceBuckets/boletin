@@ -11,17 +11,32 @@
   "ActividadUcii": {
     "description": "Auto imported from components/actividad/ucii.vue"
   },
-  "ExternoExpo": {
-    "description": "Auto imported from components/externo/expo.vue"
-  },
-  "ExternoImpo": {
-    "description": "Auto imported from components/externo/impo.vue"
-  },
   "ChartsBar": {
     "description": "Auto imported from components/charts/bar.js"
   },
   "ChartsLine": {
     "description": "Auto imported from components/charts/line.js"
+  },
+  "PreciosAsalariados": {
+    "description": "Auto imported from components/precios/asalariados.vue"
+  },
+  "PreciosDesempleo": {
+    "description": "Auto imported from components/precios/desempleo.vue"
+  },
+  "PreciosIpc": {
+    "description": "Auto imported from components/precios/ipc.vue"
+  },
+  "PreciosIpchistorico2": {
+    "description": "Auto imported from components/precios/ipchistorico2.vue"
+  },
+  "PreciosRem": {
+    "description": "Auto imported from components/precios/rem.vue"
+  },
+  "ExternoExpo": {
+    "description": "Auto imported from components/externo/expo.vue"
+  },
+  "ExternoImpo": {
+    "description": "Auto imported from components/externo/impo.vue"
   },
   "MonetariaBrecha": {
     "description": "Auto imported from components/monetaria/brecha.vue"
@@ -61,20 +76,5 @@
   },
   "MonetariaTcrm": {
     "description": "Auto imported from components/monetaria/tcrm.vue"
-  },
-  "PreciosAsalariados": {
-    "description": "Auto imported from components/precios/asalariados.vue"
-  },
-  "PreciosDesempleo": {
-    "description": "Auto imported from components/precios/desempleo.vue"
-  },
-  "PreciosIpc": {
-    "description": "Auto imported from components/precios/ipc.vue"
-  },
-  "PreciosIpchistorico2": {
-    "description": "Auto imported from components/precios/ipchistorico2.vue"
-  },
-  "PreciosRem": {
-    "description": "Auto imported from components/precios/rem.vue"
   }
 }

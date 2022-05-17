@@ -202,7 +202,7 @@ async function getBRCASeries() {
     var date = new Date(Date.UTC(0, 0, obj[2].data[i][0]));
     if (date != 'Invalid Date') {
       dateUSD.push(date.toLocaleDateString("en-CA"))
-      valUSD.push(obj[2].data[i][7].toFixed(2))
+      valUSD.push(obj[2].data[i][7])
       valRes.push(obj[2].data[i][3])
     }
   }

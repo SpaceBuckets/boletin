@@ -22,60 +22,18 @@
       </div>
                     <div class="backdrop" :class="{active: $state.isOpen}" @click="$state.isOpen = !$state.isOpen"></div>
 
-    <div class="headbert">
-      <div style="display: flex">
-        <div>
-          <h1>Tachame la Macro</h1>
-
-          <p>
-            <em>Febo asoma; ya sus rayos, iluminan el histórico contexto.</em>
-            Esta colección de indicadores intenta develar de donde viene y hacia
-            donde va la macroeconomía Argentina.
-          </p>
-        </div>
-        <div class="capis">
-          <div>
-            <div>Población</div>
-            <h2>45.4M</h2>
-            <div>Censo 2020</div>
-          </div>
-
-          <div>
-            <div>PBI per capita</div>
-            <h2>$1,015M</h2>
-            <div>Dato 2020</div>
-          </div>
-
-          <div>
-            <div>HDI</div>
-            <h2>0.845</h2>
-            <div>Dato 2020</div>
-          </div>
-          <div>
-            <div>GINI</div>
-            <h2>42.9</h2>
-            <div>Dato 2020</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
+          <h2 class="pagetitle">Actividad Económica<i>4 Indicadores Seleccionados</i></h2>
+ 
     <div class="section-container">
             <div>
         <section
-          v-for="(repepes, currActive) in $state.selectedkpis"
+          v-for="(repepes, currActive) in $state.indicadores.actividad"
           :ref="repepes"
         >
-          <component :is="`${repepes}`" />
-        </section>
+          <component :is="`actividad-${currActive}`" />
+                </section>
 
-        <!--         <actividad-box />
-        <monetaria-box />
-
-        <precios-box />
-
-        <externo-box /> -->
+ 
       </div>
 
     </div>
@@ -121,7 +79,4 @@ export default {
 };
 </script>
 
-
-<style lang="scss">
-
-</style>
+ 
