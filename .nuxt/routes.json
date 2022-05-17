@@ -1,5 +1,33 @@
 [
   {
+    "name": "actividad-economica",
+    "path": "/actividad-economica",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/actividad-economica.vue",
+    "chunkName": "pages/actividad-economica",
+    "_name": "_50fa65b7"
+  },
+  {
+    "name": "cuentas-nacionales",
+    "path": "/cuentas-nacionales",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/cuentas-nacionales.vue",
+    "chunkName": "pages/cuentas-nacionales",
+    "_name": "_0e88ce08"
+  },
+  {
+    "name": "politica-monetaria",
+    "path": "/politica-monetaria",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/politica-monetaria.vue",
+    "chunkName": "pages/politica-monetaria",
+    "_name": "_3da06a4a"
+  },
+  {
+    "name": "precios-salarios",
+    "path": "/precios-salarios",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/precios-salarios.vue",
+    "chunkName": "pages/precios-salarios",
+    "_name": "_e7f5385a"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/Users/agustin.capeletto/fed/beo/pages/index.vue",

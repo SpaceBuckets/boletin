@@ -23,21 +23,22 @@ const state = {
     monetaria: {
       tasa: "Tasa de Política Monetaria",
       cambio: "Tipo(s) de Cambio",
-      brecha: 'Brecha USD',
+      //brecha: 'Brecha USD',
       tcrm: "TCRM (Tipo de Cambio Real Multilateral)",
-      mae: "MAE (Mercado Abierto Electrónico)",
+      //mae: "MAE (Mercado Abierto Electrónico)",
       //rofex: 'Dolar Futuro',
       reservas: 'Reservas Internacionales USD',
       comprasbcra: 'Compras Diarias USD',
+      intercambio: "Intercambio Comercial",
+      ice: "ICE (Indice de Condiciones Externas)",
+      embi: "EMBI (Riesgo Pais)",
 /*       comprasmensual: 'Compras Mensuales USD',
       comprasanual: 'Compras Anuales USD', */
     },
     externo: {
-      intercambio: "Intercambio Comercial",
       expo: "Exportaciones",
       impo: "Importaciones",
-      ice: "ICE (Indice de Condiciones Externas)",
-      embi: "EMBI (Riesgo Pais)",
+
       //cbt: "Canasta Basica Total y Alimentaria", */
     }
 

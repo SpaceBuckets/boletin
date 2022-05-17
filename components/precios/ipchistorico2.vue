@@ -8,7 +8,7 @@
             :height="460"
           />
        </div>
-    </section>
+    
 
   </div>
 </template>

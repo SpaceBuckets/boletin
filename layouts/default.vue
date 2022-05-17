@@ -5,9 +5,10 @@
         <a href="/">BOLETIN<span>EXTRAOFICIAL</span></a>
       </h1>
       <div class="renav">
-        <a href="" class="active">Macroeconomia</a>
-        <a href="">Urbanismo</a>
- 
+        <nuxt-link to="actividad-economica">Actividad Económica</nuxt-link>
+        <nuxt-link to="cuentas-nacionales">Cuentas Nacionales</nuxt-link>
+        <nuxt-link to="politica-monetaria">Política Monetaria</nuxt-link>
+        <nuxt-link to="precios-salarios">Precios y Salarios</nuxt-link>
       </div>
       <svg
         id="pepe"
@@ -90,7 +91,46 @@ export default {
 </script>  
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap");
+.chartcont {
+  display: flex;
+  align-items: flex-start;
 
+  > * {
+    flex: 2;
+  }
+  .flexedtable {
+    flex: 1;
+    padding: 0;
+    padding-right: 20px;
+    margin-right: 20px;
+    max-width: 300px;
+    border-right: 2px solid #f7f5f0;
+
+    > div {
+      max-height: 230px;
+      overflow: auto;
+      display: flex;
+      &.flexedcontent {
+        flex-direction: column;
+      }
+      > div {
+        flex: 1;
+        display: flex;
+        > div {
+          flex: 1;
+          border-bottom: 1px solid #f7f5f0;
+          padding: 10px 0;
+          text-align: right;
+          color: #555;
+
+          &:first-child {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+}
 #pepe {
   top: -3px;
   right: 10px;
@@ -130,7 +170,7 @@ html {
     padding: 10px 15px;
     color: #666;
     text-decoration: none;
-    &.active {
+    &.nuxt-link-exact-active.nuxt-link-active {
       color: #eee;
       background: #151515;
       border-radius: 5px;
@@ -484,4 +524,194 @@ a {
   display: flex;
   flex-direction: column;
 }
+
+
+.headbert {
+  width: 100%;
+  border-radius: 2px;
+  max-width: 1440px;
+  //box-shadow: 0px 0px 15px 5px rgba(109,145,179,0.5);
+  margin: 0 auto 10px;
+  background: #fff;
+  position: relative;
+  padding: 20px 25px;
+  overflow: hidden;
+  //display: none;
+  > div {
+    display: flex;
+    > * {
+      flex: 1;
+    }
+  }
+  h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+  h1 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  p {
+    color: #262626;
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+.capis {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  > * {
+    flex: 1;
+    max-width: max-content;
+    h2 {
+      min-width: auto !important;
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.section-container {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 100px;
+  max-width: 1440px;
+  margin: 0 auto;
+  > div {
+    flex: 1;
+  }
+}
+.backdrop {
+  display: none;
+      &.active {
+      position: fixed;
+       top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: block;
+    z-index: 9;
+    }
+}
+.navigator {
+  background: #fff;
+  max-width: 350px;
+  position: fixed;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  z-index: 999999;
+  display: none;
+  &.active {
+    display: block;
+
+  }
+  .separator > div {
+    padding: 8px 30px 8px 15px;
+    background: #f7f5f0;
+    font-size: 14px;
+    color: #555;
+  }
+  label {
+    list-style: none;
+    padding: 10px 30px 10px 15px;
+    display: block;
+    border-bottom: 1px solid #f7f5f0;
+    font-size: 14px;
+    line-height: 1.4;
+    span {
+      color: #555;
+    }
+    cursor: pointer;
+    input:checked + span {
+      //background: rgba(253, 216, 53, 0.7);
+      font-style: normal;
+      font-weight: bold;
+      color: #111;
+    }
+    &:hover {
+      color: #111;
+    }
+  }
+}
+@keyframes rotatesun {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0);
+  }
+  25% {
+    transform: translateX(-100px) translateY(100px) translateX(180deg);
+  }
+  50% {
+    transform: translateX(-200px) translateY(200px) rotate(360deg);
+  }
+  75% {
+    transform: translateX(-100px) translateY(100px) translateX(180deg);
+  }
+  100% {
+    transform: translateX(0) translateY(0) rotate(0);
+  }
+}
+@keyframes rotatepup {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.left .rupil {
+  animation: rotatepup 2s infinite ease-in;
+}
+
+
+h5 {
+  font-family: montserrat;
+  padding: 20px 15px;
+  padding-bottom: 5px;
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+h2.pagetitle {
+    font-family: montserrat;
+  padding: 20px 15px;
+   margin: 0 auto;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #666;
+  max-width: 1440px !important;
+  color: #eee;
+  position: relative;
+  i {
+    font-style: normal;
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+    color: #888;
+    font-size: 16px;
+  }
+ }
+
 </style>
