@@ -17,6 +17,18 @@
   "ChartsLine": {
     "description": "Auto imported from components/charts/line.js"
   },
+  "CuentasAhorro": {
+    "description": "Auto imported from components/cuentas/ahorro.vue"
+  },
+  "CuentasSubsidios": {
+    "description": "Auto imported from components/cuentas/subsidios.vue"
+  },
+  "ExternoExpo": {
+    "description": "Auto imported from components/externo/expo.vue"
+  },
+  "ExternoImpo": {
+    "description": "Auto imported from components/externo/impo.vue"
+  },
   "PreciosAsalariados": {
     "description": "Auto imported from components/precios/asalariados.vue"
   },
@@ -31,12 +43,6 @@
   },
   "PreciosRem": {
     "description": "Auto imported from components/precios/rem.vue"
-  },
-  "ExternoExpo": {
-    "description": "Auto imported from components/externo/expo.vue"
-  },
-  "ExternoImpo": {
-    "description": "Auto imported from components/externo/impo.vue"
   },
   "MonetariaBrecha": {
     "description": "Auto imported from components/monetaria/brecha.vue"

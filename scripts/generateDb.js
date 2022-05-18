@@ -2,6 +2,8 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 var xlsx = require('node-xlsx');
 const parse5 = require('parse5');
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+
 
 global.emae = {
   estacional: 'https://apis.datos.gob.ar/series/api/series/?ids=143.3_NO_PR_2004_A_31&limit=5000&format=json',
@@ -385,6 +387,91 @@ async function getEMBI() {
 
 }
 
+/*     if (obj[1].data[i][0] === '379.9_INDICE_TIEMPO__13_97') {
+      console.log(i)
+    } */
+
+async function getMECON() {
+
+  const resA = await fetch('http://www.economia.gob.ar/download/infoeco/apendice6.xlsx');
+  console.log("⧖ Downloading apendice6.xlsx...")
+  var emaeB = await resA.arrayBuffer();
+  var obj = xlsx.parse(emaeB);
+
+
+
+    // Sheet 1: AHORRO
+
+  var dateUSD = []
+  var valIngresos = []
+  var valGastos = []
+  var valAhorro = []
+   for (let i = 0; i < obj[1].data.length; i++) {
+
+    var date = new Date(Date.UTC(0, 0, obj[1].data[i][0]));
+    if (date != 'Invalid Date') {
+       dateUSD.push(date.toLocaleDateString("en-CA"))
+       valIngresos.push(obj[1].data[i][1].toFixed(2))
+       valGastos.push(obj[1].data[i][17].toFixed(2))
+       valAhorro.push(obj[1].data[i][46].toFixed(2))
+    } 
+  }
+  var foundIndex
+  for (let i = 0; i < dateUSD.length; i++) {
+
+    if(dateUSD[i] === '2015-01-01') {
+      foundIndex = i
+    }
+
+  }
+  fs.writeFileSync(`./json/cuentas/saldo/dates.json`, JSON.stringify(dateUSD.splice(foundIndex)));
+  fs.writeFileSync(`./json/cuentas/saldo/ingresos.json`, JSON.stringify(valIngresos.splice(foundIndex)));
+  fs.writeFileSync(`./json/cuentas/saldo/gastos.json`, JSON.stringify(valGastos.splice(foundIndex)));
+  fs.writeFileSync(`./json/cuentas/saldo/ahorro.json`, JSON.stringify(valAhorro.splice(foundIndex)));
+   
+  console.log(`♥ [cuentas] Ahorro updated`)   
+
+
+    // Sheet 12: IMIG
+
+  var dateIMIG = []
+  var valEnergia = []
+  var valTransporte = []
+    for (let i = 0; i < obj[12].data.length; i++) {
+
+    var date = new Date(Date.UTC(0, 0, obj[12].data[i][0]));
+    if (date != 'Invalid Date') {
+      dateIMIG.push(date.toLocaleDateString("en-CA"))
+       valEnergia.push(obj[12].data[i][22].toFixed(0))
+       valTransporte.push(obj[12].data[i][23].toFixed(0))
+     } 
+  }
+  var foundIndexe
+  var fixDate = []
+
+  for (let i = 0; i < dateIMIG.length; i++) {
+
+    if(dateIMIG[i] === '2016-01-01') {
+      foundIndexe = i
+    }
+    if(dateIMIG[i] === '2020-01-01') {
+      fixDate.push(i)
+    }
+  }
+
+
+   dateIMIG[fixDate[1]] = '2021-01-01'
+  fs.writeFileSync(`./json/cuentas/subsidios/dates.json`, JSON.stringify(dateIMIG.splice(foundIndexe)));
+  fs.writeFileSync(`./json/cuentas/subsidios/transporte.json`, JSON.stringify(valTransporte.splice(foundIndexe)));
+  fs.writeFileSync(`./json/cuentas/subsidios/energia.json`, JSON.stringify(valEnergia.splice(foundIndexe)));
+    
+  console.log(`♥ [cuentas] Subsidios updated`)   
+
+
+
+}
+
+
 
 async function masterDb(kpis) {
   if (kpis !== 'tcrm') {
@@ -415,7 +502,7 @@ async function masterDb(kpis) {
 }
 
 
-masterDb([
+/* masterDb([
   'emae',
    'ipi',
   'isac',
@@ -434,4 +521,5 @@ getICE()
 getEMBI() 
 
 
-getBRCAScraper()
+getBRCAScraper() */
+getMECON()

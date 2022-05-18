@@ -29,10 +29,10 @@
     <div class="section-container">
             <div>
         <section
-          v-for="(repepes, currActive) in $state.indicadores.actividad"
+          v-for="(repepes, currActive) in $state.indicadores.cuentas"
           :ref="repepes"
         >
-          <component :is="`${currActive}`" />
+          <component :is="`cuentas-${currActive}`" />
         
         </section>
         <!--         <actividad-box />

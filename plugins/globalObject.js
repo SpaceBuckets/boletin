@@ -35,6 +35,10 @@ const state = {
 /*       comprasmensual: 'Compras Mensuales USD',
       comprasanual: 'Compras Anuales USD', */
     },
+    cuentas: {
+      ahorro: "Ahorro y Desahorro",
+      subsidios: "Subsidios Economicos"
+    },
     externo: {
       expo: "Exportaciones",
       impo: "Importaciones",
