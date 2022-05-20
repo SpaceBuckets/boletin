@@ -20,6 +20,21 @@
   "CuentasAhorro": {
     "description": "Auto imported from components/cuentas/ahorro.vue"
   },
+  "CuentasAutos": {
+    "description": "Auto imported from components/cuentas/autos.vue"
+  },
+  "CuentasGas": {
+    "description": "Auto imported from components/cuentas/gas.vue"
+  },
+  "CuentasHierro": {
+    "description": "Auto imported from components/cuentas/hierro.vue"
+  },
+  "CuentasPozos": {
+    "description": "Auto imported from components/cuentas/pozos.vue"
+  },
+  "CuentasSoja": {
+    "description": "Auto imported from components/cuentas/soja.vue"
+  },
   "CuentasSubsidios": {
     "description": "Auto imported from components/cuentas/subsidios.vue"
   },

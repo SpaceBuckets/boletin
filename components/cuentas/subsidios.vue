@@ -43,9 +43,9 @@
 
 <script>
 
- import transporte from "../../json/cuentas/subsidios/transporte.json";
-import energia from "../../json/cuentas/subsidios/energia.json";
- import expoDates from "../../json/cuentas/subsidios/dates.json";
+ import transporte from "../../json/cuentas/subtransporte/d.json";
+import energia from "../../json/cuentas/subenergia/d.json";
+ import expoDates from "../../json/cuentas/subenergia/dates.json";
 
  
 export default {

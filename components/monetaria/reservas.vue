@@ -48,8 +48,8 @@
 
 <script>
 
-import trcm from "../../json/monetaria/reservas/d.json";
- import trcmDates from "../../json/monetaria/compras/diariadates.json";
+import trcm from "../../json/reservas/total.json";
+ import trcmDates from "../../json/reservas/dates.json";
 
 export default {
   data() {

@@ -50,13 +50,13 @@
 
 <script>
 
-import argentina from "../../json/expo/embi/argentina.json";
-import brasil from "../../json/expo/embi/brasil.json";
-import chile from "../../json/expo/embi/chile.json";
-import colombia from "../../json/expo/embi/colombia.json";
-import mexico from "../../json/expo/embi/mexico.json";
-import latino from "../../json/expo/embi/latino.json";
- import iceDates from "../../json/expo/embi/dates.json";
+import argentina from "../../json/embi/argentina.json";
+import brasil from "../../json/embi/brasil.json";
+import chile from "../../json/embi/chile.json";
+import colombia from "../../json/embi/colombia.json";
+import mexico from "../../json/embi/mexico.json";
+import latino from "../../json/embi/latino.json";
+ import iceDates from "../../json/embi/dates.json";
 
 export default {
   data() {

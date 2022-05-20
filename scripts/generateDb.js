@@ -2,7 +2,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 var xlsx = require('node-xlsx');
 const parse5 = require('parse5');
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+//process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 
 global.emae = {
@@ -24,6 +24,23 @@ global.emae = {
     m: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_CMMR_2004_M_10&limit=5000&format=json',
     n: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_HR_2004_M_24&limit=5000&format=json',
     o: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_TAC_2004_M_60&limit=5000&format=json',   */
+}
+
+global.cuentas = {
+  ingresos: 'https://apis.datos.gob.ar/series/api/series/?ids=379.9_ING_CORR_2017__13_2&limit=5000&format=json',
+  gastos: 'https://apis.datos.gob.ar/series/api/series/?ids=379.9_GTOS_CORR_017__14_1&limit=5000&format=json',
+  ahorro: 'https://apis.datos.gob.ar/series/api/series/?ids=379.9_RESULTADO_017__41_83&limit=5000&format=json',
+  subenergia: 'https://apis.datos.gob.ar/series/api/series/?ids=452.2_ENERGIAGIA_0_T_7_56&limit=5000&format=json',
+  subtransporte: 'https://apis.datos.gob.ar/series/api/series/?ids=452.2_TRANSPORTERTE_0_T_10_32&limit=5000&format=json',
+  pozos: 'https://apis.datos.gob.ar/series/api/series/?ids=366.3_POZOS_TERMRAL__30&limit=5000&format=json',
+  pozosmetros: 'https://apis.datos.gob.ar/series/api/series/?ids=366.3_METROS_PERRAL__31&limit=5000&format=json',
+  gas: 'https://apis.datos.gob.ar/series/api/series/?ids=364.3_PRODUCCIoNRAL__25&limit=5000&format=json',
+  hierro: 'https://apis.datos.gob.ar/series/api/series/?ids=359.3_HIERRO_PRITAL__21&limit=5000&format=json',
+  autos: 'https://apis.datos.gob.ar/series/api/series/?ids=330.1_PRODUCCIONLES__22&limit=5000&format=json',
+  soja: 'https://apis.datos.gob.ar/series/api/series/?ids=34.2_STSOJ_0_P_16&limit=5000&format=json',
+  trigo: 'https://apis.datos.gob.ar/series/api/series/?ids=34.2_TTTRI_0_P_17&limit=5000&format=json',
+  girasol: 'https://apis.datos.gob.ar/series/api/series/?ids=34.2_GTGIR_0_P_19&limit=5000&format=json',
+  maiz: 'https://apis.datos.gob.ar/series/api/series/?ids=34.2_MTMAI_0_P_16&limit=5000&format=json',
 }
 
 global.ipi = {
@@ -102,63 +119,45 @@ global.rofex = {
   t1: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_FRO_ROF1M_D_0_0_19&limit=5000&format=json'
 }
 
-/* global.rem = {
-  interanualrem: 'https://apis.datos.gob.ar/series/api/series/?ids=430.1_MEDIANA_IP_12_M_0_0_27_96&limit=5000&start_date=2017-12-01&format=json',
-  interanualipc: 'https://apis.datos.gob.ar/series/api/series/?collapse=month&collapse_aggregation=avg&ids=148.3_INIVELNAL_DICI_M_26&limit=5000&representation_mode=percent_change_a_year_ago&format=json'
-}
-
-global.monetaria = {
-  //tcrm: 'https://apis.datos.gob.ar/series/api/series/?ids=116.4_TCRZE_2015_D_36_4&limit=5000&start_date=2009-01-01&format=json',
-  //tasa: 'https://apis.datos.gob.ar/series/api/series/?ids=89.2_TS_INTE_PM_0_D_16&limit=5000&format=json',
-  //badlar: 'https://apis.datos.gob.ar/series/api/series/?ids=89.2_TS_INTELAR_0_D_20&limit=5000&start_date=2016-01-02&format=json',
-  //plazo: 'https://apis.datos.gob.ar/series/api/series/?ids=89.1_TIPF35D_0_0_35&limit=5000&start_date=2016-01-01&format=json',
-  //call: 'https://apis.datos.gob.ar/series/api/series/?ids=89.2_TS_INTEALL_0_D_18&limit=5000&start_date=2016-01-02&format=json',
-  //cambio: 'https://apis.datos.gob.ar/series/api/series/?ids=92.2_TIPO_CAMBIION_0_0_21_24&limit=5000&start_date=2018-01-01&format=json',
-  //adr: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_T_CAMBIDRS_D_0_0_29&limit=5000&start_date=2018-01-01&format=json',
-  //reservas: 'https://apis.datos.gob.ar/series/api/series/?ids=92.1_RID_0_0_32&limit=5000&format=json'
-}
- */
-
-
-
-
-async function getTCRM() {
-
-  const resA = await fetch('http://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xls');
-  console.log("⧖ Downloading ITCRMSerie.xls...")
-  var emaeB = await resA.arrayBuffer();
-  var obj = xlsx.parse(emaeB);
-
-  var dateITRCM = []
-  var valITCRM = []
-  var valITCRB = []
-  var valITCRUS = []
-
-  for (let i = 0; i < obj[0].data.length; i++) {
-    var date = new Date(Date.UTC(0, 0, obj[0].data[i][0]));
-
-    if (date != 'Invalid Date') {
-      dateITRCM.push(date.toLocaleDateString("en-CA"))
-      valITCRM.push(obj[0].data[i][1])
-      valITCRB.push(obj[0].data[i][2])
-      valITCRUS.push(obj[0].data[i][5])
-
+global.xls = {
+  ice: {
+    url: 'https://estudioseconomicos.ec.gba.gov.ar/datos/nac/contnac-indice-de-condiciones-externas.xlsx',
+    sheet: 0,
+    date: 0,
+    columns: {
+      coyuntural: 2,
+      estructural: 1,
+    }    
+  },
+  tcrm: {
+    url: 'http://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xls',
+    sheet: 0,
+    date: 0,
+    columns: {
+      itcrm: 1,
+      itcrb: 2,
+      itcrus: 5
+    }    
+  },  
+  embi: {
+    url: "https://bcrdgdcprod.blob.core.windows.net/documents/entorno-internacional/documents/Serie_Historica_Spread_del_EMBI.xlsx",
+    sheet: 0,
+    date: 0,
+    columns: {
+      argentina: 4,
+      brasil: 6,
+      chile: 7,
+      mexico: 14,
+      colombia: 8,
+      latino: 2
     }
   }
-
-  fs.writeFileSync(`./json/monetaria/tcrm/dates.json`, JSON.stringify(dateITRCM));
-  fs.writeFileSync(`./json/monetaria/tcrm/itcrm.json`, JSON.stringify(valITCRM));
-  fs.writeFileSync(`./json/monetaria/tcrm/itcrb.json`, JSON.stringify(valITCRB));
-  fs.writeFileSync(`./json/monetaria/tcrm/itcrus.json`, JSON.stringify(valITCRUS));
-  console.log(`♥ [monetaria] TRCM updated`)
-
 }
 
 async function getUSD() {
 
   const resA = await fetch('https://api.bluelytics.com.ar/v2/evolution.json');
-  console.log("⧖ Downloading evolution.json...")
-  var emaeB = await resA.json();
+   var emaeB = await resA.json();
   var dateUSD = []
   var valUSD = []
   var valBlue = []
@@ -175,12 +174,11 @@ async function getUSD() {
 
   for (let i = 0; i < valUSD.length; i++) {
     var tempBrecha = (valBlue[i] - valUSD[i]) / valUSD[i] * 100.0;
-    
     valGap.push(tempBrecha)
-   }
+  }
 
   dateUSD = [...new Set(dateUSD)]
- 
+
   fs.writeFileSync(`./json/monetaria/blue/dates.json`, JSON.stringify(dateUSD));
   fs.writeFileSync(`./json/monetaria/blue/blue.json`, JSON.stringify(valBlue));
   fs.writeFileSync(`./json/monetaria/blue/usd.json`, JSON.stringify(valUSD));
@@ -192,8 +190,7 @@ async function getUSD() {
 async function getBRCASeries() {
 
   const resA = await fetch('http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm');
-  console.log("⧖ Downloading series.xlsm...")
-  var emaeB = await resA.arrayBuffer();
+   var emaeB = await resA.arrayBuffer();
   var obj = xlsx.parse(emaeB);
   var dateUSD = []
   var valUSD = []
@@ -217,14 +214,15 @@ async function getBRCASeries() {
   }
 
 
-  fs.writeFileSync(`./json/monetaria/reservas/d.json`, JSON.stringify(valRes.slice(0, foundArr[0])));
+  fs.writeFileSync(`./json/reservas/total.json`, JSON.stringify(valRes.slice(0, foundArr[0])));
 
-  fs.writeFileSync(`./json/monetaria/compras/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
-  fs.writeFileSync(`./json/monetaria/compras/mensualdates.json`, JSON.stringify(dateUSD.slice(foundArr[0], foundArr[1])));
-  fs.writeFileSync(`./json/monetaria/compras/anualdates.json`, JSON.stringify(dateUSD.slice(foundArr[1])));
-  fs.writeFileSync(`./json/monetaria/compras/diaria.json`, JSON.stringify(valUSD.slice(0, foundArr[0])));
-  fs.writeFileSync(`./json/monetaria/compras/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0], foundArr[1])));
-  fs.writeFileSync(`./json/monetaria/compras/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
+  fs.writeFileSync(`./json/reservas/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
+  fs.writeFileSync(`./json/reservas/mensualdates.json`, JSON.stringify(dateUSD.slice(foundArr[0], foundArr[1])));
+  fs.writeFileSync(`./json/reservas/anualdates.json`, JSON.stringify(dateUSD.slice(foundArr[1])));
+
+  fs.writeFileSync(`./json/reservas/diaria.json`, JSON.stringify(valUSD.slice(0, foundArr[0])));
+  fs.writeFileSync(`./json/reservas/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0], foundArr[1])));
+  fs.writeFileSync(`./json/reservas/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
 
   console.log(`♥ [monetaria] Reservas updated`)
 
@@ -243,7 +241,7 @@ async function getBRCASeries() {
       valPlazo.push(obj[5].data[i][1].toFixed(2))
       valBadlar.push(obj[5].data[i][8].toFixed(2))
       //valPases.push(obj[5].data[i][20].toString().replace(/s\/i/g, '0'))
- 
+
     }
   }
 
@@ -251,22 +249,22 @@ async function getBRCASeries() {
     var date = new Date(Date.UTC(0, 0, obj[6].data[i][0]));
     if (date != 'Invalid Date') {
       var tempCall = obj[6].data[i][9]
-      if (!tempCall) { tempCall = '0'}
+      if (!tempCall) { tempCall = '0' }
       valTasa.push(obj[6].data[i][9])
       var tempPases = obj[6].data[i][11]
-      if (!tempPases) { tempPases = '0'}
+      if (!tempPases) { tempPases = '0' }
       valPases.push(obj[6].data[i][11])
 
-  
+
     }
   }
- 
+
   fs.writeFileSync(`./json/monetaria/tasas/tasadates.json`, JSON.stringify(dateTasa));
   fs.writeFileSync(`./json/monetaria/tasas/tasaplazo.json`, JSON.stringify(valPlazo));
   fs.writeFileSync(`./json/monetaria/tasas/tasabadlar.json`, JSON.stringify(valBadlar));
   fs.writeFileSync(`./json/monetaria/tasas/tasatasa.json`, JSON.stringify(valTasa));
   fs.writeFileSync(`./json/monetaria/tasas/tasapases.json`, JSON.stringify(valPases));
- 
+
   console.log(`♥ [monetaria] Tasas updated`)
 
 }
@@ -279,8 +277,7 @@ async function getBRCAScraper() {
   for (let i = 0; i < series.length; i++) {
 
     const resA = await fetch('http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp?fecha_desde=1900-01-01&fecha_hasta=2040-04-30&primeravez=1&serie=' + series[i]);
-    console.log(`⧖ Scraping ${series[i]}...`)
-    var emaeB = await resA.text();
+     var emaeB = await resA.text();
     var json = parse5.parse(emaeB)
     json = json.childNodes[1].childNodes[2].childNodes[1].childNodes[7].childNodes[1].childNodes[3].childNodes[1].childNodes[1].childNodes[3].childNodes
 
@@ -292,14 +289,11 @@ async function getBRCAScraper() {
 
       if (json[i].nodeName === 'tbody') {
         var date = json[i].childNodes[1].childNodes[1].childNodes[0].value.replace(/\//g, '-');
-
         var inflaDateTemp = date.split('-')
         var newdate = inflaDateTemp[2] + '-' + inflaDateTemp[1] + '-' + inflaDateTemp[0]
         dateInfla.push(newdate)
         inflaVal.push(json[i].childNodes[1].childNodes[3].childNodes[0].value.trim().split('.').join("").replace(/,/g, '.'))
       }
-
-
     }
 
 
@@ -320,162 +314,19 @@ async function getBRCAScraper() {
   }
 }
 
-async function getICE() {
-
-  const resA = await fetch('https://estudioseconomicos.ec.gba.gov.ar/datos/nac/contnac-indice-de-condiciones-externas.xlsx');
-  console.log("⧖ Downloading contnac-indice-de-condiciones-externas.xlsx...")
-  var emaeB = await resA.arrayBuffer();
-  var obj = xlsx.parse(emaeB);
-    var dateUSD = []
-  var valICE = []
-  var valICEC = []
-
-   for (let i = 0; i < obj[0].data.length; i++) {
-    var date = new Date(Date.UTC(0, 0, obj[0].data[i][0]));
-     if (date != 'Invalid Date') {
-      dateUSD.push(date.toLocaleDateString("en-CA"))
-      valICE.push(obj[0].data[i][1].toFixed(2))
-      valICEC.push(obj[0].data[i][2])
-    }
-  }
-
-  fs.writeFileSync(`./json/expo/ice/dates.json`, JSON.stringify(dateUSD));
-  fs.writeFileSync(`./json/expo/ice/coyuntural.json`, JSON.stringify(valICEC));
-  fs.writeFileSync(`./json/expo/ice/estructural.json`, JSON.stringify(valICE));
-   
-  console.log(`♥ [expo] ICE updated`)
-
-}
-
-async function getEMBI() {
-
-  const resA = await fetch('https://bcrdgdcprod.blob.core.windows.net/documents/entorno-internacional/documents/Serie_Historica_Spread_del_EMBI.xlsx');
-  console.log("⧖ Downloading Serie_Historica_Spread_del_EMBI.xlsx...")
-  var emaeB = await resA.arrayBuffer();
-  var obj = xlsx.parse(emaeB);
-    var dateEMBI = []
-    var valArg = []
-    var valBra = []
-    var valChi = []
-    var valCol = []
-    var valMex = []
-    var valLat = []
-    for (let i = 0; i < obj[0].data.length; i++) {
-    var date = new Date(Date.UTC(0, 0, obj[0].data[i][0]));
-     if (date != 'Invalid Date') {
-
-      dateEMBI.push(date.toLocaleDateString("en-CA"))
-      valLat.push(obj[0].data[i][2])
-
-      valArg.push(obj[0].data[i][4])
-      valBra.push(obj[0].data[i][6])
-      valChi.push(obj[0].data[i][7])
-      valCol.push(obj[0].data[i][8])
-      valMex.push(obj[0].data[i][14])
-     }
-  }
- 
-  fs.writeFileSync(`./json/expo/embi/dates.json`, JSON.stringify(dateEMBI));
-   fs.writeFileSync(`./json/expo/embi/argentina.json`, JSON.stringify(valArg));
-   fs.writeFileSync(`./json/expo/embi/brasil.json`, JSON.stringify(valBra));
-   fs.writeFileSync(`./json/expo/embi/chile.json`, JSON.stringify(valChi));
-   fs.writeFileSync(`./json/expo/embi/colombia.json`, JSON.stringify(valCol));
-   fs.writeFileSync(`./json/expo/embi/mexico.json`, JSON.stringify(valMex));
-   fs.writeFileSync(`./json/expo/embi/latino.json`, JSON.stringify(valLat));
-   
-  console.log(`♥ [expo] EMBI updated`)
-
-}
-
-/*     if (obj[1].data[i][0] === '379.9_INDICE_TIEMPO__13_97') {
-      console.log(i)
-    } */
-
 async function getMECON() {
 
   const resA = await fetch('http://www.economia.gob.ar/download/infoeco/apendice6.xlsx');
-  console.log("⧖ Downloading apendice6.xlsx...")
-  var emaeB = await resA.arrayBuffer();
+   var emaeB = await resA.arrayBuffer();
   var obj = xlsx.parse(emaeB);
 
-
-
-    // Sheet 1: AHORRO
-
-  var dateUSD = []
-  var valIngresos = []
-  var valGastos = []
-  var valAhorro = []
-   for (let i = 0; i < obj[1].data.length; i++) {
-
-    var date = new Date(Date.UTC(0, 0, obj[1].data[i][0]));
-    if (date != 'Invalid Date') {
-       dateUSD.push(date.toLocaleDateString("en-CA"))
-       valIngresos.push(obj[1].data[i][1].toFixed(2))
-       valGastos.push(obj[1].data[i][17].toFixed(2))
-       valAhorro.push(obj[1].data[i][46].toFixed(2))
-    } 
-  }
-  var foundIndex
-  for (let i = 0; i < dateUSD.length; i++) {
-
-    if(dateUSD[i] === '2015-01-01') {
-      foundIndex = i
-    }
-
-  }
-  fs.writeFileSync(`./json/cuentas/saldo/dates.json`, JSON.stringify(dateUSD.splice(foundIndex)));
-  fs.writeFileSync(`./json/cuentas/saldo/ingresos.json`, JSON.stringify(valIngresos.splice(foundIndex)));
-  fs.writeFileSync(`./json/cuentas/saldo/gastos.json`, JSON.stringify(valGastos.splice(foundIndex)));
-  fs.writeFileSync(`./json/cuentas/saldo/ahorro.json`, JSON.stringify(valAhorro.splice(foundIndex)));
-   
-  console.log(`♥ [cuentas] Ahorro updated`)   
-
-
-    // Sheet 12: IMIG
-
-  var dateIMIG = []
-  var valEnergia = []
-  var valTransporte = []
-    for (let i = 0; i < obj[12].data.length; i++) {
-
-    var date = new Date(Date.UTC(0, 0, obj[12].data[i][0]));
-    if (date != 'Invalid Date') {
-      dateIMIG.push(date.toLocaleDateString("en-CA"))
-       valEnergia.push(obj[12].data[i][22].toFixed(0))
-       valTransporte.push(obj[12].data[i][23].toFixed(0))
-     } 
-  }
-  var foundIndexe
-  var fixDate = []
-
-  for (let i = 0; i < dateIMIG.length; i++) {
-
-    if(dateIMIG[i] === '2016-01-01') {
-      foundIndexe = i
-    }
-    if(dateIMIG[i] === '2020-01-01') {
-      fixDate.push(i)
-    }
-  }
-
-
-   dateIMIG[fixDate[1]] = '2021-01-01'
-  fs.writeFileSync(`./json/cuentas/subsidios/dates.json`, JSON.stringify(dateIMIG.splice(foundIndexe)));
-  fs.writeFileSync(`./json/cuentas/subsidios/transporte.json`, JSON.stringify(valTransporte.splice(foundIndexe)));
-  fs.writeFileSync(`./json/cuentas/subsidios/energia.json`, JSON.stringify(valEnergia.splice(foundIndexe)));
-    
-  console.log(`♥ [cuentas] Subsidios updated`)   
-
-
-
+ 
 }
 
 
 
 async function masterDb(kpis) {
-  if (kpis !== 'tcrm') {
-    for (let e = 0; e < kpis.length; e++) {
+     for (let e = 0; e < kpis.length; e++) {
       for (let [key, value] of Object.entries(global[`${kpis[e]}`])) {
 
         var tempDates = [];
@@ -494,16 +345,52 @@ async function masterDb(kpis) {
         fs.writeFileSync(`./json/${kpis[e]}/${key}/dates.json`, JSON.stringify(tempDates));
         fs.writeFileSync(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
         console.log(`♥ [${kpis[e]}] ${key} updated`)
-        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](100)
+        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](1000)
       }
     }
-  }
-
+ 
 }
 
 
-/* masterDb([
-  'emae',
+
+
+
+
+async function parseXLS(kpi) {
+
+  const resA = await fetch(xls[kpi].url);
+  var emaeB = await resA.arrayBuffer();
+  var obj = xlsx.parse(emaeB);
+  var data = obj[xls[kpi].sheet].data
+
+  var datesArray = []
+
+  for (let i = 0; i < data.length; i++) {
+    var date = new Date(Date.UTC(0, 0, data[i][xls[kpi].date]));
+    if (date != 'Invalid Date') {
+      datesArray.push(date.toLocaleDateString("en-CA"))
+    }
+  }
+
+  for (let [key, value] of Object.entries(xls[kpi].columns)) {
+    var tempArray = []
+    for (let i = 0; i < data.length; i++) {
+      if (new Date(Date.UTC(0, 0, data[i][xls[kpi].date])) != 'Invalid Date') { tempArray.push(Number(data[i][value]).toFixed(3))}
+    }
+    fs.writeFileSync(`./json/${kpi}/${key}.json`, JSON.stringify(tempArray));
+    console.log(`♥ [${kpi}] ${key} updated`)
+
+  }
+
+  fs.writeFileSync(`./json/${kpi}/dates.json`, JSON.stringify(datesArray));
+
+  console.log(`♥ [${kpi}] dates updated`)
+
+}
+
+masterDb([
+  'cuentas'
+/*   'emae',
    'ipi',
   'isac',
   'expo',
@@ -511,15 +398,15 @@ async function masterDb(kpis) {
   'ipc',
   'empleo',
   'ucii',
-  'rofex',
+  'rofex', */
  ]); 
 
-getTCRM()
-getUSD() 
+/* 
+parseXLS("embi");
+parseXLS("ice");
+parseXLS("tcrm");
 getBRCASeries()
-getICE() 
-getEMBI() 
 
-
-getBRCAScraper() */
-getMECON()
+getUSD() 
+getBRCAScraper()
+getMECON() */

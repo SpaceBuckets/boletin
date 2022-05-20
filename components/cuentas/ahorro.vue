@@ -2,7 +2,7 @@
   <div style="position: relative" class="">
     <div class="title-container" style="min-width:100%;">
       <h2>
-        <span>Resultado Económico</span>. Ahorro/Desahorro
+        <span>Superavit fiscal</span>. Ahorro/Desahorro
       </h2>
       <div class="select-container">
         <select name="cars" id="cars">
@@ -43,10 +43,10 @@
 
 <script>
 
- import ingresos from "../../json/cuentas/saldo/ingresos.json";
-import gastos from "../../json/cuentas/saldo/gastos.json";
-import ahorro from "../../json/cuentas/saldo/ahorro.json";
-import expoDates from "../../json/cuentas/saldo/dates.json";
+ import ingresos from "../../json/cuentas/ingresos/d.json";
+import gastos from "../../json/cuentas/gastos/d.json";
+import ahorro from "../../json/cuentas/ahorro/d.json";
+import expoDates from "../../json/cuentas/ingresos/dates.json";
 
 const colours = ahorro.map((value) => value < 0 ? '#b22222CC' : '#009966');
 
@@ -57,7 +57,7 @@ export default {
         labels: expoDates,
         datasets: [
   
-          {
+           {
             backgroundColor: 'rgba(146,220,210,0)',
             label: "Ingresos",
             data: ingresos,
@@ -72,7 +72,7 @@ export default {
             borderColor: "#b22222CC",
             pointRadius: 0,
             borderWidth: 2,
-          },   
+          },     
           {
             backgroundColor: '#ccc',
             label: "Precio",

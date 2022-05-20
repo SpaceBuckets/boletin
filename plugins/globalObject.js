@@ -37,8 +37,13 @@ const state = {
     },
     cuentas: {
       ahorro: "Ahorro y Desahorro",
-      subsidios: "Subsidios Economicos"
-    },
+      subsidios: "Subsidios Economicos",
+      pozos: 'Produccion de petroleo',
+      gas: 'Produccion de Gas',
+      hierro: 'Produccion de Hierro Primario',
+      autos: 'Produccion de Automoviles',
+      soja: 'Produccion de Soja',
+     },
     externo: {
       expo: "Exportaciones",
       impo: "Importaciones",

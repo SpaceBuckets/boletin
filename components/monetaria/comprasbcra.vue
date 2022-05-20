@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import cambio from "../../json/monetaria/compras/diaria.json";
-import trcmDates from "../../json/monetaria/compras/diariadates.json";
+import cambio from "../../json/reservas/diaria.json";
+import trcmDates from "../../json/reservas/diariadates.json";
 const colours = cambio.map((value) => value < 0 ? '#b22222CC' : '#009966');
 
 export default {

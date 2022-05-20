@@ -48,10 +48,10 @@
 
 <script>
 
-import trcm from "../../json/monetaria/tcrm/itcrm.json";
-import trcus from "../../json/monetaria/tcrm/itcrus.json";
-import trcb from "../../json/monetaria/tcrm/itcrb.json";
- import trcmDates from "../../json/monetaria/tcrm/dates.json";
+import trcm from "../../json/tcrm/itcrm.json";
+import trcus from "../../json/tcrm/itcrus.json";
+import trcb from "../../json/tcrm/itcrb.json";
+ import trcmDates from "../../json/tcrm/dates.json";
 
 export default {
   data() {

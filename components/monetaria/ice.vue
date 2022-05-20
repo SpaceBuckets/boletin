@@ -50,9 +50,9 @@
 
 <script>
 
-import iceEstructural from "../../json/expo/ice/estructural.json";
-import iceCoyuntural from "../../json/expo/ice/coyuntural.json";
- import iceDates from "../../json/expo/ice/dates.json";
+import iceEstructural from "../../json/ice/estructural.json";
+import iceCoyuntural from "../../json/ice/coyuntural.json";
+ import iceDates from "../../json/ice/dates.json";
 
 export default {
   data() {
