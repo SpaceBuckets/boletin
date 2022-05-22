@@ -389,8 +389,8 @@ async function parseXLS(kpi) {
 }
 
 masterDb([
-  'cuentas'
-/*   'emae',
+  'cuentas',
+   'emae',
    'ipi',
   'isac',
   'expo',
@@ -398,10 +398,10 @@ masterDb([
   'ipc',
   'empleo',
   'ucii',
-  'rofex', */
+  'rofex',  
  ]); 
 
-/* 
+  
 parseXLS("embi");
 parseXLS("ice");
 parseXLS("tcrm");
@@ -409,4 +409,4 @@ getBRCASeries()
 
 getUSD() 
 getBRCAScraper()
-getMECON() */
+getMECON()  

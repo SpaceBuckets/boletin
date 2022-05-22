@@ -4,20 +4,7 @@
       <h2>
         <span>Subsidios Económicos</span>. Energía y Transporte
       </h2>
-      <div class="select-container">
-        <select name="cars" id="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-        <select name="cars" id="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-      </div>
+ 
     </div>
     <div class="chartcont">
 

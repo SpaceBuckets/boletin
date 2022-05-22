@@ -19,7 +19,7 @@
         </div>
 <!--         <div class="flexedcontent">
           <div
-            v-for="(dates, i) in chartData.labels.slice().reverse()"
+            v-for="(dates, i) in chartData.labels.slice().reverse().slice(0, 6)"
             :key="`aa${i}`"
           >
             <div>{{ dates.slice(0, -3) }}</div>

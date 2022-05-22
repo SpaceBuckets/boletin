@@ -1,6 +1,39 @@
 <template>
   <div>
+    <div class="headbert" >
+      <div>
+        <div>
+          
+      <h1>Tachame la Macro</h1>
+          <em>Febo asoma; ya sus rayos, iluminan el histórico contexto.</em> Esta colección de indicadores intenta develar de donde viene y hacia donde va la macroeconomía Argentina.
+        </div>
+ 
+        <div class="capis">
+          <div>
+            <div>Población</div>
+            <h2>45.4M</h2>
+            <div>Censo 2020</div>
+          </div>
 
+          <div>
+            <div>PBI per capita</div>
+            <h2>$1,015M</h2>
+            <div>Dato 2020</div>
+          </div>
+
+          <div>
+            <div>HDI</div>
+            <h2>0.845</h2>
+            <div>Dato 2020</div>
+          </div>
+          <div>
+            <div>GINI</div>
+            <h2>42.9</h2>
+            <div>Dato 2020</div>
+          </div>
+        </div>
+      </div>
+    </div>
           <div class="navigator" :class="{active: $state.isOpen}">
         <h5>Indicadores</h5>
         <div class="separator" v-for="(kpi, i) in $state.indicadores">
@@ -22,20 +55,19 @@
       </div>
                     <div class="backdrop" :class="{active: $state.isOpen}" @click="$state.isOpen = !$state.isOpen"></div>
 
-          <h2 class="pagetitle">Actividad Económica<i>4 Indicadores Seleccionados</i></h2>
- 
+  
     <div class="section-container">
-            <div>
-        <section
-          v-for="(repepes, currActive) in $state.indicadores.actividad"
-          :ref="repepes"
-        >
-          <component :is="`actividad-${currActive}`" />
-                </section>
+               <actividad-box/>
+                 <cuentas-box/>
+                 <monetaria-box/>
+                 <dolar-box/>
+
+                 <precios-box/>
+                 <produccion-box/>
+
 
  
-      </div>
-
+ 
     </div>
   </div>
 </template>

@@ -1,4 +1,13 @@
 {
+  "ChartsBar": {
+    "description": "Auto imported from components/charts/bar.js"
+  },
+  "ChartsLine": {
+    "description": "Auto imported from components/charts/line.js"
+  },
+  "ActividadBox": {
+    "description": "Auto imported from components/actividad/box.vue"
+  },
   "ActividadEmae": {
     "description": "Auto imported from components/actividad/emae.vue"
   },
@@ -11,29 +20,29 @@
   "ActividadUcii": {
     "description": "Auto imported from components/actividad/ucii.vue"
   },
-  "ChartsBar": {
-    "description": "Auto imported from components/charts/bar.js"
+  "DolarBox": {
+    "description": "Auto imported from components/dolar/box.vue"
   },
-  "ChartsLine": {
-    "description": "Auto imported from components/charts/line.js"
+  "DolarBrecha": {
+    "description": "Auto imported from components/dolar/brecha.vue"
   },
-  "CuentasAhorro": {
-    "description": "Auto imported from components/cuentas/ahorro.vue"
+  "DolarCambio": {
+    "description": "Auto imported from components/dolar/cambio.vue"
   },
-  "CuentasAutos": {
-    "description": "Auto imported from components/cuentas/autos.vue"
+  "DolarRofex": {
+    "description": "Auto imported from components/dolar/rofex.vue"
   },
-  "CuentasGas": {
-    "description": "Auto imported from components/cuentas/gas.vue"
+  "DolarTcrm": {
+    "description": "Auto imported from components/dolar/tcrm.vue"
   },
-  "CuentasHierro": {
-    "description": "Auto imported from components/cuentas/hierro.vue"
+  "CuentasBalanza": {
+    "description": "Auto imported from components/cuentas/balanza.vue"
   },
-  "CuentasPozos": {
-    "description": "Auto imported from components/cuentas/pozos.vue"
+  "CuentasBox": {
+    "description": "Auto imported from components/cuentas/box.vue"
   },
-  "CuentasSoja": {
-    "description": "Auto imported from components/cuentas/soja.vue"
+  "CuentasDeficit": {
+    "description": "Auto imported from components/cuentas/deficit.vue"
   },
   "CuentasSubsidios": {
     "description": "Auto imported from components/cuentas/subsidios.vue"
@@ -44,26 +53,8 @@
   "ExternoImpo": {
     "description": "Auto imported from components/externo/impo.vue"
   },
-  "PreciosAsalariados": {
-    "description": "Auto imported from components/precios/asalariados.vue"
-  },
-  "PreciosDesempleo": {
-    "description": "Auto imported from components/precios/desempleo.vue"
-  },
-  "PreciosIpc": {
-    "description": "Auto imported from components/precios/ipc.vue"
-  },
-  "PreciosIpchistorico2": {
-    "description": "Auto imported from components/precios/ipchistorico2.vue"
-  },
-  "PreciosRem": {
-    "description": "Auto imported from components/precios/rem.vue"
-  },
-  "MonetariaBrecha": {
-    "description": "Auto imported from components/monetaria/brecha.vue"
-  },
-  "MonetariaCambio": {
-    "description": "Auto imported from components/monetaria/cambio.vue"
+  "MonetariaBox": {
+    "description": "Auto imported from components/monetaria/box.vue"
   },
   "MonetariaComprasanual": {
     "description": "Auto imported from components/monetaria/comprasanual.vue"
@@ -80,22 +71,49 @@
   "MonetariaIce": {
     "description": "Auto imported from components/monetaria/ice.vue"
   },
-  "MonetariaIntercambio": {
-    "description": "Auto imported from components/monetaria/intercambio.vue"
-  },
   "MonetariaMae": {
     "description": "Auto imported from components/monetaria/mae.vue"
   },
   "MonetariaReservas": {
     "description": "Auto imported from components/monetaria/reservas.vue"
   },
-  "MonetariaRofex": {
-    "description": "Auto imported from components/monetaria/rofex.vue"
-  },
   "MonetariaTasa": {
     "description": "Auto imported from components/monetaria/tasa.vue"
   },
-  "MonetariaTcrm": {
-    "description": "Auto imported from components/monetaria/tcrm.vue"
+  "ProduccionAcero": {
+    "description": "Auto imported from components/produccion/acero.vue"
+  },
+  "ProduccionAutos": {
+    "description": "Auto imported from components/produccion/autos.vue"
+  },
+  "ProduccionBox": {
+    "description": "Auto imported from components/produccion/box.vue"
+  },
+  "ProduccionCereales": {
+    "description": "Auto imported from components/produccion/cereales.vue"
+  },
+  "ProduccionGas": {
+    "description": "Auto imported from components/produccion/gas.vue"
+  },
+  "ProduccionPetroleo": {
+    "description": "Auto imported from components/produccion/petroleo.vue"
+  },
+  "PreciosAsalariados": {
+    "description": "Auto imported from components/precios/asalariados.vue"
+  },
+  "PreciosBox": {
+    "description": "Auto imported from components/precios/box.vue"
+  },
+  "PreciosDesempleo": {
+    "description": "Auto imported from components/precios/desempleo.vue"
+  },
+  "PreciosIpc": {
+    "description": "Auto imported from components/precios/ipc.vue"
+  },
+  "PreciosIpchistorico2": {
+    "description": "Auto imported from components/precios/ipchistorico2.vue"
+  },
+  "PreciosRem": {
+    "description": "Auto imported from components/precios/rem.vue"
   }
 }

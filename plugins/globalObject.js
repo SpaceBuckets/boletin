@@ -5,13 +5,13 @@ const state = {
   isOpen: false,
   selectedkpis: ["emae",'ipi','ucii','cambio','tcrm','reservas','tasa','intercambio','embi','ipc','desempleo','asalariados'],
   indicadores: {
-    actividad: {
+/*     actividad: {
       emae: "EMAE (Estimador Mensual de Actividad Económica)",
       //pbi: "Producto Bruto Interno",
       ipi: "IPI (Indice de Produccion Industrial Manufacturero)",
       isac: "ISAC (Indicador Sintético de la Construcción)",
       ucii: "UCII (Utilizacion de la Capacidad Instalada en la Industria)",
-    },
+    }, */
     precios: {
       ipc: "IPC (Índice de Precios al Consumidor)",
     /*   ipchistorico: "Inflación Histórica intermensual",

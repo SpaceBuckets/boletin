@@ -4,25 +4,11 @@
       <h2>
         <span style="text-transform: uppercase">IPI</span>. Indice de Producción Industrial Manufacturero
       </h2>
-      <div class="select-container">
-        <select name="cars" id="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-        <select name="cars" id="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-      </div>
+ 
     </div>
 <div class="chartcont">
       <div class="flexedtable">
-       <p>El IPI es un <strong>indicador provisorio de la evolución del PBI</strong> que ofrece una pauta de la actividad económica real. Se elabora con información parcial calculando la <strong>suma del valor agregado de las actividades económicas</strong>.</p> 
-        <p>Fuente: INDEC</p>
+       <p>El índice de producción industrial manufacturero (IPI) incluye <strong>un exhaustivo relevamiento de todas las actividades económicas</strong> que conforman el sector de la industria manufacturera, con cobertura para el total del país.</p> 
         <div>
           <div>
             <div>Fecha</div>
@@ -32,19 +18,21 @@
         </div>
         <div class="flexedcontent">
           <div
-            v-for="(dates, i) in chartData.labels.slice().reverse()"
+            v-for="(dates, i) in filteredArray()"
             :key="`aa${i}`"
           >
             <div>{{ dates.slice(0, -3) }}</div>
             <div>
-              {{ chartData.datasets[0].data.slice().reverse()[i].toFixed(2) }}
+              {{ chartData.datasets[0].data.filter((val, index, arr) => index > arr.length - 8).reverse()[i].toFixed(2) }}
             </div>
-            <div>
-              {{ chartData.datasets[1].data.slice().reverse()[i].toFixed(2) }}
+            <div class="green" :class="{red: getVariation(i) < 0}">
+              {{ getVariation(i) + '%' }}
             </div>
  
           </div>
         </div>
+        <br>
+                <p>Fuente: <a href="#">INDEC</a></p>
       </div>
     <charts-line
             :key="$state.updated"
@@ -61,7 +49,6 @@
 </template>
 
 <script>
-
 import ipiB from "../../json/ipi/base/d.json";
 import ipiD from "../../json/ipi/estacional/d.json";
 import ipiT from "../../json/ipi/tendencia/d.json";
@@ -74,7 +61,7 @@ export default {
         labels: ipiDates,
         datasets: [
           {
-            backgroundColor: 'rgba(46,120,210,0)',
+            backgroundColor: "rgba(46,120,210,0)",
             label: "Desestacionalizado",
             data: ipiD,
             borderColor: "#2E78D2",
@@ -99,58 +86,74 @@ export default {
             borderWidth: 1.5,
           },
         ],
-      },  
+      },
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false,
-        animation: { duration: 0 },    
+        animation: { duration: 0 },
         layout: {
           padding: {
             left: 0,
             right: 0,
             top: 0,
-            bottom: 0
-          }
+            bottom: 0,
+          },
         },
         scales: {
-          xAxes: [{
-            type: 'time',
-            offset: true,
-            position: 'bottom',
-            gridLines: {
-                            color: "#F7F5F0"
-, zeroLineColor: '#eee', drawBorder: false, offsetGridLines: false, 
-              color: "#F7F5F0"
+          xAxes: [
+            {
+              type: "time",
+              offset: true,
+              position: "bottom",
+              gridLines: {
+                color: "#F7F5F0",
+                zeroLineColor: "#eee",
+                drawBorder: false,
+                offsetGridLines: false,
+                color: "#F7F5F0",
+              },
+              ticks: { fontColor: "#aaa", fontSize: 13 },
+              time: {
+                tooltipFormat: "DD/MM/YY",
+                unit: "year",
+              },
             },
-            ticks: { fontColor: "#aaa", fontSize: 13, },
-            time: {
-              tooltipFormat: 'DD/MM/YY',
-              unit: 'year',
-            }
-          }],
-          yAxes: [{
-            ticks: { suggestedMin: 60,suggestedMax: 160,fontColor: "#aaa", },
-            gridLines: { 
-                            color: "#F7F5F0"
-, 
-              lineWidth: 1, 
-              drawBorder: false,          
+          ],
+          yAxes: [
+            {
+              ticks: { suggestedMin: 60, suggestedMax: 160, fontColor: "#aaa" },
+              gridLines: {
+                color: "#F7F5F0",
+                lineWidth: 1,
+                drawBorder: false,
+              },
+              scaleLabel: {
+                display: false,
+                labelString: "Base 2004 = 100",
+                fontColor: "#aaa",
+              },
+              position: "right",
             },
-            scaleLabel: {
-              display: false,
-              labelString: 'Base 2004 = 100',
-              fontColor: "#aaa"
-            },
-            position: "right",
-          },
           ],
         },
         legend: {
           display: false,
         },
-      },      
+      },
     };
   },
+  methods: {
+    filteredArray() {
+      return this.chartData.labels.filter((val, index, arr) => index > arr.length - 7).reverse()
+
+    },
+    getVariation(i) {
+      var currentNum = this.chartData.datasets[0].data.filter((val, index, arr) => index > arr.length - 8).reverse()
+      var A = currentNum[i] 
+      var B = currentNum[i+1] 
+      return ((A-B)/A*100.0).toFixed(2);
+    }
+  }  
 };
 </script>
 

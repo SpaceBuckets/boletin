@@ -4,20 +4,7 @@
       <h2>
         <span style="text-transform: uppercase">IPC</span>. Indice de Precios al Consumidor
       </h2>
-      <div class="select-container">
-        <select name="cars" id="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-        <select name="cars" id="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-      </div>
+ 
     </div>         
     <div class="chartcont">
   <div class="flexedtable">
@@ -32,7 +19,7 @@
         </div>
 <!--         <div class="flexedcontent">
           <div
-            v-for="(dates, i) in chartData.labels.slice().reverse()"
+            v-for="(dates, i) in chartData.labels.slice().reverse().slice(0, 6)"
             :key="`aa${i}`"
           >
             <div>{{ dates.slice(0, -3) }}</div>

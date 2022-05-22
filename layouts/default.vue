@@ -5,68 +5,10 @@
         <a href="/">BOLETIN<span>EXTRAOFICIAL</span></a>
       </h1>
       <div class="renav">
-        <nuxt-link to="/">Actividad Económica</nuxt-link>
-        <nuxt-link to="cuentas-nacionales">Cuentas Nacionales</nuxt-link>
-        <nuxt-link to="politica-monetaria">Política Monetaria</nuxt-link>
-        <nuxt-link to="precios-salarios">Precios y Salarios</nuxt-link>
+        <nuxt-link to="/">Macroeconomia</nuxt-link>
+        <nuxt-link to="/a">Urbanismo</nuxt-link>
       </div>
-      <svg
-        id="pepe"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="504px"
-        height="504px"
-        @click="$state.isOpen = !$state.isOpen"
-        viewBox="-50 -50 100 100"
-      >
-        <g id="sun">
-          >
-          <g id="face_right" fill="#fff" stroke="none">
-            <path
-              id="eyebrow_nose"
-              d="M 41,-14 C 29.5,-24 15,-25.5 7,-18 A 140,50 10 0,0 8.5,8.5 C 8,8.5 7,9 6.5,9.5 A 80,50 10 0,1 4,-19 C 15,-28 30,-29 41,-14"
-            />
-            <path
-              id="uppalpebra"
-              d="M 23,-17 C 16.5,-17 15,-15.5 12,-13 S 7.5,-11 7,-10.5 S 7,-8.5 8,-9 S 11,-10.5 14,-13 S 20,-15.5 23,-15.5 C 32,-15.5 37,-8 38,-8.5 S 33,-17 23,-17"
-            />
-            <path
-              id="upeyecontour"
-              d="M 34.5,-8.5 C 28,-15.5 16,-16 11,-8 H 13 C 18,-16 30,-12.5 31,-9 v 1"
-            />
-            <circle id="pupil" cx="22" cy="-9" r="4.5" />
-            <path
-              id="loweyecontour"
-              d="M 11,-8 C 16,-3.5 27,-3 34.5,-8.5 L 31,-9 C 26,-3.5 18,-4 13,-8 v -1"
-            />
-            <path
-              id="lowpalpebra"
-              d="M 35,-6 C 26.5,0.5 18,0 13,-3 S 8,-7 9,-7 S 11,-6 15,-4 S 25,-2 35,-6"
-            />
-            <path
-              id="nose"
-              d="M 10.5,9 A 3,3 0 1,1 6.5,12 C 6,13 4,16 0,16 h -1 l 1,1.5 C 1,17.5 4,17.5 6,16 A 4.5,4.5 0 1,0 10.5,9"
-            />
-            <path
-              id="uplip1"
-              d="M 16.5,30 C 12,27 10,22.5 5,22.5 C 4,22.5 2,23 0,24 h -1 L 0,25.5 C 2,25.5 5,23 8.5,25 S 14,29 16.5,30"
-            />
-            <path
-              id="midlip"
-              d="M 15,30 C 5,27 3,29 0,29 h -1 l 1,2 C 4,31 6,28 15,30"
-            />
-            <path
-              id="uplip2"
-              d="M 16.5,30 C 5.5,29 9,35.5 0,35.5 h -1 L 0,37 C 11,37 6,31 16.5,30"
-            />
-            <path
-              id="chin"
-              d="M 9,46 a 9,9 0 0,0 -18,0 a 9.25,9.25 0 0,1 18,0"
-            />
-          </g>
-          <use xlink:href="#face_right" transform="scale(-1,1)" />
-        </g>
-      </svg>
+    
     </header>
     <div class="content-container">
       <nuxt />
@@ -112,19 +54,32 @@ export default {
       display: flex;
       &.flexedcontent {
         flex-direction: column;
+        .green {
+          background: #00996620;
+        }
+        .green.red {
+          background: #b2222220;
+        }
       }
       > div {
         flex: 1;
         display: flex;
+        gap: 20px;
+          border-bottom: 1px solid #f7f5f0;
+
         > div {
           flex: 1;
-          border-bottom: 1px solid #f7f5f0;
           padding: 10px 0;
           text-align: right;
           color: #555;
-
+          &:last-child {
+            max-width: 80px;
+            padding-right: 10px;
+          }
           &:first-child {
             text-align: left;
+            max-width: 80px;
+
           }
         }
       }
@@ -141,7 +96,7 @@ export default {
 }
 
 .content-container {
-  margin: 10px auto;
+  margin: 20px auto;
   //background: #000;
   //height: 100vh;
   // max-width: 1440px;
@@ -322,7 +277,7 @@ section {
   min-height: 480px;
   border-radius: 2px;
   margin-bottom: 10px;
-
+position: relative;
   //border-radius: 10px;
 }
 
@@ -455,9 +410,9 @@ a {
 
 .title-container {
   padding-right: 10px;
-  padding-bottom: 20px;
-  //margin-bottom: 15px;
-  //border-bottom: 2px solid #f7f5f0;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #f7f5f0;
   display: flex;
   justify-content: space-between;
   > * { flex: 1; max-width: max-content; }
@@ -468,8 +423,8 @@ a {
     font-weight: 400;
     font-family: "Montserrat", sans-serif;
 
-    font-weight: 500;
-    color: #262626;
+    font-weight: normal;
+    color: #888;
 
     i {
       display: block;
@@ -485,6 +440,8 @@ a {
     span {
       //display: block;
       font-weight: 600;
+          color: #262626;
+
     }
   }
 }
@@ -530,7 +487,7 @@ a {
 .headbert {
   width: 100%;
   border-radius: 2px;
-  //max-width: 1440px;
+  max-width: 1440px;
   //box-shadow: 0px 0px 15px 5px rgba(109,145,179,0.5);
   margin: 0 auto 10px;
   background: #fff;
@@ -540,6 +497,7 @@ a {
   //display: none;
   > div {
     display: flex;
+    justify-content: space-between;
     > * {
       flex: 1;
     }
@@ -548,7 +506,7 @@ a {
     font-family: "Montserrat", sans-serif;
     font-size: 24px;
     font-weight: 500;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     padding: 0;
   }
   h1 {
@@ -576,21 +534,17 @@ a {
     max-width: max-content;
     h2 {
       min-width: auto !important;
-      margin-bottom: 0;
+      margin: 5px 0 5px;
     }
   }
 }
 
 
 .section-container {
-  display: flex;
-  gap: 10px;
-  padding-bottom: 100px;
+   padding-bottom: 100px;
   max-width: 1440px;
   margin: 0 auto;
-  > div {
-    flex: 1;
-  }
+ 
 }
 .backdrop {
   display: none;
@@ -715,4 +669,46 @@ h2.pagetitle {
   }
  }
 
+   .emaerto > h2 {
+    padding: 0 0;
+     margin-top: 0;
+     margin-bottom: 5px;
+     font-size: 14px;
+     text-transform: uppercase;
+     color: rgba(0,0,0,0.4);
+     //letter-spacing: 1px;
+     //font-weight: normal;
+     font-family: montserrat;
+  }
+
+
+.repills {
+  display: flex;
+  position: absolute;
+  top: 43px;
+  right: 40px;
+  gap: 10px;
+  z-index: 99;
+  > div {
+    //background: #fff;
+    //border: 1px solid #ddd;
+    padding: 12px 22px;
+    cursor: pointer;
+    font-family:montserrat;
+    //border-radius: 50px;
+
+    strong {
+        color: #888;
+        font-weight: normal;
+    }
+    &.active {
+      border-bottom: 2px solid #2E78D2;
+      strong { color: #2E78D2; font-weight:bold; }
+    }
+  }
+}
+
+.titler {
+  border-bottom: 2px solid red;
+}
 </style>
