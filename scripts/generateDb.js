@@ -314,14 +314,14 @@ async function getBRCAScraper() {
   }
 }
 
-async function getMECON() {
+/* async function getMECON() {
 
   const resA = await fetch('http://www.economia.gob.ar/download/infoeco/apendice6.xlsx');
    var emaeB = await resA.arrayBuffer();
   var obj = xlsx.parse(emaeB);
 
  
-}
+} */
 
 
 
@@ -409,4 +409,4 @@ getBRCASeries()
 
 getUSD() 
 getBRCAScraper()
-getMECON()  
+ 
