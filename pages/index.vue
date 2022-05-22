@@ -11,8 +11,8 @@
         <div class="capis">
           <div>
             <div>Población</div>
-            <h2>45.4M</h2>
-            <div>Censo 2020</div>
+            <h2>47.3M</h2>
+            <div>Censo 2022</div>
           </div>
 
           <div>

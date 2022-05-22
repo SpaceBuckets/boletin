@@ -36,7 +36,9 @@ export default {
 .chartcont {
   display: flex;
   align-items: flex-start;
-
+@media only screen and (max-width: 600px) {
+  display: block;
+  }
   > * {
     flex: 2;
   }
@@ -47,7 +49,10 @@ export default {
     margin-right: 20px;
     max-width: 300px;
     border-right: 2px solid #f7f5f0;
-
+@media only screen and (max-width: 600px) {
+  max-width: 100%;
+  border: 0;
+  }
     > div {
       max-height: 230px;
       overflow: auto;
@@ -498,6 +503,15 @@ a {
   > div {
     display: flex;
     justify-content: space-between;
+@media only screen and (max-width: 600px) {
+  display: block;
+  em {
+    display: none;
+  }
+  .capis {
+    margin-top: 10px;
+  }
+  }    
     > * {
       flex: 1;
     }
@@ -529,6 +543,9 @@ a {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+@media only screen and (max-width: 600px) {
+justify-content: space-between;
+}
   > * {
     flex: 1;
     max-width: max-content;
@@ -686,9 +703,17 @@ h2.pagetitle {
   display: flex;
   position: absolute;
   top: 43px;
+  flex-wrap: wrap;
   right: 40px;
   gap: 10px;
   z-index: 99;
+  @media only screen and (max-width: 600px) {
+  display: flex;
+  position: relative;
+  top: 0;
+  right: 0;
+  margin-bottom: 10px;
+  }
   > div {
     //background: #fff;
     //border: 1px solid #ddd;

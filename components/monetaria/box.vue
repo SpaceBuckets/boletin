@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="emaerto">
-       <h2>Cuentas Nacionales</h2>
+       <h2>Politica Monetaria</h2>
       <div class="repills">
         <div
           :class="{ active: sigla === currActive }"
