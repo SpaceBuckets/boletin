@@ -105,6 +105,9 @@ export default {
   //background: #000;
   //height: 100vh;
   // max-width: 1440px;
+    @media only screen and (max-width: 600px) {
+    margin-top: 10px;
+    }
 }
 html {
   box-sizing: border-box;
@@ -126,7 +129,10 @@ html {
   justify-content: center;
   right: 0;
   align-items: center;
-  bottom: 0;
+  bottom: 0;  
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
   a {
     padding: 10px 15px;
     color: #666;
