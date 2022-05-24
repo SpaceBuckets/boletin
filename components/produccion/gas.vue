@@ -5,7 +5,7 @@
  
     </div>
     <div class="chartcont">
-      <div class="flexedtable">
+     <div class="flexedtable">
         <p>
           El EMAE es un
           <strong>indicador provisorio de la evolución del PBI</strong> que
@@ -14,15 +14,31 @@
           <strong>suma del valor agregado de las actividades económicas</strong
           >.
         </p>
-        <p>Fuente: INDEC</p>
         <div>
           <div>
             <div>Fecha</div>
-            <div>Deses.</div>
+            <div>Serie</div>
             <div>Variacion</div>
           </div>
         </div>
-        <div class="flexedcontent"></div>
+        <div class="flexedcontent">
+          <div v-for="(dates, i) in filteredArray()" :key="`aa${i}`">
+            <div>{{ dates.slice(0,-3) }}</div>
+            <div>
+              {{
+                chartData.datasets[0].data
+                  .filter((val, index, arr) => index > arr.length - 8)
+                  .reverse()
+                  [i]
+              }}
+            </div>
+            <div class="green" :class="{ red: getVariation(i) < 0 }">
+              {{ getVariation(i) + "%" }}
+            </div>
+          </div>
+        </div>
+        <br />
+        <p>Fuente: <a href="#">INDEC</a></p>
       </div>
       <charts-line :data="chartData" :options="chartOptions" :height="460" />
     </div>
@@ -108,6 +124,18 @@ export default {
       },
     };
   },
+  methods: {
+    filteredArray() {
+      return this.chartData.labels.filter((val, index, arr) => index > arr.length - 7).reverse()
+
+    },
+    getVariation(i) {
+      var currentNum = this.chartData.datasets[0].data.filter((val, index, arr) => index > arr.length - 8).reverse()
+      var A = currentNum[i] 
+      var B = currentNum[i+1] 
+      return ((A-B)/A*100.0).toFixed(2);
+    }
+  }    
 };
 </script>
 
