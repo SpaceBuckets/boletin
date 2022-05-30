@@ -3,6 +3,7 @@ const fetch = require('node-fetch');
 var xlsx = require('node-xlsx');
 const parse5 = require('parse5');
 //process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+const glob = require('glob');
 
 
 global.emae = {
@@ -388,6 +389,39 @@ async function parseXLS(kpi) {
 
 }
 
+async function createDb(src) {
+  //Get post names
+  var folders = glob.sync('*', { cwd: `components/` })
+  var posts = [];
+  var singleObj = []
+  var singleObjNav = {}
+
+  //Main post loop
+  folders.forEach(singleFolder => {
+    const documentes = glob.sync('*.vue', {cwd: `components/${singleFolder}`})
+    let post = documentes.map(function(d) {
+      return d.replace('.vue', '');
+    });
+    for (let i = 0; i < post.length; i++) {
+      var tempObj = {}
+      tempObj.kpi = post[i]
+      tempObj.parent = singleFolder
+      singleObj.push(tempObj)
+
+    }
+    singleObjNav[singleFolder] = post
+
+  });
+  delete singleObjNav['charts']; 
+ console.log(singleObjNav)
+ fs.writeFileSync(`./json/kpis.json`, JSON.stringify(singleObj));
+ fs.writeFileSync(`./json/kpisnav.json`, JSON.stringify(singleObjNav));
+ console.log(`♥ kpis.json generated`)
+  console.log(`♥ kpisnav.json generated`)
+}
+
+
+ 
 masterDb([
   'cuentas',
    'emae',
@@ -408,5 +442,7 @@ parseXLS("tcrm");
 getBRCASeries()
 
 getUSD() 
-getBRCAScraper()
+getBRCAScraper()  
  
+
+createDb();

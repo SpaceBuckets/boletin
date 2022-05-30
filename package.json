@@ -12,6 +12,7 @@
   "dependencies": {
     "chart.js": "^2.9.4",
     "core-js": "^3.19.3",
+    "glob": "^8.0.3",
     "himalaya": "^1.1.0",
     "node-xlsx": "^0.21.0",
     "nuxt": "^2.15.8",

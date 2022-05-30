@@ -34,79 +34,66 @@
         </div>
       </div>
     </div>
-          <div class="navigator" :class="{active: $state.isOpen}">
-        <h5>Indicadores</h5>
-        <div class="separator" v-for="(kpi, i) in $state.indicadores">
-          <div v-if="i === 'actividad'">Actividad Económica</div>
-          <div v-if="i === 'precios'">Precios y Salarios</div>
-          <div v-if="i === 'monetaria'">Política Monetaria</div>
-          <div v-if="i === 'externo'">Sector Externo</div>
-          <label v-for="(pepe, e) in kpi">
-            <input
-              type="checkbox"
-              :checked="$state.selectedkpis.includes(e)"
-              @click="setCheck(e)"
-            />
 
-            <span>{{ pepe }}</span>
-          </label>
-        </div>
+<div class="dashboard-container">
 
-      </div>
-                    <div class="backdrop" :class="{active: $state.isOpen}" @click="$state.isOpen = !$state.isOpen"></div>
+<section id="actividad-row">
+     <nuxt-link :to="{ name: `actividad-economica-kpi`, params: { kpi: 'emae', parent: 'actividad-economica' } }" >
+        <component is='actividad-economica-emae' :chartHeight="330"></component>
+      </nuxt-link>
+     <nuxt-link :to="{ name: `actividad-economica-kpi`, params: { kpi: 'ucii', parent: 'actividad-economica' } }" >
+        <component is='actividad-economica-ucii' :chartHeight="330" minDate="2018-06-01"></component>
+      </nuxt-link>
+</section>
+<section id="cuentas-row">
+     <nuxt-link :to="{ name: `cuentas-nacionales-kpi`, params: { kpi: 'balanza', parent: 'cuentas-nacionales' } }" >
+        <component is='cuentas-nacionales-balanza' :chartHeight="330"></component>
+      </nuxt-link>
+     <nuxt-link :to="{ name: `cuentas-nacionales-kpi`, params: { kpi: 'deficit', parent: 'cuentas-nacionales' } }" >
+        <component is='cuentas-nacionales-deficit' :chartHeight="330" minDate="2016-06-01"></component>
+      </nuxt-link>
+</section>
+<section id="monetaria-row">
+     <nuxt-link :to="{ name: `precios-salarios-kpi`, params: { kpi: 'ipc', parent: 'precios-salarios' } }" >
+        <component is='precios-salarios-ipc' :chartHeight="330" minDate="2008-06-01"></component>
+      </nuxt-link>
+     <nuxt-link :to="{ name: `politica-monetaria-kpi`, params: { kpi: 'cambio', parent: 'politica-monetaria' } }" >
+        <component is='politica-monetaria-cambio' :chartHeight="330" minDate="2016-06-01"></component>
+      </nuxt-link>
+     <nuxt-link :to="{ name: `politica-monetaria-kpi`, params: { kpi: 'comprasbcra', parent: 'politica-monetaria' } }" >
+        <component is='politica-monetaria-comprasbcra' :chartHeight="330" minDate="2020-06-01"></component>
+      </nuxt-link>
+</section>
 
+
+</div>
   
-    <div class="section-container">
-               <actividad-box/>
-                 <cuentas-box/>
-                 <monetaria-box/>
-                 <dolar-box/>
+ <!--    <div class="section-container" v-for="(item, i) in kpis">
+      <h2 style="min-width:100%;">{{i}}</h2>
 
-                 <precios-box/>
-                 <produccion-box/>
-
+      <nuxt-link :id="kpi" v-for="kpi in item" :key='`${i}`' :to="{ name: `${i}-kpi`, params: { kpi: kpi, parent: i } }" >
+        <component :is='`${i}-${kpi}`' chartHeight="330" minDate="2016-06-01"></component>
+      </nuxt-link>
+      
 
  
  
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+
+import jsonParts from '~/json/kpis.json'
+import jsonPartsNav from '~/json/kpisnav.json'
+
+
 export default {
   name: "IndexPage",
   data() {
-    return {};
-  },
-  methods: {
-    setCheck(kpi) {
-      if (this.$state.selectedkpis.includes(kpi)) {
-        this.$state.selectedkpis.splice(
-          this.$state.selectedkpis.indexOf(kpi),
-          1
-        );
-      } else {
-        this.$state.selectedkpis.push(kpi);
-        this.$nextTick(() => {
-          var element = this.$refs[kpi];
-          var top = element[0].offsetTop-150;
-          console.log(top)
-          window.scrollTo({
-  top: top,
-   behavior: 'smooth'
-});
-        });
-      }
-    },
-    changeClick(kpi) {
-      this.$state.currActive = kpi;
-      this.$state.real.datasets[0].data = this.$state.kpis[kpi]["d"];
-      this.$state.real.datasets[1].data = this.$state.kpis[kpi]["t"];
-      this.$state.real.datasets[2].data = this.$state.kpis[kpi]["b"];
-      this.$state.real.labels = this.$state.kpis[kpi]["dates"];
-      (this.$state.currDesc = this.$state.kpis[kpi].desc),
-        this.$state.updated++;
-    },
+    return {
+      kpis: jsonPartsNav
+    };
   },
 };
 </script>
