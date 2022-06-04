@@ -39,15 +39,16 @@
     </div>
 <section id="actividad-row">
      <nuxt-link :to="{ name: `actividad-economica-kpi`, params: { kpi: 'emae', parent: 'actividad-economica' } }" >
-        <component is='actividad-economica-emae' :chartHeight="330"></component>
+        <genericLine title="EMAE. Estimador Mensual de Actividad Economica" kpi="emae" :chartHeight="330" />
       </nuxt-link>
      <nuxt-link :to="{ name: `actividad-economica-kpi`, params: { kpi: 'ucii', parent: 'actividad-economica' } }" >
-        <component is='actividad-economica-ucii' :chartHeight="330" minDate="2018-06-01"></component>
+         <genericLine title="UCII. Utilización de la Capacidad Instalada" kpi="ucii" :chartHeight="330" minDate="2018-06-01"/>
+
       </nuxt-link>
 </section>
 <section id="cuentas-row">
      <nuxt-link :to="{ name: `cuentas-nacionales-kpi`, params: { kpi: 'balanza', parent: 'cuentas-nacionales' } }" >
-        <component is='cuentas-nacionales-balanza' :chartHeight="330" minDate="2016-06-01"></component>
+        <genericLine title="Balanza Comercial" kpi="balanza" :chartHeight="330" :minDate="`2014-06-01`"/>
       </nuxt-link>
      <nuxt-link :to="{ name: `cuentas-nacionales-kpi`, params: { kpi: 'deficit', parent: 'cuentas-nacionales' } }" >
         <component is='cuentas-nacionales-deficit' :chartHeight="330" minDate="2016-06-01"></component>
@@ -84,17 +85,17 @@
 
 <script>
 
-import jsonParts from '~/json/kpis.json'
-import jsonPartsNav from '~/json/kpisnav.json'
+ 
 
 
 export default {
   name: "IndexPage",
   data() {
     return {
-      kpis: jsonPartsNav
+ 
     };
   },
+ 
 };
 </script>
 

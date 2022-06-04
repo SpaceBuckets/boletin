@@ -1,36 +1,12 @@
 {
-  "CuentasNacionalesBalanza": {
-    "description": "Auto imported from components/cuentas-nacionales/balanza.vue"
-  },
-  "CuentasNacionalesDeficit": {
-    "description": "Auto imported from components/cuentas-nacionales/deficit.vue"
-  },
-  "CuentasNacionalesExpo": {
-    "description": "Auto imported from components/cuentas-nacionales/expo.vue"
-  },
-  "CuentasNacionalesImpo": {
-    "description": "Auto imported from components/cuentas-nacionales/impo.vue"
-  },
-  "CuentasNacionalesSubsidios": {
-    "description": "Auto imported from components/cuentas-nacionales/subsidios.vue"
-  },
-  "ChartsBar": {
-    "description": "Auto imported from components/charts/bar.js"
-  },
-  "ChartsKpinav": {
-    "description": "Auto imported from components/charts/kpinav.vue"
-  },
-  "ChartsLine": {
-    "description": "Auto imported from components/charts/line.js"
+  "GenericLine": {
+    "description": "Auto imported from components/genericLine.vue"
   },
   "ActividadEconomicaAcero": {
     "description": "Auto imported from components/actividad-economica/acero.vue"
   },
   "ActividadEconomicaCereales": {
     "description": "Auto imported from components/actividad-economica/cereales.vue"
-  },
-  "ActividadEconomicaEmae": {
-    "description": "Auto imported from components/actividad-economica/emae.vue"
   },
   "ActividadEconomicaGas": {
     "description": "Auto imported from components/actividad-economica/gas.vue"
@@ -44,8 +20,26 @@
   "ActividadEconomicaPetroleo": {
     "description": "Auto imported from components/actividad-economica/petroleo.vue"
   },
-  "ActividadEconomicaUcii": {
-    "description": "Auto imported from components/actividad-economica/ucii.vue"
+  "ChartsBar": {
+    "description": "Auto imported from components/charts/bar.js"
+  },
+  "ChartsKpinav": {
+    "description": "Auto imported from components/charts/kpinav.vue"
+  },
+  "ChartsLine": {
+    "description": "Auto imported from components/charts/line.js"
+  },
+  "CuentasNacionalesDeficit": {
+    "description": "Auto imported from components/cuentas-nacionales/deficit.vue"
+  },
+  "CuentasNacionalesExpo": {
+    "description": "Auto imported from components/cuentas-nacionales/expo.vue"
+  },
+  "CuentasNacionalesImpo": {
+    "description": "Auto imported from components/cuentas-nacionales/impo.vue"
+  },
+  "CuentasNacionalesSubsidios": {
+    "description": "Auto imported from components/cuentas-nacionales/subsidios.vue"
   },
   "PoliticaMonetariaBrecha": {
     "description": "Auto imported from components/politica-monetaria/brecha.vue"
