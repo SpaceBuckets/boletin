@@ -49,7 +49,7 @@ export default {
   },
   async created() {
     this.chartOptions.scales.xAxes[0].ticks.min = this.minDate
-    this.chartData = await templates[this.kpi]()
+    this.chartData = await templates[this.kpi]().catch(e => { console.log(e) })
     if(process.client) {
       console.log(this.kpi)
 
