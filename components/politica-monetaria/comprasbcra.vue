@@ -104,7 +104,7 @@ type: Number,
           xAxes: [
             {
               type: "time",
-              offset: true,
+              offset: false,
               position: "bottom",
               gridLines: {
                 color: "#F7F5F0",
@@ -114,7 +114,7 @@ type: Number,
                 color: "#F7F5F0",
               },
               ticks: {                  
-                fontColor: "#aaa",  fontSize: 13,min: this.minDate, },
+                fontColor: "#bbb",  fontSize: 13,min: this.minDate, },
               time: {
                 tooltipFormat: "DD/MM/YY",
                 unit: "year",
@@ -125,7 +125,7 @@ type: Number,
           yAxes: [
             {
               ticks: {
-                fontColor: "#aaa",
+                fontColor: "#bbb",
                 max: 500,min: -500,
                 callback: function (value, index, values) {
                   return "$" + value;

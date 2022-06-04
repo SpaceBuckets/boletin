@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="meganav"       :class="{index: $route.path === '/'}">
-      <input type="text" placeholder="Search...">
-      <button>Random
-       </button> 
+    <div class="meganav" :class="{index: $route.path === '/'}">
+      <div class="meganavsection nochild">
+        <div> <nuxt-link to="/">Dashboard</nuxt-link>    </div>
+      </div>
       <div class="meganavsection" v-for="(parent, i) in nav">
         <div>
-        {{i.replace(/-/g, ' ')}} <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em; fill: rgba(55, 53, 47, 0.45);  transform: rotateZ(180deg);"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg>
+        {{i.replace(/-/g, ' ')}} <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em; fill: #888;  transform: rotateZ(180deg);"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg>
 
         </div>
            <nuxt-link v-for="kpi in parent" :key='`${i}-${kpi}`' :to="{ name: `${i}-kpi`, params: { kpi: kpi, parent: i } }" >
@@ -41,18 +41,33 @@ export default {
   color: rgba(25, 23, 17, 0.6);
   padding: 4px 15px;
   text-decoration: none;
-  //color: #eee;
+  color: #eee;
   &:hover {
         background: rgba(55, 53, 47, 0.08);
 
   }
-  &.nuxt-link-active {
+  &.nuxt-link-exact-active {
     background: rgba(55, 53, 47, 0.08);
-    color: rgb(55, 53, 47);
-    //color: #fff;
+    color: rgba(253, 216, 53, 1) !important;
+    color: #fff;
     font-weight: bold;
  
   }
+ }
+
+ .meganav .nochild a {
+   padding: 0;
+  &.nuxt-link-exact-active {
+    background: rgba(55, 53, 47, 0.08);
+    color: rgba(253, 216, 53, 1) !important;
+    color: #fff;
+    font-weight: bold;
+ 
+  }   
+ }
+
+ .meganav div.nochild {
+   margin-bottom: 10px !important;
  }
 .meganav {
   position: fixed;
@@ -63,22 +78,22 @@ export default {
   padding: 15px 0;
   overflow: auto;
   padding-bottom: 50px;
-  width: 240px;
+  width: 220px;
   z-index: 999;
   &.index {
-    display: none;
+    //display: none;
   }
   input {
     margin-left: 15px;
   }
   > div {
-    margin-top: 20px;
+    margin-bottom: 20px;
     > div {
       text-transform: uppercase;
     font-size: 11.5px;
     letter-spacing: 0.03em;
       color: rgba(55, 53, 47, 0.5);
-      //color: #ccc;
+      color: #ccc;
     font-weight: 600;
     padding: 0 15px 5px;
     }

@@ -119,7 +119,7 @@ export default {
                 offsetGridLines: false,
               },
               ticks: {
-                fontColor: "#aaa",
+                fontColor: "#bbb",
                 fontSize: 13,
 min: this.minDate,              },
               time: {
@@ -131,14 +131,14 @@ min: this.minDate,              },
           ],
           yAxes: [
             {
-              ticks: { suggestedMax: 180, suggestedMin: 80, fontColor: "#aaa" },
+              ticks: { suggestedMax: 180, suggestedMin: 80, fontColor: "#bbb" },
               gridLines: {
                 color: "#F7F5F0",
                 lineWidth: 1,
                },
               scaleLabel: {
                 labelString: "Base 2004 = 100",
-                fontColor: "#aaa",
+                fontColor: "#bbb",
                 display: false,
               },
               position: "right",

@@ -117,14 +117,14 @@ type: Number,
 , zeroLineColor: '#eee', drawBorder: false, offsetGridLines: false, 
               color: "#F7F5F0"
             },
-            ticks: { fontColor: "#aaa", fontSize: 13,min: this.minDate, },
+            ticks: { fontColor: "#bbb", fontSize: 13,min: this.minDate, },
             time: {
               tooltipFormat: 'DD/MM/YY',
               unit: 'year',
             }
           }],
           yAxes: [{
-            ticks: { suggestedMin: 550000,suggestedMin: 650000, fontColor: "#aaa",       },           
+            ticks: { suggestedMin: 550000,suggestedMin: 650000, fontColor: "#bbb",       },           
 
             gridLines: { 
                             color: "#F7F5F0"

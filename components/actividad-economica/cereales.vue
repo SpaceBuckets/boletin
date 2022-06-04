@@ -130,7 +130,7 @@ type: Number,
                 offsetGridLines: false,
                 color: "#F7F5F0",
               },
-              ticks: { fontColor: "#aaa", fontSize: 13,                min: this.minDate,
+              ticks: { fontColor: "#bbb", fontSize: 13,                min: this.minDate,
  },
               time: {
                 tooltipFormat: "DD/MM/YY",
@@ -141,7 +141,7 @@ type: Number,
           yAxes: [
             {
  
-              ticks: { fontColor: "#aaa",  callback: function (value, index, values) {
+              ticks: { fontColor: "#bbb",  callback: function (value, index, values) {
                   return value / 1e6;
                   
                 }, },

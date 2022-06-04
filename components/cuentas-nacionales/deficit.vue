@@ -68,7 +68,7 @@ type: Number,
             data: ingresos,
             borderColor: "#009966",
             pointRadius: 0,
-            borderWidth: 1.5,
+            borderWidth: 2,
           },
           {
             backgroundColor: "rgba(146,220,210,0)",
@@ -76,7 +76,7 @@ type: Number,
             data: gastos,
             borderColor: "#b22222CC",
             pointRadius: 0,
-            borderWidth: 1.5,
+            borderWidth: 2,
           },
           {
             backgroundColor: "#ccc",
@@ -114,7 +114,7 @@ type: Number,
                 offsetGridLines: false,
                 color: "#F7F5F0",
               },
-              ticks: { fontColor: "#aaa", fontSize: 13,                min: this.minDate,
+              ticks: { fontColor: "#bbb", fontSize: 13,                min: this.minDate,
  },
               time: {
                 tooltipFormat: "DD/MM/YY",
@@ -125,7 +125,7 @@ type: Number,
           ],
           yAxes: [
             {
-              ticks: { fontColor: "#aaa",
+              ticks: { fontColor: "#bbb",
                 callback: function (value, index, values) {
                   return "$" + value / 1e6;
                   

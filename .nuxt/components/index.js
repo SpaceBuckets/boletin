@@ -1,3 +1,11 @@
+export { default as CuentasNacionalesBalanza } from '../../components/cuentas-nacionales/balanza.vue'
+export { default as CuentasNacionalesDeficit } from '../../components/cuentas-nacionales/deficit.vue'
+export { default as CuentasNacionalesExpo } from '../../components/cuentas-nacionales/expo.vue'
+export { default as CuentasNacionalesImpo } from '../../components/cuentas-nacionales/impo.vue'
+export { default as CuentasNacionalesSubsidios } from '../../components/cuentas-nacionales/subsidios.vue'
+export { default as ChartsBar } from '../../components/charts/bar.js'
+export { default as ChartsKpinav } from '../../components/charts/kpinav.vue'
+export { default as ChartsLine } from '../../components/charts/line.js'
 export { default as ActividadEconomicaAcero } from '../../components/actividad-economica/acero.vue'
 export { default as ActividadEconomicaCereales } from '../../components/actividad-economica/cereales.vue'
 export { default as ActividadEconomicaEmae } from '../../components/actividad-economica/emae.vue'
@@ -6,11 +14,6 @@ export { default as ActividadEconomicaIpi } from '../../components/actividad-eco
 export { default as ActividadEconomicaIsac } from '../../components/actividad-economica/isac.vue'
 export { default as ActividadEconomicaPetroleo } from '../../components/actividad-economica/petroleo.vue'
 export { default as ActividadEconomicaUcii } from '../../components/actividad-economica/ucii.vue'
-export { default as CuentasNacionalesBalanza } from '../../components/cuentas-nacionales/balanza.vue'
-export { default as CuentasNacionalesDeficit } from '../../components/cuentas-nacionales/deficit.vue'
-export { default as CuentasNacionalesExpo } from '../../components/cuentas-nacionales/expo.vue'
-export { default as CuentasNacionalesImpo } from '../../components/cuentas-nacionales/impo.vue'
-export { default as CuentasNacionalesSubsidios } from '../../components/cuentas-nacionales/subsidios.vue'
 export { default as PoliticaMonetariaBrecha } from '../../components/politica-monetaria/brecha.vue'
 export { default as PoliticaMonetariaCambio } from '../../components/politica-monetaria/cambio.vue'
 export { default as PoliticaMonetariaComprasbcra } from '../../components/politica-monetaria/comprasbcra.vue'
@@ -22,9 +25,6 @@ export { default as PoliticaMonetariaTcrm } from '../../components/politica-mone
 export { default as PreciosSalariosAsalariados } from '../../components/precios-salarios/asalariados.vue'
 export { default as PreciosSalariosDesempleo } from '../../components/precios-salarios/desempleo.vue'
 export { default as PreciosSalariosIpc } from '../../components/precios-salarios/ipc.vue'
-export { default as ChartsBar } from '../../components/charts/bar.js'
-export { default as ChartsKpinav } from '../../components/charts/kpinav.vue'
-export { default as ChartsLine } from '../../components/charts/line.js'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

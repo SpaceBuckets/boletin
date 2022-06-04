@@ -34,6 +34,12 @@ export default {
 </script>  
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap");
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 .chartcont {
   display: block;
   //align-items: flex-start;
@@ -42,8 +48,8 @@ export default {
     display: block;
   }
   > * {
-    flex: 2;
-    padding: 0 10px 0 20px;
+    //flex: 2;
+    //padding: 0 10px 0 20px;
   }
   .flexedtable {
     flex: 1;
@@ -104,10 +110,8 @@ export default {
 }
 
 .content-container {
-  margin: 0px auto;
-  //background: #000;
-  //height: 100vh;
-  //max-width: 1440px;
+  max-width: 1366px;
+  margin: 0 auto;
   @media only screen and (max-width: 600px) {
     margin-top: 10px;
   }
@@ -165,42 +169,42 @@ header {
     height: auto;
     opacity: 0.8;
   }
-}
+  h1 {
+    text-align: left;
+    margin: 0;
+    line-height: 60px;
 
-header h1 {
-  text-align: left;
-  margin: 0;
-  line-height: 60px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 99;
+    a {
+      color: #ddd;
+      font-family: "Montserrat", sans-serif;
+      font-size: 22px;
+      text-decoration: none;
+      font-weight: 600;
+      line-height: 20px;
 
-  padding: 0 20px;
-  position: relative;
-  z-index: 99;
-  a {
-    color: #ddd;
-    font-family: "Montserrat", sans-serif;
-    font-size: 22px;
-    text-decoration: none;
-    font-weight: 600;
-    line-height: 20px;
-
-    span {
-      font-weight: 400;
-      color: #fff;
+      span {
+        font-weight: 400;
+        color: #fff;
+      }
     }
-  }
+  }  
 }
 
+ 
 body {
   font-family: arial, helvetica, sans-serif;
   background: rgb(245 246 250);
   background: #f7f5f0;
   background: rgb(247, 246, 243);
-  //background: #000;
+  background: #000;
   margin: 0;
   font-size: 15px;
   padding: 0;
   padding-top: 60px;
-  padding-left: 0px;
+  //padding-left: 220px;
 }
 
 p {
@@ -209,95 +213,9 @@ p {
   color: #262626;
 }
 
-.selector {
-  display: flex;
-  a {
-    text-decoration: none;
-    background: none;
-    border: 0;
-    min-width: max-content;
-    flex: 1;
-    text-align: left;
-    color: #666;
-    padding: 0 20px;
-    line-height: 60px;
-    cursor: pointer;
-    text-transform: uppercase;
-    display: block;
+ 
 
-    &:hover {
-      background: #000;
-    }
-    &.active {
-      background: rgba(253, 216, 53, 1);
-      color: #333;
-    }
-  }
-}
-
-.acti-list {
-  overflow: auto;
-  //display: flex;
-  flex-direction: column;
-  //justify-content: space-between;
-  position: absolute;
-  h2 {
-    padding: 0 0 10px;
-    font-weight: 500;
-  }
-  > * {
-    flex: 1;
-  }
-  .relist div {
-    user-select: none;
-    color: #666;
-  }
-  .redesc,
-  .relist div {
-    padding: 10px 20px 10px 0;
-    border-bottom: 1px solid #f7f5f0;
-    cursor: pointer;
-    opacity: 1;
-    color: #888;
-    &:hover {
-      color: #111;
-    }
-    &.active {
-      pointer-events: none;
-      span {
-        opacity: 1;
-        background: rgba(253, 216, 53, 1);
-        color: #111;
-      }
-    }
-  }
-  .redesc {
-    opacity: 1;
-    border: 0;
-    cursor: auto;
-    i {
-      padding-bottom: 5px;
-      display: inline-block;
-    }
-  }
-}
-
-h4 {
-  margin: 0;
-  line-clamp: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-weight: normal;
-  position: absolute;
-  color: #aaa;
-  background: #fff;
-  padding: 1px 10px;
-  left: 20px;
-  font-size: 12px;
-  top: 5px;
-}
-
+ 
 em {
   background: rgba(253, 216, 53, 0.7);
   font-style: normal;
@@ -316,10 +234,10 @@ a {
 }
 
 .title-container {
-  padding: 0 20px;
+  //padding: 0 20px;
   padding-bottom: 15px;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #f7f5f0;
+  //margin-bottom: 15px;
+  //border-bottom: 1px solid #f7f5f0;
   display: flex;
   justify-content: space-between;
   > * {
@@ -348,8 +266,7 @@ a {
       }
     }
     span {
-      //display: block;
-      font-weight: 600;
+       font-weight: 600;
       color: #262626;
     }
   }
@@ -357,19 +274,15 @@ a {
 
 .headbert {
   width: 100%;
-  border-radius: 4px;
-  max-width: 1440px;
-  //box-shadow: 0px 0px 15px 5px rgba(109,145,179,0.5);
-  margin: 10px auto 15px;
+  border-radius: 2px;
+   margin: 10px auto 10px;
   background: #fff;
   padding: 20px 25px 20px;
   overflow: hidden;
   display: flex;
   border-top: 0;
-      border: 2px solid #eee;
-
-  //border: 10px solid #000;
-  //display: none;
+ 
+ 
   > div {
     display: flex;
     justify-content: space-between;
@@ -431,8 +344,7 @@ a {
   padding-bottom: 100px;
   padding-left: 0px;
 
-  max-width: 1440px;
-  margin: 0 auto;
+   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -446,7 +358,7 @@ a {
     background: #fff;
     border-radius: 0px;
     margin: 0px;
-    border: 2px solid #eee;
+    border: 1px solid #eee;
     position: relative;
     text-decoration: none;
     order: 100;
@@ -560,24 +472,7 @@ h5 {
   font-size: 18px;
 }
 
-h2.pagetitle {
-  font-family: montserrat;
-  padding: 20px 15px;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #666;
-  max-width: 1440px !important;
-  color: #eee;
-  position: relative;
-  i {
-    font-style: normal;
-    position: absolute;
-    right: 0;
-    bottom: 20px;
-    color: #888;
-    font-size: 16px;
-  }
-}
+ 
 
 .emaerto > h2 {
   padding: 0 0;
@@ -636,32 +531,33 @@ h2.pagetitle {
 
 .contaein {
   background: #fff;
-  //max-width: 1440px;
-  //margin: 0 auto 0;
-  padding: 20px;
+  max-width: 1366px;
+      border-radius: 4px;
+    border: 1px solid #eee;
+  padding: 25px;
+  margin-top: 10px;
   min-height: 100vh;
-  margin-left: 240px;
-}
+ }
 
 .dashboard-container {
-  max-width: 1440px;
-  margin: 0 auto 0;
+ 
   min-height: 100vh;
+  section section {
+    background: #fff;
+  }
   a {
     text-decoration: none;
     background: #fff;
     display: block;
-    //margin: 10px;
-    padding: 20px 10px 15px;
-    border-radius: 4px;
-    border: 2px solid #eee;
-    //box-shadow: 0 0 1px #ccc;
-  }
+     padding: 20px 15px 15px 25px;
+    border-radius: 2px;
+    //border: 1px solid #eee;
+   }
   #cuentas-row,
   #monetaria-row {
     display: flex;
-    gap: 15px;
-        margin-bottom: 15px;
+    gap: 10px;
+        margin-bottom: 10px;
 
     > a {
       flex: 1;
@@ -669,8 +565,8 @@ h2.pagetitle {
   }
   #actividad-row {
     display: flex;
-        gap: 15px;
-    margin-bottom: 15px;
+        gap: 10px;
+    margin-bottom: 10px;
     > a {
       flex: 1;
       &:first-of-type { flex: 2; }

@@ -123,7 +123,7 @@ type: Number,
                 offsetGridLines: false,
                 color: "#F7F5F0",
               },
-              ticks: { fontColor: "#aaa", fontSize: 13,                min: this.minDate,
+              ticks: { fontColor: "#bbb", fontSize: 13,                min: this.minDate,
  },
               time: {
                 tooltipFormat: "DD/MM/YY",
@@ -133,7 +133,7 @@ type: Number,
           ],
           yAxes: [
             {
-              ticks: { suggestedMin: 20, suggestedMax: 280, fontColor: "#aaa" },
+              ticks: { suggestedMin: 20, suggestedMax: 280, fontColor: "#bbb" },
               gridLines: {
                 color: "#F7F5F0",
                 lineWidth: 1,
@@ -144,7 +144,7 @@ type: Number,
               scaleLabel: {
                 display: false,
                 labelString: "Base 2004 = 100",
-                fontColor: "#aaa",
+                fontColor: "#bbb",
               },
               position: "right",
             },

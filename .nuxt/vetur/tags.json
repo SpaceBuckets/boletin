@@ -1,4 +1,28 @@
 {
+  "CuentasNacionalesBalanza": {
+    "description": "Auto imported from components/cuentas-nacionales/balanza.vue"
+  },
+  "CuentasNacionalesDeficit": {
+    "description": "Auto imported from components/cuentas-nacionales/deficit.vue"
+  },
+  "CuentasNacionalesExpo": {
+    "description": "Auto imported from components/cuentas-nacionales/expo.vue"
+  },
+  "CuentasNacionalesImpo": {
+    "description": "Auto imported from components/cuentas-nacionales/impo.vue"
+  },
+  "CuentasNacionalesSubsidios": {
+    "description": "Auto imported from components/cuentas-nacionales/subsidios.vue"
+  },
+  "ChartsBar": {
+    "description": "Auto imported from components/charts/bar.js"
+  },
+  "ChartsKpinav": {
+    "description": "Auto imported from components/charts/kpinav.vue"
+  },
+  "ChartsLine": {
+    "description": "Auto imported from components/charts/line.js"
+  },
   "ActividadEconomicaAcero": {
     "description": "Auto imported from components/actividad-economica/acero.vue"
   },
@@ -22,21 +46,6 @@
   },
   "ActividadEconomicaUcii": {
     "description": "Auto imported from components/actividad-economica/ucii.vue"
-  },
-  "CuentasNacionalesBalanza": {
-    "description": "Auto imported from components/cuentas-nacionales/balanza.vue"
-  },
-  "CuentasNacionalesDeficit": {
-    "description": "Auto imported from components/cuentas-nacionales/deficit.vue"
-  },
-  "CuentasNacionalesExpo": {
-    "description": "Auto imported from components/cuentas-nacionales/expo.vue"
-  },
-  "CuentasNacionalesImpo": {
-    "description": "Auto imported from components/cuentas-nacionales/impo.vue"
-  },
-  "CuentasNacionalesSubsidios": {
-    "description": "Auto imported from components/cuentas-nacionales/subsidios.vue"
   },
   "PoliticaMonetariaBrecha": {
     "description": "Auto imported from components/politica-monetaria/brecha.vue"
@@ -70,14 +79,5 @@
   },
   "PreciosSalariosIpc": {
     "description": "Auto imported from components/precios-salarios/ipc.vue"
-  },
-  "ChartsBar": {
-    "description": "Auto imported from components/charts/bar.js"
-  },
-  "ChartsKpinav": {
-    "description": "Auto imported from components/charts/kpinav.vue"
-  },
-  "ChartsLine": {
-    "description": "Auto imported from components/charts/line.js"
   }
 }

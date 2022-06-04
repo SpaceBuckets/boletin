@@ -3,23 +3,64 @@ import Vue from 'vue'
 const state = {
   updated: 0,
   isOpen: false,
-  selectedkpis: ["emae",'ipi','ucii','cambio','tcrm','reservas','tasa','intercambio','embi','ipc','desempleo','asalariados'],
-  indicadores: {
-    precios: {
-      ipc: "IPC (Índice de Precios al Consumidor)",
-    /*   ipchistorico: "Inflación Histórica intermensual",
-     ipchistorico2: "Inflación Histórica interanual", */
-     rem: 'Expectativa IPC interanual',
-     asalariados: "Asalariados sector privado",
-     desempleo: "Tasa de desempleo",
+  chartOptions: {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: { duration: 0 },
+    layout: {
+      padding: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+      },
     },
-    externo: {
-      expo: "Exportaciones",
-      impo: "Importaciones",
-
-      //cbt: "Canasta Basica Total y Alimentaria", */
-    }
-
+    scales: {
+      xAxes: [
+        {
+          type: "time",
+          offset: true,
+          position: "bottom",
+          gridLines: {
+            color: "#F7F5F0",
+            zeroLineColor: "#eee",
+            drawBorder: false,
+            offsetGridLines: false,
+            color: "#F7F5F0",
+          },
+          ticks: { fontColor: "#bbb", fontSize: 13 },
+          time: {
+            tooltipFormat: "DD/MM/YY",
+            unit: "year",
+          },
+        },
+      ],
+      yAxes: [
+        {
+          ticks: {
+            fontColor: "#bbb",
+            callback: function (value, index, values) {
+              return "$" + value / 1e4 + "M";
+            },
+          },
+          gridLines: {
+            color: "#F7F5F0",
+            lineWidth: 1,
+            drawBorder: false,
+            zeroLineColor: "#eee",
+          },
+          scaleLabel: {
+            display: false,
+            labelString: "Millones de dólares",
+            fontColor: "#888",
+          },
+          position: "right",
+        },
+      ],
+    },
+    legend: {
+      display: false,
+    },
   }
   
 }

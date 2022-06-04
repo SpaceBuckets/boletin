@@ -1,5 +1,8 @@
 <template>
   <div>
+
+
+<div class="dashboard-container">
     <div class="headbert" >
       <div>
         <div>
@@ -34,9 +37,6 @@
         </div>
       </div>
     </div>
-
-<div class="dashboard-container">
-
 <section id="actividad-row">
      <nuxt-link :to="{ name: `actividad-economica-kpi`, params: { kpi: 'emae', parent: 'actividad-economica' } }" >
         <component is='actividad-economica-emae' :chartHeight="330"></component>
@@ -47,7 +47,7 @@
 </section>
 <section id="cuentas-row">
      <nuxt-link :to="{ name: `cuentas-nacionales-kpi`, params: { kpi: 'balanza', parent: 'cuentas-nacionales' } }" >
-        <component is='cuentas-nacionales-balanza' :chartHeight="330"></component>
+        <component is='cuentas-nacionales-balanza' :chartHeight="330" minDate="2016-06-01"></component>
       </nuxt-link>
      <nuxt-link :to="{ name: `cuentas-nacionales-kpi`, params: { kpi: 'deficit', parent: 'cuentas-nacionales' } }" >
         <component is='cuentas-nacionales-deficit' :chartHeight="330" minDate="2016-06-01"></component>
@@ -60,8 +60,8 @@
      <nuxt-link :to="{ name: `politica-monetaria-kpi`, params: { kpi: 'cambio', parent: 'politica-monetaria' } }" >
         <component is='politica-monetaria-cambio' :chartHeight="330" minDate="2016-06-01"></component>
       </nuxt-link>
-     <nuxt-link :to="{ name: `politica-monetaria-kpi`, params: { kpi: 'comprasbcra', parent: 'politica-monetaria' } }" >
-        <component is='politica-monetaria-comprasbcra' :chartHeight="330" minDate="2020-06-01"></component>
+     <nuxt-link :to="{ name: `politica-monetaria-kpi`, params: { kpi: 'tasa', parent: 'politica-monetaria' } }" >
+        <component is='politica-monetaria-tasa' :chartHeight="330" minDate="2016-06-01"></component>
       </nuxt-link>
 </section>
 

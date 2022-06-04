@@ -1,21 +1,62 @@
 <template>
   <div>
+    <div class="dashboard-container">
+      <div class="headbert">
+        <div>
+          <div>
+            <h1>Tachame la Macro</h1>
+            <em>Febo asoma; ya sus rayos, iluminan el histórico contexto.</em>
+            Esta colección de indicadores intenta develar de donde viene y hacia
+            donde va la macroeconomía Argentina.
+          </div>
 
-     <div class="contaein">
-          <component :is="`${$route.path.replace($route.params.kpi,'').replace(/\//g, '')}-${$route.params.kpi}`" :chartHeight="420"></component>
+          <div class="capis">
+            <div>
+              <div>Población</div>
+              <h2>47.3M</h2>
+              <div>Censo 2022</div>
+            </div>
+
+            <div>
+              <div>PBI per capita</div>
+              <h2>$1,015M</h2>
+              <div>Dato 2020</div>
+            </div>
+
+            <div>
+              <div>HDI</div>
+              <h2>0.845</h2>
+              <div>Dato 2020</div>
+            </div>
+            <div>
+              <div>GINI</div>
+              <h2>42.9</h2>
+              <div>Dato 2020</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section>
+        <component
+          :is="`${$route.path
+            .replace($route.params.kpi, '')
+            .replace(/\//g, '')}-${$route.params.kpi}`"
+          :chartHeight="420"
+        ></component>
+      </section>
 
     </div>
   </div>
 </template>
 
 <script>
-import meganav from '~/json/kpisnav.json'
+import meganav from "~/json/kpisnav.json";
 
 export default {
   name: "Details",
   data() {
     return {
-      nav: meganav
+      nav: meganav,
     };
   },
   methods: {
@@ -29,12 +70,12 @@ export default {
         this.$state.selectedkpis.push(kpi);
         this.$nextTick(() => {
           var element = this.$refs[kpi];
-          var top = element[0].offsetTop-150;
-          console.log(top)
+          var top = element[0].offsetTop - 150;
+          console.log(top);
           window.scrollTo({
-  top: top,
-   behavior: 'smooth'
-});
+            top: top,
+            behavior: "smooth",
+          });
         });
       }
     },
@@ -52,7 +93,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 </style>
 
  

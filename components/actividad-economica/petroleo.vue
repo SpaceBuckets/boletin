@@ -112,7 +112,7 @@ type: Number,
                 offsetGridLines: false,
                 color: "#F7F5F0",
               },
-              ticks: { fontColor: "#aaa", fontSize: 13,                min: this.minDate,
+              ticks: { fontColor: "#bbb", fontSize: 13,                min: this.minDate,
  },
               time: {
                 tooltipFormat: "DD/MM/YY",
@@ -124,7 +124,7 @@ type: Number,
  /*            {
               id: "B",
 
-              ticks: { fontColor: "#aaa" },
+              ticks: { fontColor: "#bbb" },
               gridLines: {
                 color: "#F7F5F0",
                 lineWidth: 1,
@@ -139,7 +139,7 @@ type: Number,
             }, */
             {
               id: "A",
-              ticks: { fontColor: "#aaa" },
+              ticks: { fontColor: "#bbb" },
               gridLines: {
                 color: "#F7F5F0",
                 lineWidth: 1,
