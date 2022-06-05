@@ -3,7 +3,7 @@ const impo = async () => { try { return (await import("~/json/impo/dolar/d.json"
 const expo = async () => { try { return (await import("~/json/expo/dolar/d.json")).default } catch (t) { return console.log(t), [] } };
 const saldo = async () => { try { return (await import("~/json/expo/saldo/d.json")).default } catch (t) { return console.log(t), [] } };
 
-async function balanza() {
+async function balanzaData() {
   return {
     labels: await impoDates(),
     datasets: [
@@ -36,4 +36,4 @@ async function balanza() {
   }
 }
 
-export { balanza };
+export { balanzaData };

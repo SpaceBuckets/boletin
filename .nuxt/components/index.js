@@ -1,4 +1,3 @@
-export { default as GenericLine } from '../../components/genericLine.vue'
 export { default as ActividadEconomicaAcero } from '../../components/actividad-economica/acero.vue'
 export { default as ActividadEconomicaCereales } from '../../components/actividad-economica/cereales.vue'
 export { default as ActividadEconomicaGas } from '../../components/actividad-economica/gas.vue'
@@ -6,6 +5,7 @@ export { default as ActividadEconomicaIpi } from '../../components/actividad-eco
 export { default as ActividadEconomicaIsac } from '../../components/actividad-economica/isac.vue'
 export { default as ActividadEconomicaPetroleo } from '../../components/actividad-economica/petroleo.vue'
 export { default as ChartsBar } from '../../components/charts/bar.js'
+export { default as ChartsGenericLine } from '../../components/charts/genericLine.vue'
 export { default as ChartsKpinav } from '../../components/charts/kpinav.vue'
 export { default as ChartsLine } from '../../components/charts/line.js'
 export { default as CuentasNacionalesDeficit } from '../../components/cuentas-nacionales/deficit.vue'

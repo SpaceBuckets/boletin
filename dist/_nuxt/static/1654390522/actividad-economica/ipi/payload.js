@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/actividad-economica/ipi", {data:[{}],fetch:{},mutations:void 0});

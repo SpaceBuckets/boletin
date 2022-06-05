@@ -413,8 +413,7 @@ async function createDb(src) {
 
   });
   delete singleObjNav['charts']; 
- console.log(singleObjNav)
- fs.writeFileSync(`./json/kpis.json`, JSON.stringify(singleObj));
+  fs.writeFileSync(`./json/kpis.json`, JSON.stringify(singleObj));
  fs.writeFileSync(`./json/kpisnav.json`, JSON.stringify(singleObjNav));
  console.log(`♥ kpis.json generated`)
   console.log(`♥ kpisnav.json generated`)

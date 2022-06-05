@@ -14,7 +14,7 @@ const tabaco = async () => { try { return (await import("~/json/ucii/tabaco/d.js
 const textiles = async () => { try { return (await import("~/json/ucii/textiles/d.json")).default } catch (t) { return console.log(t), [] } };
 const uciiDates = async () => { try { return (await import("~/json/ucii/general/dates.json")).default } catch (t) { return console.log(t), [] } };
 
-async function ucii() {
+async function uciiData() {
   return {
     labels: await uciiDates(),
     datasets: [
@@ -141,4 +141,4 @@ async function ucii() {
 
 
 
-export { ucii };
+export { uciiData };

@@ -3,7 +3,7 @@ const emaeD = async () => { try { return (await import("~/json/emae/estacional/d
 const emaeT = async () => { try { return (await import("~/json/emae/tendencia/d.json")).default } catch (t) { return console.log(t), [] } };
 const emaeDates = async () => { try { return (await import("~/json/emae/base/dates.json")).default } catch (t) { return console.log(t), [] } };
 
-async function emae() {
+async function emaeData() {
   return {
     labels: await emaeDates(),
     datasets: [
@@ -36,4 +36,4 @@ async function emae() {
   }
 }
 
-export { emae };
+export { emaeData };

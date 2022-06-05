@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/actividad-economica/emae", {data:[{}],fetch:{},mutations:void 0});

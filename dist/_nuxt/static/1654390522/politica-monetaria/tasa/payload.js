@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/politica-monetaria/tasa", {data:[{}],fetch:{},mutations:void 0});

@@ -1,7 +1,4 @@
 {
-  "GenericLine": {
-    "description": "Auto imported from components/genericLine.vue"
-  },
   "ActividadEconomicaAcero": {
     "description": "Auto imported from components/actividad-economica/acero.vue"
   },
@@ -22,6 +19,9 @@
   },
   "ChartsBar": {
     "description": "Auto imported from components/charts/bar.js"
+  },
+  "ChartsGenericLine": {
+    "description": "Auto imported from components/charts/genericLine.vue"
   },
   "ChartsKpinav": {
     "description": "Auto imported from components/charts/kpinav.vue"

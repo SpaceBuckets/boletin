@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/politica-monetaria/comprasbcra", {data:[{}],fetch:{},mutations:void 0});

@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/cuentas-nacionales/deficit", {data:[{}],fetch:{},mutations:void 0});
