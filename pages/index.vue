@@ -2,7 +2,7 @@
   <div>
 
 
-<div class="dashboard-container">
+<div class="dashboard-container index">
     <div class="headbert" >
       <div>
         <div>
@@ -14,56 +14,60 @@
         <div class="capis">
           <div>
             <div>Población</div>
-            <h2>47.3M</h2>
+            <h3>47.3M</h3>
             <div>Censo 2022</div>
           </div>
 
           <div>
             <div>PBI per capita</div>
-            <h2>$1,015M</h2>
+            <h3>$1,015M</h3>
             <div>Dato 2020</div>
           </div>
 
           <div>
             <div>HDI</div>
-            <h2>0.845</h2>
+            <h3>0.845</h3>
             <div>Dato 2020</div>
           </div>
           <div>
             <div>GINI</div>
-            <h2>42.9</h2>
+            <h3>42.9</h3>
             <div>Dato 2020</div>
           </div>
         </div>
       </div>
     </div>
 <section id="actividad-row">
-     <nuxt-link :to="{ name: `actividad-economica-kpi`, params: { kpi: 'emae', parent: 'actividad-economica' } }" >
-        <charts-genericLine title="EMAE. Estimador Mensual de Actividad Economica" data="emae" :chartHeight="330" />
+     <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'emae', parent: 'actividad-economica' } }" >
+        <charts-genericLine title="EMAE" subtitle="Estimador Mensual de Actividad Economica" data="emae" :chartHeight="330" />
       </nuxt-link>
-     <nuxt-link :to="{ name: `actividad-economica-kpi`, params: { kpi: 'ucii', parent: 'actividad-economica' } }" >
-         <charts-genericLine title="UCII. Utilización de la Capacidad Instalada" data="ucii" :chartHeight="330" minDate="2018-06-01"/>
+     <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'ucii', parent: 'actividad-economica' } }" >
+         <charts-genericLine title="UCII" subtitle="Utilización de la Capacidad Instalada" data="ucii" :chartHeight="330" minDate="2018-06-01"/>
 
       </nuxt-link>
 </section>
 <section id="cuentas-row">
-     <nuxt-link :to="{ name: `cuentas-nacionales-kpi`, params: { kpi: 'balanza', parent: 'cuentas-nacionales' } }" >
-        <charts-genericLine title="Balanza Comercial" data="balanza" :chartHeight="330" :minDate="`2014-06-01`"/>
+     <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'balanza', parent: 'cuentas-nacionales' } }" >
+        <charts-genericLine title="Balanza Comercial" subtitle="Importaciones, Exportaciones y Saldo" data="balanza" :chartHeight="330" :minDate="`2014-06-01`"/>
       </nuxt-link>
-     <nuxt-link :to="{ name: `cuentas-nacionales-kpi`, params: { kpi: 'deficit', parent: 'cuentas-nacionales' } }" >
-        <component is='cuentas-nacionales-deficit' :chartHeight="330" minDate="2016-06-01"></component>
+     <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'deficit', parent: 'cuentas-nacionales' } }" >
+         <charts-genericLine title="Deficit Fiscal" subtitle="Ingresos, Gastos y Ahorro" data="deficit" :chartHeight="330" :minDate="`2014-06-01`"/>
+
       </nuxt-link>
 </section>
 <section id="monetaria-row">
-     <nuxt-link :to="{ name: `precios-salarios-kpi`, params: { kpi: 'ipc', parent: 'precios-salarios' } }" >
-        <component is='precios-salarios-ipc' :chartHeight="330" minDate="2008-06-01"></component>
+     <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'ipc', parent: 'precios-salarios' } }" >
+      <charts-genericLine title="Inflacion" subtitle="Indice de Precios al Consumidor" data="ipc" :chartHeight="330" :minDate="`2008-06-01`" :maxVal="8" :minVal="0"/>
+
       </nuxt-link>
-     <nuxt-link :to="{ name: `politica-monetaria-kpi`, params: { kpi: 'cambio', parent: 'politica-monetaria' } }" >
-        <component is='politica-monetaria-cambio' :chartHeight="330" minDate="2016-06-01"></component>
+     <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'cambio', parent: 'politica-monetaria' } }" >
+          <charts-genericLine title="Tipos de Cambio" subtitle="USD vs. Peso" data="cambio" :chartHeight="330" :minDate="`2014-06-01`"/>
+
       </nuxt-link>
-     <nuxt-link :to="{ name: `politica-monetaria-kpi`, params: { kpi: 'tasa', parent: 'politica-monetaria' } }" >
-        <component is='politica-monetaria-tasa' :chartHeight="330" minDate="2016-06-01"></component>
-      </nuxt-link>
+     <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'tasa', parent: 'politica-monetaria' } }" >
+      <charts-genericLine title="Tasas de Interés" subtitle="Segun BCRA" data="tasa" :chartHeight="330" :minDate="`2016-06-01`"/>
+
+       </nuxt-link>
 </section>
 
 

@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/actividad-economica/gas", {data:[{}],fetch:{},mutations:void 0});

@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/actividad-economica/isac", {data:[{}],fetch:{},mutations:void 0});

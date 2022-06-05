@@ -4,6 +4,7 @@ var xlsx = require('node-xlsx');
 const parse5 = require('parse5');
 //process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const glob = require('glob');
+const matter = require('gray-matter');
 
 
 global.emae = {
@@ -419,9 +420,44 @@ async function createDb(src) {
   console.log(`♥ kpisnav.json generated`)
 }
 
+async function megaContent(src) {
+  //Get post names
+  var folders = glob.sync('*', { cwd: `static/${src}/` })
+  var posts = [];
+  //Main post loop
+  folders.forEach(singleFolder => {
+    const documentes = glob.sync('*.md', {cwd: `static/${src}/${singleFolder}`})
+    let post = [];
 
+    //Parse Markdown
+    var contents = matter(fs.readFileSync(`static/${src}/${singleFolder}/${documentes}`, 'utf8').toString());
+    post = contents.data
+    if(src === 'docs') {
+      post.c = md.render(post.c);
+    }
+    posts.push(post);
+  });
+
+  //Get Image references
+  posts.forEach(post => {
+    const srcImages = glob.sync('*.jpg', { cwd: `static/${src}/${post.s}` }).filter(e => e !== 'cover.jpg');    
+    var postImages = [];
  
-masterDb([
+    srcImages.forEach(singleImage => {
+      var dimensions = sizeOf(`static/${src}/${post.s}/${singleImage}`);
+      var redimensions = (dimensions.height / dimensions.width * 100).toFixed(1);
+      redimensions = redimensions.replace(".0","")
+
+      postImages.push({ 'h': singleImage, 's': redimensions})
+    });
+    post.i = postImages 
+  }); 
+
+  fs.writeFileSync(`./json/${src}.json`, JSON.stringify(posts));
+  console.log(`♥ ${src}.json generated`)
+}
+ 
+/* masterDb([
   'cuentas',
    'emae',
    'ipi',
@@ -444,4 +480,5 @@ getUSD()
 getBRCAScraper()  
  
 
-createDb();
+createDb(); */
+megaContent("kpis")

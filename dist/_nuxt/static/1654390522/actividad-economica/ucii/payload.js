@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/actividad-economica/ucii", {data:[{}],fetch:{},mutations:void 0});

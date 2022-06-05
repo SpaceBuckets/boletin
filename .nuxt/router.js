@@ -4,10 +4,7 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _13b2506d = () => interopDefault(import('../pages/actividad-economica/_kpi.vue' /* webpackChunkName: "pages/actividad-economica/_kpi" */))
-const _bdc51a88 = () => interopDefault(import('../pages/cuentas-nacionales/_kpi.vue' /* webpackChunkName: "pages/cuentas-nacionales/_kpi" */))
-const _18fafc6e = () => interopDefault(import('../pages/politica-monetaria/_kpi.vue' /* webpackChunkName: "pages/politica-monetaria/_kpi" */))
-const _64c4785e = () => interopDefault(import('../pages/precios-salarios/_kpi.vue' /* webpackChunkName: "pages/precios-salarios/_kpi" */))
+const _25872145 = () => interopDefault(import('../pages/kpi/_kpi.vue' /* webpackChunkName: "pages/kpi/_kpi" */))
 const _5514d34d = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -22,21 +19,9 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
-    path: "/actividad-economica/:kpi?",
-    component: _13b2506d,
-    name: "actividad-economica-kpi"
-  }, {
-    path: "/cuentas-nacionales/:kpi?",
-    component: _bdc51a88,
-    name: "cuentas-nacionales-kpi"
-  }, {
-    path: "/politica-monetaria/:kpi?",
-    component: _18fafc6e,
-    name: "politica-monetaria-kpi"
-  }, {
-    path: "/precios-salarios/:kpi?",
-    component: _64c4785e,
-    name: "precios-salarios-kpi"
+    path: "/kpi/:kpi?",
+    component: _25872145,
+    name: "kpi-kpi"
   }, {
     path: "/",
     component: _5514d34d,

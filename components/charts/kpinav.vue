@@ -9,7 +9,7 @@
         {{i.replace(/-/g, ' ')}} <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em; fill: #888;  transform: rotateZ(180deg);"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg>
 
         </div>
-           <nuxt-link v-for="kpi in parent" :key='`${i}-${kpi}`' :to="{ name: `${i}-kpi`, params: { kpi: kpi, parent: i } }" >
+           <nuxt-link v-for="kpi in parent" :key='`${i}-${kpi}`' :to="{ name: `kpi-kpi`, params: { kpi: kpi, parent: i } }" >
 
             {{kpi}}
           </nuxt-link>
@@ -42,8 +42,9 @@ export default {
   padding: 4px 15px;
   text-decoration: none;
   color: #eee;
+  padding-left: 25px;
   &:hover {
-        background: rgba(55, 53, 47, 0.08);
+    color: rgba(253, 216, 53, 1) !important;
 
   }
   &.nuxt-link-exact-active {
