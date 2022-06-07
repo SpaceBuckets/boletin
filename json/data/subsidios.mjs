@@ -1,6 +1,6 @@
-  const expoDates = async () => { try { return (await import("../cuentas/subenergia/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-  const transporte = async () => { try { return (await import("../cuentas/subtransporte/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-  const energia = async () => { try { return (await import("../cuentas/subenergia/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+  const expoDates = async () => { try { return (await import("../cuentas/subenergia/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+  const transporte = async () => { try { return (await import("../cuentas/subtransporte/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+  const energia = async () => { try { return (await import("../cuentas/subenergia/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
 
 
 async function subsidiosData() {

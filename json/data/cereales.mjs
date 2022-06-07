@@ -1,8 +1,8 @@
-  const soja = async () => { try { return (await import("../cuentas/soja/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const maiz = async () => { try { return (await import("../cuentas/maiz/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const girasol = async () => { try { return (await import("../cuentas/girasol/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const trigo = async () => { try { return (await import("../cuentas/trigo/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const expoDates = async () => { try { return (await import("../cuentas/soja/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+  const soja = async () => { try { return (await import("../cuentas/soja/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const maiz = async () => { try { return (await import("../cuentas/maiz/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const girasol = async () => { try { return (await import("../cuentas/girasol/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const trigo = async () => { try { return (await import("../cuentas/trigo/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const expoDates = async () => { try { return (await import("../cuentas/soja/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
 
 
 

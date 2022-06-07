@@ -75,20 +75,13 @@
 </template>
 
 <script>
-import { singlePost } from "~/scripts/flatDB";
-
+ 
 export default {
   name: "Details",
   async asyncData({ params }) {
     const post = require(`~/json/confluence/${params.kpi}`);
     return { post };
   },
-  data() {
-    return {};
-  },
- created() {
-   console.log(this.post)
- },
   methods: {
     getLastUpdated() {
       const formatter = new Intl.DateTimeFormat('es', { month: 'short',year: 'numeric' });

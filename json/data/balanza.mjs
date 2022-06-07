@@ -1,7 +1,7 @@
-const impoDates = async () => { try { return (await import("../impo/dolar/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const impo = async () => { try { return (await import("../impo/dolar/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const expo = async () => { try { return (await import("../expo/dolar/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const saldo = async () => { try { return (await import("../expo/saldo/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const impoDates = async () => { try { return (await import("../impo/dolar/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const impo = async () => { try { return (await import("../impo/dolar/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const expo = async () => { try { return (await import("../expo/dolar/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const saldo = async () => { try { return (await import("../expo/saldo/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
 
 async function balanzaData() {
   return {

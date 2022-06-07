@@ -1,7 +1,7 @@
-const ipiB = async () => { try { return (await import("../ipi/base/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const ipiD = async () => { try { return (await import("../ipi/estacional/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };  
-const ipiT = async () => { try { return (await import("../ipi/tendencia/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const ipiDates = async () => { try { return (await import("../ipi/base/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const ipiB = async () => { try { return (await import("../ipi/base/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const ipiD = async () => { try { return (await import("../ipi/estacional/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };  
+const ipiT = async () => { try { return (await import("../ipi/tendencia/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const ipiDates = async () => { try { return (await import("../ipi/base/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
 
 
  

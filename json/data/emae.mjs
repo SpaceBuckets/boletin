@@ -1,7 +1,7 @@
-const emaeB = async () => { try { return (await import("../emae/base/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const emaeD = async () => { try { return (await import("../emae/estacional/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const emaeT = async () => { try { return (await import("../emae/tendencia/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const emaeDates = async () => { try { return (await import("../emae/base/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const emaeB = async () => { try { return (await import("../emae/base/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const emaeD = async () => { try { return (await import("../emae/estacional/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const emaeT = async () => { try { return (await import("../emae/tendencia/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const emaeDates = async () => { try { return (await import("../emae/base/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
 
 async function emaeData() {
   return {

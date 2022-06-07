@@ -1,5 +1,5 @@
-  const cambio = async () => { try { return (await import("../monetaria/blue/gap.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const trcmDates = async () => { try { return (await import("../monetaria/blue/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+  const cambio = async () => { try { return (await import("../monetaria/blue/gap.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const trcmDates = async () => { try { return (await import("../monetaria/blue/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
 
  
 async function brechaData() {

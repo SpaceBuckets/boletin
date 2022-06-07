@@ -1,5 +1,5 @@
-  const trcmDates = async () => { try { return (await import("../reservas/diariadates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-const trcm = async () => { try { return (await import("../reservas/total.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+  const trcmDates = async () => { try { return (await import("../reservas/diariadates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const trcm = async () => { try { return (await import("../reservas/total.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
 
  
 

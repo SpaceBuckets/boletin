@@ -1,6 +1,6 @@
-  const iceDates = async () => { try { return (await import("../ice/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-  const iceCoyuntural = async () => { try { return (await import("../ice/coyuntural.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-  const iceEstructural = async () => { try { return (await import("../ice/estructural.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+  const iceDates = async () => { try { return (await import("../ice/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+  const iceCoyuntural = async () => { try { return (await import("../ice/coyuntural.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+  const iceEstructural = async () => { try { return (await import("../ice/estructural.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
  
 async function iceData() {
   return {

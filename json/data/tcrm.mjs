@@ -1,7 +1,7 @@
-  const trcmDates = async () => { try { return (await import("../tcrm/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-  const trcb = async () => { try { return (await import("../tcrm/itcrb.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-  const trcus = async () => { try { return (await import("../tcrm/itcrus.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
-  const trcm = async () => { try { return (await import("../tcrm/itcrm.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+  const trcmDates = async () => { try { return (await import("../tcrm/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+  const trcb = async () => { try { return (await import("../tcrm/itcrb.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+  const trcus = async () => { try { return (await import("../tcrm/itcrus.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+  const trcm = async () => { try { return (await import("../tcrm/itcrm.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
 
 
  
