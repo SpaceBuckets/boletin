@@ -254,6 +254,8 @@ a {
   border-top: 0;
   &.internal {
     margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     h2 {
       font-family: "Montserrat", sans-serif;
       font-size: 22px;

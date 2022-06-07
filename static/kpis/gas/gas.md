@@ -1,6 +1,6 @@
 ---
 t: "Producción de Gas"
-st: "Estimador Mensual de Actividad económica"
+st: "En millones de BTU"
 sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
 kpi: "gas"
 capis:

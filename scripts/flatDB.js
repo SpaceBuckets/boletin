@@ -1,5 +1,5 @@
  
- const getBuilds = async()=>{try{return(await import("~/json/kpis.json")).default}catch(t){return console.log(t),[]}};
+ const getBuilds = async()=>{try{return(await import("../json/kpis.json")).default}catch(t){return console.log(t),[]}};
   
 
 async function singlePost(kpi) {

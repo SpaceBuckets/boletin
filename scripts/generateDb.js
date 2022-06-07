@@ -420,7 +420,9 @@ async function createDb(src) {
 }
 
 async function megaContent(src) {
-  //Get post names
+ 
+ 
+   //Get post names
   var folders = glob.sync('*', { cwd: `static/${src}/` })
   var posts = [];
   //Main post loop
@@ -431,32 +433,19 @@ async function megaContent(src) {
     //Parse Markdown
     var contents = matter(fs.readFileSync(`static/${src}/${singleFolder}/${documentes}`, 'utf8').toString());
     post = contents.data
-    if(src === 'docs') {
-      post.c = md.render(post.c);
-    }
+ 
+  
     posts.push(post);
   });
 
-  //Get Image references
-  posts.forEach(post => {
-    const srcImages = glob.sync('*.jpg', { cwd: `static/${src}/${post.s}` }).filter(e => e !== 'cover.jpg');    
-    var postImages = [];
  
-    srcImages.forEach(singleImage => {
-      var dimensions = sizeOf(`static/${src}/${post.s}/${singleImage}`);
-      var redimensions = (dimensions.height / dimensions.width * 100).toFixed(1);
-      redimensions = redimensions.replace(".0","")
-
-      postImages.push({ 'h': singleImage, 's': redimensions})
-    });
-    post.i = postImages 
-  }); 
 
   fs.writeFileSync(`./json/${src}.json`, JSON.stringify(posts));
   console.log(`♥ ${src}.json generated`)
-}
+};
+
  
- masterDb([
+   masterDb([
   'cuentas',
    'emae',
    'ipi',
@@ -479,5 +468,5 @@ getUSD()
 getBRCAScraper()  
  
 
-createDb();
+createDb(); 
 megaContent("kpis")

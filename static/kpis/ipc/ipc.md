@@ -1,7 +1,7 @@
 ---
 t: "Inflacion"
-st: "Estimador Mensual de Actividad económica"
-sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
+st: "Índice de Precios al Consumidor"
+sd: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base."
 kpi: "ipc"
 capis:
     'interanual':
@@ -10,7 +10,22 @@ capis:
     - 0
     'tendencia-ciclo':
     - 0    
-c: "<p><strong>El EMAE es un indicador provisorio de la evolución del PIB</strong> a precios constantes de 2004 que se difunde con un rezago de 50 a 60 días de concluido el mes de referencia, de acuerdo al <a href='/'>calendario de difusión del INDEC</a>.</p><p>Incluye la serie original (número índice y la variación porcentual respecto al mismo mes del año anterior), la serie desestacionalizada y la tendencia–ciclo (número índice y variación respecto al mes inmediato anterior).</p> <p><em>Ofrece una pauta del comportamiento de la actividad económica real</em> con una frecuencia mayor a la del PIB trimestral a precios constantes. Su cálculo se estructura en la agregación del valor agregado a precios básicos de cada una de las actividades económicas más los impuestos netos de subsidios a los productos, utilizando las ponderaciones de las cuentas nacionales base 2004 de la República Argentina.</p><p>Este indicador <strong>se elabora con información parcial</strong>, de carácter provisorio -dado que en algunos casos es corregida y/o completada por la fuente- o con indicadores alternativos a los que se utilizan para el cálculo trimestral, en tanto se han evaluado como adecuadas aproximaciones. Dado que la estimación del PIB trimestral reúne mayor cantidad de datos, es habitual que se observen diferencias entre las variaciones trimestrales de ambos indicadores.</p>"
-f: "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf"
-d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
+c: "<p>El IPC provee información relevante en más de un sentido:
+• Se utiliza como medida de la inflación del país, por lo cual es considerado para la
+determinación de políticas económicas y monetarias, obligaciones contractuales,
+tasa de interés y remuneraciones.
+• Sirve como indicador del cambio en el poder de compra de los consumidores.
+• Es una herramienta útil para estimar series económicas a precios constantes.
+• Proporciona una serie de índices que permiten comparar la evolución de los precios de subconjuntos de bienes y servicios, proveyendo información sobre distintos sectores de la economía.
+• Muestra la variación promedio de precios de un conjunto de bienes y servicios
+comercializados en el mercado, representativos del consumo de los hogares. </p><p>Los índices de precios tratan de medir el efecto de los factores de precio, que en
+general son aquellos que “identifican el monto pagado por una unidad de medida de
+una clase y calidad específica de un bien o servicio específico obtenido de una fuente
+específica por un grupo de población específico”2
+. Los índices de precios, por lo tanto,
+no deberían estar afectados por cambios en la calidad de los bienes y servicios.</p>"
+f: "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_ipc_nacional_2019.pdf"
+d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base."
+maxval: 40
+minval: 0
 --- 

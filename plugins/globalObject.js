@@ -64,28 +64,28 @@ const state = {
   
 }
 
-import { uciiData } from "~/json/data/ucii.js";
-import { ipiData } from "~/json/data/ipi.js";
-import { isacData } from "~/json/data/isac.js";
-import { balanzaData } from "~/json/data/balanza.js";
-import { emaeData } from "~/json/data/emae.js";
-import { aceroData } from "~/json/data/acero.js";
-import { cerealesData } from "~/json/data/cereales.js";
-import { gasData } from "~/json/data/gas.js";
-import { petroleoData } from "~/json/data/petroleo.js";
-import { deficitData } from "~/json/data/deficit.js";
-import { cambioData } from "~/json/data/cambio.js";
-import { ipcData } from "~/json/data/ipc.js";
-import { tasaData } from "~/json/data/tasa.js";
-import { subsidiosData } from "~/json/data/subsidios.js";
-import { embiData } from "~/json/data/embi.js";
-import { asalariadosData } from "~/json/data/asalariados.js";
-import { desempleoData } from "~/json/data/desempleo.js";
-import { tcrmData } from "~/json/data/tcrm.js";
-import { reservasData } from "~/json/data/reservas.js";
-import { iceData } from "~/json/data/ice.js";
-import { brechaData } from "~/json/data/brecha.js";
-import { comprasbcraData } from "~/json/data/comprasbcra.js";
+import { uciiData } from "../json/data/ucii.mjs";
+import { ipiData } from "../json/data/ipi.mjs";
+import { isacData } from "../json/data/isac.mjs";
+import { balanzaData } from "../json/data/balanza.mjs";
+import { emaeData } from "../json/data/emae.mjs";
+import { aceroData } from "../json/data/acero.mjs";
+import { cerealesData } from "../json/data/cereales.mjs";
+import { gasData } from "../json/data/gas.mjs";
+import { petroleoData } from "../json/data/petroleo.mjs";
+import { deficitData } from "../json/data/deficit.mjs";
+import { cambioData } from "../json/data/cambio.mjs";
+import { ipcData } from "../json/data/ipc.mjs";
+import { tasaData } from "../json/data/tasa.mjs";
+import { subsidiosData } from "../json/data/subsidios.mjs";
+import { embiData } from "../json/data/embi.mjs";
+import { asalariadosData } from "../json/data/asalariados.mjs";
+import { desempleoData } from "../json/data/desempleo.mjs";
+import { tcrmData } from "../json/data/tcrm.mjs";
+import { reservasData } from "../json/data/reservas.mjs";
+import { iceData } from "../json/data/ice.mjs";
+import { brechaData } from "../json/data/brecha.mjs";
+import { comprasbcraData } from "../json/data/comprasbcra.mjs";
 
 
 
