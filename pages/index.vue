@@ -39,33 +39,33 @@
     </div>
 <section id="actividad-row">
      <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'emae', parent: 'actividad-economica' } }" >
-        <charts-genericLine title="EMAE" subtitle="Estimador Mensual de Actividad Economica" data="emae" :chartHeight="330" />
+        <lazy-charts-genericLine title="EMAE" subtitle="Estimador Mensual de Actividad Economica" data="emae" :chartHeight="330" />
       </nuxt-link>
      <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'ucii', parent: 'actividad-economica' } }" >
-         <charts-genericLine title="UCII" subtitle="Utilización de la Capacidad Instalada" data="ucii" :chartHeight="330" minDate="2018-06-01"/>
+         <lazy-charts-genericLine title="UCII" subtitle="Utilización de la Capacidad Instalada" data="ucii" :chartHeight="330" minDate="2018-06-01"/>
 
       </nuxt-link>
 </section>
 <section id="cuentas-row">
      <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'balanza', parent: 'cuentas-nacionales' } }" >
-        <charts-genericLine title="Balanza Comercial" subtitle="Importaciones, Exportaciones y Saldo" data="balanza" :chartHeight="330" :minDate="`2014-06-01`"/>
+        <lazy-charts-genericLine title="Balanza Comercial" subtitle="Importaciones, Exportaciones y Saldo" data="balanza" :chartHeight="330" :minDate="`2014-06-01`"/>
       </nuxt-link>
      <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'deficit', parent: 'cuentas-nacionales' } }" >
-         <charts-genericLine title="Deficit Fiscal" subtitle="Ingresos, Gastos y Ahorro" data="deficit" :chartHeight="330" :minDate="`2014-06-01`"/>
+         <lazy-charts-genericLine title="Deficit Fiscal" subtitle="Ingresos, Gastos y Ahorro" data="deficit" :chartHeight="330" :minDate="`2014-06-01`"/>
 
       </nuxt-link>
 </section>
 <section id="monetaria-row">
      <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'ipc', parent: 'precios-salarios' } }" >
-      <charts-genericLine title="Inflacion" subtitle="Indice de Precios al Consumidor" data="ipc" :chartHeight="330" :minDate="`2008-06-01`" :maxVal="8" :minVal="0"/>
+      <lazy-charts-genericLine title="Inflacion" subtitle="Indice de Precios al Consumidor" data="ipc" :chartHeight="330" :minDate="`2008-06-01`" :maxVal="8" :minVal="0"/>
 
       </nuxt-link>
      <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'cambio', parent: 'politica-monetaria' } }" >
-          <charts-genericLine title="Tipos de Cambio" subtitle="USD vs. Peso" data="cambio" :chartHeight="330" :minDate="`2014-06-01`"/>
+          <lazy-charts-genericLine title="Tipos de Cambio" subtitle="USD vs. Peso" data="cambio" :chartHeight="330" :minDate="`2014-06-01`"/>
 
       </nuxt-link>
      <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: 'tasa', parent: 'politica-monetaria' } }" >
-      <charts-genericLine title="Tasas de Interés" subtitle="Segun BCRA" data="tasa" :chartHeight="330" :minDate="`2016-06-01`"/>
+      <lazy-charts-genericLine title="Tasas de Interés" subtitle="Segun BCRA" data="tasa" :chartHeight="330" :minDate="`2016-06-01`"/>
 
        </nuxt-link>
 </section>

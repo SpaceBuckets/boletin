@@ -445,7 +445,7 @@ async function megaContent(src) {
 };
 
  
-   masterDb([
+/*    masterDb([
   'cuentas',
    'emae',
    'ipi',
@@ -468,5 +468,5 @@ getUSD()
 getBRCAScraper()  
  
 
-createDb(); 
+createDb();  */
 megaContent("kpis")

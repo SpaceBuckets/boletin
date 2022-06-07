@@ -27,7 +27,7 @@
     </div>
     <div class="recontent-container">
       <div class="content-cell" style="min-width: 100%;">
-        <charts-genericLine :data="post.kpi" :maxVal="post.maxval" :minVal="post.minval" :chartHeight="440" />
+        <lazy-charts-genericLine :data="post.kpi" :maxVal="post.maxval" :minVal="post.minval" :chartHeight="440" />
       </div>
       <div class="content-cell" style="flex: 2;padding-right:100px;">
         <h3>Metodología</h3>
