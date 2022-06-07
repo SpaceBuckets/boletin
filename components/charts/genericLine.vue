@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       chartOptions: JSON.parse(JSON.stringify(this.$state.chartOptions)),
-      chartData: require(`~/json/confluence/${this.data}`).chartdata
+      chartData: require(`~/json/confluence/${this.data}.json`).chartdata
     };
   },
   created() {
