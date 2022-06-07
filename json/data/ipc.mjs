@@ -1,6 +1,6 @@
-  const ipc = async () => { try { return (await import("../ipc/historico/dmensual.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
-const ipc2 = async () => { try { return (await import("../ipc/historico/danual.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
-const ipcDates = async () => { try { return (await import("../ipc/historico/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+  const ipc = async () => { try { return (await import("../ipc/historico/dmensual.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
+const ipc2 = async () => { try { return (await import("../ipc/historico/danual.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
+const ipcDates = async () => { try { return (await import("../ipc/historico/dates.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
 
  
 async function ipcData() {

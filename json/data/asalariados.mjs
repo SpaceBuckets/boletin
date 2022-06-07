@@ -1,6 +1,6 @@
-  const eprivDates = async () => { try { return (await import("../empleo/privadob/dates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
-  const epriv = async () => { try { return (await import("../empleo/privadod/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
-  const epub = async () => { try { return (await import("../empleo/privadob/d.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+  const eprivDates = async () => { try { return (await import("../empleo/privadob/dates.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
+  const epriv = async () => { try { return (await import("../empleo/privadod/d.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
+  const epub = async () => { try { return (await import("../empleo/privadob/d.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
 
 
  

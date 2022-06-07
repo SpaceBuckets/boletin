@@ -1,5 +1,5 @@
-  const trcmDates = async () => { try { return (await import("../reservas/diariadates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
-const cambio = async () => { try { return (await import("../reservas/diaria.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+  const trcmDates = async () => { try { return (await import("../reservas/diariadates.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
+const cambio = async () => { try { return (await import("../reservas/diaria.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
 
  
 //const colours = cambio.map((value) => value < 0 ? '#b22222CC' : '#009966');

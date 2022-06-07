@@ -1,8 +1,8 @@
-const trcmDates = async () => { try { return (await import("../monetaria/tasas/tasadates.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
-const tasa = async () => { try { return (await import("../monetaria/tasas/tasatasa.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
-const badlar = async () => { try { return (await import("../monetaria/tasas/tasabadlar.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
-const plazo = async () => { try { return (await import("../monetaria/tasas/tasaplazo.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
-const pases = async () => { try { return (await import("../monetaria/tasas/tasapases.json", { assert: { type: "json" } }))  } catch (t) { return console.log(t), [] } };
+const trcmDates = async () => { try { return (await import("../monetaria/tasas/tasadates.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
+const tasa = async () => { try { return (await import("../monetaria/tasas/tasatasa.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
+const badlar = async () => { try { return (await import("../monetaria/tasas/tasabadlar.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
+const plazo = async () => { try { return (await import("../monetaria/tasas/tasaplazo.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
+const pases = async () => { try { return (await import("../monetaria/tasas/tasapases.json", { assert: { type: "json" } })).default  } catch (t) { return console.log(t), [] } };
 
 async function tasaData() {
   return {
