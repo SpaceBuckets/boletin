@@ -49,7 +49,7 @@
               <div>{{ dates }}</div>
               <div>
                 {{
-                  $kpi[post.kpi].datasets[0].data
+                  post.chartdata.datasets[0].data
                     .filter((val, index, arr) => index > arr.length - 24)
                     .reverse()
                     [i]
@@ -57,7 +57,7 @@
               </div>
               <div>
                 {{
-                  $kpi[post.kpi].datasets[0].data
+                  post.chartdata.datasets[0].data
                     .filter((val, index, arr) => index > arr.length - 24)
                     .reverse()
                     [i]
@@ -80,7 +80,7 @@ import { singlePost } from "~/scripts/flatDB";
 export default {
   name: "Details",
   async asyncData({ params }) {
-    const post = await singlePost(params.kpi);
+    const post = require(`~/json/confluence/${params.kpi}`)
     return { post };
   },
   data() {
@@ -90,28 +90,28 @@ export default {
   methods: {
     getLastUpdated() {
       const formatter = new Intl.DateTimeFormat('es', { month: 'short',year: 'numeric' });
-      const lastupdate = formatter.format(new Date(this.$kpi[this.post.kpi].labels.slice(-1)[0]));
+      const lastupdate = formatter.format(new Date(this.post.chartdata.labels.slice(-1)[0]));
 
-      return this.$kpi[this.post.kpi].labels.slice(-1)[0]
+      return this.post.chartdata.labels.slice(-1)[0]
     },    
     getCapiVariation(i) {
-      var A = this.$kpi[this.post.kpi].datasets[i].data.slice(-1)[0]
-      var B = this.$kpi[this.post.kpi].datasets[i].data.slice(-2)[0]
+      var A = this.post.chartdata.datasets[i].data.slice(-1)[0]
+      var B = this.post.chartdata.datasets[i].data.slice(-2)[0]
       return (((A - B) / A) * 100.0).toFixed(2);
  
     },        
     getCapiInterVariation(i) {
-      var A = this.$kpi[this.post.kpi].datasets[i].data.slice(-1)[0]
-      var B = this.$kpi[this.post.kpi].datasets[i].data.slice(-10)[0]
+      var A = this.post.chartdata.datasets[i].data.slice(-1)[0]
+      var B = this.post.chartdata.datasets[i].data.slice(-10)[0]
       return (((A - B) / A) * 100.0).toFixed(2);
     },
     filteredArray() {
-      return this.$kpi[this.post.kpi].labels
+      return this.post.chartdata.labels
         .filter((val, index, arr) => index > arr.length - 23)
         .reverse();
     },
     getVariation(i) {
-      var currentNum = this.$kpi[this.post.kpi].datasets[0].data
+      var currentNum = this.post.chartdata.datasets[0].data
         .filter((val, index, arr) => index > arr.length - 24)
         .reverse();
       var A = currentNum[i];

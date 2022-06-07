@@ -5,7 +5,7 @@
       </h2>
  
     <charts-line
-      :data="$kpi[data]"
+      :data="chartData"
       :options="chartOptions"
       :height="chartHeight"
     />
@@ -47,12 +47,15 @@ export default {
   data() {
     return {
       chartOptions: JSON.parse(JSON.stringify(this.$state.chartOptions)),
+      chartData: require(`~/json/confluence/${this.data}`).chartdata
     };
   },
   created() {
+
+ 
     this.chartOptions.scales.xAxes[0].ticks.min = this.minDate;
     this.chartOptions.scales.yAxes[0].ticks.min = this.minVal;
-    this.chartOptions.scales.yAxes[0].ticks.max = this.maxVal;
+    this.chartOptions.scales.yAxes[0].ticks.max = this.maxVal; 
   },
 };
 </script>
