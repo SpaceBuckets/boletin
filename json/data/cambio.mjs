@@ -1,6 +1,6 @@
-  const cambio = async () => { try { return (await import("../monetaria/blue/usd.json")).default } catch (t) { return console.log(t), [] } };
-  const adr = async () => { try { return (await import("../monetaria/blue/blue.json")).default } catch (t) { return console.log(t), [] } };
-  const trcmDates = async () => { try { return (await import("../monetaria/blue/dates.json")).default } catch (t) { return console.log(t), [] } };
+  const cambio = async () => { try { return (await import("../monetaria/blue/usd.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+  const adr = async () => { try { return (await import("../monetaria/blue/blue.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+  const trcmDates = async () => { try { return (await import("../monetaria/blue/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
 
 
  

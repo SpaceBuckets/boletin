@@ -1,10 +1,10 @@
-const iceDates = async () => { try { return (await import("../embi/dates.json")).default } catch (t) { return console.log(t), [] } };
-const argentina = async () => { try { return (await import("../embi/argentina.json")).default } catch (t) { return console.log(t), [] } };
-const brasil = async () => { try { return (await import("../embi/brasil.json")).default } catch (t) { return console.log(t), [] } };
-const chile = async () => { try { return (await import("../embi/chile.json")).default } catch (t) { return console.log(t), [] } };
-const colombia = async () => { try { return (await import("../embi/colombia.json")).default } catch (t) { return console.log(t), [] } };
-const mexico = async () => { try { return (await import("../embi/mexico.json")).default } catch (t) { return console.log(t), [] } };
-const latino = async () => { try { return (await import("../embi/latino.json")).default } catch (t) { return console.log(t), [] } };
+const iceDates = async () => { try { return (await import("../embi/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const argentina = async () => { try { return (await import("../embi/argentina.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const brasil = async () => { try { return (await import("../embi/brasil.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const chile = async () => { try { return (await import("../embi/chile.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const colombia = async () => { try { return (await import("../embi/colombia.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const mexico = async () => { try { return (await import("../embi/mexico.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const latino = async () => { try { return (await import("../embi/latino.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
 
  
 

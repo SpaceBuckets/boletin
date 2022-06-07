@@ -1,5 +1,5 @@
-  const expoDates = async () => { try { return (await import("../cuentas/hierro/dates.json")).default } catch (t) { return console.log(t), [] } };
-const acero = async () => { try { return (await import("../cuentas/hierro/d.json")).default } catch (t) { return console.log(t), [] } };
+  const expoDates = async () => { try { return (await import("../cuentas/hierro/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const acero = async () => { try { return (await import("../cuentas/hierro/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
 
 async function aceroData() {
   return {

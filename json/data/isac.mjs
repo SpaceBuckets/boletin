@@ -1,7 +1,7 @@
-  const isacB = async () => { try { return (await import("../isac/base/d.json")).default } catch (t) { return console.log(t), [] } };
-const isacD = async () => { try { return (await import("../isac/estacional/d.json")).default } catch (t) { return console.log(t), [] } };
-const isacT = async () => { try { return (await import("../isac/tendencia/d.json")).default } catch (t) { return console.log(t), [] } };
-const isacDates = async () => { try { return (await import("../isac/base/dates.json")).default } catch (t) { return console.log(t), [] } };
+  const isacB = async () => { try { return (await import("../isac/base/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const isacD = async () => { try { return (await import("../isac/estacional/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const isacT = async () => { try { return (await import("../isac/tendencia/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const isacDates = async () => { try { return (await import("../isac/base/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
 
 
 

@@ -1,7 +1,7 @@
-  const ingresos = async () => { try { return (await import("../cuentas/ingresos/d.json")).default } catch (t) { return console.log(t), [] } };
-const gastos = async () => { try { return (await import("../cuentas/gastos/d.json")).default } catch (t) { return console.log(t), [] } };
-const ahorro = async () => { try { return (await import("../cuentas/ahorro/d.json")).default } catch (t) { return console.log(t), [] } };
-const expoDates = async () => { try { return (await import("../cuentas/ingresos/dates.json")).default } catch (t) { return console.log(t), [] } };
+  const ingresos = async () => { try { return (await import("../cuentas/ingresos/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const gastos = async () => { try { return (await import("../cuentas/gastos/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const ahorro = async () => { try { return (await import("../cuentas/ahorro/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const expoDates = async () => { try { return (await import("../cuentas/ingresos/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
 
  
 async function deficitData() {

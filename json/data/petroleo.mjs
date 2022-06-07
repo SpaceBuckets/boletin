@@ -1,6 +1,6 @@
-  const expoDates = async () => { try { return (await import("../cuentas/pozos/dates.json")).default } catch (t) { return console.log(t), [] } };
-const transporte = async () => { try { return (await import("../cuentas/pozos/d.json")).default } catch (t) { return console.log(t), [] } };
-const transportee = async () => { try { return (await import("../cuentas/pozosmetros/d.json")).default } catch (t) { return console.log(t), [] } };
+  const expoDates = async () => { try { return (await import("../cuentas/pozos/dates.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const transporte = async () => { try { return (await import("../cuentas/pozos/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
+const transportee = async () => { try { return (await import("../cuentas/pozosmetros/d.json", { assert: { type: "json" } })).default } catch (t) { return console.log(t), [] } };
 
 
  
