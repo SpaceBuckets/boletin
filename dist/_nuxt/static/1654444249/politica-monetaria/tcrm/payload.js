@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/politica-monetaria/tcrm", {data:[{}],fetch:{},mutations:void 0});

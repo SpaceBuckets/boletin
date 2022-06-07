@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/cuentas-nacionales/balanza", {data:[{}],fetch:{},mutations:void 0});

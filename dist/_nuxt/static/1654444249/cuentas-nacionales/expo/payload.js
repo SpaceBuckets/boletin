@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/cuentas-nacionales/expo", {data:[{}],fetch:{},mutations:void 0});

@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/precios-salarios/ipc", {data:[{}],fetch:{},mutations:void 0});

@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/politica-monetaria/cambio", {data:[{}],fetch:{},mutations:void 0});

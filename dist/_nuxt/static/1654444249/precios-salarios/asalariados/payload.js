@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/precios-salarios/asalariados", {data:[{}],fetch:{},mutations:void 0});
