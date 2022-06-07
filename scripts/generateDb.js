@@ -517,5 +517,5 @@ getUSD()
 getBRCAScraper()  
  
 
-createDb(); */
-megaContent("kpis")
+createDb(); 
+megaContent("kpis")*/
