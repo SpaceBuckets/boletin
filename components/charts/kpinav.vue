@@ -1,12 +1,16 @@
 <template>
   <div>
     <div class="meganav" :class="{index: $route.path === '/'}">
+    <div class="meganavsection nochild">
+              <div> <nuxt-link to="/home">Home</nuxt-link>    </div>
+
+    </div>
       <div class="meganavsection nochild">
         <div> <nuxt-link to="/">Dashboard</nuxt-link>    </div>
       </div>
-      <div class="meganavsection" v-for="(parent, i) in nav">
+      <div class="meganavsection open" @click="sectionOpen = i" v-for="(parent, i) in nav" :class="{open: sectionOpen === i}" :key="">
         <div>
-        {{i.replace(/-/g, ' ')}} <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em; fill: #888;  transform: rotateZ(180deg);"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg>
+        {{i.replace(/-/g, ' ')}} <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em; fill: #888;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg>
 
         </div>
            <nuxt-link v-for="kpi in parent" :key='`${i}-${kpi}`' :to="{ name: `kpi-kpi`, params: { kpi: kpi, parent: i } }" >
@@ -27,6 +31,7 @@ export default {
   name: "Details",
   data() {
     return {
+      sectionOpen: '',
       nav: meganav
     };
   },
@@ -48,8 +53,7 @@ export default {
 
   }
   &.nuxt-link-exact-active {
-    background: rgba(55, 53, 47, 0.08);
-    color: rgba(253, 216, 53, 1) !important;
+     color: rgba(253, 216, 53, 1) !important;
     color: #fff;
     font-weight: bold;
  
@@ -59,8 +63,7 @@ export default {
  .meganav .nochild a {
    padding: 0;
   &.nuxt-link-exact-active {
-    background: rgba(55, 53, 47, 0.08);
-    color: rgba(253, 216, 53, 1) !important;
+     color: rgba(253, 216, 53, 1) !important;
     color: #fff;
     font-weight: bold;
  
@@ -68,7 +71,7 @@ export default {
  }
 
  .meganav div.nochild {
-   margin-bottom: 10px !important;
+   margin-bottom: 15px !important;
  }
 .meganav {
   position: fixed;
@@ -79,10 +82,12 @@ export default {
   padding: 15px 0;
   overflow: auto;
   padding-bottom: 50px;
+  padding-top: 25px;
   width: 220px;
   z-index: 999;
+ 
   &.index {
-    //display: none;
+   //transform: translateX(-100%)
   }
   input {
     margin-left: 15px;
@@ -94,12 +99,20 @@ export default {
     font-size: 11.5px;
     letter-spacing: 0.03em;
       color: rgba(55, 53, 47, 0.5);
-      color: #ccc;
+    color: #eee;
     font-weight: 600;
     padding: 0 15px 5px;
     }
   }
 }
+
+.meganavsection {
+  cursor: pointer;
+  > a { display: none; }
+  &.open > a { display: block; }
+  &.open svg { transform: rotateZ(180deg); }
+}
+
 </style>
 
  

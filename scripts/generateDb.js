@@ -390,90 +390,15 @@ async function parseXLS(kpi) {
 
 }
 
-async function createDb(src) {
-  //Get post names
-  var folders = glob.sync('*', { cwd: `components/` })
-  var posts = [];
-  var singleObj = []
-  var singleObjNav = {}
-
-  //Main post loop
-  folders.forEach(singleFolder => {
-    const documentes = glob.sync('*.vue', {cwd: `components/${singleFolder}`})
-    let post = documentes.map(function(d) {
-      return d.replace('.vue', '');
-    });
-    for (let i = 0; i < post.length; i++) {
-      var tempObj = {}
-      tempObj.kpi = post[i]
-      tempObj.parent = singleFolder
-      singleObj.push(tempObj)
-
-    }
-    singleObjNav[singleFolder] = post
-
-  });
-  delete singleObjNav['charts']; 
-  fs.writeFileSync(`./json/kpis.json`, JSON.stringify(singleObj));
-  console.log(`♥ kpis.json generated`)
-  console.log(`♥ kpisnav.json generated`)
-}
-
 async function megaContent(src) {
-  const { uciiData } = await import("../json/data/ucii.mjs");
-  const { ipiData } = await import("../json/data/ipi.mjs");
-  const { isacData } = await import("../json/data/isac.mjs");
-  const { balanzaData } = await import("../json/data/balanza.mjs");
-  const { emaeData } = await import("../json/data/emae.mjs");
-  const { aceroData } = await import("../json/data/acero.mjs");
-  const { cerealesData } = await import("../json/data/cereales.mjs");
-  const { gasData } = await import("../json/data/gas.mjs");
-  const { petroleoData } = await import("../json/data/petroleo.mjs");
-  const { deficitData } = await import("../json/data/deficit.mjs");
-  const { cambioData } = await import("../json/data/cambio.mjs");
-  const { ipcData } = await import("../json/data/ipc.mjs");
-  const { tasaData } = await import("../json/data/tasa.mjs");
-  const { subsidiosData } = await import("../json/data/subsidios.mjs");
-  const { embiData } = await import("../json/data/embi.mjs");
-  const { asalariadosData } = await import("../json/data/asalariados.mjs");
-  const { desempleoData } = await import("../json/data/desempleo.mjs");
-  const { tcrmData } = await import("../json/data/tcrm.mjs");
-  const { reservasData } = await import("../json/data/reservas.mjs");
-  const { iceData } = await import("../json/data/ice.mjs");
-  const { brechaData } = await import("../json/data/brecha.mjs");
-  const { comprasbcraData } = await import("../json/data/comprasbcra.mjs");
   
-const megaData = {
-    emae: await emaeData(),
-    ipi: await ipiData(),
-    isac: await isacData(),
-    ucii: await uciiData(),
-    balanza: await balanzaData(),
-    acero: await aceroData(),
-    cereales: await cerealesData(),
-    gas: await gasData(),
-    petroleo: await petroleoData(),
-    deficit: await deficitData(),
-    cambio: await cambioData(),
-    ipc: await ipcData(),
-    tasa: await tasaData(),
-    subsidios: await subsidiosData(),
-    embi: await embiData(),
-    asalariados: await asalariadosData(),
-    desempleo: await desempleoData(),
-    tcrm: await tcrmData(),
-    reservas: await reservasData(),
-    ice: await iceData(),
-    brecha: await brechaData(),
-    comprasbcra: await comprasbcraData()
-}
-
- 
+  
    //Get post names
   var folders = glob.sync('*', { cwd: `static/${src}/` })
   var posts = [];
   //Main post loop
-  folders.forEach(singleFolder => {
+     for (const singleFolder of folders) {
+
     const documentes = glob.sync('*.md', {cwd: `static/${src}/${singleFolder}`})
     let post = [];
 
@@ -481,20 +406,20 @@ const megaData = {
     var contents = matter(fs.readFileSync(`static/${src}/${singleFolder}/${documentes}`, 'utf8').toString());
     post = contents.data
  
-   post.chartdata = megaData[singleFolder]
+    post.chartdata = await require(`../json/data/${singleFolder}.js`)
  
     posts.push(post);
     fs.writeFileSync(`./json/confluence/${singleFolder}.json`, JSON.stringify(post));
     console.log(`♥ ${singleFolder}.json generated`)
 
-  });
+  };
 
  
 
 };
 
  
-  masterDb([
+/*    masterDb([
   'cuentas',
    'emae',
    'ipi',
@@ -514,8 +439,6 @@ parseXLS("tcrm");
 getBRCASeries()
 
 getUSD() 
-getBRCAScraper()  
+getBRCAScraper()   */
  
-
-createDb();  
 megaContent("kpis")

@@ -26,6 +26,6 @@ específica por un grupo de población específico”2
 no deberían estar afectados por cambios en la calidad de los bienes y servicios.</p>"
 f: "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_ipc_nacional_2019.pdf"
 d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base."
-maxval: 40
-minval: 0
+max: 10
+min: 0
 --- 

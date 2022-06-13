@@ -1,6 +1,6 @@
 ---
 t: "Desempleo"
-st: "Estimador Mensual de Actividad económica"
+st: "Porcentaje Sobre el Total de la Población"
 sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
 kpi: "desempleo"
 capis:

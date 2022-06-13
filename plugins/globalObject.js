@@ -3,6 +3,14 @@ import Vue from 'vue'
 const state = {
   updated: 0,
   isOpen: false,
+  kpidates: {
+    balanza: "2004-06-01",
+    deficit: "2018-12-01",
+    ipc: "2004-12-01",
+    cambio: "2018-12-01",
+    tasa: "2016-06-01"
+
+  },
   chartOptions: {
     responsive: true,
     maintainAspectRatio: false,
@@ -38,14 +46,16 @@ const state = {
         {
           ticks: {
             fontColor: "#bbb",
-            callback: function (value, index, values) {
+/*             callback: function (value, index, values) {
               return "$" + value / 1e4 + "M";
-            },
+            }, */
           },
           gridLines: {
             color: "#F7F5F0",
             lineWidth: 1,
             drawBorder: false,
+            drawOnChartArea: true,
+
             zeroLineColor: "#eee",
           },
           scaleLabel: {

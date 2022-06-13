@@ -1,6 +1,6 @@
 ---
 t: "EMAE"
-st: "Estimador Mensual de Actividad económica"
+st: "Estimador Mensual de Actividad"
 sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
 kpi: "emae"
 capis:

@@ -2,12 +2,38 @@
   <div>
     <header>
       <h1 class="nav-logo">
-        <nuxt-link to="/">BOLETIN<span>EXTRAOFICIAL</span></nuxt-link>
+        <nuxt-link to="/"><span>BOLETIN</span>EXTRAOFICIAL</nuxt-link>
+<svg width="126" height="110" viewBox="0 0 126 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1017_42)">
+<path d="M125.364 17.66C107.8 2.38727 85.6545 0.0963621 73.4363 11.5509C64.5684 23.4072 65.3586 37.3675 75.7273 52.0236C74.9636 52.0236 73.4363 52.7873 72.6727 53.5509C64.9714 38.8848 63.6466 23.7827 68.8545 10.0236C85.6545 -3.72182 108.564 -5.2491 125.364 17.66V17.66Z" fill="#843511"/>
+<path d="M97.8727 13.0781C87.9454 13.0781 85.6545 15.369 81.0727 19.1872C76.4909 23.0054 74.2 22.2418 73.4364 23.0054C72.6727 23.769 73.4364 26.0599 74.9636 25.2963C76.4909 24.5327 79.5454 23.0054 84.1273 19.1872C88.7091 15.369 93.2909 15.369 97.8727 15.369C111.618 15.369 119.255 26.8236 120.782 26.0599C122.309 25.2963 113.145 13.0781 97.8727 13.0781V13.0781Z" fill="#843511"/>
+<path d="M115.436 26.0602C105.509 15.3693 87.1818 14.6056 79.5455 26.8238H82.6C90.2364 14.6056 108.564 19.9511 110.091 25.2965V26.8238" fill="#843511"/>
+<path d="M96.3454 32.1693C100.141 32.1693 103.218 29.0923 103.218 25.2966C103.218 21.5009 100.141 18.4238 96.3454 18.4238C92.5497 18.4238 89.4727 21.5009 89.4727 25.2966C89.4727 29.0923 92.5497 32.1693 96.3454 32.1693Z" fill="#843511"/>
+<path d="M79.5455 26.8237C87.1818 33.6964 103.982 34.46 115.436 26.06L110.091 25.2964C102.455 33.6964 90.2364 32.9328 82.6 26.8237V25.2964" fill="#843511"/>
+<path d="M116.2 29.8783C103.218 39.8056 90.2364 39.042 82.6 34.4602C74.9637 29.8783 74.9637 28.3511 76.4909 28.3511C78.0182 28.3511 79.5455 29.8783 85.6546 32.9329C91.7637 35.9874 100.927 35.9874 116.2 29.8783V29.8783ZM78.7818 52.7874C79.5624 53.065 80.2531 53.5489 80.7804 54.1878C81.3078 54.8266 81.6521 55.5965 81.7766 56.4155C81.9012 57.2345 81.8014 58.0719 81.4878 58.8387C81.1743 59.6055 80.6587 60.2729 79.996 60.77C79.3333 61.267 78.5482 61.5751 77.7243 61.6614C76.9004 61.7477 76.0685 61.609 75.3172 61.2601C74.5658 60.9112 73.9231 60.3651 73.4575 59.68C72.9918 58.9949 72.7206 58.1963 72.6727 57.3693C71.9091 58.8965 68.8546 63.4783 62.7455 63.4783H61.2182L62.7455 65.7693C64.2727 65.7693 68.8546 65.7693 71.9091 63.4783C72.5547 64.4046 73.4186 65.1576 74.4244 65.6706C75.4302 66.1837 76.5469 66.441 77.6758 66.4199C78.8047 66.3988 79.911 66.0999 80.8969 65.5496C81.8828 64.9993 82.718 64.2146 83.3285 63.2649C83.9391 62.3151 84.3063 61.2295 84.3976 60.1042C84.4889 58.9788 84.3015 57.8482 83.852 56.8125C83.4026 55.7767 82.7048 54.8676 81.8205 54.1656C80.9362 53.4636 79.8926 52.9902 78.7818 52.7874V52.7874ZM87.9455 84.8602C81.0727 80.2783 78.0182 73.4056 70.3818 73.4056C68.8546 73.4056 65.8 74.1693 62.7455 75.6965H61.2182L62.7455 77.9874C65.8 77.9874 70.3818 74.1693 75.7273 77.2238C81.0727 80.2783 84.1273 83.3329 87.9455 84.8602V84.8602ZM85.6546 84.8602C70.3818 80.2783 67.3273 83.3329 62.7455 83.3329H61.2182L62.7455 86.3874C68.8546 86.3874 71.9091 81.8056 85.6546 84.8602V84.8602Z" fill="#843511"/>
+<path d="M87.9455 84.8599C71.1455 83.3327 76.4909 93.2599 62.7455 93.2599H61.2182L62.7455 95.5508C79.5455 95.5508 71.9091 86.3872 87.9455 84.8599ZM76.4909 109.296C76.4909 105.651 75.0427 102.155 72.465 99.5767C69.8872 96.999 66.391 95.5508 62.7455 95.5508C59.0999 95.5508 55.6037 96.999 53.026 99.5767C50.4482 102.155 49 105.651 49 109.296C49.7921 106.254 51.5713 103.56 54.0588 101.637C56.5463 99.7143 59.6015 98.6711 62.7455 98.6711C65.8895 98.6711 68.9446 99.7143 71.4321 101.637C73.9196 103.56 75.6988 106.254 76.4909 109.296V109.296ZM0 17.66C17.5637 2.38727 39.7091 0.0963621 51.9273 11.5509C60.7952 23.4072 60.005 37.3675 49.6364 52.0236C50.4 52.0236 51.9273 52.7873 52.6909 53.5509C60.3923 38.8848 61.717 23.7827 56.5091 10.0236C39.7091 -3.72182 16.8 -5.2491 0 17.66Z" fill="#843511"/>
+<path d="M27.4909 13.0781C37.4182 13.0781 39.7091 15.369 44.2909 19.1872C48.8727 23.0054 51.1637 22.2418 51.9273 23.0054C52.6909 23.769 51.9273 26.0599 50.4 25.2963C48.8727 24.5327 45.8182 23.0054 41.2364 19.1872C36.6546 15.369 32.0727 15.369 27.4909 15.369C13.7455 15.369 6.10912 26.8236 4.58185 26.0599C3.05457 25.2963 12.2182 13.0781 27.4909 13.0781V13.0781Z" fill="#843511"/>
+<path d="M9.92725 26.0602C19.8545 15.3693 38.1818 14.6056 45.8182 26.8238H42.7636C35.1273 14.6056 16.8 19.9511 15.2727 25.2965V26.8238" fill="#843511"/>
+<path d="M29.0182 32.1693C25.2225 32.1693 22.1455 29.0923 22.1455 25.2966C22.1455 21.5009 25.2225 18.4238 29.0182 18.4238C32.8139 18.4238 35.8909 21.5009 35.8909 25.2966C35.8909 29.0923 32.8139 32.1693 29.0182 32.1693Z" fill="#843511"/>
+<path d="M45.8182 26.8237C38.1818 33.6964 21.3818 34.46 9.92725 26.06L15.2727 25.2964C22.9091 33.6964 35.1273 32.9328 42.7636 26.8237V25.2964" fill="#843511"/>
+<path d="M9.16364 29.8783C22.1454 39.8056 35.1273 39.042 42.7636 34.4602C50.4 29.8783 50.4 28.3511 48.8727 28.3511C47.3454 28.3511 45.8182 29.8783 39.7091 32.9329C33.6 35.9874 24.4364 35.9874 9.16364 29.8783V29.8783ZM46.5818 52.7874C45.8013 53.065 45.1106 53.5489 44.5832 54.1878C44.0559 54.8266 43.7116 55.5965 43.587 56.4155C43.4624 57.2345 43.5623 58.0719 43.8758 58.8387C44.1894 59.6055 44.7049 60.2729 45.3676 60.77C46.0304 61.267 46.8155 61.5751 47.6394 61.6614C48.4633 61.7477 49.2951 61.609 50.0465 61.2601C50.7978 60.9112 51.4405 60.3651 51.9062 59.68C52.3718 58.9949 52.643 58.1963 52.6909 57.3693C53.4545 58.8965 56.5091 63.4783 62.6182 63.4783H64.1454L62.6182 65.7693C61.0909 65.7693 56.5091 65.7693 53.4545 63.4783C52.8089 64.4046 51.945 65.1576 50.9392 65.6706C49.9334 66.1837 48.8167 66.441 47.6878 66.4199C46.5589 66.3988 45.4526 66.0999 44.4667 65.5496C43.4808 64.9993 42.6457 64.2146 42.0351 63.2649C41.4245 62.3151 41.0574 61.2295 40.9661 60.1042C40.8748 58.9788 41.0621 57.8482 41.5116 56.8125C41.9611 55.7767 42.6588 54.8676 43.5431 54.1656C44.4274 53.4636 45.4711 52.9902 46.5818 52.7874V52.7874ZM37.4182 84.8602C44.2909 80.2783 47.3454 73.4056 54.9818 73.4056C56.5091 73.4056 59.5636 74.1693 62.6182 75.6965H64.1454L62.6182 77.9874C59.5636 77.9874 54.9818 74.1693 49.6364 77.2238C44.2909 80.2783 41.2364 83.3329 37.4182 84.8602V84.8602ZM39.7091 84.8602C54.9818 80.2783 58.0364 83.3329 62.6182 83.3329H64.1454L62.6182 86.3874C56.5091 86.3874 53.4545 81.8056 39.7091 84.8602V84.8602Z" fill="#843511"/>
+<path d="M37.4182 84.8599C54.2182 83.3327 48.8727 93.2599 62.6182 93.2599H64.1454L62.6182 95.5508C45.8182 95.5508 53.4545 86.3872 37.4182 84.8599ZM48.8727 109.296C48.8727 105.651 50.3209 102.155 52.8987 99.5767C55.4765 96.999 58.9727 95.5508 62.6182 95.5508C66.2637 95.5508 69.7599 96.999 72.3377 99.5767C74.9155 102.155 76.3636 105.651 76.3636 109.296C75.5715 106.254 73.7923 103.56 71.3048 101.637C68.8173 99.7143 65.7622 98.6711 62.6182 98.6711C59.4742 98.6711 56.419 99.7143 53.9316 101.637C51.4441 103.56 49.6648 106.254 48.8727 109.296" fill="#843511"/>
+</g>
+<defs>
+<clipPath id="clip0_1017_42">
+<rect width="126" height="110" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+
+
       </h1>
       <div class="renav">
-        <nuxt-link to="/">Macroeconomia</nuxt-link>
-        <nuxt-link to="/a">Urbanismo</nuxt-link>
+        Esta colección de indicadores intenta develar de donde viene y hacia donde va la macroeconomía Argentina. 
       </div>
+
+ 
     </header>
     <div class="content-container">
       <charts-kpinav />
@@ -33,72 +59,13 @@ export default {
 };
 </script>  
 <style lang="scss">
-.flexedtable {
-  flex: 1;
-  padding: 0;
-  padding-right: 0px;
-
-  @media only screen and (max-width: 600px) {
-    max-width: 100%;
-    border: 0;
-  }
-  > div {
-    max-height: 420px;
-    overflow: auto;
-    display: flex;
-    &.flexedcontent {
-      flex-direction: column;
-      .green {
-        background: #00996620;
-      }
-      .green.red {
-        background: #b2222220;
-      }
-    }
-    > div {
-      flex: 1;
-      display: flex;
-      gap: 20px;
-      border-bottom: 1px solid #f7f5f0;
-
-      > div {
-        flex: 1;
-        padding: 10px 0;
-        text-align: right;
-        color: #555;
-        &:last-child {
-          max-width: 80px;
-          padding-right: 10px;
-        }
-        &:first-child {
-          text-align: left;
-          max-width: 80px;
-        }
-      }
-    }
-  }
-}
-
-.recontent-container {
-  display: flex;
-  flex-wrap: wrap;
-  .content-cell {
-    background: #fff;
-    padding: 20px 25px;
-    flex: 1;
-    border-top: 2px solid #f7f5f0;
-
-    h3 {
-      margin-top: 0;
-      font-family: "Montserrat", sans-serif;
-    }
-  }
-}
 
 .content-container {
-  max-width: 1366px;
-  margin: 0 auto;
-  @media only screen and (max-width: 600px) {
+  //max-width: 1440px;
+  margin: 0px;
+  margin-right:20px;
+
+   @media only screen and (max-width: 600px) {
     margin-top: 10px;
   }
 }
@@ -123,19 +90,7 @@ html {
   right: 0;
   align-items: center;
   bottom: 0;
-  @media only screen and (max-width: 600px) {
-    display: none;
-  }
-  a {
-    padding: 10px 15px;
-    color: #666;
-    text-decoration: none;
-    &.nuxt-link-active {
-      color: #eee;
-      background: #151515;
-      border-radius: 5px;
-    }
-  }
+  color: #666;
 }
 header {
   background: rgba(55, 53, 47, 0.08);
@@ -149,30 +104,34 @@ header {
   display: flex;
   align-items: center;
   z-index: 999;
-  img {
-    width: 30px;
-    height: auto;
-    opacity: 0.8;
+      border-bottom: 1px solid #333;
+
+  svg {
+    width: auto;
+    height: 60px;
+    padding: 20px 0px 20px 10px;
+    path { fill: #eee; }
   }
   h1 {
     text-align: left;
     margin: 0;
-    line-height: 60px;
-
-    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
     position: relative;
     z-index: 99;
+    //flex-direction: row-reverse;
     a {
       color: #ddd;
-      font-family: "Montserrat", sans-serif;
-      font-size: 22px;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 21px;
       text-decoration: none;
-      font-weight: 600;
-      line-height: 20px;
-
+      font-weight: lighter;
+ 
       span {
-        font-weight: 400;
-        color: #fff;
+        font-weight: 600;
+        color: #eee;
       }
     }
   }
@@ -188,6 +147,7 @@ body {
   font-size: 15px;
   padding: 0;
   padding-top: 60px;
+  padding-left: 220px;
 }
 
 p {
@@ -212,17 +172,13 @@ a {
   font-size: 18px;
   min-width: 300px;
   font-weight: 400;
-  padding-bottom: 15px;
-
-  font-family: "Montserrat", sans-serif;
-
-  font-weight: normal;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: lighter;
   color: #888;
-
   i {
     display: block;
     font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     font-style: normal;
     color: #888;
     margin-top: 10px;
@@ -243,182 +199,16 @@ a {
   }
 }
 
-.headbert {
-  width: 100%;
-  border-radius: 2px;
-  margin: 10px auto 10px;
-  background: #fff;
-  padding: 20px 25px 20px;
-  overflow: hidden;
-  display: flex;
-  border-top: 0;
-  &.internal {
-    margin-bottom: 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    h2 {
-      font-family: "Montserrat", sans-serif;
-      font-size: 22px;
-      font-weight: 500;
-      margin-top: 0;
-      margin-bottom: 15px;
-      font-weight: normal;
-      color: #888;
-    }
-  }
-  > div {
-    display: flex;
-    justify-content: space-between;
-    flex: 1;
-    @media only screen and (max-width: 600px) {
-      display: block;
-      em {
-        display: none;
-      }
-      .capis {
-        margin-top: 10px;
-      }
-    }
-    > * {
-      flex: 1;
-      &:first-child {
-        min-width: 55%;
-        padding-right: 20px;
-      }
-    }
-  }
-  h2 {
-    font-family: "Montserrat", sans-serif;
-    font-size: 24px;
-    font-weight: 500;
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-weight: normal;
-    color: #888;
-  }
-  h3 {
-    font-family: "Montserrat", sans-serif;
-    font-size: 22px;
-    font-weight: 500;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-weight: normal;
-  }
-  h1 {
-    font-family: "Montserrat", sans-serif;
-    font-size: 24px;
-    font-weight: 500;
-    padding: 0;
-    margin: 0;
-    margin-bottom: 10px;
-  }
-  p {
-    color: #262626;
-    font-size: 16px;
-    margin: 0;
-  }
-}
 
 canvas {
-  cursor: crosshair;
+  cursor: pointer;
 }
 
-.capis {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
-  @media only screen and (max-width: 600px) {
-    justify-content: space-between;
-  }
-  > * {
-    flex: 1;
-    min-width: 70px;
-    margin-right: 60px;
-    margin-top: 5px;
-    &:last-child {
-      margin-right: 10px;
-    }
-    h2 {
-      min-width: auto !important;
-      margin: 5px 0 5px;
-    }
-  }
-}
-
-.section-container {
-  padding-bottom: 100px;
-  padding-left: 0px;
-
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  > a {
-    flex: 1;
-    max-width: calc(20% - 10px);
-    min-width: 350px;
-    display: block;
-    padding: 20px 0px 10px 0px;
-    background: #fff;
-    border-radius: 0px;
-    margin: 0px;
-    border: 1px solid #eee;
-    position: relative;
-    text-decoration: none;
-    order: 100;
-    #emae {
-      order: 1;
-    }
-    &:hover {
-      background: #fafafa;
-    }
-  }
-}
-
-.contaein {
-  background: #fff;
-  max-width: 1366px;
-  border-radius: 4px;
-  border: 1px solid #eee;
-  padding: 25px;
-  margin-top: 10px;
-  min-height: 100vh;
-}
-
-.dashboard-container {
-  min-height: 100vh;
-  section section {
-    background: #fff;
-  }
-  &.index a {
-    text-decoration: none;
-    background: #fff;
-    display: block;
-    padding: 20px 15px 15px 25px;
-    border-radius: 2px;
-  }
-  #cuentas-row,
-  #monetaria-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-
-    > a {
-      flex: 1;
-    }
-  }
-  #actividad-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-    > a {
-      flex: 1;
-      &:first-of-type {
-        flex: 2;
-      }
-    }
-  }
-}
+ .chart {
+   display: flex;
+   flex-direction: column;
+   > * {
+     flex: 1;
+   }
+ }
 </style>

@@ -1,7 +1,7 @@
 ---
 t: "TCRM"
-st: "Estimador Mensual de Actividad económica"
-sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
+st: "Tipo de Cambio Real Multilateral"
+sd: "Este índice mide el precio relativo de los bienes y servicios de la economía argentina con respecto al de los de los principales 12 socios comerciales del país, en función del flujo de comercio de manufacturas."
 kpi: "tcrm"
 capis:
     'interanual':
@@ -10,7 +10,13 @@ capis:
     - 0
     'tendencia-ciclo':
     - 0        
-c: "<p><strong>El EMAE es un indicador provisorio de la evolución del PIB</strong> a precios constantes de 2004 que se difunde con un rezago de 50 a 60 días de concluido el mes de referencia, de acuerdo al <a href='/'>calendario de difusión del INDEC</a>.</p><p>Incluye la serie original (número índice y la variación porcentual respecto al mismo mes del año anterior), la serie desestacionalizada y la tendencia–ciclo (número índice y variación respecto al mes inmediato anterior).</p> <p><em>Ofrece una pauta del comportamiento de la actividad económica real</em> con una frecuencia mayor a la del PIB trimestral a precios constantes. Su cálculo se estructura en la agregación del valor agregado a precios básicos de cada una de las actividades económicas más los impuestos netos de subsidios a los productos, utilizando las ponderaciones de las cuentas nacionales base 2004 de la República Argentina.</p><p>Este indicador <strong>se elabora con información parcial</strong>, de carácter provisorio -dado que en algunos casos es corregida y/o completada por la fuente- o con indicadores alternativos a los que se utilizan para el cálculo trimestral, en tanto se han evaluado como adecuadas aproximaciones. Dado que la estimación del PIB trimestral reúne mayor cantidad de datos, es habitual que se observen diferencias entre las variaciones trimestrales de ambos indicadores.</p>"
+c: "<p>Este índice mide el precio relativo de los bienes y servicios de la economía argentina con respecto al de los de los principales 12 socios comerciales del país, en función del flujo de comercio de manufacturas.</p>
+
+<p>Se obtiene a partir de un promedio ponderado de los tipos de cambio reales bilaterales de los principales socios comerciales del país. Se considera la evolución de los precios de las canastas de consumo representativas de los socios comerciales expresados en moneda local en relación con el valor de la canasta de consumo local, constituyéndose como una de las medidas amplias de competitividad (de tipo precio).</p>
+
+<p>El ITCRM se elabora y publica de forma diaria, a partir de las cotizaciones de las monedas a las 15 hs. de cada día y contempla un mecanismo de diarización de las estimaciones y de replicación de los últimos datos de los índices de precios representativos para información aún no conocida.</p>"
 f: "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf"
 d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
+max: 280
+min: 0
 ---
