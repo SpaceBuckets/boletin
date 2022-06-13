@@ -419,7 +419,7 @@ async function megaContent(src) {
 };
 
  
-/*    masterDb([
+    masterDb([
   'cuentas',
    'emae',
    'ipi',
@@ -439,6 +439,6 @@ parseXLS("tcrm");
 getBRCASeries()
 
 getUSD() 
-getBRCAScraper()   */
+getBRCAScraper()    
  
 megaContent("kpis")
