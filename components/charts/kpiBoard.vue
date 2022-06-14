@@ -45,6 +45,7 @@
           </svg>
         </button>
         <div class="seleccionador" v-if="!item.hasChart">
+          <h2>Nuevo Chart</h2>
           <div class="buttonmagic">
             <svg
               width="48"
@@ -248,11 +249,12 @@
             </div>
             <section style="display: flex; justify-content: space-between">
               <button @click="modalOpen = false">Cancelar</button>
-              <button @click="saveChart(parent)">Grabar Chart</button>
+              <button @click="saveChart(parent)">Agregar Chart</button>
             </section>
           </div>
         </div>
-        <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: item.kpi } }">
+<!--         <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: item.kpi } }">        </nuxt-link>
+ -->
           <component
             v-if="item.hasChart && !edit"
             :is="`charts-generic${item.type}`"
@@ -264,7 +266,6 @@
             :is="`charts-generic${item.type}`"
             :data="item.kpi"
           />          
-        </nuxt-link>
       </section>
     </div>
   </div>
@@ -288,7 +289,7 @@ export default {
       columnAmount: 6,
       dragging: false,
       saredUrl: false,
-      modalOpen: true,
+      modalOpen: false,
       startX: "",
       startY: "",
       boardID: "",
@@ -424,9 +425,9 @@ export default {
   flex-direction: column;
   align-items: center;
   svg {
-    width: 70px;
+    width: 60px;
     height: auto;
-    margin-bottom: 10px;
+    margin-bottom: 5px;margin-top: 10px;
     rect {
       fill: #ddd;
       stroke: #ddd;
@@ -526,7 +527,6 @@ export default {
       margin-bottom: 20px;
       min-width: 100%;
       height: 20px;
-      padding-right: 20px;
     }
     button.delete {
       background: none;
@@ -560,6 +560,17 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  h2 {
+        position: absolute;
+    top: 20px;
+    left: 20px;
+margin: 0;
+    font-size: 18px;
+     font-weight: 400;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: lighter;
+    color: #888;
+  }
   .backdropper {
     display: none;
     position: fixed;

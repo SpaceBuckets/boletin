@@ -1,11 +1,11 @@
 <template>
   <section class="chart">
     <h2>
-       <strong>Última Actualización</strong>
+       <strong>{{chart.t}}</strong>
     </h2>
-    <div class="numcontain" style="position: absolute;top: 30px;bottom: 15px;left: 15px;right:15px">
-      <h4>{{getLastUpdated()}}</h4>
-      <a :href="chart.f">Fuente: INDEC</a>
+    <div class="numcontain" style="position: absolute;top: 55px;bottom: 15px;left: 20px;right:15px; padding-right:50px;">
+       
+      <div v-html="chart.c"></div>
     </div>
   </section>
 </template>
@@ -25,24 +25,7 @@ export default {
   },
   created() {},
   methods: {
-    getLastUpdated() {
-      const formatter = new Intl.DateTimeFormat("es", {
-         month: "long",
-        year: "numeric",
-      });
-      const lastupdate = formatter.format(
-        new Date(this.chart.chartdata.labels.slice(-1)[0])
-      );
-      var day = this.chart.chartdata.labels.slice(-1)[0].slice(-2)
-      if (day === "01") {
-       return lastupdate.replace("de","").replace(" ","");
-
-      }
-            else {
-       return day + " " + lastupdate.replace("de","").replace(" ","");
-
-      }
-    },
+ 
   },
 };
 </script>
@@ -53,8 +36,7 @@ a {
 }
  .numcontain {
    display: flex;
-   flex-direction: column;
-    justify-content: center;
+ 
  }
  h2 {
    margin-bottom: 0 !important;

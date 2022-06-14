@@ -10,55 +10,49 @@ export default {
   data() {
     return {
       savedCells: {
-    "1315": {
-        "area": "1 / 1 / 3 / 5",
-        "kpi": "emae",
-        "type": "Line",
-        "hasChart": true,
-     },
+    "1213": {
+        "area": "1 / 1 / 2 / 3",
+        "kpi": "header",
+        "type": "Header",
+        "hasChart": true
+    },
+    "1234": {
+        "area": "1 / 3 / 2 / 4",
+        "kpi": "sol",
+        "type": "Sol",
+        "hasChart": true
+    },
     "1357": {
         "area": "1 / 5 / 3 / 7",
-        "kpi": "ucii",
+        "kpi": "emae",
         "type": "Line",
-        "hasChart": true,
-
-     },
-    "3514": {
-        "area": "3 / 1 / 5 / 4",
-        "kpi": "balanza",
+        "hasChart": false
+    },
+    "3515": {
+        "area": "3 / 1 / 5 / 5",
+        "kpi": "emae",
         "type": "Line",
-        "hasChart": true,
-
-     },
-    "3547": {
-        "area": "3 / 4 / 5 / 7",
-        "kpi": "deficit",
-        "type": "Line",
-        "hasChart": true,
-
-     },
-    "5713": {
-        "area": "5 / 1 / 7 / 3",
-        "kpi": "ipc",
-        "type": "Line",
-        "hasChart": true,
-
-     },
-    "5735": {
-        "area": "5 / 3 / 7 / 5",
+        "hasChart": true
+    },
+    "3557": {
+        "area": "3 / 5 / 5 / 7",
+        "kpi": "emae",
+        "type": "Table",
+        "hasChart": true
+    },
+    "5715": {
+        "area": "5 / 1 / 7 / 5",
         "kpi": "cambio",
         "type": "Line",
-                "hasChart": true,
-
-     },
+        "hasChart": true
+    },
     "5757": {
         "area": "5 / 5 / 7 / 7",
-        "kpi": "tasa",
-        "type": "Line",
-                "hasChart": true,
-
-     }
-},      
+        "kpi": "cambio",
+        "type": "Table",
+        "hasChart": true
+    }
+}
     };
   }
 };

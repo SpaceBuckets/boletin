@@ -1,7 +1,7 @@
 <template>
   <section class="chart">
     <h2>
-       Variación Interanual
+      <strong>Variación Interanual</strong>
     </h2>
     <div class="numcontain" style="position: absolute;top: 55px;bottom: 15px;left: 15px;right:15px">
       <h4 :class="{ negative: getCapiInterVariation(0) < 0 }"><svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg> {{getCapiInterVariation(0)}}%</h4>

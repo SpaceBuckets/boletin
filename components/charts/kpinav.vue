@@ -1,10 +1,7 @@
 <template>
   <div>
     <div class="meganav" :class="{index: $route.path === '/'}">
-    <div class="meganavsection nochild">
-              <div> <nuxt-link to="/home">Home</nuxt-link>    </div>
 
-    </div>
       <div class="meganavsection nochild">
         <div> <nuxt-link to="/">Dashboard</nuxt-link>    </div>
       </div>

@@ -5,6 +5,9 @@
   "ChartsGenericBox": {
     "description": "Auto imported from components/charts/genericBox.vue"
   },
+  "ChartsGenericHeader": {
+    "description": "Auto imported from components/charts/genericHeader.vue"
+  },
   "ChartsGenericKpi": {
     "description": "Auto imported from components/charts/genericKpi.vue"
   },
@@ -19,6 +22,9 @@
   },
   "ChartsGenericLine": {
     "description": "Auto imported from components/charts/genericLine.vue"
+  },
+  "ChartsGenericSol": {
+    "description": "Auto imported from components/charts/genericSol.vue"
   },
   "ChartsGenericTable": {
     "description": "Auto imported from components/charts/genericTable.vue"

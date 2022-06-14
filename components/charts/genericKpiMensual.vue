@@ -1,7 +1,7 @@
 <template>
   <section class="chart">
     <h2>
-       Variación Intermensual
+      <span>Variación Intermensual</span>
     </h2>
     <div class="numcontain" style="position: absolute;top: 55px;bottom: 15px;left: 15px;right:15px">
       <h4 :class="{ negative: getVariation(0) < 0 }">
@@ -58,6 +58,10 @@ h4 {
   margin: 0;
   margin-bottom: 20px;
   text-transform: capitalize;
+    color: #009966;
+  svg { 
+      fill: #009966; 
+       }
     &.negative {
     color: #b22222;
     svg { 

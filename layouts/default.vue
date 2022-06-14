@@ -29,7 +29,7 @@
 
 
       </h1>
-      <div class="renav">
+      <div class="renav" style="display:none">
         Esta colección de indicadores intenta develar de donde viene y hacia donde va la macroeconomía Argentina. 
       </div>
 
