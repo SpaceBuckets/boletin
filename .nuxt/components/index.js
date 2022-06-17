@@ -1,5 +1,6 @@
 export { default as ChartsBar } from '../../components/charts/bar.js'
 export { default as ChartsGenericBox } from '../../components/charts/genericBox.vue'
+export { default as ChartsGenericComment } from '../../components/charts/genericComment.vue'
 export { default as ChartsGenericHeader } from '../../components/charts/genericHeader.vue'
 export { default as ChartsGenericKpi } from '../../components/charts/genericKpi.vue'
 export { default as ChartsGenericKpiAnual } from '../../components/charts/genericKpiAnual.vue'

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <charts-kpiBoard :data="savedCells" />
+     <charts-kpiBoard :data="savedCells" />
   </div>
 </template>
 

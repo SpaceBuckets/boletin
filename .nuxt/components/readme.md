@@ -8,6 +8,7 @@ You can directly use them in pages and other components without the need to impo
 
 - `<ChartsBar>` | `<charts-bar>` (components/charts/bar.js)
 - `<ChartsGenericBox>` | `<charts-generic-box>` (components/charts/genericBox.vue)
+- `<ChartsGenericComment>` | `<charts-generic-comment>` (components/charts/genericComment.vue)
 - `<ChartsGenericHeader>` | `<charts-generic-header>` (components/charts/genericHeader.vue)
 - `<ChartsGenericKpi>` | `<charts-generic-kpi>` (components/charts/genericKpi.vue)
 - `<ChartsGenericKpiAnual>` | `<charts-generic-kpi-anual>` (components/charts/genericKpiAnual.vue)

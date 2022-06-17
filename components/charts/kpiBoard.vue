@@ -2,9 +2,9 @@
   <div>
     <div v-if="edit" class="dashtitle">
       <button @click="clearBoard(savedCells)">Restart</button>
-      <button @click="clearBoard(savedCells)">Random</button>
-      <button @click="getURL()">Get URL</button>
-      <input v-if="saredUrl" type="text" :placeholder="`/${boardID}`" />
+       <button @click="saveDB()">Save to URL</button>
+
+      <input  type="text" :placeholder="`/${boardID}`" />
     </div>
 
     <div
@@ -16,7 +16,7 @@
         @pointerdown="startDrag($event)"
         @pointerup="endDrag($event)"
         @mousemove="hoverling($event)"
-        v-for="cells in 36"
+        v-for="cells in 60"
         :data-row-start="Math.ceil(cells / columnAmount)"
         :data-row-end="Math.ceil(cells / columnAmount) + 1"
         :data-col-start="getColStart(cells)"
@@ -58,16 +58,16 @@
                 fill="#ccc"
               />
             </svg>
-            <button @click="modalOpen = true">Agregar Chart</button>
+            <button @click="modalOpen = parent">Agregar Chart</button>
           </div>
           <div
             class="backdropper"
-            @click="modalOpen = false"
-            :class="{ active: modalOpen }"
+            @click="modalOpen = ''"
+            :class="{ active: modalOpen === parent }"
           ></div>
-          <div class="wrapper modal" :class="{ active: modalOpen }">
+          <div class="wrapper modal" :class="{ active: modalOpen === parent }">
             <h3>Agregar Nuevo Chart</h3>
-            <button class="delete" @click="modalOpen = false">
+            <button class="delete" @click="modalOpen = ''">
               <svg
                 stroke="#ccc"
                 stroke-width="12"
@@ -82,7 +82,7 @@
               <label for="">
                 Tipo de Chart
                 <span>Seleccione la clase de gráfico que desea agregar.</span>
-                </label>
+              </label>
               <div class="settiper">
                 <div
                   :class="{ active: item.type === 'Line' }"
@@ -144,82 +144,48 @@
               </div>
             </div>
             <div>
-              <label for="">Categoría e Indicador
-                <span>Seleccione la información a graficar en el nuevo chart.</span>
-
-
+              <label for=""
+                >Categoría e Indicador
+                <span
+                  >Seleccione la información a graficar en el nuevo chart.</span
+                >
               </label>
               <div>
                 <select
                   required
-                  @change="$set(savedCells[parent], 'kpi', $event.target.value)"
+                  @change="selectedCat = $event.target.value"
                   name="kpis"
                   id="cars"
                 >
-                  <option value="" selected disabled hidden>
-                    Seleccionar Categoría
-                  </option>
-                  <option value="emae">EMAE</option>
-                  <option value="isac">ISAC</option>
-                  <option value="ipi">IPI</option>
-                  <option value="ucii">UCII</option>
-                  <option value="deficit">Deficit Fiscal</option>
-                  <option value="balanza">Balanza Comercial</option>
-                  <option value="subsidios">Subsidios Economicos</option>
-                  <option value="desempleo">Desempleo</option>
-                  <option value="embi">Riesgo Pais</option>
-                  <option value="tasa">Tasas de Interes</option>
-                  <option value="ipc">Inflacion</option>
-                  <option value="reservas">Reservas Internacionales</option>
-                  <option value="cambio">Cambio USD/Peso</option>
-                  <option value="acero">Produccion de Acero</option>
-                  <option value="acero">Produccion de Gas</option>
-                  <option value="acero">Produccion de Petroleo</option>
-                  <option value="cereales">Produccion de Cereales</option>
+          
+ 
+                  <option :key="i" v-for="(parentOption, i) in kpeis" :value="i">{{i}}</option>
+ 
                 </select>
                 <select
                   required
                   @change="$set(savedCells[parent], 'kpi', $event.target.value)"
-                  name="kpis"
-                  id="cars"
+                  name="kp11is"
+                  id="car33s"
+                                    multiple="multiple"
+
                 >
-                  <option value="" selected disabled hidden>
-                    Seleccionar Indicador
-                  </option>
-                  <option value="emae">EMAE</option>
-                  <option value="isac">ISAC</option>
-                  <option value="ipi">IPI</option>
-                  <option value="ucii">UCII</option>
-                  <option value="deficit">Deficit Fiscal</option>
-                  <option value="balanza">Balanza Comercial</option>
-                  <option value="subsidios">Subsidios Economicos</option>
-                  <option value="desempleo">Desempleo</option>
-                  <option value="embi">Riesgo Pais</option>
-                  <option value="tasa">Tasas de Interes</option>
-                  <option value="ipc">Inflacion</option>
-                  <option value="reservas">Reservas Internacionales</option>
-                  <option value="cambio">Cambio USD/Peso</option>
-                  <option value="acero">Produccion de Acero</option>
-                  <option value="acero">Produccion de Gas</option>
-                  <option value="acero">Produccion de Petroleo</option>
-                  <option value="cereales">Produccion de Cereales</option>
+        
+                  <option :selected="kpiOption.kpi === 'emae'" :key="u" v-for="(kpiOption, u) in kpeis[selectedCat]" :value="kpiOption.kpi">{{kpiOption.t}}</option>
                 </select>
-
               </div>
-
             </div>
             <div>
-              <label for="">Periodo de Tiempo
+              <label for=""
+                >Periodo de Tiempo
                 <span>Seleccione el rango de fechas a filtrar.</span>
-
-
               </label>
               <div>
                 <select
                   required
                   @change="$set(savedCells[parent], 'kpi', $event.target.value)"
-                  name="kpis"
-                  id="cars"
+                  name="kpi33s"
+                  id="car3s"
                 >
                   <option value="" selected disabled hidden>
                     Seleccionar Fechas
@@ -242,30 +208,27 @@
                   <option value="acero">Produccion de Petroleo</option>
                   <option value="cereales">Produccion de Cereales</option>
                 </select>
- 
-
               </div>
-
             </div>
             <section style="display: flex; justify-content: space-between">
-              <button @click="modalOpen = false">Cancelar</button>
+              <button @click="modalOpen = ''">Cancelar</button>
               <button @click="saveChart(parent)">Agregar Chart</button>
             </section>
           </div>
         </div>
-<!--         <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: item.kpi } }">        </nuxt-link>
+        <!--         <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: item.kpi } }">        </nuxt-link>
  -->
-          <component
-            v-if="item.hasChart && !edit"
-            :is="`charts-generic${item.type}`"
-            :data="item.kpi"
-          />
-          <component
-            v-if="item.hasChart && edit"
-            edit
-            :is="`charts-generic${item.type}`"
-            :data="item.kpi"
-          />          
+        <component
+          v-if="item.hasChart && !edit"
+          :is="`charts-generic${item.type}`"
+          :data="item.kpi"
+        />
+        <component
+          v-if="item.hasChart && edit"
+          edit
+          :is="`charts-generic${item.type}`"
+          :data="item.kpi"
+        />
       </section>
     </div>
   </div>
@@ -287,9 +250,11 @@ export default {
   data() {
     return {
       columnAmount: 6,
+      kpeis: require(`~/json/kpis.json`),
+      selectedCat: 'Actividad Económica',
       dragging: false,
       saredUrl: false,
-      modalOpen: false,
+      modalOpen: "",
       startX: "",
       startY: "",
       boardID: "",
@@ -299,9 +264,23 @@ export default {
   },
   created() {
     this.savedCells = this.data;
+    //console.log(this.kpeis)
     //console.log(this.savedCells)
   },
+
   methods: {
+    async saveDB() {
+      var uiui = this.uniqueId()
+      await this.$supabase.from("data").insert({ url: uiui, object: this.savedCells });
+      this.boardID =uiui
+
+
+       
+      this.$router.replace({path: uiui});
+
+       //history.pushState({},null,`${this.$route.path.replace("/","")}/${uiui}`)
+
+    },
     uniqueId() {
       var idStrLen = 6;
       var idStr = (Math.floor(Math.random() * 25) + 10).toString(36);
@@ -310,19 +289,19 @@ export default {
       } while (idStr.length < idStrLen);
       return idStr;
     },
-    getURL() {
-      this.boardID = this.uniqueId();
-    },
+ 
     clearBoard(cells) {
       for (let cell in cells) {
         this.$delete(this.savedCells, cell);
       }
       this.boardID = this.uniqueId();
+       history.pushState({},null,this.$route.path)
     },
     saveChart(parent) {
+      console.log(this.savedCells[parent])
       this.$set(this.savedCells[parent], "hasChart", true);
       this.modalOpen = false;
-      console.log(this.savedCells);
+      //console.log(this.savedCells);
     },
     setRandom(cell) {
       const types = ["Line", "Kpi"];
@@ -427,7 +406,8 @@ export default {
   svg {
     width: 60px;
     height: auto;
-    margin-bottom: 5px;margin-top: 10px;
+    margin-bottom: 5px;
+    margin-top: 10px;
     rect {
       fill: #ddd;
       stroke: #ddd;
@@ -446,7 +426,7 @@ export default {
     border-radius: 2px;
     color: #666;
     border: 1px solid #ddd;
- 
+
     text-align: center;
     svg {
       padding: 5px;
@@ -487,7 +467,7 @@ export default {
   > i {
     border-right: 1px dashed #444;
     border-bottom: 1px dashed #444;
-    height: 215px;
+    height: 210px;
     pointer-events: none;
     cursor: pointer;
     &.active {
@@ -561,12 +541,12 @@ export default {
   align-items: center;
   justify-content: center;
   h2 {
-        position: absolute;
+    position: absolute;
     top: 20px;
     left: 20px;
-margin: 0;
+    margin: 0;
     font-size: 18px;
-     font-weight: 400;
+    font-weight: 400;
     font-family: Helvetica, Arial, sans-serif;
     font-weight: lighter;
     color: #888;
@@ -638,7 +618,10 @@ margin: 0;
     border-radius: 50px;
     color: #666;
     cursor: pointer;
-    &:last-of-type { background: #009966; color:#fff}
+    &:last-of-type {
+      background: #009966;
+      color: #fff;
+    }
     &:hover {
       color: #111;
       background: rgba(253, 216, 53, 1);
@@ -652,7 +635,9 @@ margin: 0;
     width: 100%;
     //max-width: 200px;
     &:last-of-type,
-    &:first-of-type:last-of-type { margin: 0; }
+    &:first-of-type:last-of-type {
+      margin: 0;
+    }
   }
 }
 
@@ -677,10 +662,10 @@ select option[value=""] {
   height: 60px;
   padding: 14px 20px;
   button {
-    background: #222;
+    background: #fdd835 !important;
     padding: 8px 15px;
     border: 0;
-    color: #ddd;
+    color: #111;
     border-radius: 2px;
     cursor: pointer;
     margin-left: 10px;

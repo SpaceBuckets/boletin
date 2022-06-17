@@ -12,5 +12,12 @@
     "component": "/Users/agustin.capeletto/fed/beo/pages/index.vue",
     "chunkName": "pages/index",
     "_name": "_5514d34d"
+  },
+  {
+    "name": "all",
+    "path": "/*",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/_.vue",
+    "chunkName": "pages/_",
+    "_name": "_e8f9f44c"
   }
 ]

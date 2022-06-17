@@ -1,5 +1,5 @@
 <template>
-  <section class="chart flexedtable">
+  <section class="chart">
        <h2 v-if="!title">
         <strong>{{ chart.t }}</strong>. {{chart.st}}
       </h2>
@@ -7,9 +7,9 @@
         <strong>{{ title }}</strong>. {{subtitle}}
       </h2>    
  
-     <p v-html="chart.c">
+     <div v-html="chart.c">
        
-     </p>
+     </div>
   </section>
 </template>
 

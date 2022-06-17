@@ -5,14 +5,17 @@
       <div class="meganavsection nochild">
         <div> <nuxt-link to="/">Dashboard</nuxt-link>    </div>
       </div>
-      <div class="meganavsection open" @click="sectionOpen = i" v-for="(parent, i) in nav" :class="{open: sectionOpen === i}" :key="">
+      <div class="meganavsection nochild">
+        <div><input type="text" placeholder="Search..."> </div>
+      </div>      
+      <div class="meganavsection open" v-if="i !== 'Todos'" @click="sectionOpen = i" v-for="(parent, i) in nav" :class="{open: sectionOpen === i}" :key="">
         <div>
         {{i.replace(/-/g, ' ')}} <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em; fill: #888;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg>
 
         </div>
-           <nuxt-link v-for="kpi in parent" :key='`${i}-${kpi}`' :to="{ name: `kpi-kpi`, params: { kpi: kpi, parent: i } }" >
+           <nuxt-link v-for="kpi in parent" :key='`${i}-${kpi.kpi}`' :to="{ name: `kpi-kpi`, params: { kpi: kpi.kpi, parent: i } }" >
 
-            {{kpi}}
+            {{kpi.t}}
           </nuxt-link>
       </div>
 
@@ -22,7 +25,7 @@
 </template>
 
 <script>
-import meganav from '~/json/kpisnav.json'
+import meganav from '~/json/kpis.json'
 
 export default {
   name: "Details",
@@ -68,7 +71,7 @@ export default {
  }
 
  .meganav div.nochild {
-   margin-bottom: 15px !important;
+   margin-bottom: 10px !important;
  }
 .meganav {
   position: fixed;
@@ -86,9 +89,7 @@ export default {
   &.index {
    //transform: translateX(-100%)
   }
-  input {
-    margin-left: 15px;
-  }
+ 
   > div {
     margin-bottom: 20px;
     > div {
@@ -108,7 +109,15 @@ export default {
   > a { display: none; }
   &.open > a { display: block; }
   &.open svg { transform: rotateZ(180deg); }
+  input {
+    background: #333;
+    border: 0;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
 }
+
+
 
 </style>
 

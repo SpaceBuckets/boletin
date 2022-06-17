@@ -5,6 +5,9 @@
   "ChartsGenericBox": {
     "description": "Auto imported from components/charts/genericBox.vue"
   },
+  "ChartsGenericComment": {
+    "description": "Auto imported from components/charts/genericComment.vue"
+  },
   "ChartsGenericHeader": {
     "description": "Auto imported from components/charts/genericHeader.vue"
   },

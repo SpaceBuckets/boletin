@@ -347,7 +347,7 @@ async function masterDb(kpis) {
         fs.writeFileSync(`./json/${kpis[e]}/${key}/dates.json`, JSON.stringify(tempDates));
         fs.writeFileSync(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
         console.log(`♥ [${kpis[e]}] ${key} updated`)
-        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](1000)
+        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](500)
       }
     }
  
@@ -396,6 +396,7 @@ async function megaContent(src) {
    //Get post names
   var folders = glob.sync('*', { cwd: `static/${src}/` })
   var posts = [];
+  var categories = []
   //Main post loop
      for (const singleFolder of folders) {
 
@@ -409,17 +410,51 @@ async function megaContent(src) {
     post.chartdata = await require(`../json/data/${singleFolder}.js`)
  
     posts.push(post);
+    categories.push(post.cat)
     fs.writeFileSync(`./json/confluence/${singleFolder}.json`, JSON.stringify(post));
     console.log(`♥ ${singleFolder}.json generated`)
 
   };
+  categories = [...new Set(categories)]
+  categoriesObject = {}
+  for (const singleCat of categories) {
+    if(singleCat !== undefined) {
+      categoriesObject[singleCat] = []
+    }
+  }
+  categoriesObject['Todos'] = []
+
+  for (const singleFolder of folders) {
+
+    const documentes = glob.sync('*.md', {cwd: `static/${src}/${singleFolder}`})
+    let post = [];
+
+    //Parse Markdown
+    var contents = matter(fs.readFileSync(`static/${src}/${singleFolder}/${documentes}`, 'utf8').toString());
+    post = contents.data
+ 
+    if(post.cat !== undefined) {
+      categoriesObject['Todos'].push({t:post.t,kpi:post.kpi})
+      categoriesObject[post.cat].push({t:post.t,kpi:post.kpi})
+    }
+  };
+
+  for (const singleCaet of Object.keys(categoriesObject)) {
+        categoriesObject[singleCaet].sort(function(a, b) {
+        var x = a['t']; var y = b['t'];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+   }
+
+
+  fs.writeFileSync(`./json/kpis.json`, JSON.stringify(categoriesObject));
+
 
  
-
 };
 
  
-    masterDb([
+     masterDb([
   'cuentas',
    'emae',
    'ipi',
@@ -439,6 +474,6 @@ parseXLS("tcrm");
 getBRCASeries()
 
 getUSD() 
-getBRCAScraper()    
+getBRCAScraper()     
  
-megaContent("kpis")
+megaContent("kpi")

@@ -9,7 +9,7 @@ export default {
   name: "IndexPage",
   data() {
     return {
-      savedCells: {
+        savedCells: {
     "1213": {
         "area": "1 / 1 / 2 / 3",
         "kpi": "header",
@@ -22,11 +22,11 @@ export default {
         "type": "Sol",
         "hasChart": true
     },
-    "1357": {
-        "area": "1 / 5 / 3 / 7",
-        "kpi": "emae",
-        "type": "Line",
-        "hasChart": false
+    "1257": {
+        "area": "1 / 5 / 2 / 6",
+        "kpi": "comment",
+        "type": "Comment",
+        "hasChart": true
     },
     "3515": {
         "area": "3 / 1 / 5 / 5",
@@ -37,8 +37,8 @@ export default {
     "3557": {
         "area": "3 / 5 / 5 / 7",
         "kpi": "emae",
-        "type": "Table",
-        "hasChart": true
+        "type": "Line",
+        "hasChart": false
     },
     "5715": {
         "area": "5 / 1 / 7 / 5",
@@ -51,9 +51,29 @@ export default {
         "kpi": "cambio",
         "type": "Table",
         "hasChart": true
+    },
+    "7914": {
+        "area": "7 / 1 / 9 / 4",
+        "kpi": "balanza",
+        "type": "Line",
+        "hasChart": true
+    },
+    "7947": {
+        "area": "7 / 4 / 9 / 7",
+        "kpi": "deficit",
+        "type": "Line",
+        "hasChart": true
+    },
+    "91114": {
+        "area": "9 / 1 / 11 / 4",
+        "kpi": "ipc",
+        "type": "Line",
+        "hasChart": true
     }
-}
+} 
     };
-  }
+  },
+
+
 };
 </script>

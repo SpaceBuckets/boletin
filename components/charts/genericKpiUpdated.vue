@@ -30,9 +30,17 @@ export default {
          month: "long",
         year: "numeric",
       });
+
+     var date = new Date(this.chart.chartdata.labels.slice(-1)[0])
+     var day = 60 * 60 * 24 * 1000;
+
+      date = date.setDate(date.getDate() + 1)
+
+
       const lastupdate = formatter.format(
-        new Date(this.chart.chartdata.labels.slice(-1)[0])
+date
       );
+      console.log(lastupdate)
       var day = this.chart.chartdata.labels.slice(-1)[0].slice(-2)
       if (day === "01") {
        return lastupdate.replace("de","").replace(" ","");

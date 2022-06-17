@@ -91,4 +91,14 @@ export default {
 };
 </script>
 
- 
+ <style>
+@keyframes spin { 
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}
+#sun {
+  animation: spin 120s linear infinite;
+}
+ </style>
