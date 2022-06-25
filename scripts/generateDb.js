@@ -618,7 +618,7 @@ async function megaContent(src) {
 async function processDB() {
  
   await masterDb([
- /*    'cuentas',
+    'cuentas',
     'gastos',
     'tributarios',
     'emae',
@@ -630,10 +630,10 @@ async function processDB() {
     'empleo',
     'ucii', 
     'rofex',
-    'polingresos'  */
+    'polingresos' 
   ]); 
   
-  /* await parseXLS("embi");
+  await parseXLS("embi");
   await parseXLS("ice");
   await parseXLS("tcrm");
   await getBRCASeries()
@@ -646,7 +646,7 @@ async function processDB() {
   await parseJson("poblacion");
   await parseJson("pbi");  
 
-  await parseAmbito()  */
+  await parseAmbito()  
 
   await megaContent("kpi")
 }
