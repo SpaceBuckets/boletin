@@ -8,7 +8,7 @@ module.exports = {
       data: require("../monetaria/blue/gap.json"),
       borderColor: "#b22222CC",
       pointRadius: 0,
-      borderWidth: 1.75,
+      borderWidth: 1.5,
     },
   ],
 }

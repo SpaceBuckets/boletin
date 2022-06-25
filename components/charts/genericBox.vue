@@ -3,9 +3,9 @@
        <h2 v-if="!title">
         <strong>{{ chart.t }}</strong>. {{chart.st}}
       </h2>
-        <h2 v-if="title">
+    <h2 v-if="title">
         <strong>{{ title }}</strong>. {{subtitle}}
-      </h2>    
+    </h2>   
  
      <div v-html="chart.c">
        
@@ -16,6 +16,10 @@
 <script>
 export default {
   props: {
+    altTitle: {
+      type: String,
+      required: false,
+    },
     title: {
       type: String,
       required: false,

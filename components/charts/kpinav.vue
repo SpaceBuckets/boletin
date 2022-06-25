@@ -82,7 +82,7 @@ export default {
   padding: 15px 0;
   overflow: auto;
   padding-bottom: 50px;
-  padding-top: 25px;
+  padding-top: 20px;
   width: 220px;
   z-index: 999;
  
@@ -112,7 +112,7 @@ export default {
   input {
     background: #333;
     border: 0;
-    padding: 10px;
+    padding: 5px 10px;
     margin-bottom: 5px;
   }
 }

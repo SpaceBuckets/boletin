@@ -7,7 +7,7 @@ module.exports = {
       data: require("../cuentas/ingresos/d.json"),
       borderColor: "#009966",
       pointRadius: 0,
-      borderWidth: 1.75,
+      borderWidth: 1.5,
     },
     {
       backgroundColor: "rgba(146,220,210,0)",
@@ -15,7 +15,7 @@ module.exports = {
       data: require("../cuentas/gastos/d.json"),
       borderColor: "#b22222CC",
       pointRadius: 0,
-      borderWidth: 1.75,
+      borderWidth: 1.5,
     },
     {
       backgroundColor: "#ccc",

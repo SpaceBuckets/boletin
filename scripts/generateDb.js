@@ -5,120 +5,202 @@ const parse5 = require('parse5');
 //process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const glob = require('glob');
 const matter = require('gray-matter');
+ const Papa = require('papaparse')
+ const path = require('path')
+ 
+ function writeFileSyncRecursive(filename, content, charset) {
+   const folders = filename.split(path.sep).slice(0, -1)
+   if (folders.length) {
+     // create folder path if it doesn't exist
+     folders.reduce((last, folder) => {
+       const folderPath = last ? last + path.sep + folder : folder
+       if (!fs.existsSync(folderPath)) {
+         fs.mkdirSync(folderPath)
+       }
+       return folderPath
+     })
+   } 
+   fs.writeFileSync(filename, content, charset)
+ }
 
 
 global.emae = {
-  estacional: 'https://apis.datos.gob.ar/series/api/series/?ids=143.3_NO_PR_2004_A_31&limit=5000&format=json',
-  tendencia: 'https://apis.datos.gob.ar/series/api/series/?ids=143.3_NO_PR_2004_A_28&limit=5000&format=json',
-  base: 'https://apis.datos.gob.ar/series/api/series/?ids=143.3_NO_PR_2004_A_21&limit=5000&format=json',
-  /*   a: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_ISOM_2004_M_39&limit=5000&format=json',
-    b: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_VIPAA_2004_M_5&limit=5000&format=json',
-    c: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_ISD_2004_M_26&limit=5000&format=json',
-    d: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_VMASD_2004_M_23&limit=5000&format=json',
-    e: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_ITC_2004_M_21&limit=5000&format=json',
-    f: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_VMATC_2004_M_12&limit=5000&format=json',
-    g: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_AGCS_2004_M_41&limit=5000&format=json',
-    h: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_P_2004_M_20&limit=5000&format=json',
-    i: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_EMC_2004_M_25&limit=5000&format=json',
-    j: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_IM_2004_M_25&limit=5000&format=json',
-    k: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_SEGA_2004_M_48&limit=5000&format=json',
-    l: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_C_2004_M_60&limit=5000&format=json',
-    m: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_CMMR_2004_M_10&limit=5000&format=json',
-    n: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_HR_2004_M_24&limit=5000&format=json',
-    o: 'https://apis.datos.gob.ar/series/api/series/?ids=11.3_TAC_2004_M_60&limit=5000&format=json',   */
+  estacional: '143.3_NO_PR_2004_A_31',
+  tendencia: '143.3_NO_PR_2004_A_28',
+  base: '143.3_NO_PR_2004_A_21',
+  /*   a: '11.3_ISOM_2004_M_39',
+    b: '11.3_VIPAA_2004_M_5',
+    c: '11.3_ISD_2004_M_26',
+    d: '11.3_VMASD_2004_M_23',
+    e: '11.3_ITC_2004_M_21',
+    f: '11.3_VMATC_2004_M_12',
+    g: '11.3_AGCS_2004_M_41',
+    h: '11.3_P_2004_M_20',
+    i: '11.3_EMC_2004_M_25',
+    j: '11.3_IM_2004_M_25',
+    k: '11.3_SEGA_2004_M_48',
+    l: '11.3_C_2004_M_60',
+    m: '11.3_CMMR_2004_M_10',
+    n: '11.3_HR_2004_M_24',
+    o: '11.3_TAC_2004_M_60',   */
 }
 
 global.cuentas = {
-  ingresos: 'https://apis.datos.gob.ar/series/api/series/?ids=379.9_ING_CORR_2017__13_2&limit=5000&format=json',
-  gastos: 'https://apis.datos.gob.ar/series/api/series/?ids=379.9_GTOS_CORR_017__14_1&limit=5000&format=json',
-  ahorro: 'https://apis.datos.gob.ar/series/api/series/?ids=379.9_RESULTADO_017__41_83&limit=5000&format=json',
-  subenergia: 'https://apis.datos.gob.ar/series/api/series/?ids=452.2_ENERGIAGIA_0_T_7_56&limit=5000&format=json',
-  subtransporte: 'https://apis.datos.gob.ar/series/api/series/?ids=452.2_TRANSPORTERTE_0_T_10_32&limit=5000&format=json',
-  pozos: 'https://apis.datos.gob.ar/series/api/series/?ids=366.3_POZOS_TERMRAL__30&limit=5000&format=json',
-  pozosmetros: 'https://apis.datos.gob.ar/series/api/series/?ids=366.3_METROS_PERRAL__31&limit=5000&format=json',
-  gas: 'https://apis.datos.gob.ar/series/api/series/?ids=364.3_PRODUCCIoNRAL__25&limit=5000&format=json',
-  hierro: 'https://apis.datos.gob.ar/series/api/series/?ids=359.3_HIERRO_PRITAL__21&limit=5000&format=json',
-  autos: 'https://apis.datos.gob.ar/series/api/series/?ids=330.1_PRODUCCIONLES__22&limit=5000&format=json',
-  soja: 'https://apis.datos.gob.ar/series/api/series/?ids=34.2_STSOJ_0_P_16&limit=5000&format=json',
-  trigo: 'https://apis.datos.gob.ar/series/api/series/?ids=34.2_TTTRI_0_P_17&limit=5000&format=json',
-  girasol: 'https://apis.datos.gob.ar/series/api/series/?ids=34.2_GTGIR_0_P_19&limit=5000&format=json',
-  maiz: 'https://apis.datos.gob.ar/series/api/series/?ids=34.2_MTMAI_0_P_16&limit=5000&format=json',
+  ingresos: '379.9_ING_CORR_2017__13_2',
+  gastos: '379.9_GTOS_CORR_017__14_1',
+  ahorro: '379.9_RESULTADO_017__41_83',
+  subenergia: '452.2_ENERGIAGIA_0_T_7_56',
+  subtransporte: '452.2_TRANSPORTERTE_0_T_10_32',
+  pozos: '366.3_POZOS_TERMRAL__30',
+  pozosmetros: '366.3_METROS_PERRAL__31',
+  petroleo: '363.3_PRODUCCIONUDO__28',
+  gas: '364.3_PRODUCCIoNRAL__25',
+  hierro: '359.3_HIERRO_PRITAL__21',
+  autos: '330.1_PRODUCCIONLES__22',
+  soja: '34.2_STSOJ_0_P_16',
+  trigo: '34.2_TTTRI_0_P_17',
+  girasol: '34.2_GTGIR_0_P_19',
+  maiz: '34.2_MTMAI_0_P_16',
+}
+
+global.tributarios = {
+  dga: '172.3_SOTAL_DDGA_M_0_0_12',
+  dgi: '172.3_SOTAL_DDGI_M_0_0_12',
+  total: '172.3_TL_RECAION_M_0_0_17',
+  seguridad: '172.3_SRIDAD_IAL_M_0_0_16',
+}
+
+global.polingresos = {
+  asignaciones: '186.3_ASIGNACIONRES_0_0_23',
+  argentinatrabaja: '186.3_ARGENTINA_AJA_0_0_17',
+  auh: '186.3_ASIGNACIONIAL_0_0_43',
+  becas: '186.3_BECASCAS_0_0_5',
+  jovenestrabajo: '186.3_JOVENES_MAAJO_0_0_25',
+  jubilaciones: '186.3_JUBILACIONINO_0_0_53',
+  jubilacionesotros: '186.3_JUBILACIONLES_0_0_49',
+  otras: '186.3_OTRAS_POLISOC_0_0_52',
+  pensiones: '186.3_PENSIONES_VAS_0_0_26',
+  jefasyjefes: '186.3_PROGRAMA_JDOS_0_0_38',
+  familias: '186.3_PLAN_FAMILIAL_0_0_30',
+  progresar: '186.3_PROGRAMA_RINA_0_0_39',
+  puam: '186.3_PENSION_UNYOR_0_0_30',
+  segcapacitacion: '186.3_SEGURO_CAPLEO_0_0_26',
+  segdesempleo: '186.3_SEGURO_DESLEO_0_0_16',
+  segdesempleootros: '186.3_SEGURO_DESTRE_0_0_24',
+  proyectoscomunitarios: '186.3_PROYECTOS_IOS_0_0_34',
+  total: '186.3_TOTAL_POLISOS_0_0_23'
+}
+	
+global.gastos = {
+  energia: '452.2_CAPITAL_ENION_0_T_22_35',
+  transporte: '452.3_CAPITAL_TRION_0_M_25_82',
+  educacion: '452.3_CAPITAL_EDION_0_M_24_92',
+  vivienda: '452.3_CAPITAL_VIION_0_M_23_52',
+  agua: '452.3_CAPITAL_AGION_0_M_41_40',
+  otros: '452.3_CAPITAL_OTION_0_M_20_10'
 }
 
 global.ipi = {
-  estacional: 'https://apis.datos.gob.ar/series/api/series/?ids=453.1_SERIE_DESEADA_0_0_24_58&limit=5000&format=json',
-  tendencia: 'https://apis.datos.gob.ar/series/api/series/?ids=453.1_SERIE_TENDCLO_0_0_21_61&limit=5000&format=json',
-  base: 'https://apis.datos.gob.ar/series/api/series/?ids=453.1_SERIE_ORIGNAL_0_0_14_46&limit=5000&format=json'
+  estacional: '453.1_SERIE_DESEADA_0_0_24_58',
+  tendencia: '453.1_SERIE_TENDCLO_0_0_21_61',
+  base: '453.1_SERIE_ORIGNAL_0_0_14_46',
 }
 
 global.isac = {
-  estacional: 'https://apis.datos.gob.ar/series/api/series/?ids=33.2_ISAC_SIN_EDAD_0_M_23_56&limit=5000&format=json',
-  tendencia: 'https://apis.datos.gob.ar/series/api/series/?ids=33.2_ISAC_CICLOCIA_0_M_20_62&limit=5000&format=json',
-  base: 'https://apis.datos.gob.ar/series/api/series/?ids=33.2_ISAC_NIVELRAL_0_M_18_63&limit=5000&format=json'
+  estacional: '33.2_ISAC_SIN_EDAD_0_M_23_56',
+  tendencia: '33.2_ISAC_CICLOCIA_0_M_20_62',
+  base: '33.2_ISAC_NIVELRAL_0_M_18_63',
 }
 
 global.expo = {
-  saldo: 'https://apis.datos.gob.ar/series/api/series/?collapse=month&collapse_aggregation=avg&ids=74.3_ISC_0_M_19&limit=5000&format=json',
-  dolar: 'https://apis.datos.gob.ar/series/api/series/?ids=74.3_IET_0_M_16&limit=5000&format=json',
-  cantidad: 'https://apis.datos.gob.ar/series/api/series/?ids=80.2_IICENG_0_T_47&limit=5000&format=json',
-  precio: 'https://apis.datos.gob.ar/series/api/series/?ids=80.2_IIPENG_0_T_45&limit=5000&format=json',
+  saldo: 'https://apis.datos.gob.ar/series/api/series/?collapse=month&collapse_aggregation=avg&ids=74.3_ISC_0_M_19',
+  dolar: '74.3_IET_0_M_16',
+  cantidad: '80.2_IICENG_0_T_47',
+  precio: '80.2_IIPENG_0_T_45',
 }
 
 global.impo = {
-  dolar: 'https://apis.datos.gob.ar/series/api/series/?ids=74.3_IIT_0_M_25&limit=5000&format=json',
-  cantidad: 'https://apis.datos.gob.ar/series/api/series/?ids=81.2_IICING_0_T_47&limit=5000&format=json',
-  precio: 'https://apis.datos.gob.ar/series/api/series/?ids=81.2_IIPING_0_T_45&limit=5000&format=json',
+  dolar: '74.3_IIT_0_M_25',
+  cantidad: '81.2_IICING_0_T_47',
+  precio: '81.2_IIPING_0_T_45',
 }
 
 global.ipc = {
-  general: 'https://apis.datos.gob.ar/series/api/series/?ids=145.3_INGNACUAL_DICI_M_38&limit=5000&format=json',
-  cuyo: 'https://apis.datos.gob.ar/series/api/series/?ids=145.3_INGCUYUAL_DICI_M_34&limit=5000&format=json',
-  patagonia: 'https://apis.datos.gob.ar/series/api/series/?ids=145.3_INGPATUAL_DICI_M_39&limit=5000&format=json',
-  gba: 'https://apis.datos.gob.ar/series/api/series/?ids=145.3_INGGBAGBA_DICI_M_10&limit=5000&representation_mode=percent_change&format=json',
-  //caba: 'https://apis.datos.gob.ar/series/api/series/?ids=45.2_ECTDTC_0_T_38&limit=5000&format=json',
-  pampeana: 'https://apis.datos.gob.ar/series/api/series/?ids=148.3_INIVELANA_DICI_M_26&limit=5000&representation_mode=percent_change&format=json',
-  noroeste: 'https://apis.datos.gob.ar/series/api/series/?ids=148.3_INIVELNOA_DICI_M_21&limit=5000&representation_mode=percent_change&format=json',
-  nordeste: 'https://apis.datos.gob.ar/series/api/series/?ids=148.3_INIVELNEA_DICI_M_21&limit=5000&representation_mode=percent_change&format=json'
-}
+  general: '145.3_INGNACUAL_DICI_M_38',
+  cuyo: '145.3_INGCUYUAL_DICI_M_34',
+  patagonia: '145.3_INGPATUAL_DICI_M_39',
+  gba: '145.3_INGGBAGBA_DICI_M_10&representation_mode=percent_change',
+  //caba: '45.2_ECTDTC_0_T_38',
+  pampeana: '148.3_INIVELANA_DICI_M_26&representation_mode=percent_change',
+  noroeste: '148.3_INIVELNOA_DICI_M_21&representation_mode=percent_change',
+  nordeste: '148.3_INIVELNEA_DICI_M_21&representation_mode=percent_change'
+} 
 
 global.empleo = {
-  privadob: 'https://apis.datos.gob.ar/series/api/series/?ids=151.1_AARIADODAD_2012_M_31&limit=5000&format=json',
-  privadod: 'https://apis.datos.gob.ar/series/api/series/?ids=151.1_AARIADOTAC_2012_M_26&limit=5000&format=json',
-  general: 'https://apis.datos.gob.ar/series/api/series/?ids=45.2_ECTDT_0_T_33&limit=5000&format=json',
-  cuyo: 'https://apis.datos.gob.ar/series/api/series/?ids=45.2_ECTDTCU_0_T_38&limit=5000&format=json',
-  patagonia: 'https://apis.datos.gob.ar/series/api/series/?ids=45.2_ECTDTP_0_T_43&limit=5000&format=json',
-  gba: 'https://apis.datos.gob.ar/series/api/series/?ids=45.2_ECTDTG_0_T_37&limit=5000&format=json',
-  caba: 'https://apis.datos.gob.ar/series/api/series/?ids=45.2_ECTDTC_0_T_38&limit=5000&format=json',
-  pampeana: 'https://apis.datos.gob.ar/series/api/series/?ids=45.2_ECTDTRP_0_T_49&limit=5000&format=json',
-  noroeste: 'https://apis.datos.gob.ar/series/api/series/?ids=45.2_ECTDTNO_0_T_42&limit=5000&format=json',
-  nordeste: 'https://apis.datos.gob.ar/series/api/series/?ids=45.2_ECTDTNE_0_T_42&limit=5000&format=json'
+  privadob: '151.1_AARIADODAD_2012_M_31',
+  privadod: '151.1_AARIADOTAC_2012_M_26',
+  general: '45.2_ECTDT_0_T_33',
+  cuyo: '45.2_ECTDTCU_0_T_38',
+  patagonia: '45.2_ECTDTP_0_T_43',
+  gba: '45.2_ECTDTG_0_T_37',
+  caba: '45.2_ECTDTC_0_T_38',
+  pampeana: '45.2_ECTDTRP_0_T_49',
+  noroeste: '45.2_ECTDTNO_0_T_42',
+  nordeste: '45.2_ECTDTNE_0_T_42',
 }
 
 global.ucii = {
-  general: 'https://apis.datos.gob.ar/series/api/series/?ids=31.3_UNG_2004_M_18&limit=5000&format=json',
-  metales: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_UIMB_2004_M_33&limit=5000&format=json",
-  edicion: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_UEI_2004_M_22&limit=5000&format=json",
-  textiles: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_UPT_2004_M_23&limit=5000&format=json",
-  metalmecanica: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_UMNIA_2004_M_42&limit=5000&format=json",
-  plastico: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_UCP_2004_M_20&limit=5000&format=json",
-  automotriz: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_UV_2004_M_25&limit=5000&format=json",
-  tabaco: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_UPT_2004_M_21&limit=5000&format=json",
-  alimentos: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_UPAB_2004_M_35&limit=5000&format=json",
-  quimicos: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_USPQ_2004_M_34&limit=5000&format=json",
-  petroleo: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_URP_2004_M_24&limit=5000&format=json",
-  papel: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_UPC_2004_M_17&limit=5000&format=json",
-  minerales: "https://apis.datos.gob.ar/series/api/series/?ids=31.3_UMNM_2004_M_27&limit=5000&format=json"
+  general: '31.3_UNG_2004_M_18',
+  metales: "31.3_UIMB_2004_M_33",
+  edicion: "31.3_UEI_2004_M_22",
+  textiles: "31.3_UPT_2004_M_23",
+  metalmecanica: "31.3_UMNIA_2004_M_42",
+  plastico: "31.3_UCP_2004_M_20",
+  automotriz: "31.3_UV_2004_M_25",
+  tabaco: "31.3_UPT_2004_M_21",
+  alimentos: "31.3_UPAB_2004_M_35",
+  quimicos: "31.3_USPQ_2004_M_34",
+  petroleo: "31.3_URP_2004_M_24",
+  papel: "31.3_UPC_2004_M_17",
+  minerales: "31.3_UMNM_2004_M_27",
 }
 
-global.rofex = {
-  dolar: 'https://apis.datos.gob.ar/series/api/series/?ids=92.2_TIPO_CAMBIION_0_0_21_24&limit=5000&start_date=2009-01-03&format=json',
-  mae: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_VMEN_MAMAE_D_0_0_11&limit=5000&format=json',
-  t6: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_FRO_ROF6M_D_0_0_19&limit=5000&format=json',
-  t5: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_FRO_ROF5M_D_0_0_19&limit=5000&format=json',
-  t4: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_FRO_ROF4M_D_0_0_19&limit=5000&format=json',
-  t3: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_FRO_ROF3M_D_0_0_19&limit=5000&format=json',
-  t2: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_FRO_ROF2M_D_0_0_19&limit=5000&format=json',
-  t1: 'https://apis.datos.gob.ar/series/api/series/?ids=168.1_FRO_ROF1M_D_0_0_19&limit=5000&format=json'
+  global.rofex = {
+  dolar: '92.2_TIPO_CAMBIION_0_0_21_24&limit=5000&start_date=2009-01-03',
+  mae: '168.1_VMEN_MAMAE_D_0_0_11',
+  t6: '168.1_FRO_ROF6M_D_0_0_19',
+  t5: '168.1_FRO_ROF5M_D_0_0_19',
+  t4: '168.1_FRO_ROF4M_D_0_0_19',
+  t3: '168.1_FRO_ROF3M_D_0_0_19',
+  t2: '168.1_FRO_ROF2M_D_0_0_19',
+  t1: '168.1_FRO_ROF1M_D_0_0_19',
+}
+ 
+global.csv = {
+  ipicammesa: {
+    url: 'https://datos.produccion.gob.ar/dataset/2c91f1eb-1eff-47e2-9122-42275e15ad9d/resource/9f5150e2-7de5-4233-b906-a52d26c625c6/download/ipi-cammesa.csv',
+    sheet: 0,
+    date: 0,
+    columns: {
+      interanual: 1
+    }
+  }
+}
+
+global.json = {
+  gini: {
+    argentina: 'https://api.worldbank.org/v2/country/arg/indicator/SI.POV.GINI?format=json&per_page=500',
+ /*    brasil: 'https://api.worldbank.org/v2/country/bra/indicator/SI.POV.GINI?format=json&per_page=500',
+    chile: 'https://api.worldbank.org/v2/country/chl/indicator/SI.POV.GINI?format=json&per_page=500',
+ */
+  },
+  poblacion: {
+    argentina: 'https://api.worldbank.org/v2/country/arg/indicator/SP.POP.TOTL?format=json&per_page=5000' 
+  },
+  pbi: {
+    argentina: 'https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000' 
+
+  }
 }
 
 global.xls = {
@@ -156,6 +238,16 @@ global.xls = {
   }
 }
 
+global.ambito = {
+  mep: 'https://mercados.ambito.com//dolarrava/mep/historico-general/01-01-1900/01-01-2100',
+  ccl: 'https://mercados.ambito.com//dolarrava/cl/historico-general/01-01-1900/01-01-2100',
+  blue: 'https://mercados.ambito.com//dolar/informal/historico-general/01-01-1900/01-01-2100',
+  turista: 'https://mercados.ambito.com//dolar/dolarturista/historico-general/01-01-1900/01-01-2100',
+  oficial: 'https://mercados.ambito.com//dolar/oficial/historico-general/01-01-1900/01-01-2100',
+  mayorista: 'https://mercados.ambito.com//dolar/mayorista/historico-general/01-01-1900/01-01-2100',
+}
+
+
 async function getUSD() {
 
   const resA = await fetch('https://api.bluelytics.com.ar/v2/evolution.json');
@@ -181,10 +273,10 @@ async function getUSD() {
 
   dateUSD = [...new Set(dateUSD)]
 
-  fs.writeFileSync(`./json/monetaria/blue/dates.json`, JSON.stringify(dateUSD));
-  fs.writeFileSync(`./json/monetaria/blue/blue.json`, JSON.stringify(valBlue));
-  fs.writeFileSync(`./json/monetaria/blue/usd.json`, JSON.stringify(valUSD));
-  fs.writeFileSync(`./json/monetaria/blue/gap.json`, JSON.stringify(valGap));
+  writeFileSyncRecursive(`./json/monetaria/blue/dates.json`, JSON.stringify(dateUSD));
+  writeFileSyncRecursive(`./json/monetaria/blue/blue.json`, JSON.stringify(valBlue));
+  writeFileSyncRecursive(`./json/monetaria/blue/usd.json`, JSON.stringify(valUSD));
+  writeFileSyncRecursive(`./json/monetaria/blue/gap.json`, JSON.stringify(valGap));
   console.log(`♥ [monetaria] Dolar/blue updated`)
 
 }
@@ -216,15 +308,15 @@ async function getBRCASeries() {
   }
 
 
-  fs.writeFileSync(`./json/reservas/total.json`, JSON.stringify(valRes.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./json/reservas/total.json`, JSON.stringify(valRes.slice(0, foundArr[0])));
 
-  fs.writeFileSync(`./json/reservas/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
-  fs.writeFileSync(`./json/reservas/mensualdates.json`, JSON.stringify(dateUSD.slice(foundArr[0], foundArr[1])));
-  fs.writeFileSync(`./json/reservas/anualdates.json`, JSON.stringify(dateUSD.slice(foundArr[1])));
+  writeFileSyncRecursive(`./json/reservas/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./json/reservas/mensualdates.json`, JSON.stringify(dateUSD.slice(foundArr[0], foundArr[1])));
+  writeFileSyncRecursive(`./json/reservas/anualdates.json`, JSON.stringify(dateUSD.slice(foundArr[1])));
 
-  fs.writeFileSync(`./json/reservas/diaria.json`, JSON.stringify(valUSD.slice(0, foundArr[0])));
-  fs.writeFileSync(`./json/reservas/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0], foundArr[1])));
-  fs.writeFileSync(`./json/reservas/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
+  writeFileSyncRecursive(`./json/reservas/diaria.json`, JSON.stringify(valUSD.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./json/reservas/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0], foundArr[1])));
+  writeFileSyncRecursive(`./json/reservas/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
 
   console.log(`♥ [monetaria] Reservas updated`)
 
@@ -261,11 +353,11 @@ async function getBRCASeries() {
     }
   }
 
-  fs.writeFileSync(`./json/monetaria/tasas/tasadates.json`, JSON.stringify(dateTasa));
-  fs.writeFileSync(`./json/monetaria/tasas/tasaplazo.json`, JSON.stringify(valPlazo));
-  fs.writeFileSync(`./json/monetaria/tasas/tasabadlar.json`, JSON.stringify(valBadlar));
-  fs.writeFileSync(`./json/monetaria/tasas/tasatasa.json`, JSON.stringify(valTasa));
-  fs.writeFileSync(`./json/monetaria/tasas/tasapases.json`, JSON.stringify(valPases));
+  writeFileSyncRecursive(`./json/monetaria/tasas/tasadates.json`, JSON.stringify(dateTasa));
+  writeFileSyncRecursive(`./json/monetaria/tasas/tasaplazo.json`, JSON.stringify(valPlazo));
+  writeFileSyncRecursive(`./json/monetaria/tasas/tasabadlar.json`, JSON.stringify(valBadlar));
+  writeFileSyncRecursive(`./json/monetaria/tasas/tasatasa.json`, JSON.stringify(valTasa));
+  writeFileSyncRecursive(`./json/monetaria/tasas/tasapases.json`, JSON.stringify(valPases));
 
   console.log(`♥ [monetaria] Tasas updated`)
 
@@ -301,31 +393,20 @@ async function getBRCAScraper() {
 
 
     if (series[i] === '7932') {
-      fs.writeFileSync(`./json/ipc/historico/dates.json`, JSON.stringify(dateInfla));
-      fs.writeFileSync(`./json/ipc/historico/danual.json`, JSON.stringify(inflaVal));
+      writeFileSyncRecursive(`./json/ipc/historico/dates.json`, JSON.stringify(dateInfla));
+      writeFileSyncRecursive(`./json/ipc/historico/danual.json`, JSON.stringify(inflaVal));
     }
     if (series[i] === '7931') {
-      fs.writeFileSync(`./json/ipc/historico/dates.json`, JSON.stringify(dateInfla));
-      fs.writeFileSync(`./json/ipc/historico/dmensual.json`, JSON.stringify(inflaVal));
+      writeFileSyncRecursive(`./json/ipc/historico/dates.json`, JSON.stringify(dateInfla));
+      writeFileSyncRecursive(`./json/ipc/historico/dmensual.json`, JSON.stringify(inflaVal));
     }
     if (series[i] === '7933') {
-      fs.writeFileSync(`./json/rem/interanualrem/dates.json`, JSON.stringify(dateInfla));
-      fs.writeFileSync(`./json/rem/interanualrem/d.json`, JSON.stringify(inflaVal));
+      writeFileSyncRecursive(`./json/rem/interanualrem/dates.json`, JSON.stringify(dateInfla));
+      writeFileSyncRecursive(`./json/rem/interanualrem/d.json`, JSON.stringify(inflaVal));
     }
 
   }
 }
-
-/* async function getMECON() {
-
-  const resA = await fetch('http://www.economia.gob.ar/download/infoeco/apendice6.xlsx');
-   var emaeB = await resA.arrayBuffer();
-  var obj = xlsx.parse(emaeB);
-
- 
-} */
-
-
 
 async function masterDb(kpis) {
      for (let e = 0; e < kpis.length; e++) {
@@ -333,7 +414,7 @@ async function masterDb(kpis) {
 
         var tempDates = [];
         var tempDataBase = [];
-        const resB = await fetch(value);
+        const resB = await fetch(`https://apis.datos.gob.ar/series/api/series/?limit=5000&format=json&ids=${value}`);
         var emaeB = await resB.json();
         for (let i = 0; i < emaeB.data.length; i++) {
           if (kpis[e] === "ipc" || kpis[e] === 'empleo' || kpis[e] === 'rem') {
@@ -344,8 +425,8 @@ async function masterDb(kpis) {
           }
           tempDates.push(emaeB.data[i][0]);
         }
-        fs.writeFileSync(`./json/${kpis[e]}/${key}/dates.json`, JSON.stringify(tempDates));
-        fs.writeFileSync(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
+        writeFileSyncRecursive(`./json/${kpis[e]}/${key}/dates.json`, JSON.stringify(tempDates));
+        writeFileSyncRecursive(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
         console.log(`♥ [${kpis[e]}] ${key} updated`)
         await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](500)
       }
@@ -379,17 +460,100 @@ async function parseXLS(kpi) {
     for (let i = 0; i < data.length; i++) {
       if (new Date(Date.UTC(0, 0, data[i][xls[kpi].date])) != 'Invalid Date') { tempArray.push(Number(data[i][value]).toFixed(3))}
     }
-    fs.writeFileSync(`./json/${kpi}/${key}.json`, JSON.stringify(tempArray));
+    writeFileSyncRecursive(`./json/${kpi}/${key}.json`, JSON.stringify(tempArray));
     console.log(`♥ [${kpi}] ${key} updated`)
 
   }
 
-  fs.writeFileSync(`./json/${kpi}/dates.json`, JSON.stringify(datesArray));
+  writeFileSyncRecursive(`./json/${kpi}/dates.json`, JSON.stringify(datesArray));
 
   console.log(`♥ [${kpi}] dates updated`)
 
 }
 
+ 
+
+async function parseCSV(kpi) {
+
+  const resA = await fetch(csv[kpi].url);
+  var emaeB = await resA.text()
+  var data = Papa.parse(emaeB).data
+ 
+  var datesArray = []
+
+  for (let i = 0; i < data.length; i++) {
+    var date = new Date(data[i][csv[kpi].date]).toUTCString();
+ 
+ if (date != 'Invalid Date') {
+      datesArray.push(new Date (date).toLocaleDateString("en-CA", {timeZone: "UTC"}))
+    }
+  }
+
+  for (let [key, value] of Object.entries(csv[kpi].columns)) {
+    var tempArray = []
+    for (let i = 0; i < data.length; i++) {
+      if (new Date(data[i][csv[kpi].date]).toUTCString() !== 'Invalid Date') { tempArray.push(Number(data[i][value]).toFixed(3))}
+
+    }
+    writeFileSyncRecursive(`./json/${kpi}/${key}.json`, JSON.stringify(tempArray));
+    console.log(`♥ [${kpi}] ${key} updated`)
+
+  }
+
+  writeFileSyncRecursive(`./json/${kpi}/dates.json`, JSON.stringify(datesArray));
+
+  console.log(`♥ [${kpi}] dates updated`)
+
+}
+
+async function parseJson(kpi) {
+ 
+  for (let [key, value] of Object.entries(json[kpi])) {
+    const resA = await fetch(value);
+    var emaeB = JSON.parse(await resA.text())
+    var datesArray = []
+    var tempArray = []
+
+    for (let i = 0; i < emaeB[1].length; i++) {
+
+      if (emaeB[1][i].value !== null) {
+        datesArray.push(new Date (emaeB[1][i].date).toLocaleDateString("en-CA", {timeZone: "UTC"}))
+        tempArray.push(emaeB[1][i].value)
+      }
+  
+  }
+  writeFileSyncRecursive(`./json/${kpi}/dates.json`, JSON.stringify(datesArray));
+  writeFileSyncRecursive(`./json/${kpi}/${key}.json`, JSON.stringify(tempArray)); 
+  console.log(`♥ [${kpi}] ${key} updated`)
+
+  }
+
+
+}
+
+async function parseAmbito() {
+ 
+  for (let [key, value] of Object.entries(ambito)) {
+    const resA = await fetch(value);
+    var emaeB = JSON.parse(await resA.text())
+    var datesArray = []
+    var tempArray = []
+   for (let i = 1; i < emaeB.length; i++) {
+ 
+    datesArray.push(emaeB[i][0].split('-').reverse().join('-'))
+   // datesArray.push(new Date (emaeB[1][i].date).toLocaleDateString("en-CA", {timeZone: "UTC"}))
+
+    tempArray.push(Number(emaeB[i][1].replace(',','.')))
+      
+  }
+  writeFileSyncRecursive(`./json/ambito/${key}/dates.json`, JSON.stringify(datesArray));
+    writeFileSyncRecursive(`./json/ambito/${key}/d.json`, JSON.stringify(tempArray));
+    console.log(`♥ [ambito] ${key} updated`)
+
+   } 
+
+}
+ 
 async function megaContent(src) {
   
   
@@ -411,8 +575,7 @@ async function megaContent(src) {
  
     posts.push(post);
     categories.push(post.cat)
-    fs.writeFileSync(`./json/confluence/${singleFolder}.json`, JSON.stringify(post));
-    console.log(`♥ ${singleFolder}.json generated`)
+    writeFileSyncRecursive(`./json/confluence/${singleFolder}.json`, JSON.stringify(post));
 
   };
   categories = [...new Set(categories)]
@@ -447,33 +610,45 @@ async function megaContent(src) {
    }
 
 
-  fs.writeFileSync(`./json/kpis.json`, JSON.stringify(categoriesObject));
-
-
+  writeFileSyncRecursive(`./json/kpis.json`, JSON.stringify(categoriesObject));
+  console.log(`♥ Content generated`)
  
 };
 
+async function processDB() {
  
-     masterDb([
-  'cuentas',
-   'emae',
-   'ipi',
-  'isac',
-  'expo',
-  'impo',
-  'ipc',
-  'empleo',
-  'ucii',
-  'rofex',  
- ]); 
-
+  await masterDb([
+ /*    'cuentas',
+    'gastos',
+    'tributarios',
+    'emae',
+    'ipi',
+    'isac',
+    'expo',
+    'impo',
+    'ipc',
+    'empleo',
+    'ucii', 
+    'rofex',
+    'polingresos'  */
+  ]); 
   
-parseXLS("embi");
-parseXLS("ice");
-parseXLS("tcrm");
-getBRCASeries()
+  /* await parseXLS("embi");
+  await parseXLS("ice");
+  await parseXLS("tcrm");
+  await getBRCASeries()
 
-getUSD() 
-getBRCAScraper()
- 
-megaContent("kpi")
+  await getUSD() 
+  await getBRCAScraper() 
+  await parseCSV("ipicammesa");
+
+  await parseJson("gini")
+  await parseJson("poblacion");
+  await parseJson("pbi");  
+
+  await parseAmbito()  */
+
+  await megaContent("kpi")
+}
+
+processDB()

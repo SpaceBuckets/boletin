@@ -6,6 +6,7 @@
     <h2 v-if="title">
         <strong>{{ title }}</strong>. {{subtitle}}
     </h2>
+    
     <div style="position: absolute;top: 55px;bottom: 15px;left: 20px;right:15px">
                   
     <charts-line
@@ -20,7 +21,11 @@
 <script>
  
 export default {
-  props: {     
+  props: {  
+    altTitle: {
+      type: String,
+      required: false
+    },       
     edit: {
       type: Boolean,
       required: false

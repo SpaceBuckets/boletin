@@ -7,7 +7,7 @@ module.exports = {
       data: require("../impo/dolar/d.json"),
       borderColor: "#b22222CC",
       pointRadius: 0,
-      borderWidth: 1.75,
+      borderWidth: 1.5,
     },
     {
       backgroundColor: "rgba(146,220,210,0)",
@@ -15,7 +15,7 @@ module.exports = {
       data: require("../expo/dolar/d.json"),
       borderColor: "#009966",
       pointRadius: 0,
-      borderWidth: 1.75,
+      borderWidth: 1.5,
     },
     {
       backgroundColor: "#ccc",

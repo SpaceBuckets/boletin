@@ -7,7 +7,7 @@ const state = {
     balanza: "2004-06-01",
     deficit: "2018-12-01",
     ipc: "2004-12-01",
-    cambio: "2018-12-01",
+    cambio: "2017-06-01",
     tasa: "2016-06-01"
 
   },
@@ -15,6 +15,8 @@ const state = {
     responsive: true,
     maintainAspectRatio: false,
     animation: { duration: 0 },
+    bezierCurve: true,
+
     layout: {
       padding: {
         left: 0,

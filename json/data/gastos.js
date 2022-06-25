@@ -1,0 +1,45 @@
+module.exports = {
+  labels: require("../gastos/transporte/dates.json"),
+  datasets: [
+    {
+      backgroundColor: "rgba(46,120,210,0)",
+      label: "Transporte",
+      data: require("../gastos/transporte/d.json"),
+      borderColor: "rgba(46,120,210,1)",
+      pointRadius: 0,
+      borderWidth: 1.5,
+    },
+    {
+      backgroundColor: "rgba(46,120,210,0)",
+      label: "Agua",
+      data: require("../gastos/agua/d.json"),
+      borderColor: "rgba(46,120,210,1)",
+      pointRadius: 0,
+      borderWidth: 1.5,
+    },
+    {
+      backgroundColor: "rgba(46,120,210,0)",
+      label: "Vivienda",
+      data: require("../gastos/vivienda/d.json"),
+      borderColor: "rgba(46,120,210,1)",
+      pointRadius: 0,
+      borderWidth: 1.5,
+    },
+    {
+      backgroundColor: "rgba(46,120,210,0)",
+      label: "Energia",
+      data: require("../gastos/energia/d.json"),
+      borderColor: "rgba(46,120,210,1)",
+      pointRadius: 0,
+      borderWidth: 1.5,
+    },        
+    {
+      backgroundColor: "rgba(46,120,210,0)",
+      label: "Educacion",
+      data: require("../gastos/educacion/d.json"),
+      borderColor: "rgba(46,120,210,1)",
+      pointRadius: 0,
+      borderWidth: 1.5,
+    },    
+  ],
+}

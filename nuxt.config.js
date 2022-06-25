@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Boletin Extraoficial',
+    title: 'BOLETIN EXTRAOFICIAL',
     htmlAttrs: {
       lang: 'en'
     },

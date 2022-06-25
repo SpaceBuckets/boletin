@@ -1,10 +1,22 @@
 <template>
   <div>
+        <div class="dashtitle">
+      <h2>{{chart.t}}. <span>{{chart.st}}</span></h2>
+      <div style="display:flex;">
+       <div >
+       <button>Share</button>
+
+       </div>
+
+      </div>
+
+    </div>
      <charts-kpiBoard :data="savedCells" />
   </div>
 </template>
 
 <script>
+ 
 export default {
   name: "Details",
   async asyncData({ params }) {
@@ -20,6 +32,8 @@ export default {
         kpi: params.kpi,
         type: "Line",
         hasChart: true,
+        title: "Serie de tiempo",
+        subtitle: 'Frecuencia mensual. Base 2004'
       },
       2367: {
         area: "2 / 6 / 3 / 7",
@@ -38,17 +52,27 @@ export default {
         kpi: params.kpi,
         type: "Box",
         hasChart: true,
+        title: "Descripción metodológica",
+        subtitle: 'Fuente INDEC'
       },
       4757: {
         area: "4 / 5 / 7 / 7",
         kpi: params.kpi,
         type: "Table",
         hasChart: true,
+        title: "Valores y tendencias",
+        subtitle: 'Últimos 24 meses'
       },
     };
 
     return { savedCells };
   },
+  data() {
+    return {
+      chart: require(`~/json/confluence/${this.$route.params.kpi}.json`)
+
+    }
+  }
 };
 </script>
 

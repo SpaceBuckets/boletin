@@ -1,13 +1,14 @@
 module.exports = {
-  labels: require("../cuentas/pozos/dates.json"),
+  labels: require("../cuentas/petroleo/dates.json"),
   datasets: [
     {
-      backgroundColor: "rgba(146,220,210,0)",
+      backgroundColor: "rgba(46,120,210,0.05)",
       label: "Pozos de petroleo",
-      data: require("../cuentas/pozos/d.json"),
+      data: require("../cuentas/petroleo/d.json"),
       borderColor: "#2E78D2",
       pointRadius: 0,
-      borderWidth: 1.75,
+
+      borderWidth: 1.5,
     },
   ],
 }

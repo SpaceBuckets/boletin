@@ -1,10 +1,17 @@
 <template>
   <div>
     <div v-if="edit" class="dashtitle">
-      <button @click="clearBoard(savedCells)">Restart</button>
-       <button @click="saveDB()">Save to URL</button>
+      <h2>Dashboard <span>Builder</span></h2>
+      <div style="display:flex;">
+      <button @click="clearBoard(savedCells)">Reset <span>↻</span></button>
+      <div >
+       <button @click="saveDB()">Grabar URL »</button>
 
-      <input  type="text" :placeholder="`/${boardID}`" />
+      <input  type="text" :value="`${boardID}`" />
+      </div>
+
+      </div>
+
     </div>
 
     <div
@@ -159,7 +166,7 @@
                 >
           
  
-                  <option :key="i" v-for="(parentOption, i) in kpeis" :value="i">{{i}}</option>
+                  <option :selected="i === 'Todos'" :key="i" v-for="(parentOption, i) in kpeis" :value="i">{{i}}</option>
  
                 </select>
                 <select
@@ -168,7 +175,7 @@
                   name="kp11is"
                   id="car33s"
                                     multiple="multiple"
-
+                  style="height:135px"
                 >
         
                   <option :selected="kpiOption.kpi === 'emae'" :key="u" v-for="(kpiOption, u) in kpeis[selectedCat]" :value="kpiOption.kpi">{{kpiOption.t}}</option>
@@ -222,6 +229,8 @@
           v-if="item.hasChart && !edit"
           :is="`charts-generic${item.type}`"
           :data="item.kpi"
+          :title="item.title"
+          :subtitle="item.subtitle"
         />
         <component
           v-if="item.hasChart && edit"
@@ -251,7 +260,7 @@ export default {
     return {
       columnAmount: 6,
       kpeis: require(`~/json/kpis.json`),
-      selectedCat: 'Actividad Económica',
+      selectedCat: 'Todos',
       dragging: false,
       saredUrl: false,
       modalOpen: "",
@@ -264,6 +273,9 @@ export default {
   },
   created() {
     this.savedCells = this.data;
+
+          this.boardID = this.$route.path;
+
     //console.log(this.kpeis)
     //console.log(this.savedCells)
   },
@@ -294,8 +306,8 @@ export default {
       for (let cell in cells) {
         this.$delete(this.savedCells, cell);
       }
-      this.boardID = this.uniqueId();
-       history.pushState({},null,this.$route.path)
+      this.boardID = "";
+      this.$router.replace({path: ''});
     },
     saveChart(parent) {
       console.log(this.savedCells[parent])
@@ -463,11 +475,11 @@ export default {
   gap: 0px;
   border-left: 1px dashed #444;
   border-top: 1px dashed #444;
-  margin-top: 20px;
+  //margin-top: 20px;
   > i {
     border-right: 1px dashed #444;
     border-bottom: 1px dashed #444;
-    height: 210px;
+    height: 215px;
     pointer-events: none;
     cursor: pointer;
     &.active {
@@ -652,15 +664,15 @@ select option[value=""] {
   color: #999999;
 }
 .dashtitle {
-  margin: 0px 0 15px;
+  margin: 15px 0 15px;
   display: flex;
   justify-content: space-between;
-  position: fixed;
+/*   position: fixed;
   z-index: 9999;
   right: 0;
   top: 0;
   height: 60px;
-  padding: 14px 20px;
+  padding: 14px 20px; */
   button {
     background: #fdd835 !important;
     padding: 8px 15px;
@@ -678,7 +690,9 @@ select option[value=""] {
     border-left: 1px solid #222;
     padding: 8px 15px;
     border: 0;
+    color: #fff;
     margin-left: -5px;
+    width: 112px;
     &:focus {
       outline: 0;
     }
@@ -692,8 +706,10 @@ select option[value=""] {
     font-weight: 400;
     margin: 0;
     align-self: flex-end;
+    span,
     strong {
       color: #ddd;
+      font-weight: lighter;
     }
   }
 }

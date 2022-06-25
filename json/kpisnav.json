@@ -1,6 +1,0 @@
-{
-  "actividad-economica": ["emae", "isac", "ipi", "ucii","petroleo","gas","cereales","acero"],
-  "cuentas-nacionales": ["balanza", "deficit", "subsidios"],
-  "politica-monetaria": ["cambio", "reservas","comprasbcra", "tasa", "tcrm","embi", "ice"],
-  "precios-salarios": ["ipc","asalariados", "desempleo"]
-}
