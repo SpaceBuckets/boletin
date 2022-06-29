@@ -61,6 +61,7 @@ global.cuentas = {
   trigo: '34.2_TTTRI_0_P_17',
   girasol: '34.2_GTGIR_0_P_19',
   maiz: '34.2_MTMAI_0_P_16',
+
 }
 
 global.tributarios = {
@@ -106,6 +107,21 @@ global.ipi = {
   base: '453.1_SERIE_ORIGNAL_0_0_14_46',
 }
 
+/* global.consumo = {
+  electricidad: '302.3_ELEC_GAS_AGWH_0_S_35',
+  gas: '302.3_ELEC_GAS_A_M3_0_S_33',
+  agua: '302.3_ELEC_GAS_A_M3_0_S_30',
+}
+*/
+
+global.tasas = {
+  fed: '131.1_FET_0_0_12&start_date=1999-01-01',
+  euro: '131.1_MZT_0_0_18&start_date=1999-01-01',
+  brasil: '131.1_SBT_0_0_17&start_date=1999-01-01',
+  inglaterra: '131.1_RIT_0_0_20&start_date=1999-01-01',
+  japon: '131.1_OIRJT_0_0_34&start_date=1999-01-01',
+}
+
 global.isac = {
   estacional: '33.2_ISAC_SIN_EDAD_0_M_23_56',
   tendencia: '33.2_ISAC_CICLOCIA_0_M_20_62',
@@ -133,7 +149,9 @@ global.ipc = {
   //caba: '45.2_ECTDTC_0_T_38',
   pampeana: '148.3_INIVELANA_DICI_M_26&representation_mode=percent_change',
   noroeste: '148.3_INIVELNOA_DICI_M_21&representation_mode=percent_change',
-  nordeste: '148.3_INIVELNEA_DICI_M_21&representation_mode=percent_change'
+  nordeste: '148.3_INIVELNEA_DICI_M_21&representation_mode=percent_change',
+  icc: '380.3_ICC_NACIONNAL_0_T_12',
+  ipim: '448.1_NIVEL_GENERAL_0_0_13_46&representation_mode=percent_change'
 } 
 
 global.empleo = {
@@ -147,6 +165,9 @@ global.empleo = {
   pampeana: '45.2_ECTDTRP_0_T_49',
   noroeste: '45.2_ECTDTNO_0_T_42',
   nordeste: '45.2_ECTDTNE_0_T_42',
+  ripte: '158.1_REPTE_0_0_5',
+  salariominimo: '57.1_SMVMM_0_M_34',
+  haberminimo: '58.1_MP_0_M_24'
 }
 
 global.ucii = {
@@ -165,7 +186,7 @@ global.ucii = {
   minerales: "31.3_UMNM_2004_M_27",
 }
 
-  global.rofex = {
+global.rofex = {
   dolar: '92.2_TIPO_CAMBIION_0_0_21_24&limit=5000&start_date=2009-01-03',
   mae: '168.1_VMEN_MAMAE_D_0_0_11',
   t6: '168.1_FRO_ROF6M_D_0_0_19',
@@ -174,6 +195,13 @@ global.ucii = {
   t3: '168.1_FRO_ROF3M_D_0_0_19',
   t2: '168.1_FRO_ROF2M_D_0_0_19',
   t1: '168.1_FRO_ROF1M_D_0_0_19',
+}
+
+global.bcra = {
+  reservas: '174.1_RRVAS_IDOS_0_0_36',
+  pbi: '3.2_OGP_D_2004_T_17',
+  uva: '94.2_UVAD_D_0_0_10',
+  cer: '94.2_CD_D_0_0_10&start_date=2012-01-01'
 }
  
 global.csv = {
@@ -417,18 +445,17 @@ async function masterDb(kpis) {
         const resB = await fetch(`https://apis.datos.gob.ar/series/api/series/?limit=5000&format=json&ids=${value}`);
         var emaeB = await resB.json();
         for (let i = 0; i < emaeB.data.length; i++) {
-          if (kpis[e] === "ipc" || kpis[e] === 'empleo' || kpis[e] === 'rem') {
-            var valor = emaeB.data[i][1] * 100
-            tempDataBase.push(valor.toFixed(2));
-          } else {
-            tempDataBase.push(emaeB.data[i][1]);
-          }
+   if (emaeB.data[i][1] == null){
+    emaeB.data[i][1] = 0
+}
+tempDataBase.push(emaeB.data[i][1].toFixed(2));
+
           tempDates.push(emaeB.data[i][0]);
         }
         writeFileSyncRecursive(`./json/${kpis[e]}/${key}/dates.json`, JSON.stringify(tempDates));
         writeFileSyncRecursive(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
         console.log(`♥ [${kpis[e]}] ${key} updated`)
-        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](500)
+        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](600)
       }
     }
  
@@ -609,15 +636,24 @@ async function megaContent(src) {
     });
    }
 
+   const ordered = Object.keys(categoriesObject).sort().reduce(
+    (obj, key) => { 
+      obj[key] = categoriesObject[key]; 
+      return obj;
+    }, 
+    {}
+  );
+  delete ordered['Otros']
+  ordered['Otros'] = categoriesObject['Otros']
 
-  writeFileSyncRecursive(`./json/kpis.json`, JSON.stringify(categoriesObject));
-  console.log(`♥ Content generated`)
+   writeFileSyncRecursive(`./json/kpis.json`, JSON.stringify(ordered));
+  console.log(`♥ Content regenerated`)
  
 };
 
 async function processDB() {
  
-  await masterDb([
+    await masterDb([
     'cuentas',
     'gastos',
     'tributarios',
@@ -630,7 +666,9 @@ async function processDB() {
     'empleo',
     'ucii', 
     'rofex',
-    'polingresos' 
+    'polingresos',
+    'tasas',
+    'bcra'
   ]); 
   
   await parseXLS("embi");
@@ -646,7 +684,7 @@ async function processDB() {
   await parseJson("poblacion");
   await parseJson("pbi");  
 
-  await parseAmbito()  
+  await parseAmbito()   
 
   await megaContent("kpi")
 }

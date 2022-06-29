@@ -1,6 +1,6 @@
 ---
-t: "Producto Bruto Interno"
-st: "Per Capita"
+t: "PBI"
+st: "Producto Bruto Interno (per Capita)"
 sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
 kpi: "pbi"
 capis:

@@ -1,5 +1,5 @@
 ---
-t: "Balanza Comercial"
+t: "Intercambio Comercial"
 st: "Importaciones, Exportaciones y Saldo"
 sd: "El intercambio comercial argentino (ICA) muestra la evolución de la balanza comercial, la relación entre los ingresos en dólares de las exportaciones y los gastos de las importaciones."
 kpi: "balanza"
