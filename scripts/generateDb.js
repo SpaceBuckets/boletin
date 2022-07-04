@@ -651,7 +651,7 @@ async function megaContent(src) {
 };
 
 async function processDB() {
-/*  
+ 
     await masterDb([
     'cuentas',
     'gastos',
@@ -683,7 +683,7 @@ async function processDB() {
   await parseJson("poblacion");
   await parseJson("pbi");  
 
-  await parseAmbito()    */
+  await parseAmbito()    
 
   await megaContent("kpi")
 }
