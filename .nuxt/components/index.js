@@ -7,6 +7,7 @@ export { default as ChartsGenericKpiAnual } from '../../components/charts/generi
 export { default as ChartsGenericKpiMensual } from '../../components/charts/genericKpiMensual.vue'
 export { default as ChartsGenericKpiUpdated } from '../../components/charts/genericKpiUpdated.vue'
 export { default as ChartsGenericLine } from '../../components/charts/genericLine.vue'
+export { default as ChartsGenericPostHeader } from '../../components/charts/genericPostHeader.vue'
 export { default as ChartsGenericSol } from '../../components/charts/genericSol.vue'
 export { default as ChartsGenericTable } from '../../components/charts/genericTable.vue'
 export { default as ChartsKpiBoard } from '../../components/charts/kpiBoard.vue'

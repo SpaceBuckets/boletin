@@ -3,14 +3,7 @@ t: "RIPTE"
 st: "Remuneración imponible promedio de los trabajadores estables"
 sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
 kpi: "ripte"
-capis:
-    'interanual':
-    - 0
-    'desestacionalizada':
-    - 0
-    'tendencia-ciclo':
-    - 0    
-c: "<p><strong>El EMAE es un indicador provisorio de la evolución del PIB</strong> a precios constantes de 2004 que se difunde con un rezago de 50 a 60 días de concluido el mes de referencia, de acuerdo al <a href='/'>calendario de difusión del INDEC</a>.</p><p>Incluye la serie original (número índice y la variación porcentual respecto al mismo mes del año anterior), la serie desestacionalizada y la tendencia–ciclo (número índice y variación respecto al mes inmediato anterior).</p> <p><em>Ofrece una pauta del comportamiento de la actividad económica real</em> con una frecuencia mayor a la del PIB trimestral a precios constantes. Su cálculo se estructura en la agregación del valor agregado a precios básicos de cada una de las actividades económicas más los impuestos netos de subsidios a los productos, utilizando las ponderaciones de las cuentas nacionales base 2004 de la República Argentina.</p><p>Este indicador <strong>se elabora con información parcial</strong>, de carácter provisorio -dado que en algunos casos es corregida y/o completada por la fuente- o con indicadores alternativos a los que se utilizan para el cálculo trimestral, en tanto se han evaluado como adecuadas aproximaciones. Dado que la estimación del PIB trimestral reúne mayor cantidad de datos, es habitual que se observen diferencias entre las variaciones trimestrales de ambos indicadores.</p>"
+c: "<p>RIPTE se define como la remuneración promedio sujeta a aportes al Sistema Integrado Previsional Argentino (SIPA) que perciben los trabajadores que se encuentran bajo relación de dependencia y que han sido declarados en forma continua durante los últimos 13 meses. Las variaciones de la RIPTE intervienen en el cálculo de la movilidad jubilatoria del Régimen General del Sistema Integrado Previsional Argentino (SIPA) y en el cálculo de las indemnizaciones por accidentes de trabajo. Su publicación se realiza a los 45 días de finalizado el periodo correspondiente debido al tiempo que transcurre entre la recepción y el procesamiento de las Declaraciones Juradas que los empleadores presentan ante la AFIP.</p>"
 f: "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf"
 d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
 cat: "Precios y Salarios"

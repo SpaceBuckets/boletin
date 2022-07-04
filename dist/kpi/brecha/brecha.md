@@ -3,6 +3,7 @@ t: "Brecha USD/Peso"
 st: "Estimador Mensual de Actividad económica"
 sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
 kpi: "brecha"
+hidden: "true"
 capis:
     'interanual':
     - 0

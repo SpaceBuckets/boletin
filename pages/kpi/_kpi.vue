@@ -1,7 +1,7 @@
 <template>
   <div>
         <div class="dashtitle">
-      <h2>{{chart.t}}. <span>{{chart.st}}</span></h2>
+      <h2>{{kpi.t}}. <span>{{kpi.st}}</span></h2>
       <div style="display:flex;">
        <div >
        <button>Share</button>
@@ -21,7 +21,7 @@ export default {
   name: "Details",
   async asyncData({ params }) {
     const savedCells = {
-      1267: {
+       1267: {
         area: "1 / 6 / 2 / 7",
         kpi: params.kpi,
         type: "KpiUpdated",
@@ -48,7 +48,7 @@ export default {
         hasChart: true,
       },
       4715: {
-        area: "4 / 1 / 7 / 5",
+        area: "4 / 1 / 6 / 5",
         kpi: params.kpi,
         type: "Box",
         hasChart: true,
@@ -56,22 +56,63 @@ export default {
         subtitle: 'Fuente INDEC'
       },
       4757: {
-        area: "4 / 5 / 7 / 7",
+        area: "4 / 5 / 6 / 7",
         kpi: params.kpi,
         type: "Table",
         hasChart: true,
         title: "Valores y tendencias",
-        subtitle: 'Últimos 24 meses'
+        subtitle:  'Últimos 24 meses'
       },
+/*     "1215": {
+        "area": "1 / 1 / 2 / 5",
+        "kpi": params.kpi,
+        "type": "PostHeader",
+        "hasChart": true
+    },
+    "1256": {
+        "area": "1 / 5 / 2 / 6",
+        "kpi": params.kpi,
+        "type": "KpiUpdated",
+        "hasChart": true
+    },
+    "1267": {
+        "area": "1 / 6 / 2 / 7",
+        "kpi": params.kpi,
+        "type": "KpiMensual",
+        "hasChart": true
+    },
+    "2515": {
+        "area": "2 / 1 / 5 / 5",
+        "kpi": params.kpi,
+        "type": "Line",
+        "hasChart": true,
+        title: "Serie de tiempo",
+        subtitle: 'Frecuencia mensual. Base 2004'        
+    },
+    "2557": {
+        "area": "2 / 5 / 5 / 7",
+        "kpi": params.kpi,
+        "type": "Table",
+        "hasChart": true,
+        title: "Valores y tendencias",
+        subtitle:  'Últimos 24 meses'        
+    }
+       */
     };
 
     return { savedCells };
   },
   data() {
     return {
-      chart: require(`~/json/confluence/${this.$route.params.kpi}.json`)
+      kpi: require(`~/json/confluence/${this.$route.params.kpi}.json`)
 
     }
+  },
+  created() {    
+   if (this.kpi.cells) {
+      this.savedCells = this.kpi.cells
+   }
+
   }
 };
 </script>

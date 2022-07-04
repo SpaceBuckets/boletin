@@ -3,17 +3,9 @@ t: "Asalariados"
 st: "Sector Público y Privado"
 sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
 kpi: "asalariados"
-capis:
-    'interanual':
-    - 0
-    'desestacionalizada':
-    - 0
-    'tendencia-ciclo':
-    - 0    
-c: "<p><strong>El EMAE es un indicador provisorio de la evolución del PIB</strong> a precios constantes de 2004 que se difunde con un rezago de 50 a 60 días de concluido el mes de referencia, de acuerdo al <a href='/'>calendario de difusión del INDEC</a>.</p><p>Incluye la serie original (número índice y la variación porcentual respecto al mismo mes del año anterior), la serie desestacionalizada y la tendencia–ciclo (número índice y variación respecto al mes inmediato anterior).</p> <p><em>Ofrece una pauta del comportamiento de la actividad económica real</em> con una frecuencia mayor a la del PIB trimestral a precios constantes. Su cálculo se estructura en la agregación del valor agregado a precios básicos de cada una de las actividades económicas más los impuestos netos de subsidios a los productos, utilizando las ponderaciones de las cuentas nacionales base 2004 de la República Argentina.</p><p>Este indicador <strong>se elabora con información parcial</strong>, de carácter provisorio -dado que en algunos casos es corregida y/o completada por la fuente- o con indicadores alternativos a los que se utilizan para el cálculo trimestral, en tanto se han evaluado como adecuadas aproximaciones. Dado que la estimación del PIB trimestral reúne mayor cantidad de datos, es habitual que se observen diferencias entre las variaciones trimestrales de ambos indicadores.</p>"
+c: "<p>Aquellas personas que trabajan a cambio de un sueldo, salario, remuneración, comisión o cualquier otra retribución en metálico o en especie, para un empresario (persona física o jurídica). Según el empleador sea público o privado se puede hablar de asalariados del sector público o del sector privado. El trabajo por un salario, trabajo asalariado o mano de obra asalariada es la relación socioeconómica entre un trabajador por cuenta ajena (también denominado trabajador asalariado) y un empleador (también denominado empresario), por medio de la cual el primero cede su fuerza de trabajo a través de un contrato laboral, formal o informal. Estas transacciones por lo general tienen lugar en el mercado laboral en el cual las remuneraciones o salarios son determinados por el mercado.1​2​ A cambio del salario, el producto del trabajo se convierte por lo general en propiedad del empleador, excepto en casos especiales tales como la propiedad de patentes de propiedad intelectual en los Estados Unidos en donde los reconocimientos de patentes son por lo general asignados a la persona inventora original. Un trabajador asalariado es una persona cuyo medio principal de ingresos es la venta de su esfuerzo.</p>"
 f: "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf"
 d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
 min: 560000
 max: 650000
-cat: "Precios y Salarios"
 --- 

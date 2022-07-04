@@ -97,7 +97,7 @@ export default {
     border: 0;
   }
   > div {
-    max-height: 420px;
+    max-height: 100%;
     overflow: auto;
     display: flex;
     &.flexedcontent {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="edit" class="dashtitle">
+     <div v-if="edit" class="dashtitle">
       <h2>Dashboard <span>Builder</span></h2>
       <div style="display:flex;">
       <button @click="clearBoard(savedCells)">Reset <span>↻</span></button>
@@ -240,6 +240,7 @@
         />
       </section>
     </div>
+ 
   </div>
 </template>
 

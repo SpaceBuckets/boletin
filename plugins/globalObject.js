@@ -72,7 +72,11 @@ const state = {
       ],
     },
     legend: {
-      display: false,
+      display: true,
+      position: 'bottom',
+      labels: {
+        boxWidth: 12,
+       }
     },
   }
   

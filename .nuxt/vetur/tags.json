@@ -26,6 +26,9 @@
   "ChartsGenericLine": {
     "description": "Auto imported from components/charts/genericLine.vue"
   },
+  "ChartsGenericPostHeader": {
+    "description": "Auto imported from components/charts/genericPostHeader.vue"
+  },
   "ChartsGenericSol": {
     "description": "Auto imported from components/charts/genericSol.vue"
   },

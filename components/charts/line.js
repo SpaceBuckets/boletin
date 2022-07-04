@@ -1,4 +1,5 @@
 import { Line } from 'vue-chartjs'
+//import zoom from 'chartjs-plugin-zoom';
 
 export default {
   extends: Line,
@@ -9,6 +10,9 @@ export default {
     };
   },
   mounted() {
+    //this.addPlugin(zoom);
+   // console.log(this.$Zoom)
+
      this.chartOptions.scales.xAxes[0].ticks.min = this.$state.kpidates[this.chart.kpi]; 
     this.chartOptions.scales.yAxes[0].ticks.max = this.chart.max; 
     this.chartOptions.scales.yAxes[0].ticks.min = this.chart.min; 
