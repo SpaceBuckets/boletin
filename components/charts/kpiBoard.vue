@@ -1,6 +1,6 @@
 <template>
   <div>
-     <div v-if="edit" class="dashtitle">
+<!--      <div v-if="edit" class="dashtitle" style="display:none">
       <h2>Dashboard <span>Builder</span></h2>
       <div style="display:flex;">
       <button @click="clearBoard(savedCells)">Reset <span>↻</span></button>
@@ -12,7 +12,7 @@
 
       </div>
 
-    </div>
+    </div> -->
 
     <div
       class="container-grid"
@@ -476,13 +476,22 @@ export default {
   gap: 0px;
   border-left: 1px dashed #444;
   border-top: 1px dashed #444;
-  //margin-top: 20px;
+  margin-top: 20px;
+  @media only screen and (max-width: 980px) {
+    display: block;
+    border: 0;
+    margin-top: 5px;
+  }  
   > i {
     border-right: 1px dashed #444;
     border-bottom: 1px dashed #444;
-    height: 215px;
+    height: 212px;
     pointer-events: none;
     cursor: pointer;
+    @media only screen and (max-width: 980px) {
+  display: none;
+
+    }      
     &.active {
       pointer-events: all;
     }
@@ -509,6 +518,11 @@ export default {
     padding: 20px;
     margin: 6px;
     overflow: hidden;
+    @media only screen and (max-width: 980px) {
+      position: relative;
+      float: left;
+      width: calc(100% - 12px);
+    }      
     a {
       text-decoration: none;
     }

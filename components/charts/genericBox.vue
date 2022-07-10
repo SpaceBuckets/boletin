@@ -10,6 +10,11 @@
      <div v-html="chart.c">
        
      </div>
+     <div>
+      Fuente:  <a :href="chart.f">{{chart.fu}}</a>
+     </div>
+<!--      <charts-genericKpiUpdatedBox :data="chart.kpi"/>
+     <charts-genericHeatmapBox :data="chart.kpi"/> -->
   </section>
 </template>
 

@@ -1,11 +1,11 @@
 <template>
   <section class="chart">
-    <h2>
-       <strong>Última Actualización</strong>
-    </h2>
-    <div class="numcontain" style="position: absolute;top: 30px;bottom: 15px;left: 15px;right:15px">
+      <h2>
+        <strong>{{ chart.t }}</strong>. Último Dato
+      </h2>
+ 
+    <div class="numcontain" >
       <h4>{{getLastUpdated()}}</h4>
-      <a :href="chart.f">Fuente: INDEC</a>
     </div>
   </section>
 </template>
@@ -40,7 +40,6 @@ export default {
       const lastupdate = formatter.format(
 date
       );
-      console.log(lastupdate)
       var day = this.chart.chartdata.labels.slice(-1)[0].slice(-2)
       if (day === "01") {
        return lastupdate.replace("de","").replace(" ","");
@@ -63,6 +62,16 @@ a {
    display: flex;
    flex-direction: column;
     justify-content: center;
+    position: absolute;top: 30px;bottom: 15px;left: 15px;right:15px;
+     @media only screen and (max-width: 980px) {
+           top: 0;
+           bottom: 0;
+           left: initial;
+           h4 {
+            margin: 0;
+            font-size: 20px;
+           }
+           }
  }
  h2 {
    margin-bottom: 0 !important;
@@ -93,4 +102,7 @@ h5 {
 
   }
 }
+
+
+
 </style>

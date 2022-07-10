@@ -2,12 +2,12 @@
   <div>
     <div class="meganav" :class="{index: $route.path === '/'}">
 
-      <div class="meganavsection nochild">
+     <div class="meganavsection nochild">
         <div> <nuxt-link to="/">Dashboard</nuxt-link>    </div>
       </div>
-      <div class="meganavsection nochild">
+    <!--    <div class="meganavsection nochild">
         <div><input type="text" placeholder="Search..."> </div>
-      </div>      
+      </div>    -->   
       <div class="meganavsection open" v-if="i !== 'Todos'" @click="sectionOpen = i" v-for="(parent, i) in nav" :class="{open: sectionOpen === i}" :key="">
         <div>
         {{i.replace(/-/g, ' ')}} <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em; fill: #888;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg>
@@ -85,11 +85,10 @@ export default {
   padding-top: 20px;
   width: 220px;
   z-index: 999;
- 
-  &.index {
-   //transform: translateX(-100%)
-  }
- 
+    @media only screen and (max-width: 980px) {
+     transform: translateX(-100%);
+
+    }      
   > div {
     margin-bottom: 20px;
     > div {

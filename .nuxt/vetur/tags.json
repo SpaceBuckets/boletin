@@ -11,6 +11,12 @@
   "ChartsGenericHeader": {
     "description": "Auto imported from components/charts/genericHeader.vue"
   },
+  "ChartsGenericHeatmap": {
+    "description": "Auto imported from components/charts/genericHeatmap.vue"
+  },
+  "ChartsGenericHeatmapBox": {
+    "description": "Auto imported from components/charts/genericHeatmapBox.vue"
+  },
   "ChartsGenericKpi": {
     "description": "Auto imported from components/charts/genericKpi.vue"
   },
@@ -22,6 +28,9 @@
   },
   "ChartsGenericKpiUpdated": {
     "description": "Auto imported from components/charts/genericKpiUpdated.vue"
+  },
+  "ChartsGenericKpiUpdatedBox": {
+    "description": "Auto imported from components/charts/genericKpiUpdatedBox.vue"
   },
   "ChartsGenericLine": {
     "description": "Auto imported from components/charts/genericLine.vue"

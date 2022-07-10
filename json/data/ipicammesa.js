@@ -3,7 +3,7 @@ module.exports = {
   datasets: [
     {
       backgroundColor: "rgba(46,120,210,0)",
-      label: "Desestacionalizado",
+      label: "IPI CAMMESA",
       data: require("../ipicammesa/interanual.json"),
       borderColor: "#2E78D2",
       pointRadius: 0,

@@ -3,6 +3,21 @@
     <header>
       <h1 class="nav-logo">
         <nuxt-link to="/"><span>BOLETÍN</span>EXTRAOFICIAL</nuxt-link>
+     
+      </h1>
+      <div class="renav">
+        Esta colección de indicadores intenta develar de donde viene y hacia
+        donde va la macroeconomía Argentina.
+      </div>
+          <div :class="{menued: $state.isOpen}" class="backdropper" @click="$state.isOpen = false">
+      </div>
+
+      <button class="floatmaster" v-if="!$state.isOpen" @click="$state.isOpen = !$state.isOpen">
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#eee' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'><line x1="15" y1="20" x2="85" y2="20" /> <line x1="15" y1="50" x2="85" y2="50" /> <line x1="15" y1="80" x2="85" y2="80" /></svg>
+
+      </button>
+
+      <button class="floatmaster" v-if="$state.isOpen" @click="$state.isOpen = !$state.isOpen">
 <svg width="126" height="110" viewBox="0 0 126 110" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_1017_42)">
 <path d="M125.364 17.66C107.8 2.38727 85.6545 0.0963621 73.4363 11.5509C64.5684 23.4072 65.3586 37.3675 75.7273 52.0236C74.9636 52.0236 73.4363 52.7873 72.6727 53.5509C64.9714 38.8848 63.6466 23.7827 68.8545 10.0236C85.6545 -3.72182 108.564 -5.2491 125.364 17.66V17.66Z" fill="#843511"/>
@@ -25,17 +40,11 @@
 </clipPath>
 </defs>
 </svg>
-
-
-
-      </h1>
-      <div class="renav" style="display:none">
-        Esta colección de indicadores intenta develar de donde viene y hacia donde va la macroeconomía Argentina. 
-      </div>
-
- 
+      </button>
+       <!--   <input type="text" placeholder="Search...">
+ -->
     </header>
-    <div class="content-container">
+    <div class="content-container" :class="{menued: $state.isOpen}">
       <charts-kpinav />
 
       <nuxt />
@@ -48,26 +57,58 @@ export default {
   scrollToTop: false,
   data() {
     return {
-      openNav: false,
+      isOpen: false,
     };
   },
   watch: {
     $route(to, from) {
-      this.openNav = false;
+      this.$state.isOpen = false;
     },
   },
 };
 </script>  
 <style lang="scss">
+ .floatmaster {
+  display: none;
+  background: none;
+  border: 0;
+  position: absolute;
+  right: 0;
+      @media only screen and (max-width: 980px) {
+  display: block;
 
+    }   
+}
+.backdropper {
+  background: rgba(0,0,0,0.4);
+    top: 0;
+    right: 0;
+    left: 220px;
+    bottom: 0;
+    position: fixed;
+    display: none; 
+     &.menued {
+  display: block;
+
+    }       
+
+}
 .content-container {
   //max-width: 1440px;
   margin: 0px;
-  margin-right:20px;
-
-   @media only screen and (max-width: 600px) {
-    margin-top: 10px;
+  padding: 0 20px 0 225px;
+  &.menued {
+   // padding: 0 20px;
+    .meganav {
+      transform: translateX(0);
+      background: #000;
+      right: 0;
+    }
   }
+    @media only screen and (max-width: 980px) {
+  padding: 0;
+
+    }      
 }
 html {
   box-sizing: border-box;
@@ -91,6 +132,10 @@ html {
   align-items: center;
   bottom: 0;
   color: #666;
+      @media only screen and (max-width: 980px) {
+  display: none;
+
+    }  
 }
 header {
   background: rgba(55, 53, 47, 0.08);
@@ -99,19 +144,20 @@ header {
   top: 0;
   height: 60px;
   left: 0;
-  width: 220px;
+  right: 0;
   backface-visibility: hidden;
   display: flex;
   align-items: center;
-  z-index: 999;
-      //border-bottom: 1px solid #333;
+  z-index: 999999;
+  border-bottom: 1px solid #333;
 
   svg {
-    width: auto;
-    height: 60px;
-    padding: 20px 0px 20px 10px;
-    display: none;
-    path { fill: #eee; }
+    width: 60px;
+    padding: 15px;
+    height: auto;
+      path {
+      fill: #eee;
+    }
   }
   h1 {
     text-align: left;
@@ -125,17 +171,16 @@ header {
     a {
       color: #ddd;
       font-family: Helvetica, Arial, sans-serif;
-      font-size: 18px;
+      font-size: 20px;
       text-decoration: none;
       font-weight: lighter;
-      border-bottom: 1px solid #333;
-      margin-top: 15px;
-      padding-bottom: 10px;
+      line-height: 60px;
       span {
         font-weight: 600;
         color: #eee;
-        display: block;
-      font-size: 16px;
+        display: inline-block;
+        padding-right: 2px;
+        //font-size: 16px;
       }
     }
   }
@@ -149,9 +194,7 @@ body {
   background: #000;
   margin: 0;
   font-size: 15px;
-  padding: 0;
-  //padding-top: 60px;
-  padding-left: 230px;
+  padding-top: 60px;
 }
 
 p {
@@ -203,16 +246,17 @@ a {
   }
 }
 
-
 canvas {
   cursor: pointer;
 }
 
- .chart {
-   display: flex;
-   flex-direction: column;
-   > * {
-     flex: 1;
-   }
- }
+.chart {
+  display: flex;
+  flex-direction: column;
+  > * {
+    flex: 1;
+  }
+}
+
+ 
 </style>
