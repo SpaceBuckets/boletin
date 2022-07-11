@@ -10,10 +10,10 @@ module.exports = {
       borderWidth: 1.5,
     },
     {
-      backgroundColor: "rgba(46,120,210,0)",
+      backgroundColor: "rgba(122, 73, 165,0)",
       label: "TCRUS",
       data: require("../tcrm/itcrus.json"),
-      borderColor: "rgba(46,120,210,0.25)",
+      borderColor: "rgba(122, 73, 165,0.25)",
       pointRadius: 0,
       borderWidth: 1.5,
     },

@@ -151,7 +151,10 @@ global.ipc = {
   noroeste: '148.3_INIVELNOA_DICI_M_21&representation_mode=percent_change',
   nordeste: '148.3_INIVELNEA_DICI_M_21&representation_mode=percent_change',
   icc: '380.3_ICC_NACIONNAL_0_T_12',
-  ipim: '448.1_NIVEL_GENERAL_0_0_13_46&representation_mode=percent_change'
+  ipim: '448.1_NIVEL_GENERAL_0_0_13_46&representation_mode=percent_change',
+  ipib: '449.1_NIVEL_GENERAL_0_0_13_97&representation_mode=percent_change',
+  ipcnucleo: '148.3_INUCLEONAL_DICI_M_19&representation_mode=percent_change',
+  ipcgba: '101.1_I2NG_2016_M_22&representation_mode=percent_change'
 } 
 
 global.empleo = {
@@ -389,6 +392,58 @@ async function getBRCASeries() {
 
   console.log(`♥ [monetaria] Tasas updated`)
 
+   // Sheet 7: BASE MONETARIA
+   var dateBasemonetaria = []
+   var redateBasemonetaria = []
+   var valTotal = []
+   var valPases = []
+   var valLeliq = []
+   var valNobac = []
+ 
+   for (let i = 0; i < obj[6].data.length; i++) {
+     var date = new Date(Date.UTC(0, 0, obj[6].data[i][0]));
+     if (date != 'Invalid Date') {
+      dateBasemonetaria.push(date.toLocaleDateString("en-CA"))
+      if (obj[6].data[i][4] === undefined) { obj[6].data[i][4] = 0 }
+      if (obj[6].data[i][5] === undefined) { obj[6].data[i][5] = 0 }
+       valPases.push(obj[6].data[i][1])
+       valLeliq.push(obj[6].data[i][4])
+       valNobac.push(obj[6].data[i][5])
+  
+     }
+   }
+
+   var valLeliqFiltered = valLeliq.map(e => parseFloat(e.toString().replace('s/o', '0')))
+   var valPasesFiltered = valPases.map(e => parseFloat(e.toString().replace('s/o', '0')))
+   var valNobacFiltered = valNobac.map(e => parseFloat(e.toString().replace('s/o', '0')))
+
+   var BaseMonetariaPlus = valLeliqFiltered.map(function (num, idx) { return (num + valPasesFiltered[idx] +  valNobacFiltered[idx]).toFixed(2); });
+
+
+   for (let i = 0; i < obj[1].data.length; i++) {
+    var date = new Date(Date.UTC(0, 0, obj[1].data[i][0]));
+    if (date != 'Invalid Date') {
+      redateBasemonetaria.push(date.toLocaleDateString("en-CA"))
+ 
+      valTotal.push(obj[1].data[i][28])
+ 
+ 
+    }
+  }
+  var refoundArr = []
+  for (let e = 0; e < dateUSD.length; e++) {
+    if (dateUSD[e] === '2003-01-01') {
+      refoundArr.push(e)
+    }
+  }
+ 
+   writeFileSyncRecursive(`./json/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus));
+   writeFileSyncRecursive(`./json/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,foundArr[0])));
+   writeFileSyncRecursive(`./json/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,foundArr[0])));
+ 
+ 
+   console.log(`♥ [monetaria] basemonetaria updated`)
+
 }
 
 
@@ -418,8 +473,14 @@ async function getBRCAScraper() {
       }
     }
 
-
-
+    if (series[i] === '251') {
+      writeFileSyncRecursive(`./json/basemonetaria/circulacion/dates.json`, JSON.stringify(dateInfla));
+      writeFileSyncRecursive(`./json/basemonetaria/circulacion/d.json`, JSON.stringify(inflaVal));
+    }
+    if (series[i] === '250') {
+      writeFileSyncRecursive(`./json/basemonetaria/total/dates.json`, JSON.stringify(dateInfla));
+      writeFileSyncRecursive(`./json/basemonetaria/total/d.json`, JSON.stringify(inflaVal));
+    }
     if (series[i] === '7932') {
       writeFileSyncRecursive(`./json/ipc/historico/dates.json`, JSON.stringify(dateInfla));
       writeFileSyncRecursive(`./json/ipc/historico/danual.json`, JSON.stringify(inflaVal));
@@ -653,24 +714,24 @@ async function megaContent(src) {
 async function processDB() {
  
    await masterDb([
-    'cuentas',
+   'cuentas',
     'gastos',
     'tributarios',
     'emae',
     'ipi',
     'isac',
     'expo',
-    'impo',
+    'impo', 
     'ipc',
-    'empleo',
+     'empleo',
     'ucii', 
     'rofex',
     'polingresos',
     'tasas',
-    'bcra'
+    'bcra' 
   ]); 
   
-  await parseXLS("embi");
+   await parseXLS("embi");
   await parseXLS("ice");
   await parseXLS("tcrm");
   await getBRCASeries()
@@ -683,7 +744,8 @@ async function processDB() {
   await parseJson("poblacion");
   await parseJson("pbi");  
 
-  await parseAmbito()  
+  await parseAmbito()   
+  await getBRCASeries()
 
   await megaContent("kpi")
 }

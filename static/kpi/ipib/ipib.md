@@ -1,8 +1,8 @@
 ---
-t: "IPIM"
-st: "Índice de Precios Internos al por Mayor"
+t: "IPIB"
+st: "Índice de Precios Internos Básicos al por Mayor"
 sd: "Este indicador incluye un exhaustivo relevamiento de todas las <em>actividades económicas que conforman la industria manufacturera</em>, con cobertura para el total del país."
-kpi: "ipim"
+kpi: "ipib"
 capis:
     'interanual':
     - 0
