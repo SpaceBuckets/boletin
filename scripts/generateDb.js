@@ -334,7 +334,7 @@ async function getBRCASeries() {
   var foundArr = []
   for (let e = 0; e < dateUSD.length; e++) {
     if (dateUSD[e] === '2003-01-01') {
-      foundArr.push(e)
+      foundArr.push(e-1)
     }
   }
 
@@ -433,7 +433,7 @@ async function getBRCASeries() {
   var refoundArr = []
   for (let e = 0; e < dateUSD.length; e++) {
     if (dateUSD[e] === '2003-01-01') {
-      refoundArr.push(e)
+      refoundArr.push(e-1)
     }
   }
  
@@ -473,14 +473,7 @@ async function getBRCAScraper() {
       }
     }
 
-    if (series[i] === '251') {
-      writeFileSyncRecursive(`./json/basemonetaria/circulacion/dates.json`, JSON.stringify(dateInfla));
-      writeFileSyncRecursive(`./json/basemonetaria/circulacion/d.json`, JSON.stringify(inflaVal));
-    }
-    if (series[i] === '250') {
-      writeFileSyncRecursive(`./json/basemonetaria/total/dates.json`, JSON.stringify(dateInfla));
-      writeFileSyncRecursive(`./json/basemonetaria/total/d.json`, JSON.stringify(inflaVal));
-    }
+ 
     if (series[i] === '7932') {
       writeFileSyncRecursive(`./json/ipc/historico/dates.json`, JSON.stringify(dateInfla));
       writeFileSyncRecursive(`./json/ipc/historico/danual.json`, JSON.stringify(inflaVal));
