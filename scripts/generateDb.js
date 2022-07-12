@@ -419,7 +419,6 @@ async function getBRCASeries() {
 
    var BaseMonetariaPlus = valLeliqFiltered.map(function (num, idx) { return (num + valPasesFiltered[idx] +  valNobacFiltered[idx]).toFixed(2); });
 
-
    for (let i = 0; i < obj[1].data.length; i++) {
     var date = new Date(Date.UTC(0, 0, obj[1].data[i][0]));
     if (date != 'Invalid Date') {
@@ -436,7 +435,8 @@ async function getBRCASeries() {
       refoundArr.push(e-1)
     }
   }
-   writeFileSyncRecursive(`./json/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus));
+
+   writeFileSyncRecursive(`./json/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus.slice(0,refoundArr[0])));
    writeFileSyncRecursive(`./json/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,refoundArr[0])));
    writeFileSyncRecursive(`./json/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,refoundArr[0])));
  
@@ -726,7 +726,6 @@ async function processDB() {
     await parseXLS("embi");
   await parseXLS("ice");
   await parseXLS("tcrm");
-  await getBRCASeries()
 
   await getUSD() 
   await getBRCAScraper() 
@@ -736,8 +735,9 @@ async function processDB() {
   await parseJson("poblacion");
   await parseJson("pbi");  
 
-  await parseAmbito()   
+  await parseAmbito()    
 
+  await getBRCASeries()
 
 
   await megaContent("kpi")

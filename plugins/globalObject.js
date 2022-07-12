@@ -10,7 +10,8 @@ const state = {
     cambio: "2017-06-01",
     salariominimo: "2004-12-01",
     haberminimo: "2004-12-01",
-    tasa: "2016-06-01"
+    tasa: "2016-06-01",
+    basemonetaria: "2016-06-01"
 
   },
   chartOptions: {
