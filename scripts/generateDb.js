@@ -436,10 +436,9 @@ async function getBRCASeries() {
       refoundArr.push(e-1)
     }
   }
- 
    writeFileSyncRecursive(`./json/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus));
-   writeFileSyncRecursive(`./json/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,foundArr[0])));
-   writeFileSyncRecursive(`./json/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,foundArr[0])));
+   writeFileSyncRecursive(`./json/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,refoundArr[0])));
+   writeFileSyncRecursive(`./json/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,refoundArr[0])));
  
  
    console.log(`♥ [monetaria] basemonetaria updated`)
@@ -493,24 +492,23 @@ async function getBRCAScraper() {
 async function masterDb(kpis) {
      for (let e = 0; e < kpis.length; e++) {
       for (let [key, value] of Object.entries(global[`${kpis[e]}`])) {
-
+  
         var tempDates = [];
         var tempDataBase = [];
         const resB = await fetch(`https://apis.datos.gob.ar/series/api/series/?limit=5000&format=json&ids=${value}`);
         var emaeB = await resB.json();
         for (let i = 0; i < emaeB.data.length; i++) {
-   if (emaeB.data[i][1] == null){
-    emaeB.data[i][1] = 0
-}
-tempDataBase.push(emaeB.data[i][1].toFixed(2));
-
+          if (emaeB.data[i][1] == null){ emaeB.data[i][1] = 0 }
+          tempDataBase.push(emaeB.data[i][1].toFixed(2));
           tempDates.push(emaeB.data[i][0]);
         }
         writeFileSyncRecursive(`./json/${kpis[e]}/${key}/dates.json`, JSON.stringify(tempDates));
         writeFileSyncRecursive(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
         console.log(`♥ [${kpis[e]}] ${key} updated`)
+
         await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](600)
       }
+
     }
  
 }
@@ -723,8 +721,9 @@ async function processDB() {
     'tasas',
     'bcra' 
   ]); 
-  
-   await parseXLS("embi");
+
+   
+    await parseXLS("embi");
   await parseXLS("ice");
   await parseXLS("tcrm");
   await getBRCASeries()
@@ -738,7 +737,8 @@ async function processDB() {
   await parseJson("pbi");  
 
   await parseAmbito()   
-  await getBRCASeries()
+
+
 
   await megaContent("kpi")
 }
