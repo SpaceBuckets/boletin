@@ -5,7 +5,7 @@
         <nuxt-link to="/"><span>BOLETÍN</span>EXTRAOFICIAL</nuxt-link>
      
       </h1>
-      <div class="renav">
+      <div class="renav" style="display:none">
         Esta colección de indicadores intenta develar de donde viene y hacia
         donde va la macroeconomía Argentina.
       </div>
@@ -97,6 +97,12 @@ export default {
   //max-width: 1440px;
   margin: 0px;
   padding: 0 20px 0 225px;
+  &.index {
+    padding: 30px 20px 0;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  }
   &.menued {
    // padding: 0 20px;
     .meganav {
@@ -171,7 +177,7 @@ header {
     a {
       color: #ddd;
       font-family: Helvetica, Arial, sans-serif;
-      font-size: 20px;
+      font-size: 21px;
       text-decoration: none;
       font-weight: lighter;
       line-height: 60px;

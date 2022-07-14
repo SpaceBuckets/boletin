@@ -3,7 +3,7 @@ module.exports = {
   datasets: [
     {
       backgroundColor: 'rgba(46,120,210,0.0)',
-      label: "Desempleo General",
+      label: "General",
       data: require("../empleo/general/d.json"),
       borderColor: "#2E78D2",
       pointRadius: 0,
@@ -11,7 +11,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "Desempleo CABA",
+      label: "CABA",
       data: require("../empleo/caba/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -20,7 +20,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "Desempleo Cuyo",
+      label: "Cuyo",
       data: require("../empleo/cuyo/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -29,7 +29,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "Desempleo GBA",
+      label: "GBA",
       data: require("../empleo/gba/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -38,7 +38,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "Desempleo Nordeste",
+      label: "Nordeste",
       data: require("../empleo/nordeste/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -47,7 +47,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "Desempleo Noroeste",
+      label: "Noroeste",
       data: require("../empleo/noroeste/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -56,7 +56,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "Desempleo Pampeana",
+      label: "Pampeana",
       data: require("../empleo/pampeana/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -65,7 +65,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "Desempleo Patagonia",
+      label: "Patagonia",
       data: require("../empleo/patagonia/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",

@@ -4,7 +4,7 @@ module.exports = {
   datasets: [
     {
       backgroundColor: "#2E78D295",
-      label: "Desestacionalizado",
+      label: "IPC General",
       data: require("../ipc/historico/dmensual.json"),
       type: 'bar',
       borderColor: "#2E78D2",

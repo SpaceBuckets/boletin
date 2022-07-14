@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="meganav" :class="{index: $route.path === '/'}">
+    <div class="meganav" >
 
      <div class="meganavsection nochild">
         <div> <nuxt-link to="/">Dashboard</nuxt-link>    </div>
@@ -85,6 +85,9 @@ export default {
   padding-top: 20px;
   width: 220px;
   z-index: 999;
+  &.index {
+    display: none;
+  }
     @media only screen and (max-width: 980px) {
      transform: translateX(-100%);
 

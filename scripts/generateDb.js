@@ -506,7 +506,7 @@ async function masterDb(kpis) {
         writeFileSyncRecursive(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
         console.log(`♥ [${kpis[e]}] ${key} updated`)
 
-        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](600)
+        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](300)
       }
 
     }

@@ -3,7 +3,7 @@ module.exports = {
   datasets: [
     {
       backgroundColor: "rgba(46,120,210,0)",
-      label: "UCII General",
+      label: "General",
       data: require("../ucii/general/d.json"),
       borderColor: "#2E78D2",
       pointRadius: 0,
@@ -11,7 +11,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Alimentos",
+      label: "Alimentos",
       data: require("../ucii/alimentos/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -20,7 +20,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Automotriz",
+      label: "Automotriz",
       data: require("../ucii/automotriz/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -29,7 +29,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Edicion",
+      label: "Edicion",
       data: require("../ucii/edicion/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -38,7 +38,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Metales",
+      label: "Metales",
       data: require("../ucii/metales/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -47,7 +47,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Metalmecanica",
+      label: "Metalmecanica",
       data: require("../ucii/metalmecanica/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -56,7 +56,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Minerales",
+      label: "Minerales",
       data: require("../ucii/minerales/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -65,7 +65,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Papel",
+      label: "Papel",
       data: require("../ucii/papel/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -74,7 +74,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Petroleo",
+      label: "Petroleo",
       data: require("../ucii/petroleo/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -83,7 +83,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Plastico",
+      label: "Plastico",
       data: require("../ucii/plastico/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -92,7 +92,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Quimicos",
+      label: "Quimicos",
       data: require("../ucii/quimicos/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -101,7 +101,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Tabaco",
+      label: "Tabaco",
       data: require("../ucii/tabaco/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
@@ -110,7 +110,7 @@ module.exports = {
     },
     {
       fill: false,
-      label: "UCII Textiles",
+      label: "Textiles",
       data: require("../ucii/textiles/d.json"),
       borderColor: "rgba(46,120,210,0.15)",
       pointBackgroundColor: "#C1D7F2",
