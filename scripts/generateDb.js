@@ -431,7 +431,7 @@ async function getBRCASeries() {
   }
   var refoundArr = []
   for (let e = 0; e < redateBasemonetaria.length; e++) {
-    if (redateBasemonetaria[e] === '2003-01-01' || redateBasemonetaria[e] === '2003-01-01') {
+    if (redateBasemonetaria[e] === '2003-01-01' || redateBasemonetaria[e] === '2003-01-02') {
       refoundArr.push(e)
     }
   }
