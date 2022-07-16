@@ -333,8 +333,8 @@ async function getBRCASeries() {
 
   var foundArr = []
   for (let e = 0; e < dateUSD.length; e++) {
-    if (dateUSD[e] === '2003-01-01') {
-      foundArr.push(e-1)
+    if (dateUSD[e] === '2003-01-01' || dateUSD[e] === '2003-01-02' && e !== 0) {
+      foundArr.push(e)
     }
   }
 
@@ -431,18 +431,17 @@ async function getBRCASeries() {
   }
   var refoundArr = []
   for (let e = 0; e < redateBasemonetaria.length; e++) {
-    if (redateBasemonetaria[e] === '2003-01-01' || redateBasemonetaria[e] === '2003-01-02') {
+    if (redateBasemonetaria[e] === '2003-01-01' || redateBasemonetaria[e] === '2003-01-02' && e !== 0) {
       refoundArr.push(e)
     }
   }
-  console.log(refoundArr)
 
    writeFileSyncRecursive(`./json/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus.slice(0,refoundArr[0])));
    writeFileSyncRecursive(`./json/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,refoundArr[0])));
    writeFileSyncRecursive(`./json/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,refoundArr[0])));
  
  
-   console.log(`♥ [monetaria] basemonetaria updated`)
+   console.log(`♥ [monetaria] Base Monetaria updated`)
 
 }
 
