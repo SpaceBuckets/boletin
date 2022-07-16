@@ -476,7 +476,7 @@ export default {
   gap: 0px;
   border-left: 1px dashed #444;
   border-top: 1px dashed #444;
-  margin-top: 20px;
+  margin-top: 0px;
   @media only screen and (max-width: 980px) {
     display: block;
     border: 0;

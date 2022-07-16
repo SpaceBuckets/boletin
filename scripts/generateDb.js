@@ -703,7 +703,7 @@ async function megaContent(src) {
 };
 
 async function processDB() {
- 
+ /* 
    await masterDb([
    'cuentas',
     'gastos',
@@ -723,7 +723,7 @@ async function processDB() {
   ]); 
 
    
-    await parseXLS("embi");
+  await parseXLS("embi");
   await parseXLS("ice");
   await parseXLS("tcrm");
 
@@ -739,6 +739,9 @@ async function processDB() {
 
   await getBRCASeries()
 
+ */
+ 
+  await getBRCASeries()
 
   await megaContent("kpi")
 }

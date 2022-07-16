@@ -101,7 +101,7 @@ export default {
    if (this.kpi.cells) {
       this.savedCells = this.kpi.cells
    }
-
+    console.log(this.kpi)
   }
 };
 </script>

@@ -96,9 +96,9 @@ export default {
 .content-container {
   //max-width: 1440px;
   margin: 0px;
-  padding: 0 20px 0 225px;
+  padding: 20px 20px 0 225px;
   &.index {
-    padding: 30px 20px 0;
+    padding: 20px 20px 0;
   max-width: 1440px;
   margin: 0 auto;
 
@@ -144,18 +144,19 @@ html {
     }  
 }
 header {
-  background: rgba(55, 53, 47, 0.08);
-  background: #000;
+  //background: rgba(55, 53, 47, 0.08);
+  //background: #000;
   position: fixed;
   top: 0;
   height: 60px;
   left: 0;
-  right: 0;
+  width: 230px;
+  //right: 0;
   backface-visibility: hidden;
   display: flex;
   align-items: center;
   z-index: 999999;
-  border-bottom: 1px solid #333;
+  //border-bottom: 1px solid #333;
 
   svg {
     width: 60px;
@@ -177,16 +178,16 @@ header {
     a {
       color: #ddd;
       font-family: Helvetica, Arial, sans-serif;
-      font-size: 21px;
+      font-size: 18px;
       text-decoration: none;
       font-weight: lighter;
-      line-height: 60px;
+      //line-height: 60px;
       span {
         font-weight: 600;
         color: #eee;
-        display: inline-block;
+        display: block;
         padding-right: 2px;
-        //font-size: 16px;
+        font-size: 16px;
       }
     }
   }
@@ -200,7 +201,7 @@ body {
   background: #000;
   margin: 0;
   font-size: 15px;
-  padding-top: 60px;
+  padding-top: 0px;
 }
 
 p {

@@ -184,8 +184,8 @@ padding-bottom: 20px;
 }
 .pepeboard > h2 {
     color: #eee;
-    padding-top: 15px;
-    margin-top: 15px;
+ margin-top: 0;
+ padding-top: 15px;
 }
 .mincharto {
   position: relative;
