@@ -17,7 +17,7 @@ c: "<p>Este índice mide el precio relativo de los bienes y servicios de la econ
 <p>El ITCRM se elabora y publica de forma diaria, a partir de las cotizaciones de las monedas a las 15 hs. de cada día y contempla un mecanismo de diarización de las estimaciones y de replicación de los últimos datos de los índices de precios representativos para información aún no conocida.</p>"
 f: "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf"
 d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral."
-max: 280
+max: 300
 min: 0
 cat: "Política Monetaria"
 

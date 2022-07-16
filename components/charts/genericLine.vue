@@ -13,7 +13,7 @@
     <h2 v-if="title">
         <strong>{{ title }}</strong>. {{subtitle}}
     </h2>
-    
+    <div class="updatedPill" v-if="$route.path === '/'">{{ getLastUpdated()}}</div>
     <div class="chartcontain">
     <charts-line
       :chart="chart"
@@ -92,6 +92,31 @@ export default {
 
   },
   methods: {
+ getLastUpdated() {
+      const formatter = new Intl.DateTimeFormat("es", {
+         month: "long",
+        year: "numeric",
+      });
+
+     var date = new Date(this.chart.chartdata.labels.slice(-1)[0])
+     var day = 60 * 60 * 24 * 1000;
+
+      date = date.setDate(date.getDate() + 1)
+
+
+      const lastupdate = formatter.format(
+date
+      );
+      var day = this.chart.chartdata.labels.slice(-1)[0].slice(-2)
+      if (day === "01") {
+       return lastupdate.replace("de","").replace(" ","");
+
+      }
+            else {
+       return day + " " + lastupdate.replace("de","").replace(" ","");
+
+      }
+    },    
     triggerRange(e) {
       var valpepe = e.target.value * -1
       this.startingVal = e.target.value
@@ -157,5 +182,14 @@ display: flex;
   }
  }
 
+.updatedPill {
+  position: absolute;
+  top: 22px;
+  right: 20px;
+  border-radius: 100px;
+   color: #aaa;
+   text-transform: capitalize;
+  font-size: 14px;
+}
  
  </style>

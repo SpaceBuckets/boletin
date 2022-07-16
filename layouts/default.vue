@@ -112,7 +112,7 @@ export default {
     }
   }
     @media only screen and (max-width: 980px) {
-  padding: 0;
+  padding: 0 10px;
 
     }      
 }
@@ -157,7 +157,10 @@ header {
   align-items: center;
   z-index: 999999;
   //border-bottom: 1px solid #333;
+      @media only screen and (max-width: 980px) {
+  width: 100vw;
 
+    }   
   svg {
     width: 60px;
     padding: 15px;
@@ -201,7 +204,10 @@ body {
   background: #000;
   margin: 0;
   font-size: 15px;
-  padding-top: 0px;
+        @media only screen and (max-width: 980px) {
+  padding-top: 60px;
+
+    }   
 }
 
 p {
@@ -229,6 +235,7 @@ a {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: lighter;
   color: #888;
+  padding-right: 90px;
   i {
     display: block;
     font-size: 14px;

@@ -48,51 +48,18 @@
     </div> -->
     <!--     <charts-kpiBoard edit :data="savedCells"/>
  -->
-    <h2>Dólar vs Peso</h2>
-    <div class="mastersection">
-      <div class="mincharto">
-        <charts-genericLine data="cambio" />
-      </div>
-      <div class="mincharto">
-        <charts-genericLine data="tcrm" />
-      </div>
-    </div>
-    <h2>Actividad Económica</h2>
-    <div class="mastersection">
-      <div class="mincharto">
-        <charts-genericLine data="emae" />
-      </div>
-      <div class="mincharto">
-        <charts-genericLine data="ucii" />
-      </div>
-    </div>  
-    <h2>Política Monetaria</h2>
-    <div class="mastersection">
-      <div class="mincharto">
-        <charts-genericLine data="tasa" />
-      </div>
-      <div class="mincharto">
-        <charts-genericLine data="basemonetaria" />
-      </div>
-    </div>     
-    <h2>Cuentas Nacionales</h2>
-    <div class="mastersection">
-      <div class="mincharto">
-        <charts-genericLine data="deficit" />
-      </div>
-      <div class="mincharto">
-        <charts-genericLine data="balanza" />
-      </div>
-    </div>   
-    <h2>Precios y Salarios</h2>
-    <div class="mastersection">
-      <div class="mincharto">
-        <charts-genericLine data="ipc" />
-      </div>
-      <div class="mincharto">
-        <charts-genericLine data="desempleo" />
-      </div>
-    </div>          
+
+    <template v-for="(indexItem, i) in savedIndex">
+        <h2>{{ indexItem.title }}</h2>
+        <div class="mastersection">
+           <nuxt-link class="mincharto" v-for="indexChart in savedIndex[i].items" :to="`kpi/${indexChart}`" :key="`a-${indexChart}`">
+                <charts-genericLine :data="indexChart" />
+            </nuxt-link> 
+        </div>
+    </template>
+
+  
+           
   </div>
 </template>
 
@@ -101,6 +68,28 @@ export default {
   name: "IndexPage",
   data() {
     return {
+      savedIndex: [
+        {
+          title: "Dólar vs. Peso",
+          items: ["cambio", "tcrm"],
+        },
+        {
+          title: "Actividad Económica",
+          items: ["emae", "ucii"],
+        },
+        {
+          title: "Política Monetaria",
+          items: ["tasa", "basemonetaria"],
+        },
+        {
+          title: "Cuentas Nacionales",
+          items: ["deficit", "balanza"],
+        },
+        {
+          title: "Precios y Salarios",
+          items: ["ipc", "desempleo"],
+        },
+      ],
       savedCells: {
         1213: {
           area: "1 / 1 / 2 / 3",
@@ -172,66 +161,69 @@ export default {
 .mastersection {
   display: flex;
   gap: 15px;
-    border-bottom: 1px solid #444;
-padding-bottom: 20px;
-   @media only screen and (max-width: 980px) {
-  display: block;
-
-    }    
+  border-bottom: 1px solid #444;
+  padding-bottom: 20px;
+  @media only screen and (max-width: 980px) {
+    display: block;
+  }
   > * {
     flex: 1;
   }
 }
+.pepeboard {
+  padding: 0 6px;
+}
 .pepeboard > h2 {
-    color: #eee;
- margin-top: 0;
- padding-top: 15px;
+  color: #eee;
+  margin-top: 0;
+  padding-top: 15px;
+  font-weight: normal;
 }
 .mincharto {
   position: relative;
   width: 50%;
-  height: 400px;
+  min-height: 400px;
   background: #fff;
   padding: 20px;
   border-radius: 4px;
-    margin-bottom: 15px;
+  margin-bottom: 15px;
+  text-decoration: none;
 
-   @media only screen and (max-width: 980px) {
-  width: 100%;
-
-    }    
+  @media only screen and (max-width: 980px) {
+    width: 100%;
+  }
   .rangeselector {
     display: none !important;
   }
 }
 
 .rewelcome {
-    border-bottom: 1px solid #333;
-    border-radius: 2px;
-    color: #eee;
-    padding: 0 15px 20px;
-    font-size: 18px;
-    position: relative;
-    left: 0;
-    padding-right: 25%;
-    background: #000;
-    p {
-        color: #ccc;
-        margin: 0;
-    }
-h1 {
+  border-bottom: 1px solid #333;
+  border-radius: 2px;
+  color: #eee;
+  padding: 0 15px 20px;
+  font-size: 18px;
+  position: relative;
+  left: 0;
+  padding-right: 25%;
+  background: #000;
+  p {
+    color: #ccc;
+    margin: 0;
+  }
+  h1 {
     color: #eee;
     margin: 0;
     margin-bottom: 10px;
     font-weight: normal;
     font-size: 30px;
-}
- svg {
+  }
+  svg {
     position: absolute;
     top: -75px;
     width: 150px;
     height: auto;
     right: 30px;
-}    
+  }
 }
 </style>

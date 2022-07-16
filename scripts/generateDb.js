@@ -270,11 +270,11 @@ global.xls = {
 }
 
 global.ambito = {
+  oficial: 'https://mercados.ambito.com//dolar/oficial/historico-general/01-01-1900/01-01-2100',
   mep: 'https://mercados.ambito.com//dolarrava/mep/historico-general/01-01-1900/01-01-2100',
   ccl: 'https://mercados.ambito.com//dolarrava/cl/historico-general/01-01-1900/01-01-2100',
   blue: 'https://mercados.ambito.com//dolar/informal/historico-general/01-01-1900/01-01-2100',
   turista: 'https://mercados.ambito.com//dolar/dolarturista/historico-general/01-01-1900/01-01-2100',
-  oficial: 'https://mercados.ambito.com//dolar/oficial/historico-general/01-01-1900/01-01-2100',
   mayorista: 'https://mercados.ambito.com//dolar/mayorista/historico-general/01-01-1900/01-01-2100',
 }
 
@@ -499,7 +499,16 @@ async function masterDb(kpis) {
         var emaeB = await resB.json();
         for (let i = 0; i < emaeB.data.length; i++) {
           if (emaeB.data[i][1] == null){ emaeB.data[i][1] = 0 }
-          tempDataBase.push(emaeB.data[i][1].toFixed(2));
+
+          if (key === 'ipcgba' || key === 'ipcnucleo' || key === 'ipib' || key === 'ipim') {
+            tempDataBase.push((emaeB.data[i][1]*100).toFixed(2))
+
+          } else {
+            tempDataBase.push(emaeB.data[i][1].toFixed(2));
+
+          }
+
+
           tempDates.push(emaeB.data[i][0]);
         }
         writeFileSyncRecursive(`./json/${kpis[e]}/${key}/dates.json`, JSON.stringify(tempDates));
@@ -601,8 +610,8 @@ async function parseJson(kpi) {
       }
   
   }
-  writeFileSyncRecursive(`./json/${kpi}/dates.json`, JSON.stringify(datesArray));
-  writeFileSyncRecursive(`./json/${kpi}/${key}.json`, JSON.stringify(tempArray)); 
+  writeFileSyncRecursive(`./json/${kpi}/dates.json`, JSON.stringify(datesArray.reverse()));
+  writeFileSyncRecursive(`./json/${kpi}/${key}.json`, JSON.stringify(tempArray.reverse())); 
   console.log(`♥ [${kpi}] ${key} updated`)
 
   }
@@ -611,6 +620,7 @@ async function parseJson(kpi) {
 }
 
 async function parseAmbito() {
+  var pepeLength
  
   for (let [key, value] of Object.entries(ambito)) {
     const resA = await fetch(value);
@@ -625,8 +635,10 @@ async function parseAmbito() {
     tempArray.push(Number(emaeB[i][1].replace(',','.')))
       
   }
-  writeFileSyncRecursive(`./json/ambito/${key}/dates.json`, JSON.stringify(datesArray));
-    writeFileSyncRecursive(`./json/ambito/${key}/d.json`, JSON.stringify(tempArray));
+  if (key === 'oficial') { pepeLength = tempArray.length }
+  tempArray.length = pepeLength  
+   writeFileSyncRecursive(`./json/ambito/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
+    writeFileSyncRecursive(`./json/ambito/${key}/d.json`, JSON.stringify(tempArray.reverse()));
     console.log(`♥ [ambito] ${key} updated`)
 
    } 
@@ -703,7 +715,7 @@ async function megaContent(src) {
 };
 
 async function processDB() {
- /* 
+  
    await masterDb([
    'cuentas',
     'gastos',
@@ -739,9 +751,8 @@ async function processDB() {
 
   await getBRCASeries()
 
- */
  
-  await getBRCASeries()
+
 
   await megaContent("kpi")
 }

@@ -2,7 +2,7 @@ module.exports = {
   labels: require("../emae/base/dates.json"),
   datasets: [
     {
-      backgroundColor: "rgba(46,120,210,0)",
+      fill: false,
       label: "Desestacionalizado",
       data: require("../emae/estacional/d.json"),
       borderColor: "#2E78D2",
