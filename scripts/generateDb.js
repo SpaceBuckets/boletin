@@ -431,11 +431,11 @@ async function getBRCASeries() {
   }
   var refoundArr = []
   for (let e = 0; e < redateBasemonetaria.length; e++) {
-    if (redateBasemonetaria[e] === '2003-01-01') {
-      refoundArr.push(e-1)
+    if (redateBasemonetaria[e] === '2003-01-01' || redateBasemonetaria[e] === '2003-01-01') {
+      refoundArr.push(e)
     }
   }
-  console.log(refoundArr[0])
+  console.log(refoundArr)
 
    writeFileSyncRecursive(`./json/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus.slice(0,refoundArr[0])));
    writeFileSyncRecursive(`./json/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,refoundArr[0])));
