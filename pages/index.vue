@@ -188,7 +188,7 @@ export default {
   border-radius: 4px;
   margin-bottom: 15px;
   text-decoration: none;
-
+display: block;
   @media only screen and (max-width: 980px) {
     width: 100%;
   }
