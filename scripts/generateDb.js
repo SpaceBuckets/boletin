@@ -807,8 +807,8 @@ async function processDB() {
   await parseAmbito()    
 
   await getBRCASeries() 
-  await parseBonos('bonoscer')    
-  await parseBonos('bonosusd')    
+/*   await parseBonos('bonoscer')    
+  await parseBonos('bonosusd')    */ 
 
   
  
