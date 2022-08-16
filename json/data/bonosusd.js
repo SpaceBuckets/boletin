@@ -36,7 +36,7 @@ module.exports = {
     {
       backgroundColor: "rgba(46,120,210,0.0)",
       label: "GD35D",
-      data: require("../bonosusd/gd35D/d.json"),
+      data: require("../bonosusd/gd35d/d.json"),
       borderColor: "rgba(46,120,210,0.25)",
       pointRadius: 0,
       borderWidth: 1.5,
@@ -44,7 +44,7 @@ module.exports = {
     {
       backgroundColor: "rgba(46,120,210,0.0)",
       label: "GD41D",
-      data: require("../bonosusd/gd41D/d.json"),
+      data: require("../bonosusd/gd41d/d.json"),
       borderColor: "rgba(46,120,210,0.25)",
       pointRadius: 0,
       borderWidth: 1.5,
