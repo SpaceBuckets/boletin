@@ -17,7 +17,7 @@ module.exports = {
       data: require("../ambito/blue/d.json"),
       borderColor: "#2E78D2",
       pointRadius: 0,
-      borderWidth: 1.5,
+      borderWidth: 1.25,
 
     },
     {
@@ -26,7 +26,7 @@ module.exports = {
       data: require("../ambito/ccl/d.json"),
       borderColor: "#b22222CC",
       pointRadius: 0,
-      borderWidth: 1.5,
+      borderWidth: 1.25,
     },
     {
       backgroundColor: "rgba(178,34,34,0)",
@@ -34,7 +34,7 @@ module.exports = {
       data: require("../ambito/mep/d.json"),
       borderColor: "#b2222250",
       pointRadius: 0,
-      borderWidth: 1.5,
+      borderWidth: 1.25,
     },
  
   ],

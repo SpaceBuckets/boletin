@@ -58,6 +58,8 @@ export default {
     };
   },
   created() {
+
+console.log(this.chart.chartdata.labels)
     let modifiedArr = this.chart.chartdata.labels.map(function (element) {
       return element.slice(0, -6);
     });

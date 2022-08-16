@@ -1,8 +1,8 @@
 <template>
   <div class="pepeboard">
-<!--     <div class="rewelcome">
+<!--       <div class="rewelcome">
         <p>
-        Esta colección de indicadores intenta develar de donde viene y hacia donde va la macroeconomía Argentina. Esta colección de indicadores intenta develar de donde viene y hacia donde va la macroeconomía Argentina. Esta colección de indicadores intenta develar de donde viene y hacia donde va la macroeconomía Argentina.
+           <strong>Febo asoma; ya sus rayos, iluminan el histórico contexto.</strong> Esta colección de 47 indicadores intenta develar de dónde viene y hacia dónde va la macroeconomía de la República Argentina.
 
         </p>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="504px" height="504px" viewBox="-165 -165 330 330">
@@ -45,7 +45,7 @@
 		<use xlink:href="#face_right" transform="scale(-1,1)"/>
 	</g>
 </svg>
-    </div> -->
+    </div>  --> 
     <!--     <charts-kpiBoard edit :data="savedCells"/>
  -->
 
@@ -58,16 +58,39 @@
         </div>
     </template>
 
-  
+<div class="retabler">
+  <h2><strong>Indicadores macroeconomicos de Argentina</strong> ({{items.length}})
+    </h2>
+    <table>
+  <tr>
+    <th>Indicador</th>
+    <th>Descripcion</th>
+    <th>Categoria</th>
+    <th>Fuente</th>
+    <th>Ultima Actualizacion</th>
+  </tr>
+  <tr v-for="(parent, i) in items">
+    <td>{{parent.kpi}}</td>
+    <td>{{parent.desc}}</td>
+    <td>{{parent.cat}}</td>
+    <td>INDEC</td>
+    <td>Mayo 2022</td>
+  </tr>
+</table>
+</div>
+
            
   </div>
 </template>
 
 <script>
+import megatable from '~/json/tableObject.json'
+
 export default {
   name: "IndexPage",
   data() {
     return {
+      items: megatable,      
       savedIndex: [
         {
           title: "Dólar vs. Peso",
@@ -161,7 +184,7 @@ export default {
 .mastersection {
   display: flex;
   gap: 15px;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #333;
   padding-bottom: 20px;
   @media only screen and (max-width: 980px) {
     display: block;
@@ -176,8 +199,9 @@ export default {
 .pepeboard > h2 {
   color: #eee;
   margin-top: 0;
-  padding-top: 15px;
+  padding-top: 20px;
   font-weight: normal;
+  &:first-of-type { padding-top: 0; }
 }
 .mincharto {
   position: relative;
@@ -199,17 +223,18 @@ display: block;
 }
 
 .rewelcome {
-  border-bottom: 1px solid #333;
+  border: 1px solid #333;
   border-radius: 2px;
   color: #eee;
-  padding: 0 15px 20px;
-  font-size: 18px;
+  padding: 15px;
+  font-size: 16px;
   position: relative;
   left: 0;
   padding-right: 25%;
   background: #000;
+  strong,
   p {
-    color: #ccc;
+    color: #eee;
     margin: 0;
   }
   h1 {
@@ -221,10 +246,48 @@ display: block;
   }
   svg {
     position: absolute;
-    top: -75px;
-    width: 150px;
+    top: 0;
+    width: 75px;
     height: auto;
-    right: 30px;
+    right: 20px;
+    padding: 5px;
+  }
+}
+
+.retabler {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  h2 {
+        margin: 0;
+    font-size: 18px;
+    min-width: 300px;
+    font-weight: 400;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #888;
+    padding-right: 90px;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-spacing: 0; border-collapse: collapse;
+  }
+  th,td {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+     &:nth-child(2) {
+      max-width: 200px;
+    }
+    &:first-child {
+      max-width: max-content;
+    }
+  }
+  tr {
+    cursor: pointer;
+    &:hover {
+      background: #eee;
+    }
   }
 }
 </style>

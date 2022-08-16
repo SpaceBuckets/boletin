@@ -1,0 +1,53 @@
+module.exports = {
+  labels: require("../bonosusd/al30d/dates.json"),
+  datasets: [
+    {
+      backgroundColor: "rgba(46,120,210,0.0)",
+      label: "AL30D",
+      data: require("../bonosusd/al30d/d.json"),
+      borderColor: "rgba(46,120,210,1)",
+      pointRadius: 0,
+      borderWidth: 1.5,
+    },
+    {
+      backgroundColor: "rgba(46,120,210,0.0)",
+      label: "AL29D",
+      data: require("../bonosusd/al29d/d.json"),
+      borderColor: "rgba(46,120,210,0.25)",
+      pointRadius: 0,
+      borderWidth: 1.5,
+    },
+    {
+      backgroundColor: "rgba(46,120,210,0.0)",
+      label: "AL41D",
+      data: require("../bonosusd/al41d/d.json"),
+      borderColor: "rgba(46,120,210,0.25)",
+      pointRadius: 0,
+      borderWidth: 1.5,
+    },   
+    {
+      backgroundColor: "rgba(46,120,210,0.0)",
+      label: "GD30D",
+      data: require("../bonosusd/gd30d/d.json"),
+      borderColor: "rgba(46,120,210,0.25)",
+      pointRadius: 0,
+      borderWidth: 1.5,
+    },   
+    {
+      backgroundColor: "rgba(46,120,210,0.0)",
+      label: "GD35D",
+      data: require("../bonosusd/gd35D/d.json"),
+      borderColor: "rgba(46,120,210,0.25)",
+      pointRadius: 0,
+      borderWidth: 1.5,
+    },   
+    {
+      backgroundColor: "rgba(46,120,210,0.0)",
+      label: "GD41D",
+      data: require("../bonosusd/gd41D/d.json"),
+      borderColor: "rgba(46,120,210,0.25)",
+      pointRadius: 0,
+      borderWidth: 1.5,
+    },               
+  ],
+}

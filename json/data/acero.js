@@ -3,7 +3,7 @@ module.exports = {
   datasets: [
     {
       backgroundColor: "rgba(46,120,210,0.05)",
-      label: "Transporte",
+      label: "Producción de Acero",
       data: require("../cuentas/hierro/d.json"),
       borderColor: "rgba(46,120,210,1)",
       pointRadius: 0,

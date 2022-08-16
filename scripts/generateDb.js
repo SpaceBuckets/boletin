@@ -107,12 +107,12 @@ global.ipi = {
   base: '453.1_SERIE_ORIGNAL_0_0_14_46',
 }
 
-/* global.consumo = {
+  global.consumo = {
   electricidad: '302.3_ELEC_GAS_AGWH_0_S_35',
   gas: '302.3_ELEC_GAS_A_M3_0_S_33',
   agua: '302.3_ELEC_GAS_A_M3_0_S_30',
 }
-*/
+ 
 
 global.tasas = {
   fed: '131.1_FET_0_0_12&start_date=1999-01-01',
@@ -278,6 +278,22 @@ global.ambito = {
   mayorista: 'https://mercados.ambito.com//dolar/mayorista/historico-general/01-01-1900/01-01-2100',
 }
 
+global.bonoscer = {
+  tx23: '12185',
+  tx24: '12304',
+  tx26: '13029',
+  tx28: '13031',
+  t2x2: '12416'
+}
+
+global.bonosusd = {
+  al29d: '13076',
+  al30d: '13078',
+  al41d: '13083',
+  gd30d: '13092',
+  gd35d: '13089',
+  gd41d: '13093'
+}
 
 async function getUSD() {
 
@@ -304,10 +320,10 @@ async function getUSD() {
 
   dateUSD = [...new Set(dateUSD)]
 
-  writeFileSyncRecursive(`./json/monetaria/blue/dates.json`, JSON.stringify(dateUSD));
-  writeFileSyncRecursive(`./json/monetaria/blue/blue.json`, JSON.stringify(valBlue));
-  writeFileSyncRecursive(`./json/monetaria/blue/usd.json`, JSON.stringify(valUSD));
-  writeFileSyncRecursive(`./json/monetaria/blue/gap.json`, JSON.stringify(valGap));
+  writeFileSyncRecursive(`./json/monetaria/blue/dates.json`, JSON.stringify(dateUSD.reverse()));
+  writeFileSyncRecursive(`./json/monetaria/blue/blue.json`, JSON.stringify(valBlue.reverse()));
+  writeFileSyncRecursive(`./json/monetaria/blue/usd.json`, JSON.stringify(valUSD.reverse()));
+  writeFileSyncRecursive(`./json/monetaria/blue/gap.json`, JSON.stringify(valGap.reverse()));
   console.log(`♥ [monetaria] Dolar/blue updated`)
 
 }
@@ -515,7 +531,7 @@ async function masterDb(kpis) {
         writeFileSyncRecursive(`./json/${kpis[e]}/${key}/d.json`, JSON.stringify(tempDataBase));
         console.log(`♥ [${kpis[e]}] ${key} updated`)
 
-        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](300)
+        await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](100)
       }
 
     }
@@ -644,6 +660,41 @@ async function parseAmbito() {
    } 
 
 }
+
+
+async function parseBonos(cat) {
+   for (let [key, value] of Object.entries(global[`${cat}`])) {
+
+  var resA = await fetch("https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas", {
+    "headers": { "content-type": "application/x-www-form-urlencoded; charset=UTF-8", },
+    "body": `idEspecie=${value}&fechaDesde=01%2F01%2F1900&fechaHasta=01%2F01%2F2100`,
+    "method": "POST"
+});
+  var emaeB = JSON.parse(await resA.text())
+
+ var datesArray = []
+ var tempArray = []
+ var pepeLength
+
+   for (let i = 1; i < emaeB.length; i++) {
+
+    datesArray.push(emaeB[i].FechaString.split('/').reverse().join('-'))
+   // datesArray.push(new Date (emaeB[1][i].date).toLocaleDateString("en-CA", {timeZone: "UTC"}))
+
+   tempArray.push(Number(emaeB[i].PrecioUltimo))
+      
+  }
+   if (key === 'tx23' || key === 'al29d') { pepeLength = tempArray.length }
+  tempArray.length = pepeLength  
+  for (let i = 1; i < tempArray.length; i++) { if(tempArray[i] === undefined) { tempArray[i] = null } }
+  for (let o = 1; o < datesArray.length; o++) { if(datesArray[o] === undefined) { datesArray[o] = null } }
+    writeFileSyncRecursive(`./json/${cat}/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
+    writeFileSyncRecursive(`./json/${cat}/${key}/d.json`, JSON.stringify(tempArray.reverse()));
+    console.log(`♥ [bonos] ${key} updated`) 
+
+  }  
+
+}
  
 async function megaContent(src) {
   
@@ -671,13 +722,14 @@ async function megaContent(src) {
   };
   categories = [...new Set(categories)]
   categoriesObject = {}
+  tableObject = []
   for (const singleCat of categories) {
     if(singleCat !== undefined) {
       categoriesObject[singleCat] = []
     }
   }
   categoriesObject['Todos'] = []
-
+ 
   for (const singleFolder of folders) {
 
     const documentes = glob.sync('*.md', {cwd: `static/${src}/${singleFolder}`})
@@ -689,6 +741,7 @@ async function megaContent(src) {
     if(post.cat !== undefined) {
       categoriesObject['Todos'].push({t:post.t,kpi:post.kpi})
       categoriesObject[post.cat].push({t:post.t,kpi:post.kpi})
+      tableObject.push({t:post.t,kpi:post.kpi,cat:post.cat,desc:post.st})
     }
   };
 
@@ -707,7 +760,11 @@ async function megaContent(src) {
     {}
   );
   delete ordered['Otros']
+  delete ordered['Consumo']
+  ordered['Consumo'] = categoriesObject['Consumo']
   ordered['Otros'] = categoriesObject['Otros']
+  
+  writeFileSyncRecursive(`./json/tableObject.json`, JSON.stringify(tableObject));
 
    writeFileSyncRecursive(`./json/kpis.json`, JSON.stringify(ordered));
   console.log(`♥ Content regenerated`)
@@ -715,7 +772,7 @@ async function megaContent(src) {
 };
 
 async function processDB() {
-  
+ 
    await masterDb([
    'cuentas',
     'gastos',
@@ -749,11 +806,12 @@ async function processDB() {
 
   await parseAmbito()    
 
-  await getBRCASeries()
+  await getBRCASeries() 
+  await parseBonos('bonoscer')    
+  await parseBonos('bonosusd')    
 
+  
  
-
-
   await megaContent("kpi")
 }
 
