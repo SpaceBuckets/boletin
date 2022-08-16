@@ -58,7 +58,7 @@
         </div>
     </template>
 
-<div class="retabler">
+<!-- <div class="retabler">
   <h2><strong>Indicadores macroeconomicos de Argentina</strong> ({{items.length}})
     </h2>
     <table>
@@ -77,7 +77,7 @@
     <td>Mayo 2022</td>
   </tr>
 </table>
-</div>
+</div> -->
 
            
   </div>
@@ -181,6 +181,7 @@ export default {
 </script>
 
 <style lang="scss">
+ 
 .mastersection {
   display: flex;
   gap: 15px;
