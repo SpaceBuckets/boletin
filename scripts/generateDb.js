@@ -691,6 +691,7 @@ async function parseBonos(cat) {
     writeFileSyncRecursive(`./json/${cat}/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
     writeFileSyncRecursive(`./json/${cat}/${key}/d.json`, JSON.stringify(tempArray.reverse()));
     console.log(`♥ [bonos] ${key} updated`) 
+    await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](200)
 
   }  
 
@@ -806,9 +807,9 @@ async function processDB() {
 
   await parseAmbito()    
 
-  await getBRCASeries() 
-/*   await parseBonos('bonoscer')    
-  await parseBonos('bonosusd')    */ 
+ await getBRCASeries()  
+  await parseBonos('bonoscer')   
+  await parseBonos('bonosusd')    
 
   
  
