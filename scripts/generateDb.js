@@ -235,6 +235,22 @@ global.json = {
 }
 
 global.xls = {
+  ivm: {
+    url: 'https://estudioseconomicos.ec.gba.gov.ar/datos/nac/contnac-ventas-minoristas.xlsx',
+    sheet: 0,
+    date: 0,
+    columns: {
+      valor: 1,
+    }      
+  },
+  ipip: {
+    url: 'https://estudioseconomicos.ec.gba.gov.ar/datos/nac/contnac-indice-de-produccion-industrial-pyme.xlsx',
+    sheet: 0,
+    date: 0,
+    columns: {
+      valor: 1,
+    }    
+  },  
   ice: {
     url: 'https://estudioseconomicos.ec.gba.gov.ar/datos/nac/contnac-indice-de-condiciones-externas.xlsx',
     sheet: 0,
@@ -464,7 +480,7 @@ async function getBRCASeries() {
 
 async function getBRCAScraper() {
 
-  const series = ['7932', '7931', '7933']
+  const series = ['7932', '7931', '7933', '7988','7914']
 
   for (let i = 0; i < series.length; i++) {
 
@@ -501,7 +517,14 @@ async function getBRCAScraper() {
       writeFileSyncRecursive(`./json/rem/interanualrem/dates.json`, JSON.stringify(dateInfla));
       writeFileSyncRecursive(`./json/rem/interanualrem/d.json`, JSON.stringify(inflaVal));
     }
-
+    if (series[i] === '7988') {
+      writeFileSyncRecursive(`./json/bcra/icl/dates.json`, JSON.stringify(dateInfla));
+      writeFileSyncRecursive(`./json/bcra/icl/d.json`, JSON.stringify(inflaVal));
+    }
+    if (series[i] === '7914') {
+      writeFileSyncRecursive(`./json/bcra/uvi/dates.json`, JSON.stringify(dateInfla));
+      writeFileSyncRecursive(`./json/bcra/uvi/d.json`, JSON.stringify(inflaVal));
+    }    
   }
 }
 
@@ -773,7 +796,7 @@ async function megaContent(src) {
 };
 
 async function processDB() {
- 
+  /* 
    await masterDb([
    'cuentas',
     'gastos',
@@ -795,10 +818,10 @@ async function processDB() {
    
   await parseXLS("embi");
   await parseXLS("ice");
+  await parseXLS("ipip");
   await parseXLS("tcrm");
 
   await getUSD() 
-  await getBRCAScraper() 
   await parseCSV("ipicammesa");
 
   await parseJson("gini")
@@ -811,8 +834,12 @@ async function processDB() {
   await parseBonos('bonoscer')   
   await parseBonos('bonosusd')    
 
-  
- 
+  await getBRCAScraper() 
+
+  */
+  await parseXLS("ipip");
+  await parseXLS("ivm");
+
   await megaContent("kpi")
 }
 

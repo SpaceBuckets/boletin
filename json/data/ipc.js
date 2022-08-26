@@ -6,7 +6,7 @@ module.exports = {
       backgroundColor: "#2E78D295",
       label: "IPC General",
       data: require("../ipc/historico/dmensual.json"),
-      //type: 'bar',
+      type: 'bar',
       borderColor: "#2E78D2",
       pointRadius: 0,
       borderWidth: 0,
