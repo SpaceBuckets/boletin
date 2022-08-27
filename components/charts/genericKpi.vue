@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      chart: require(`~/json/confluence/${this.data}.json`),
+      chart: require(`~/static/confluence/${this.data}.json`),
     };
   },
   created() {},

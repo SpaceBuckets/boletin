@@ -260,7 +260,7 @@ export default {
   data() {
     return {
       columnAmount: 6,
-      kpeis: require(`~/json/kpis.json`),
+      kpeis: require(`~/static/kpis.json`),
       selectedCat: 'Todos',
       dragging: false,
       saredUrl: false,

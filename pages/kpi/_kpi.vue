@@ -10,7 +10,7 @@
 export default {
   name: "Details",
   async asyncData({ params }) {
-    const rekpi = require(`~/json/confluence/${params.kpi}.json`)
+    const rekpi = require(`~/static/confluence/${params.kpi}.json`)
 
     const savedCells = {
       1416: {
@@ -93,7 +93,7 @@ export default {
   },
   data() {
     return {
-      kpi: require(`~/json/confluence/${this.$route.params.kpi}.json`)
+      kpi: require(`~/static/confluence/${this.$route.params.kpi}.json`)
 
     }
   },

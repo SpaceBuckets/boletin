@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      chart: require(`~/json/confluence/${this.data}.json`),
+      chart: require(`~/static/confluence/${this.data}.json`),
       minVal: 0,
       maxVal: 0,
       startingVal: 0,

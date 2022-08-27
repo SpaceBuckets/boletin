@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import megatable from '~/json/tableObject.json'
+import megatable from '~/static/tableObject.json'
 
 export default {
   name: "IndexPage",

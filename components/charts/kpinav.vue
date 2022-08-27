@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import meganav from '~/json/kpis.json'
+import meganav from '~/static/kpis.json'
 
 export default {
   name: "Details",
