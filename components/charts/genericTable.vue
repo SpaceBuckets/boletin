@@ -65,7 +65,7 @@ export default {
   },
   data() {
     return {
-      chart: require(`~/static/confluence/${this.data}.json`)
+      chart: require(`~/static/kpi/${this.data}/${this.data}.json`)
     };
   },
   methods: {

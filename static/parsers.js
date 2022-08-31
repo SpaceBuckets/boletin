@@ -1,0 +1,204 @@
+const fs = require('fs');
+const fetch = require('node-fetch');
+var xlsx = require('node-xlsx');
+const parse5 = require('parse5');
+//process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+const glob = require('glob');
+const matter = require('gray-matter');
+const Papa = require('papaparse')
+const path = require('path')
+var moment = require('moment'); // require
+
+function writeFileSyncRecursive(filename, content, charset) {
+  const folders = filename.split(path.sep).slice(0, -1)
+  if (folders.length) {
+    folders.reduce((last, folder) => {
+      const folderPath = last ? last + path.sep + folder : folder
+      if (!fs.existsSync(folderPath)) {
+        fs.mkdirSync(folderPath)
+      }
+      return folderPath
+    })
+  }
+  fs.writeFileSync(filename, content, charset)
+}
+
+async function datosGobarAPI(kpi, name, value) {
+
+  var tempDates = [];
+  var tempDataBase = [];
+  const resB = await fetch(`https://apis.datos.gob.ar/series/api/series/?limit=5000&format=json&ids=${value}`);
+  var emaeB = await resB.json();
+  for (let i = 0; i < emaeB.data.length; i++) {
+    if (emaeB.data[i][1] == null) { emaeB.data[i][1] = 0 }
+
+    if (name === 'ipcgba' || name === 'ipcnucleo' || name === 'ipib' || name === 'ipim') {
+      tempDataBase.push((emaeB.data[i][1] * 100).toFixed(2))
+
+    } else {
+      tempDataBase.push(emaeB.data[i][1].toFixed(2));
+
+    }
+
+
+    tempDates.push(emaeB.data[i][0]);
+  }
+  writeFileSyncRecursive(`./static/kpi/${kpi}/${name}/dates.json`, JSON.stringify(tempDates));
+  writeFileSyncRecursive(`./static/kpi/${kpi}/${name}/d.json`, JSON.stringify(tempDataBase));
+  await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](800)
+  console.log(`♥ [${kpi}] ${name} updated`)
+
+
+}
+
+async function parseAmbito(obj) {
+  var pepeLength
+ 
+  for (let [key, value] of Object.entries(obj)) {
+    const resA = await fetch(value);
+    var emaeB = JSON.parse(await resA.text())
+    var datesArray = []
+    var tempArray = []
+   for (let i = 1; i < emaeB.length; i++) {
+ 
+    datesArray.push(emaeB[i][0].split('-').reverse().join('-'))
+   // datesArray.push(new Date (emaeB[1][i].date).toLocaleDateString("en-CA", {timeZone: "UTC"}))
+
+    tempArray.push(Number(emaeB[i][1].replace(',','.')))
+      
+  }
+  if (key === 'oficial') { pepeLength = tempArray.length }
+  tempArray.length = pepeLength  
+   writeFileSyncRecursive(`./static/kpi/cambio/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
+    writeFileSyncRecursive(`./static/kpi/cambio/${key}/d.json`, JSON.stringify(tempArray.reverse()));
+    console.log(`♥ [ambito] ${key} updated`)
+
+   } 
+
+}
+
+
+
+async function parseWorldBank(kpi,name,value) {
+ 
+    const resA = await fetch(value);
+    var emaeB = JSON.parse(await resA.text())
+    var datesArray = [], tempArray = []
+
+    for (let i = 0; i < emaeB[1].length; i++) {
+
+      if (emaeB[1][i].value !== null) {
+        datesArray.push(new Date (emaeB[1][i].date).toLocaleDateString("en-CA", {timeZone: "UTC"}))
+        tempArray.push(emaeB[1][i].value)
+      }
+  
+  }
+  writeFileSyncRecursive(`./static/kpi/${kpi}/${name}/dates.json`, JSON.stringify(datesArray.reverse()));
+  writeFileSyncRecursive(`./static/kpi/${kpi}/${name}/d.json`, JSON.stringify(tempArray.reverse())); 
+  console.log(`♥ [${kpi}] ${name} updated`)
+}
+
+async function datosGobarCSV(kpi,name) {
+
+  const resA = await fetch(kpi.url);
+  var emaeB = await resA.text()
+  var data = Papa.parse(emaeB).data
+ 
+  var datesArray = []
+
+  for (let i = 0; i < data.length; i++) {
+    var date = new Date(data[i][kpi.date]).toUTCString();
+ 
+ if (date != 'Invalid Date') {
+      datesArray.push(new Date (date).toLocaleDateString("en-CA", {timeZone: "UTC"}))
+    }
+  }
+
+  for (let [key, value] of Object.entries(kpi.columns)) {
+    var tempArray = []
+    for (let i = 0; i < data.length; i++) {
+      if (new Date(data[i][kpi.date]).toUTCString() !== 'Invalid Date') { tempArray.push(Number(data[i][value]).toFixed(3))}
+
+    }
+    writeFileSyncRecursive(`./static/kpi/${name}/${key}.json`, JSON.stringify(tempArray));
+    console.log(`♥ [${name}] ${name} updated`)
+
+  }
+
+  writeFileSyncRecursive(`./static/kpi/${name}/dates.json`, JSON.stringify(datesArray));
+
+  console.log(`♥ [${name}] dates updated`)
+
+}
+
+async function genericXLS(kpi,name) {
+
+  const resA = await fetch(kpi.url);
+  var data = xlsx.parse(await resA.arrayBuffer())[kpi.sheet].data
+
+  // DATES
+  var datesArray = []
+  for (let i = 0; i < data.length; i++) {
+    if (name.includes("commodity") && data[i][kpi.date] && data[i][kpi.date] != 'Invalid Date') {
+      data[i][kpi.date] = data[i][kpi.date].toString()
+      if (data[i][kpi.date].includes(".1")) { 
+        data[i][kpi.date] = data[i][kpi.date].replace(".1",".10").replace(".101",".11").replace(".102",".12")
+      }
+       var date = moment(new Date(data[i][kpi.date])).utc().format("YYYY-MM-DD");
+       if (date === 'Invalid date') { } else { datesArray.push(date) }
+    } else {
+      var date = new Date(Date.UTC(0, 0, data[i][kpi.date]));
+      if (date != 'Invalid Date') {
+        datesArray.push(date.toLocaleDateString("en-CA"))
+      }
+    }
+
+  }
+
+  writeFileSyncRecursive(`./static/kpi/${name}/dates.json`, JSON.stringify(datesArray));
+  console.log(`♥ [${name}] dates updated`)
+
+  // VALUES
+  for (let [key, value] of Object.entries(kpi.columns)) {
+    var tempArray = []
+    for (let i = 0; i < data.length; i++) {
+      if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value]).toFixed(3))}
+    }
+
+    writeFileSyncRecursive(`./static/kpi/${name}/${key}.json`, JSON.stringify(tempArray));
+    console.log(`♥ [${name}] updated`)
+
+  }
+
+}
+
+async function scrapeBCRA(serie, name) {
+
+  const resA = await fetch('http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp?fecha_desde=1900-01-01&fecha_hasta=2040-04-30&primeravez=1&serie=' + serie);
+  var emaeB = await resA.text();
+  var json = parse5.parse(emaeB)
+  json = json.childNodes[1].childNodes[2].childNodes[1].childNodes[7].childNodes[1].childNodes[3].childNodes[1].childNodes[1].childNodes[3].childNodes
+
+  var dateInfla = []
+  var inflaVal = []
+
+  for (let i = 0; i < json.length; i++) {
+
+    if (json[i].nodeName === 'tbody') {
+      var date = json[i].childNodes[1].childNodes[1].childNodes[0].value.replace(/\//g, '-');
+      var inflaDateTemp = date.split('-')
+      var newdate = inflaDateTemp[2] + '-' + inflaDateTemp[1] + '-' + inflaDateTemp[0]
+      dateInfla.push(newdate)
+      inflaVal.push(json[i].childNodes[1].childNodes[3].childNodes[0].value.trim().split('.').join("").replace(/,/g, '.'))
+    }
+  }
+
+    writeFileSyncRecursive(`./static/kpi/${name}/datos/dates.json`, JSON.stringify(dateInfla));
+    writeFileSyncRecursive(`./static/kpi/${name}/datos/d.json`, JSON.stringify(inflaVal));
+    console.log(`♥ [${name}] updated`)
+
+
+}
+
+
+module.exports = {scrapeBCRA,genericXLS, datosGobarCSV,parseWorldBank, parseAmbito,writeFileSyncRecursive, datosGobarAPI }

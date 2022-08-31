@@ -48,10 +48,10 @@ export default {
   },
   data() {
     return {
-      chart: require(`~/static/confluence/${this.data}.json`)
+      chart: require(`~/static/kpi/${this.data}/${this.data}.json`)
     };
   },
-  methods: {
+  methods: { 
      filteredArray() {
       return this.chart.chartdata.labels
         .filter((val, index, arr) => index > arr.length - 23)
