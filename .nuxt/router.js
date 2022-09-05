@@ -4,6 +4,7 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _04e48e4d = () => interopDefault(import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
 const _25872145 = () => interopDefault(import('../pages/kpi/_kpi.vue' /* webpackChunkName: "pages/kpi/_kpi" */))
 const _5514d34d = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 const _e8f9f44c = () => interopDefault(import('../pages/_.vue' /* webpackChunkName: "pages/_" */))
@@ -20,6 +21,10 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/admin",
+    component: _04e48e4d,
+    name: "admin"
+  }, {
     path: "/kpi/:kpi?",
     component: _25872145,
     name: "kpi-kpi"

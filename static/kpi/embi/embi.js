@@ -6,14 +6,14 @@ module.exports = (async function() {
     url: "https://bcrdgdcprod.blob.core.windows.net/documents/entorno-internacional/documents/Serie_Historica_Spread_del_EMBI.xlsx",
     sheet: 0,
     date: 0,
-    columns: {
-      argentina: 4,
-      brasil: 6,
-      chile: 7,
-      mexico: 14,
-      colombia: 8,
-      latino: 2
-    }   
+    items: [
+      { name: "argentina", id: 4, },
+      { name: "brasil", id: 6, },
+      { name: "chile", id: 7,},
+      { name: "mexico", id: 14,},
+      { name: "colombia", id: 8,},
+      { name: "latino", id: 2}
+    ]
   }
   
   await parsers.genericXLS(kpidata, kpi)

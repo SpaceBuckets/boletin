@@ -1,5 +1,12 @@
 [
   {
+    "name": "admin",
+    "path": "/admin",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/admin/index.vue",
+    "chunkName": "pages/admin/index",
+    "_name": "_04e48e4d"
+  },
+  {
     "name": "kpi-kpi",
     "path": "/kpi/:kpi?",
     "component": "/Users/agustin.capeletto/fed/beo/pages/kpi/_kpi.vue",

@@ -114,7 +114,7 @@ async function datosGobarCSV(kpi,name) {
     }
   }
 
-  for (let [key, value] of Object.entries(kpi.columns)) {
+  for (let [key, value] of Object.entries(kpi.items)) {
     var tempArray = []
     for (let i = 0; i < data.length; i++) {
       if (new Date(data[i][kpi.date]).toUTCString() !== 'Invalid Date') { tempArray.push(Number(data[i][value]).toFixed(3))}
@@ -146,6 +146,42 @@ async function genericXLS(kpi,name) {
       }
        var date = moment(new Date(data[i][kpi.date])).utc().format("YYYY-MM-DD");
        if (date === 'Invalid date') { } else { datesArray.push(date) }
+    } else if (name.includes("ipifiel")) {
+      if(data[0][kpi.date]) { data[i][kpi.date] = undefined }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Año")) { data[i][kpi.date] = undefined }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Trim")) { data[i][kpi.date] = undefined }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Variación")) { data[i][kpi.date] = undefined }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Bienes")) { data[i][kpi.date] = undefined }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Fuente")) { data[i][kpi.date] = undefined }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Pr")) { data[i][kpi.date] = undefined }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("JL")) { data[i][kpi.date] = data[i][kpi.date].replace("JL","Jul") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("E")) { data[i][kpi.date] = data[i][kpi.date].replace("E","Jan") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("F")) { data[i][kpi.date] = data[i][kpi.date].replace("F","Feb") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("O")) { data[i][kpi.date] = data[i][kpi.date].replace("O","Oct") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("S")) { data[i][kpi.date] = data[i][kpi.date].replace("S","Sep") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("D")) { data[i][kpi.date] = data[i][kpi.date].replace("D","Dec") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("N")) { data[i][kpi.date] = data[i][kpi.date].replace("N","Nov") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("J")) { data[i][kpi.date] = data[i][kpi.date].replace("J","Jun") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Junan")) { data[i][kpi.date] = data[i][kpi.date].replace("Junan","Jan") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Junul")) { data[i][kpi.date] = data[i][kpi.date].replace("Junul","Jul") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("M") && data[i-1][kpi.date].includes("Feb")) { data[i][kpi.date] = data[i][kpi.date].replace("M","Mar") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("A") && data[i-1][kpi.date].includes("Mar")) { data[i][kpi.date] = data[i][kpi.date].replace("A","Apr") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("M") && data[i-1][kpi.date].includes("Apr")) { data[i][kpi.date] = data[i][kpi.date].replace("M","May") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("A") && data[i-1][kpi.date].includes("Jul")) { data[i][kpi.date] = data[i][kpi.date].replace("A","Aug") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Jun") && data[i-1][kpi.date].includes("Jun")) { data[i][kpi.date] = data[i][kpi.date].replace("Jun","Jul") }
+
+/*             if(data[i][kpi.date] && data[i][kpi.date].includes("A")) { data[i][kpi.date] = data[i][kpi.date].replace("A","Apr") }
+
+      if(data[i][kpi.date] && data[i][kpi.date].includes("J")) { data[i][kpi.date] = data[i][kpi.date].replace("J","Jun") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Junul")) { data[i][kpi.date] = data[i][kpi.date].replace("Junul","Jul") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("M")) { data[i][kpi.date] = data[i][kpi.date].replace("M","Mar") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Mayar")) { data[i][kpi.date] = data[i][kpi.date].replace("Mayar","May") }
+      if(data[i][kpi.date] && data[i][kpi.date].includes("Junan")) { data[i][kpi.date] = data[i][kpi.date].replace("Junan","Jan") }
+ */
+
+      //var date = moment(new Date(data[i][kpi.date])).utc().format("YYYY-MM-DD");
+      datesArray.push(data[i][kpi.date])
+
     } else {
       var date = new Date(Date.UTC(0, 0, data[i][kpi.date]));
       if (date != 'Invalid Date') {
@@ -154,22 +190,58 @@ async function genericXLS(kpi,name) {
     }
 
   }
+  if (name.includes("ipifiel")) {
+    var newDatesArray = []
+    datesArray = datesArray.filter(e => e)
+    datesArrayObj = {}
+    const chunkSize = 12;
+    for (let i = 0; i < datesArray.length; i += chunkSize) {
 
-  writeFileSyncRecursive(`./static/kpi/${name}/dates.json`, JSON.stringify(datesArray));
+        const chunk = datesArray.slice(i, i + chunkSize);
+        datesArrayObj[datesArray[i].replace("Jan","").replace("**","").replace(" ","")] = chunk
+    }
+
+    for (let [key, value] of Object.entries(datesArrayObj)) {
+      for (let i = 0; i < datesArrayObj[key].length; i++) {
+        if(datesArrayObj[key][i].includes(key)) { datesArrayObj[key][i] = datesArrayObj[key][i].replace(key,"") }
+        var date = datesArrayObj[key][i] + key
+        date = date.replace("**","")
+        //console.log(date)
+
+        newDatesArray.push(moment(new Date(date)).format("YYYY-MM-DD"))
+
+      }
+    }
+
+    datesArray = newDatesArray
+
+  }
+   writeFileSyncRecursive(`./static/kpi/${name}/${kpi.items[0].name}/dates.json`, JSON.stringify(datesArray));
   console.log(`♥ [${name}] dates updated`)
 
   // VALUES
-  for (let [key, value] of Object.entries(kpi.columns)) {
+  if (name.includes("ipifiel")) { 
+    for (let [key, value] of Object.entries(kpi.items)) {
+      var tempArray = []
+      for (let i = 5; i < datesArray.length+5; i++) {
+        tempArray.push(Number(data[i][value.id]).toFixed(3))
+        //if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value.id]).toFixed(3))}
+      }
+     writeFileSyncRecursive(`./static/kpi/${name}/${value.name}/d.json`, JSON.stringify(tempArray));
+     console.log(`♥ [${name}] updated`)
+  
+    }
+  } else {
+    for (let [key, value] of Object.entries(kpi.items)) {
     var tempArray = []
     for (let i = 0; i < data.length; i++) {
-      if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value]).toFixed(3))}
+      if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value.id]).toFixed(3))}
     }
-
-    writeFileSyncRecursive(`./static/kpi/${name}/${key}.json`, JSON.stringify(tempArray));
+    writeFileSyncRecursive(`./static/kpi/${name}/${value.name}/d.json`, JSON.stringify(tempArray));
     console.log(`♥ [${name}] updated`)
 
   }
-
+  }
 }
 
 async function scrapeBCRA(serie, name) {

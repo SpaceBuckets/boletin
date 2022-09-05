@@ -29,7 +29,7 @@ export default {
     };
   },
   created() {
-    console.log(this.chart)
+    //console.log(this.chart)
   },
     methods: {
     getVariation(i) {

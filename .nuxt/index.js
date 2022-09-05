@@ -15,6 +15,7 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 import nuxt_plugin_plugin_73c751ca from 'nuxt_plugin_plugin_73c751ca' // Source: ./components/plugin.js (mode: 'all')
 import nuxt_plugin_supabase_45705f63 from 'nuxt_plugin_supabase_45705f63' // Source: ./supabase.js (mode: 'all')
 import nuxt_plugin_supabasecookie_fa031ecc from 'nuxt_plugin_supabasecookie_fa031ecc' // Source: ./supabase-cookie.js (mode: 'all')
+import nuxt_plugin_axios_768c12b1 from 'nuxt_plugin_axios_768c12b1' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_globalObject_a43db082 from 'nuxt_plugin_globalObject_a43db082' // Source: ../plugins/globalObject.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -189,6 +190,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_supabasecookie_fa031ecc === 'function') {
     await nuxt_plugin_supabasecookie_fa031ecc(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_axios_768c12b1 === 'function') {
+    await nuxt_plugin_axios_768c12b1(app.context, inject)
   }
 
   if (typeof nuxt_plugin_globalObject_a43db082 === 'function') {

@@ -79,10 +79,10 @@ export default {
     };
   },
   async created() {
-    var tmpSaved = await this.$supabase.from("data").select("*").match({url: this.$route.path.replace("/","")})
+/*     var tmpSaved = await this.$supabase.from("data").select("*").match({url: this.$route.path.replace("/","")})
     tmpSaved = await tmpSaved.data[0].object
     this.savedCells = tmpSaved
-    this.updated++
+    this.updated++ */
 
   },
 

@@ -7,10 +7,10 @@ module.exports = (async function() {
     url: 'https://estudioseconomicos.ec.gba.gov.ar/datos/nac/contnac-indice-de-condiciones-externas.xlsx',
     sheet: 0,
     date: 0,
-    columns: {
-      coyuntural: 2,
-      estructural: 1,
-    }  
+    items: [
+      {name: "coyuntural", id: 2},
+      {name: "estructural", id: 1}
+    ]
   }
   
   await parsers.genericXLS(kpidata, kpi)

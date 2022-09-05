@@ -6,11 +6,11 @@ module.exports = (async function() {
     url: 'http://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xls',
     sheet: 0,
     date: 0,
-    columns: {
-      itcrm: 1,
-      itcrb: 2,
-      itcrus: 5
-    }    
+    items: [
+      {name:"itcrm", id:1},
+      {name:"itcrb", id:2},
+      {name:"itcrus",id:5}
+    ]
   }
 
   await parsers.genericXLS(kpidata, kpi)

@@ -6,9 +6,10 @@ module.exports = (async function() {
       url: 'https://www.bcsf.com.ar/ces/base-datos/bases/download-public-file/6',
       sheet: 2,
       date: 0,
-      columns: {
-        valor: 1,
-      }        
+      items: [{
+        name: "valor",
+        id: 1,
+      }] 
   }
 
   await parsers.genericXLS(kpidata, kpi)
@@ -23,12 +24,12 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   cat: "Commodities",
   chartdata: {
-    labels: require("./dates.json"),
+    labels: require("./valor/dates.json"),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0.05)",
         label: "Energy Price Index",
-        data: require("./valor.json"),
+        data: require("./valor/d.json"),
         borderColor: "rgba(46,120,210,1)",
         pointRadius: 0,
         borderWidth: 1.5,

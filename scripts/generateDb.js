@@ -8,6 +8,7 @@ const matter = require('gray-matter');
  const Papa = require('papaparse')
  const path = require('path')
  var moment = require('moment'); // require
+ const cliProgress = require('cli-progress');
 
  function writeFileSyncRecursive(filename, content, charset) {
    const folders = filename.split(path.sep).slice(0, -1)
@@ -340,6 +341,7 @@ async function megaContent(src) {
 
   for (const singleFolder of folders) { categories.push(await require(`../static/kpi/${singleFolder}/${singleFolder}.json`).cat) };
   categories = [...new Set(categories)]
+  writeFileSyncRecursive(`./static/categories.json`, JSON.stringify(categories));
 
   for (const singleCat of categories) { categoriesObject[singleCat] = [] }
 
@@ -378,17 +380,23 @@ async function megaContent(src) {
 
 async function processItems(arr){
   console.log("◷ Starting up... Please be patient")
-  await parseAmbito() 
-  await getUSD()
-  await getBRCASeries()
-
+ 
+ 
+   await parseAmbito() 
+   await getUSD()
+   await getBRCASeries()
+ 
   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
     await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](500)
+ 
   } 
   console.log("---------------------")
   megaContent("kpi")
 };
 
 processItems(glob.sync('*', { cwd: `static/kpi/` }));
-//processItems(['uvi']);
+//processItems(['commodityenergy']);
+
+
+

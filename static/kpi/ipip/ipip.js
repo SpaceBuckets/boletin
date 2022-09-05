@@ -6,9 +6,9 @@ module.exports = (async function() {
     url: 'https://estudioseconomicos.ec.gba.gov.ar/datos/nac/contnac-indice-de-produccion-industrial-pyme.xlsx',
     sheet: 0,
     date: 0,
-    columns: {
-      valor: 1,
-    }    
+    items: [{
+      name: "valor", id: 1
+    }]
   }
   
   await parsers.genericXLS(kpidata, kpi)
