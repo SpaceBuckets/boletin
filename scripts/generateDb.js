@@ -384,7 +384,7 @@ async function processItems(arr){
  
 /*    await parseAmbito() 
    await getUSD()
-   await getBRCASeries() */
+   await getBRCASeries()  */
  
   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
@@ -396,7 +396,7 @@ async function processItems(arr){
 };
 
 processItems(glob.sync('*', { cwd: `static/kpi/` }));
-//processItems(['emae']);
+//processItems(['ipicammesa']);
 
 
 
