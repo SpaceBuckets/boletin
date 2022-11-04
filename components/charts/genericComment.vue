@@ -44,14 +44,14 @@ a {
    overflow: hidden;
  }
 h4 {
-  font-size: 24px;
+  font-size: 20px;
   text-align: center;
   margin: 0;
   margin-bottom: 20px;
   text-transform: capitalize;
  }
 h5 {
-  font-size: 20px;
+  font-size: 18px;
   margin: 0;
   text-align: center;
   color: #009966;

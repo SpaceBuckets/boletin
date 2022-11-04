@@ -473,19 +473,21 @@ export default {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   position: relative;
+  background: #ccc;
   gap: 0px;
-  border-left: 1px dashed #444;
-  border-top: 1px dashed #444;
-  margin-top: 0px;
+  //  border-left: 1px dashed #444;
+  // border-top: 1px dashed #444;
+  margin: 0px 0 0 0;
+  max-width: 1440px; 
   @media only screen and (max-width: 980px) {
     display: block;
     border: 0;
     margin-top: 5px;
   }  
   > i {
-    border-right: 1px dashed #444;
-    border-bottom: 1px dashed #444;
-    height: 212px;
+    //  border-right: 1px dashed #444;
+    //  border-bottom: 1px dashed #444;
+    height: 182px;
     pointer-events: none;
     cursor: pointer;
     @media only screen and (max-width: 980px) {
@@ -509,14 +511,15 @@ export default {
   }
   > section {
     background: #fff;
-    border-radius: 3px;
+    border-radius: 0;
     position: absolute;
     left: 0;
     bottom: 0;
     top: 0;
     right: 0;
     padding: 20px;
-    margin: 6px;
+    margin-bottom: 1px;
+    margin-right: 1px;
     overflow: hidden;
     @media only screen and (max-width: 980px) {
       position: relative;

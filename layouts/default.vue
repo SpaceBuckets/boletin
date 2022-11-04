@@ -96,7 +96,7 @@ export default {
 .content-container {
   //max-width: 1440px;
   margin: 0px;
-  padding: 20px 20px 0 225px;
+  padding: 10px 0 0 250px;
   &.index {
     padding: 20px 20px 0;
   max-width: 1440px;

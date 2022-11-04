@@ -13,22 +13,40 @@ export default {
     const rekpi = require(`~/static/kpi/${params.kpi}/${params.kpi}.json`)
 
     const savedCells = {
-      1416: {
-        area: "1 / 1 / 4 / 6",
+      1246: {
+        area: "2 / 1 / 5 / 6",
         kpi: params.kpi,
         type: "Line",
         hasChart: true,
+        title: "Serie de Tiempo",
+        subtitle: rekpi.t        
       },
-       1267: {
-        area: "1 / 6 / 2 / 7",
+       1515: {
+        area: "1 / 5 / 1 / 5",
         kpi: params.kpi,
         type: "KpiUpdated",
         hasChart: true,
         title: rekpi.t,
         subtitle: "Último Dato"      
-      },      
+      },       
+
+       2626: {
+        area: "2 / 6 / 5 / 6",
+        kpi: params.kpi,
+        type: "KpiUpdated",
+        hasChart: true,
+   
+      },   
+       1616: {
+        area: "1 / 6 / 1 / 6",
+        kpi: params.kpi,
+        type: "Fuente",
+        hasChart: true,
+     
+      },    
+                          
       2367: {
-        area: "2 / 6 / 4 / 7",
+        area: "5 / 6 / 8 / 6",
         kpi: params.kpi,
         type: "Heatmap",
         hasChart: true,
@@ -36,57 +54,25 @@ export default {
         subtitle: "Variación"
       },
 
-      4715: {
-        area: "4 / 1 / 7 / 5",
-        kpi: params.kpi,
-        type: "Box",
-        hasChart: true,
-        title: rekpi.t,
-        subtitle: "Descripción metodológica",
-      },
       4757: {
-        area: "4 / 5 / 7 / 7",
+        area: "5 / 1 / 8 / 6",
         kpi: params.kpi,
         type: "Table",
         hasChart: true,
         title: rekpi.t,
         subtitle:  'Últimos 24 meses'
       },
-/*     "1215": {
-        "area": "1 / 1 / 2 / 5",
-        "kpi": params.kpi,
-        "type": "PostHeader",
-        "hasChart": true
+      1215: {
+        area: "1 / 1 / 2 / 5",
+        kpi: params.kpi,
+        type: "PostHeader",
+        hasChart: true,
+        title: rekpi.t,
+        subtitle: rekpi.st        
     },
-    "1256": {
-        "area": "1 / 5 / 2 / 6",
-        "kpi": params.kpi,
-        "type": "KpiUpdated",
-        "hasChart": true
-    },
-    "1267": {
-        "area": "1 / 6 / 2 / 7",
-        "kpi": params.kpi,
-        "type": "KpiMensual",
-        "hasChart": true
-    },
-    "2515": {
-        "area": "2 / 1 / 5 / 5",
-        "kpi": params.kpi,
-        "type": "Line",
-        "hasChart": true,
-        title: "Serie de tiempo",
-        subtitle: 'Frecuencia mensual. Base 2004'        
-    },
-    "2557": {
-        "area": "2 / 5 / 5 / 7",
-        "kpi": params.kpi,
-        "type": "Table",
-        "hasChart": true,
-        title: "Valores y tendencias",
-        subtitle:  'Últimos 24 meses'        
-    }
-       */
+ 
+ 
+       
     };
 
     return { savedCells };

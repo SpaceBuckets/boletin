@@ -4,7 +4,7 @@ module.exports = (async function () {
   const kpi = "ipifiel"
 
   kpidata = { 
-    "url": "http://www.fiel.org/publicaciones/CuadrosIC/CUAD_INDI_1661360304025.xls", 
+    "url": "http://www.fiel.org/publicaciones/CuadrosIC/CUAD_INDI_1666801187774.xls", 
     "sheet": "0", 
     "date": "0", 
     "items": [{ "name": "estacional", "id": "1" }] }

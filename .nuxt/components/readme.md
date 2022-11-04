@@ -9,6 +9,7 @@ You can directly use them in pages and other components without the need to impo
 - `<ChartsBar>` | `<charts-bar>` (components/charts/bar.js)
 - `<ChartsGenericBox>` | `<charts-generic-box>` (components/charts/genericBox.vue)
 - `<ChartsGenericComment>` | `<charts-generic-comment>` (components/charts/genericComment.vue)
+- `<ChartsGenericFuente>` | `<charts-generic-fuente>` (components/charts/genericFuente.vue)
 - `<ChartsGenericHeader>` | `<charts-generic-header>` (components/charts/genericHeader.vue)
 - `<ChartsGenericHeatmap>` | `<charts-generic-heatmap>` (components/charts/genericHeatmap.vue)
 - `<ChartsGenericHeatmapBox>` | `<charts-generic-heatmap-box>` (components/charts/genericHeatmapBox.vue)

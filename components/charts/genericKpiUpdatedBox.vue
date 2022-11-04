@@ -92,7 +92,7 @@ h4 {
   text-transform: capitalize;
  }
 h5 {
-  font-size: 20px;
+  font-size: 18px;
   margin: 0;
   text-align: center;
   color: #009966;
