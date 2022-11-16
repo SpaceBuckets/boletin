@@ -381,10 +381,9 @@ async function megaContent(src) {
 async function processItems(arr){
   console.log("◷ Starting up... Please be patient")
  
- 
-/*    await parseAmbito() 
+     await parseAmbito() 
    await getUSD()
-   await getBRCASeries()  */
+   await getBRCASeries()  
  
   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
