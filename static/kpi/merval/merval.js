@@ -1,6 +1,7 @@
 module.exports = (async function () {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "merval"
 
   await parsers.datosGobarAPI(kpi, 'datos', '169.1_MALVAL_0_0_6')
@@ -15,12 +16,12 @@ module.exports = (async function () {
     d: "",
     cat: "Sector Financiero",
     chartdata: {
-      labels: require("./datos/dates.json"),
+      labels: require(`../../data/${generatedTime}/${kpi}/datos/dates.json`),
       datasets: [
         {
           backgroundColor: "transparent",
           label: "Indice Merval",
-          data: require("./datos/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/datos/d.json`),
           borderColor: "#2E78D2CC",
           type: 'line',
           pointRadius: 0,
@@ -31,7 +32,7 @@ module.exports = (async function () {
     }
   }
 
-  parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

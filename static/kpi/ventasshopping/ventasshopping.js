@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "ventasshopping"
     
   await parsers.datosGobarAPI(kpi,'total','458.1_VENTAS_TOTTES_ABRI_M_33_40 ')
@@ -18,12 +19,12 @@ await parsers.datosGobarAPI(kpi,'resto','458.1_VENTAS_RESTES_ABRI_M_31_8')
     d: "",
     cat: "Consumo",
     chartdata: {
-    labels: require("./total/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/total/dates.json`),
     datasets: [
         {
             backgroundColor: "rgba(46,120,210,0)",
             label: "Total",
-            data: require("./total/d.json"),
+            data: require(`../../data/${generatedTime}/${kpi}/total/d.json`),
             borderColor: "rgba(46,120,210,1)",
             pointRadius: 0,
             borderWidth: 1.5,
@@ -31,7 +32,7 @@ await parsers.datosGobarAPI(kpi,'resto','458.1_VENTAS_RESTES_ABRI_M_31_8')
 {
             backgroundColor: "rgba(46,120,210,0)",
             label: "GBA",
-            data: require("./GBA/d.json"),
+            data: require(`../../data/${generatedTime}/${kpi}/GBA/d.json`),
             borderColor: "rgba(46,120,210,0.25)",
             pointRadius: 0,
             borderWidth: 1.5,
@@ -39,7 +40,7 @@ await parsers.datosGobarAPI(kpi,'resto','458.1_VENTAS_RESTES_ABRI_M_31_8')
 {
             backgroundColor: "rgba(46,120,210,0)",
             label: "Resto",
-            data: require("./resto/d.json"),
+            data: require(`../../data/${generatedTime}/${kpi}/resto/d.json`),
             borderColor: "rgba(46,120,210,0.25)",
             pointRadius: 0,
             borderWidth: 1.5,
@@ -49,6 +50,6 @@ await parsers.datosGobarAPI(kpi,'resto','458.1_VENTAS_RESTES_ABRI_M_31_8')
     }
   }
 
-  parsers.writeFileSyncRecursive('./static/kpi/ventasshopping/ventasshopping.json', JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
    
 })()

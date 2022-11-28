@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "deficit"
   const deficit = {
     ingresos: '379.9_ING_CORR_2017__13_2',
@@ -21,12 +22,12 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   cat: "Cuentas Nacionales",
   chartdata: {
-    labels: require("./ingresos/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/ingresos/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(146,220,210,0)",
         label: "Ingresos",
-        data: require("./ingresos/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/ingresos/d.json`),
         borderColor: "#009966",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -34,7 +35,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(146,220,210,0)",
         label: "Gastos",
-        data: require("./gastos/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/gastos/d.json`),
         borderColor: "#b22222CC",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -42,7 +43,7 @@ module.exports = (async function() {
       {
         backgroundColor: "#ccc",
         label: "Saldo",
-        data: require("./ahorro/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/ahorro/d.json`),
         borderColor: "#ccc",
         pointRadius: 0,
         borderWidth: 0,
@@ -52,7 +53,7 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

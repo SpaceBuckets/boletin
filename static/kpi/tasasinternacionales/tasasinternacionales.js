@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "tasasinternacionales"
  
   const kpidata = {
@@ -24,12 +25,12 @@ module.exports = (async function() {
   max: 30,
   cat: "Política Monetaria",
   chartdata: {
-    labels: require("./fed/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/fed/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0.0)",
         label: "Tasa FED",
-        data: require("./fed/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/fed/d.json`),
         borderColor: "rgba(46,120,210,1)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -37,7 +38,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0.0)",
         label: "Tasa Euro",
-        data: require("./euro/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/euro/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -45,7 +46,7 @@ module.exports = (async function() {
       /*     {
             backgroundColor: "rgba(46,120,210,0.0)",
             label: "Tasa Japon",
-            data: require("./japon/d.json"),
+            data: require(`../../data/${generatedTime}/${kpi}/japon/d.json`),
             borderColor: "rgba(46,120,210,0.25)",
             pointRadius: 0,
             borderWidth: 1.5,
@@ -53,7 +54,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0.0)",
         label: "Tasa Inglaterra",
-        data: require("./inglaterra/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/inglaterra/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -61,7 +62,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0.0)",
         label: "Tasa Brasil",
-        data: require("./brasil/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/brasil/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -70,6 +71,6 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "embi"
   const kpidata = {
     url: "https://bcrdgdcprod.blob.core.windows.net/documents/entorno-internacional/documents/Serie_Historica_Spread_del_EMBI.xlsx",
@@ -29,12 +30,12 @@ module.exports = (async function() {
   max: 50,
   cat: "Política Monetaria",
   chartdata: {
-    labels: require("./dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/argentina/dates.json`),
     datasets: [
       {
         backgroundColor: 'rgba(46,120,210,0)',
         label: "EMBI Brasil",
-        data: require("./brasil.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/brasil/d.json`),
         borderColor: "rgba(46,120,210,0.3)",
 
         pointRadius: 0,
@@ -43,7 +44,7 @@ module.exports = (async function() {
       {
         backgroundColor: 'rgba(46,120,210,0)',
         label: "EMBI Chile",
-        data: require("./chile.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/chile/d.json`),
         borderColor: "rgba(46,120,210,0.3)",
 
         pointRadius: 0,
@@ -52,7 +53,7 @@ module.exports = (async function() {
       {
         backgroundColor: 'rgba(46,120,210,0)',
         label: "EMBI Colombia",
-        data: require("./colombia.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/colombia/d.json`),
         borderColor: "rgba(46,120,210,0.3)",
 
         pointRadius: 0,
@@ -61,7 +62,7 @@ module.exports = (async function() {
       {
         backgroundColor: 'rgba(46,120,210,0)',
         label: "EMBI Mexico",
-        data: require("./mexico.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/mexico/d.json`),
         borderColor: "rgba(46,120,210,0.3)",
 
         pointRadius: 0,
@@ -70,7 +71,7 @@ module.exports = (async function() {
       {
         backgroundColor: 'rgba(46,120,210,0)',
         label: "EMBI Latino",
-        data: require("./latino.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/latino/d.json`),
         borderColor: "#7a49a580",
 
         pointRadius: 0,
@@ -79,7 +80,7 @@ module.exports = (async function() {
       {
         backgroundColor: 'rgba(146,220,210,0)',
         label: "EMBI Argentina",
-        data: require("./argentina.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/argentina/d.json`),
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -89,7 +90,7 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

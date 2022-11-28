@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "ripte"
  
   await parsers.datosGobarAPI(kpi, "ripte", '158.1_REPTE_0_0_5')
@@ -15,12 +16,12 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   cat: "Salarios",
   chartdata: {
-    labels: require("./ripte/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/ripte/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0.05)",
         label: "RIPTE",
-        data: require("./ripte/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/ripte/d.json`),
         borderColor: "rgba(46,120,210,1)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -30,6 +31,6 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

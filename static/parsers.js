@@ -2,12 +2,13 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 var xlsx = require('node-xlsx');
 const parse5 = require('parse5');
-//process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const glob = require('glob');
 const matter = require('gray-matter');
 const Papa = require('papaparse')
 const path = require('path')
 var moment = require('moment'); // require
+const generatedTime = require(`../static/generatedTime.json`)
 
 function writeFileSyncRecursive(filename, content, charset) {
   const folders = filename.split(path.sep).slice(0, -1)
@@ -43,8 +44,8 @@ async function datosGobarAPI(kpi, name, value) {
 
     tempDates.push(emaeB.data[i][0]);
   }
-  writeFileSyncRecursive(`./static/kpi/${kpi}/${name}/dates.json`, JSON.stringify(tempDates));
-  writeFileSyncRecursive(`./static/kpi/${kpi}/${name}/d.json`, JSON.stringify(tempDataBase));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/dates.json`, JSON.stringify(tempDates));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/d.json`, JSON.stringify(tempDataBase));
   await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](800)
   console.log(`♥ [${kpi}] ${name} updated`)
 
@@ -69,8 +70,8 @@ async function parseAmbito(obj) {
   }
   if (key === 'oficial') { pepeLength = tempArray.length }
   tempArray.length = pepeLength  
-   writeFileSyncRecursive(`./static/kpi/cambio/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
-    writeFileSyncRecursive(`./static/kpi/cambio/${key}/d.json`, JSON.stringify(tempArray.reverse()));
+   writeFileSyncRecursive(`./static/data/${generatedTime}/cambio/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
+    writeFileSyncRecursive(`./static/data/${generatedTime}/cambio/${key}/d.json`, JSON.stringify(tempArray.reverse()));
     console.log(`♥ [ambito] ${key} updated`)
 
    } 
@@ -93,8 +94,8 @@ async function parseWorldBank(kpi,name,value) {
       }
   
   }
-  writeFileSyncRecursive(`./static/kpi/${kpi}/${name}/dates.json`, JSON.stringify(datesArray.reverse()));
-  writeFileSyncRecursive(`./static/kpi/${kpi}/${name}/d.json`, JSON.stringify(tempArray.reverse())); 
+  writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/dates.json`, JSON.stringify(datesArray.reverse()));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/d.json`, JSON.stringify(tempArray.reverse())); 
   console.log(`♥ [${kpi}] ${name} updated`)
 }
 
@@ -120,12 +121,12 @@ async function datosGobarCSV(kpi,name) {
       if (new Date(data[i][kpi.date]).toUTCString() !== 'Invalid Date') { tempArray.push(Number(data[i][value]).toFixed(3))}
 
     }
-    writeFileSyncRecursive(`./static/kpi/${name}/${key}.json`, JSON.stringify(tempArray));
+    writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${key}.json`, JSON.stringify(tempArray));
     console.log(`♥ [${name}] ${name} updated`)
 
   }
 
-  writeFileSyncRecursive(`./static/kpi/${name}/dates.json`, JSON.stringify(datesArray));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/dates.json`, JSON.stringify(datesArray));
 
   console.log(`♥ [${name}] dates updated`)
 
@@ -216,7 +217,7 @@ async function genericXLS(kpi,name) {
     datesArray = newDatesArray
 
   }
-   writeFileSyncRecursive(`./static/kpi/${name}/${kpi.items[0].name}/dates.json`, JSON.stringify(datesArray));
+   writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${kpi.items[0].name}/dates.json`, JSON.stringify(datesArray));
   console.log(`♥ [${name}] dates updated`)
 
   // VALUES
@@ -227,7 +228,7 @@ async function genericXLS(kpi,name) {
         tempArray.push(Number(data[i][value.id]).toFixed(3))
         //if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value.id]).toFixed(3))}
       }
-     writeFileSyncRecursive(`./static/kpi/${name}/${value.name}/d.json`, JSON.stringify(tempArray));
+     writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${value.name}/d.json`, JSON.stringify(tempArray));
      console.log(`♥ [${name}] updated`)
   
     }
@@ -237,7 +238,7 @@ async function genericXLS(kpi,name) {
     for (let i = 0; i < data.length; i++) {
       if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value.id]).toFixed(3))}
     }
-    writeFileSyncRecursive(`./static/kpi/${name}/${value.name}/d.json`, JSON.stringify(tempArray));
+    writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${value.name}/d.json`, JSON.stringify(tempArray));
     console.log(`♥ [${name}] updated`)
 
   }
@@ -265,8 +266,8 @@ async function scrapeBCRA(serie, name) {
     }
   }
 
-    writeFileSyncRecursive(`./static/kpi/${name}/datos/dates.json`, JSON.stringify(dateInfla));
-    writeFileSyncRecursive(`./static/kpi/${name}/datos/d.json`, JSON.stringify(inflaVal));
+    writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/datos/dates.json`, JSON.stringify(dateInfla));
+    writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/datos/d.json`, JSON.stringify(inflaVal));
     console.log(`♥ [${name}] updated`)
 
 

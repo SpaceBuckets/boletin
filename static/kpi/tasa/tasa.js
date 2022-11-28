@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "tasa"
  
 
@@ -53,12 +54,12 @@ module.exports = (async function() {
   max: 100,
   cat: "Política Monetaria",
   chartdata: {
-    labels: require("./tasadates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/tasadates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Referencia",
-        data: require("./tasatasa.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/tasatasa.json`),
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -66,7 +67,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Badlar",
-        data: require("./tasabadlar.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/tasabadlar.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1,
@@ -74,7 +75,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Plazo Fijo",
-        data: require("./tasaplazo.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/tasaplazo.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1,
@@ -82,7 +83,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Pases Pasivos (1d)",
-        data: require("./tasapases.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/tasapases.json`),
         borderColor: "#7a49a580",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -91,7 +92,7 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

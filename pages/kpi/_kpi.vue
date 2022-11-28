@@ -6,11 +6,12 @@
 </template>
 
 <script>
- 
+   const generatedTime = require(`~/static/generatedTime.json`)
+
 export default {
   name: "Details",
   async asyncData({ params }) {
-    const rekpi = require(`~/static/kpi/${params.kpi}/${params.kpi}.json`)
+    const rekpi = require(`~/static/data/${generatedTime}/${params.kpi}/${params.kpi}.json`)
 
     const savedCells = {
       1246: {
@@ -79,11 +80,12 @@ export default {
   },
   data() {
     return {
-      kpi: require(`~/static/kpi/${this.$route.params.kpi}/${this.$route.params.kpi}.json`)
+      kpi: require(`~/static/data/${generatedTime}/${this.$route.params.kpi}/${this.$route.params.kpi}.json`)
 
     }
   },
   created() {    
+    console.log()
    if (this.kpi.cells) {
       this.savedCells = this.kpi.cells
    }

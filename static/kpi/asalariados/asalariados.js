@@ -1,5 +1,6 @@
 module.exports = (async function() {
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "asalariados"
 
   await parsers.datosGobarAPI(kpi, "privadob", '151.1_AARIADODAD_2012_M_31')
@@ -15,12 +16,12 @@ module.exports = (async function() {
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     cat: "Salarios",
     chartdata: {
-      labels: require("./privadob/dates.json"),
+      labels: require(`../../data/${generatedTime}/${kpi}/privadob/dates.json`),
       datasets: [
         {
           backgroundColor: 'rgba(46,120,210,0)',
           label: "Empleo Privado",
-          data: require("./privadod/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/privadod/d.json`),
           borderColor: "#2E78D2",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -28,7 +29,7 @@ module.exports = (async function() {
         {
           backgroundColor: 'rgba(46,120,210,0)',
           label: "Empleo Publico",
-          data: require("./privadob/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/privadob/d.json`),
           borderColor: "rgba(46,120,210,0.25)",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -37,6 +38,6 @@ module.exports = (async function() {
     }    
   }
  
-  parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

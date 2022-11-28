@@ -2,6 +2,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "ipim"
  
   await parsers.datosGobarAPI(kpi, "ipim", '448.1_NIVEL_GENERAL_0_0_13_46&representation_mode=percent_change')
@@ -17,12 +18,12 @@ module.exports = (async function() {
   cat: "Precios",
   min: 0,
   chartdata: {
-    labels: require("./ipim/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/ipim/dates.json`),
     datasets: [
       {
         backgroundColor: "#2E78D295",
         label: "IPIM",
-        data: require("./ipim/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/ipim/d.json`),
         type: 'bar',
         borderColor: "#2E78D2",
         pointRadius: 0,
@@ -32,7 +33,7 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

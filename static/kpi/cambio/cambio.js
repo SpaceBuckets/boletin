@@ -1,8 +1,8 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "cambio"
- 
   var post = {
     kpi,
   t: "Tipos de Cambio",
@@ -52,12 +52,12 @@ module.exports = (async function() {
   max: 350,
   cat: "Política Monetaria",  
   chartdata: {
-  labels: require("./oficial/dates.json"),
+  labels: require(`../../data/${generatedTime}/${kpi}/oficial/dates.json`),
   datasets: [
     {
       backgroundColor: "rgba(0,153,102,0.0)",
       label: "Oficial",
-      data: require("./oficial/d.json"),
+      data: require(`../../data/${generatedTime}/${kpi}/oficial/d.json`),
       borderColor: "#009966",
       pointRadius: 0,
       borderWidth: 1.5,
@@ -67,7 +67,7 @@ module.exports = (async function() {
     {
       backgroundColor: "rgba(178,34,34,0)",
       label: "Blue",
-      data: require("./blue/d.json"),
+      data: require(`../../data/${generatedTime}/${kpi}/blue/d.json`),
       borderColor: "#2E78D2",
       pointRadius: 0,
       borderWidth: 1.25,
@@ -76,7 +76,7 @@ module.exports = (async function() {
     {
       backgroundColor: "rgba(178,34,34,0)",
       label: "CCL",
-      data: require("./ccl/d.json"),
+      data: require(`../../data/${generatedTime}/${kpi}/ccl/d.json`),
       borderColor: "#b22222CC",
       pointRadius: 0,
       borderWidth: 1.25,
@@ -84,7 +84,7 @@ module.exports = (async function() {
     {
       backgroundColor: "rgba(178,34,34,0)",
       label: "MEP",
-      data: require("./mep/d.json"),
+      data: require(`../../data/${generatedTime}/${kpi}/mep/d.json`),
       borderColor: "#b2222250",
       pointRadius: 0,
       borderWidth: 1.25,
@@ -95,6 +95,6 @@ module.exports = (async function() {
 }
 
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

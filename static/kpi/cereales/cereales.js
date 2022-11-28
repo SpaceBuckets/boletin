@@ -2,6 +2,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "cereales"
  
   await parsers.datosGobarAPI(kpi, "soja", '34.2_STSOJ_0_P_16')
@@ -20,12 +21,12 @@ module.exports = (async function() {
   "max": 80000000,
   "cat": "Producción",
 chartdata: {
-  labels: require("./soja/dates.json"),
+  labels: require(`../../data/${generatedTime}/${kpi}/soja/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(146,220,210,0)",
         label: "Girasol",
-        data: require("./girasol/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/girasol/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
 
         pointRadius: 0,
@@ -34,7 +35,7 @@ chartdata: {
       {
         backgroundColor: "rgba(146,220,210,0)",
         label: "Maiz",
-        data: require("./maiz/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/maiz/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
 
         pointRadius: 0,
@@ -43,7 +44,7 @@ chartdata: {
       {
         backgroundColor: "rgba(146,220,210,0)",
         label: "Trigo",
-        data: require("./trigo/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/trigo/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
 
         pointRadius: 0,
@@ -53,7 +54,7 @@ chartdata: {
         backgroundColor: "rgba(146,220,210,0)",
         label: "Soja",
 
-        data: require("./soja/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/soja/d.json`),
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -62,6 +63,6 @@ chartdata: {
   }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

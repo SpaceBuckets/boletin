@@ -1,6 +1,7 @@
 module.exports = (async function () {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "ocupacionhotelera"
 
   
@@ -21,12 +22,12 @@ module.exports = (async function () {
     d: "",
     cat: "Turismo",
     chartdata: {
-      labels: require("./total/dates.json"),
+      labels: require(`../../data/${generatedTime}/${kpi}/total/dates.json`),
       datasets: [
         {
           backgroundColor: "rgba(146,220,210,0)",
           label: "Viajeros Hospedados",
-          data: require("./total/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/total/d.json`),
           borderColor: "#2E78D2CC",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -34,7 +35,7 @@ module.exports = (async function () {
         {
           backgroundColor: "rgba(146,220,210,0)",
           label: "Residentes",
-          data: require("./residentes/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/residentes/d.json`),
           borderColor: "#2E78D250",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -42,7 +43,7 @@ module.exports = (async function () {
         {
           backgroundColor: "rgba(146,220,210,0)",
           label: "No Residentes",
-          data: require("./noresidentes/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/noresidentes/d.json`),
           borderColor: "#2E78D250",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -51,7 +52,7 @@ module.exports = (async function () {
     }
   }
 
-  parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

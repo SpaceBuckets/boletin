@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "ucii"
   const ucii = {
     general: '31.3_UNG_2004_M_18',
@@ -30,12 +31,12 @@ module.exports = (async function() {
   "d": "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   "cat": "Actividad Económica",
   chartdata: {
-    labels: require("./general/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/general/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "General",
-        data: require("./general/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/general/d.json`),
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -43,7 +44,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Alimentos",
-        data: require("./alimentos/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/alimentos/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -52,7 +53,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Automotriz",
-        data: require("./automotriz/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/automotriz/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -61,7 +62,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Edicion",
-        data: require("./edicion/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/edicion/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -70,7 +71,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Metales",
-        data: require("./metales/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/metales/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -79,7 +80,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Metalmecanica",
-        data: require("./metalmecanica/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/metalmecanica/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -88,7 +89,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Minerales",
-        data: require("./minerales/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/minerales/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -97,7 +98,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Papel",
-        data: require("./papel/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/papel/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -106,7 +107,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Petroleo",
-        data: require("./petroleo/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/petroleo/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -115,7 +116,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Plastico",
-        data: require("./plastico/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/plastico/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -124,7 +125,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Quimicos",
-        data: require("./quimicos/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/quimicos/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -133,7 +134,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Tabaco",
-        data: require("./tabaco/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/tabaco/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -142,7 +143,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Textiles",
-        data: require("./textiles/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/textiles/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -153,7 +154,7 @@ module.exports = (async function() {
 }
 
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

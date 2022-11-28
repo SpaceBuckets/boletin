@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "ice"
  
   const kpidata = {
@@ -25,12 +26,12 @@ module.exports = (async function() {
   max: 10,
   cat: "Otros",
   chartdata: {
-    labels: require("./dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/coyuntural/dates.json`),
     datasets: [
       {
         backgroundColor: 'rgba(46,120,210,0)',
         label: "ICE Coyuntural",
-        data: require("./coyuntural.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/coyuntural/d.json`),
         borderColor: "rgba(46,120,210,0.3)",
 
         pointRadius: 0,
@@ -39,7 +40,7 @@ module.exports = (async function() {
       {
         backgroundColor: 'rgba(146,220,210,0)',
         label: "ICE Estructural",
-        data: require("./estructural.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/estructural/d.json`),
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -49,7 +50,7 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

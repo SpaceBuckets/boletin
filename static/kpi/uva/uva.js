@@ -4,6 +4,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "uva"
  
   await parsers.datosGobarAPI(kpi, "uva", '94.2_UVAD_D_0_0_10')
@@ -18,12 +19,12 @@ module.exports = (async function() {
   "d": "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   "cat": "Política Monetaria",
   chartdata: {
-    labels: require("./uva/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/uva/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0.05)",
         label: "UVA",
-        data: require("./uva/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/uva/d.json`),
         borderColor: "rgba(46,120,210,1)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -33,6 +34,6 @@ module.exports = (async function() {
   }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

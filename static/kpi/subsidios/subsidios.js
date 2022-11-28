@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "subsidios"
  
   const kpidata = {
@@ -21,12 +22,12 @@ module.exports = (async function() {
   max: 250000,
   cat: "Cuentas Nacionales",
   chartdata: {
-    labels: require("./subenergia/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/subenergia/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(146,220,210,0)",
         label: "Transporte",
-        data: require("./subtransporte/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/subtransporte/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -34,7 +35,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(146,220,210,0)",
         label: "Energia",
-        data: require("./subenergia/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/subenergia/d.json`),
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -43,7 +44,7 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

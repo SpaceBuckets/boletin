@@ -2,6 +2,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "ipc"
  
   await parsers.scrapeBCRA("7931",kpi)
@@ -18,12 +19,12 @@ module.exports = (async function() {
   min: 0,
   cat: "Precios",
   chartdata: {
-    labels: require("./datos/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/datos/dates.json`),
     datasets: [
       {
         backgroundColor: "#2E78D295",
         label: "IPC General",
-        data: require("./datos/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/datos/d.json`),
         type: 'bar',
         borderColor: "#2E78D2",
         pointRadius: 0,
@@ -33,7 +34,7 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

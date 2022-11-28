@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "icl"
  
   await parsers.scrapeBCRA("7988",kpi)
@@ -15,12 +16,12 @@ module.exports = (async function() {
   d: "El Índice de Contratos de Locación (ICL) es un indicador creado por la Ley 27.551 con el fin de poder establecer parámetros de actualización a la hora de celebrar contratos de alquiler.",
   cat: "Política Monetaria",
   chartdata: {
-    labels: require("./datos/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/datos/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0.05)",
         label: "ICL",
-        data: require("./datos/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/datos/d.json`),
         borderColor: "rgba(46,120,210,1)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -29,6 +30,6 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

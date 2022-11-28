@@ -473,8 +473,8 @@ export default {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   position: relative;
-  background: #ccc;
-  gap: 0px;
+  background: #000;
+  gap: 8px;
   //  border-left: 1px dashed #444;
   // border-top: 1px dashed #444;
   margin: 0px 0 0 0;
@@ -511,7 +511,7 @@ export default {
   }
   > section {
     background: #fff;
-    border-radius: 0;
+    border-radius: 4px;
     position: absolute;
     left: 0;
     bottom: 0;

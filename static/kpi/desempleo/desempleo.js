@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "desempleo"
  
   const kpidata = {
@@ -26,12 +27,12 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   cat: "Salarios",
   chartdata: {
-    labels: require("./general/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/general/dates.json`),
     datasets: [
       {
         backgroundColor: 'rgba(46,120,210,0.0)',
         label: "General",
-        data: require("./general/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/general/d.json`),
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -39,7 +40,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "CABA",
-        data: require("./caba/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/caba/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -48,7 +49,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Cuyo",
-        data: require("./cuyo/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/cuyo/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -57,7 +58,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "GBA",
-        data: require("./gba/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/gba/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -66,7 +67,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Nordeste",
-        data: require("./nordeste/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/nordeste/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -75,7 +76,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Noroeste",
-        data: require("./noroeste/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/noroeste/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -84,7 +85,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Pampeana",
-        data: require("./pampeana/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/pampeana/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -93,7 +94,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Patagonia",
-        data: require("./patagonia/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/patagonia/d.json`),
         borderColor: "rgba(46,120,210,0.15)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -103,7 +104,7 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

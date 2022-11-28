@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "tributarios"
   const kpidata = {
     dga: '172.3_SOTAL_DDGA_M_0_0_12',
@@ -21,12 +22,12 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   cat: "Cuentas Nacionales",
   chartdata: {
-    labels: require("./total/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/total/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Total",
-        data: require(".//total/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}//total/d.json`),
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -34,7 +35,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "DGA",
-        data: require(".//dga/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}//dga/d.json`),
         borderColor: "#7a49a580",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -42,7 +43,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "DGI",
-        data: require(".//dgi/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}//dgi/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -51,7 +52,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Seguridad Social",
-        data: require(".//seguridad/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}//seguridad/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -61,6 +62,6 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

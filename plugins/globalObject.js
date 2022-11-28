@@ -3,6 +3,7 @@ import Vue from 'vue'
 const state = {
   updated: 0,
   isOpen: false,
+  generatedTime: require(`../static/generatedTime.json`),
   kpidates: {
     balanza: "2004-06-01",
     deficit: "2018-12-01",

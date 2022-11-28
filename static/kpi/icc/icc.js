@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "icc"
  
   await parsers.datosGobarAPI(kpi, "icc", '380.3_ICC_NACIONNAL_0_T_12')
@@ -15,12 +16,12 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   cat: "Otros",
   chartdata: {
-    labels: require("./icc/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/icc/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0.05)",
         label: "ICC",
-        data: require("./icc/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/icc/d.json`),
         borderColor: "rgba(46,120,210,1)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -29,6 +30,6 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

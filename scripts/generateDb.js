@@ -9,6 +9,7 @@ const matter = require('gray-matter');
  const path = require('path')
  var moment = require('moment'); // require
  const cliProgress = require('cli-progress');
+ global.crypto = require('crypto')
 
  function writeFileSyncRecursive(filename, content, charset) {
    const folders = filename.split(path.sep).slice(0, -1)
@@ -126,8 +127,10 @@ var pepeLength
  tempArray.length = pepeLength  
  for (let i = 1; i < tempArray.length; i++) { if(tempArray[i] === undefined) { tempArray[i] = null } }
  for (let o = 1; o < datesArray.length; o++) { if(datesArray[o] === undefined) { datesArray[o] = null } }
-   writeFileSyncRecursive(`./static/kpi/${cat}/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
-   writeFileSyncRecursive(`./static/kpi/${cat}/${key}/d.json`, JSON.stringify(tempArray.reverse()));
+ const generatedTime = require(`../static/generatedTime.json`)
+
+   writeFileSyncRecursive(`./static/data/${generatedTime}/${cat}/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
+   writeFileSyncRecursive(`./static/data/${generatedTime}/${cat}/${key}/d.json`, JSON.stringify(tempArray.reverse()));
    console.log(`♥ [bonos] ${key} updated`) 
 
  }  
@@ -159,11 +162,12 @@ async function getUSD() {
   }
 
   dateUSD = [...new Set(dateUSD)]
+  const generatedTime = require(`../static/generatedTime.json`)
 
-  writeFileSyncRecursive(`./static/kpi/brecha/blue/dates.json`, JSON.stringify(dateUSD.reverse()));
-  writeFileSyncRecursive(`./static/kpi/brecha/blue/blue.json`, JSON.stringify(valBlue.reverse()));
-  writeFileSyncRecursive(`./static/kpi/brecha/blue/usd.json`, JSON.stringify(valUSD.reverse()));
-  writeFileSyncRecursive(`./static/kpi/brecha/blue/gap.json`, JSON.stringify(valGap.reverse()));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/brecha/blue/dates.json`, JSON.stringify(dateUSD.reverse()));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/brecha/blue/blue.json`, JSON.stringify(valBlue.reverse()));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/brecha/blue/usd.json`, JSON.stringify(valUSD.reverse()));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/brecha/blue/gap.json`, JSON.stringify(valGap.reverse()));
   console.log(`♥ [monetaria] Dolar/blue updated`)
 
 }
@@ -193,18 +197,19 @@ async function getBRCASeries() {
       foundArr.push(e)
     }
   }
+  const generatedTime = require(`../static/generatedTime.json`)
 
 
-  writeFileSyncRecursive(`./static/kpi/reservas/total.json`, JSON.stringify(valRes.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/total.json`, JSON.stringify(valRes.slice(0, foundArr[0])));
 
-  writeFileSyncRecursive(`./static/kpi/reservas/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
-  writeFileSyncRecursive(`./static/kpi/reservas/mensualdates.json`, JSON.stringify(dateUSD.slice(foundArr[0], foundArr[1])));
-  writeFileSyncRecursive(`./static/kpi/reservas/anualdates.json`, JSON.stringify(dateUSD.slice(foundArr[1])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/mensualdates.json`, JSON.stringify(dateUSD.slice(foundArr[0], foundArr[1])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/anualdates.json`, JSON.stringify(dateUSD.slice(foundArr[1])));
 
-  writeFileSyncRecursive(`./static/kpi/comprasbcra/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
-  writeFileSyncRecursive(`./static/kpi/comprasbcra/diaria.json`, JSON.stringify(valUSD.slice(0, foundArr[0])));
-  writeFileSyncRecursive(`./static/kpi/comprasbcra/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0], foundArr[1])));
-  writeFileSyncRecursive(`./static/kpi/comprasbcra/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/diaria.json`, JSON.stringify(valUSD.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0], foundArr[1])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
 
   console.log(`♥ [monetaria] Reservas updated`)
 
@@ -241,11 +246,11 @@ async function getBRCASeries() {
     }
   }
 
-  writeFileSyncRecursive(`./static/kpi/tasa/tasadates.json`, JSON.stringify(dateTasa));
-  writeFileSyncRecursive(`./static/kpi/tasa/tasaplazo.json`, JSON.stringify(valPlazo));
-  writeFileSyncRecursive(`./static/kpi/tasa/tasabadlar.json`, JSON.stringify(valBadlar));
-  writeFileSyncRecursive(`./static/kpi/tasa/tasatasa.json`, JSON.stringify(valTasa));
-  writeFileSyncRecursive(`./static/kpi/tasa/tasapases.json`, JSON.stringify(valPases));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasadates.json`, JSON.stringify(dateTasa));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasaplazo.json`, JSON.stringify(valPlazo));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasabadlar.json`, JSON.stringify(valBadlar));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasatasa.json`, JSON.stringify(valTasa));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasapases.json`, JSON.stringify(valPases));
 
   console.log(`♥ [monetaria] Tasas updated`)
 
@@ -293,9 +298,9 @@ async function getBRCASeries() {
     }
   }
 
-   writeFileSyncRecursive(`./static/kpi/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus.slice(0,refoundArr[0])));
-   writeFileSyncRecursive(`./static/kpi/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,refoundArr[0])));
-   writeFileSyncRecursive(`./static/kpi/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,refoundArr[0])));
+   writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus.slice(0,refoundArr[0])));
+   writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,refoundArr[0])));
+   writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,refoundArr[0])));
  
  
    console.log(`♥ [monetaria] Base Monetaria updated`)
@@ -304,7 +309,8 @@ async function getBRCASeries() {
 
 async function parseAmbito() {
   var pepeLength
- 
+  const generatedTime = require(`../static/generatedTime.json`)
+
   for (let [key, value] of Object.entries(ambito)) {
     const resA = await fetch(value);
     var emaeB = JSON.parse(await resA.text())
@@ -320,26 +326,27 @@ async function parseAmbito() {
   }
   if (key === 'oficial') { pepeLength = tempArray.length }
   tempArray.length = pepeLength  
-   writeFileSyncRecursive(`./static/kpi/cambio/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
-    writeFileSyncRecursive(`./static/kpi/cambio/${key}/d.json`, JSON.stringify(tempArray.reverse()));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/cambio/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
+    writeFileSyncRecursive(`./static/data/${generatedTime}/cambio/${key}/d.json`, JSON.stringify(tempArray.reverse()));
     console.log(`♥ [ambito] ${key} updated`)
 
    } 
 
 }
 
-
+ 
  
 async function megaContent(src) {
   
-  
+  const generatedTime = require(`../static/generatedTime.json`)
+
    //Get post names
   var folders = glob.sync('*', { cwd: `static/${src}/` })
   var categories = []
   categoriesObject = {}
   tableObject = []
 
-  for (const singleFolder of folders) { categories.push(await require(`../static/kpi/${singleFolder}/${singleFolder}.json`).cat) };
+  for (const singleFolder of folders) { categories.push(await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`).cat) };
   categories = [...new Set(categories)]
   writeFileSyncRecursive(`./static/categories.json`, JSON.stringify(categories));
 
@@ -348,7 +355,7 @@ async function megaContent(src) {
   categoriesObject['Todos'] = []
 
   for (const singleFolder of folders) {
-      var post = await require(`../static/kpi/${singleFolder}/${singleFolder}.json`)
+      var post = await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`)
       categoriesObject['Todos'].push({t:post.t,kpi:post.kpi})
       categoriesObject[post.cat].push({t:post.t,kpi:post.kpi})
       tableObject.push({t:post.t,kpi:post.kpi,cat:post.cat,desc:post.st})
@@ -376,26 +383,38 @@ async function megaContent(src) {
 };
 
  
+
+
+async function processTime(arr){
+  console.log("◷ Starting up... Please be patient")
+  var reuuid = crypto.randomUUID().split("-").slice(-1)[0]
+  reuuid = new Date().getTime();
+  writeFileSyncRecursive(`./static/generatedTime.json`, JSON.stringify(reuuid));
+  console.log("◷ Generated Time")
  
+};
 
 async function processItems(arr){
-  console.log("◷ Starting up... Please be patient")
+  console.log("◷ Starting API")
  
-     await parseAmbito() 
-   await getUSD()
-   await getBRCASeries()  
+ 
+    await parseAmbito() 
+    await getUSD()
+    await getBRCASeries()   
+    await parseBonos('bonoscer')   
+    await parseBonos('bonosusd')   
  
   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
     await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](500)
  
   } 
-  console.log("---------------------")
-  megaContent("kpi")
+  console.log("---------------------") 
+ megaContent("kpi")  
 };
-
+ processTime();
 processItems(glob.sync('*', { cwd: `static/kpi/` }));
-//processItems(['ipicammesa']);
+//processItems(['cambio','brecha']);
 
 
 

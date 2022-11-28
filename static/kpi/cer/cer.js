@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "cer"
   
   await parsers.datosGobarAPI(kpi, "cer", '94.2_CD_D_0_0_10&start_date=2012-01-01')
@@ -18,12 +19,12 @@ module.exports = (async function() {
   cat: "Política Monetaria",
 
   chartdata: {
-  labels: require("./cer/dates.json"),
+  labels: require(`../../data/${generatedTime}/${kpi}/cer/dates.json`),
   datasets: [
     {
       backgroundColor: "rgba(46,120,210,0.05)",
       label: "CER",
-      data: require("./cer/d.json"),
+      data: require(`../../data/${generatedTime}/${kpi}/cer/d.json`),
       borderColor: "rgba(46,120,210,1)",
       pointRadius: 0,
       borderWidth: 1.5,
@@ -34,6 +35,6 @@ module.exports = (async function() {
 }
   
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

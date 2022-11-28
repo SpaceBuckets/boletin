@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "bonosusd"
  
 
@@ -15,12 +16,12 @@ module.exports = (async function() {
     cat: "Política Monetaria",
     min: 0,
     chartdata: {
-      labels: require("./al30d/dates.json"),
+      labels: require(`../../data/${generatedTime}/${kpi}/al30d/dates.json`),
       datasets: [
         {
           backgroundColor: "rgba(46,120,210,0.0)",
           label: "AL30D",
-          data: require("./al30d/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/al30d/d.json`),
           borderColor: "rgba(46,120,210,1)",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -28,7 +29,7 @@ module.exports = (async function() {
         {
           backgroundColor: "rgba(46,120,210,0.0)",
           label: "AL29D",
-          data: require("./al29d/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/al29d/d.json`),
           borderColor: "rgba(46,120,210,0.25)",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -36,7 +37,7 @@ module.exports = (async function() {
         {
           backgroundColor: "rgba(46,120,210,0.0)",
           label: "AL41D",
-          data: require("./al41d/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/al41d/d.json`),
           borderColor: "rgba(46,120,210,0.25)",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -44,7 +45,7 @@ module.exports = (async function() {
         {
           backgroundColor: "rgba(46,120,210,0.0)",
           label: "GD30D",
-          data: require("./gd30d/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/gd30d/d.json`),
           borderColor: "rgba(46,120,210,0.25)",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -52,7 +53,7 @@ module.exports = (async function() {
         {
           backgroundColor: "rgba(46,120,210,0.0)",
           label: "GD35D",
-          data: require("./gd35d/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/gd35d/d.json`),
           borderColor: "rgba(46,120,210,0.25)",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -60,7 +61,7 @@ module.exports = (async function() {
         {
           backgroundColor: "rgba(46,120,210,0.0)",
           label: "GD41D",
-          data: require("./gd41d/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/gd41d/d.json`),
           borderColor: "rgba(46,120,210,0.25)",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -70,5 +71,5 @@ module.exports = (async function() {
   }
 
   
-  parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 })()

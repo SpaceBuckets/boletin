@@ -2,6 +2,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "comprasbcra"
  
   var post = {
@@ -16,12 +17,12 @@ module.exports = (async function() {
   min: -300,
   cat: "Política Monetaria",  
   chartdata: {
-  labels: require("./diariadates.json"),
+  labels: require(`../../data/${generatedTime}/${kpi}/diariadates.json`),
   datasets: [
     {
       backgroundColor: "",
       label: "Compras Divisas USD",
-      data: require("./diaria.json"),
+      data: require(`../../data/${generatedTime}/${kpi}/diaria.json`),
       barThickness: 1,
       pointRadius: 0,
     },
@@ -29,6 +30,6 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

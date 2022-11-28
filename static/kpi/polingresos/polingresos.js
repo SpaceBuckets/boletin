@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "polingresos"
  
   const kpidata = {
@@ -38,12 +39,12 @@ module.exports = (async function() {
   cat: "Cuentas Nacionales",
   min: 0,
   chartdata: {
-    labels: require("./total/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/total/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Total",
-        data: require("./total/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/total/d.json`),
         borderColor: "rgba(46,120,210,1)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -51,7 +52,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Argentina Trabaja",
-        data: require("./argentinatrabaja/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/argentinatrabaja/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -59,7 +60,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Asignaciones",
-        data: require("./asignaciones/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/asignaciones/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -67,7 +68,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "AUH",
-        data: require("./auh/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/auh/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -75,7 +76,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Becas",
-        data: require("./becas/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/becas/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -83,7 +84,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Familias",
-        data: require("./familias/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/familias/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -91,7 +92,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Jefas y Jefes de Hogar",
-        data: require("./jefasyjefes/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/jefasyjefes/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -99,7 +100,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Jovenes Trabajo",
-        data: require("./jovenestrabajo/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/jovenestrabajo/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -107,7 +108,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Jubilaciones",
-        data: require("./jubilaciones/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/jubilaciones/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -115,7 +116,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Jubilaciones (no SIPA)",
-        data: require("./jubilacionesotros/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/jubilacionesotros/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -123,7 +124,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Otras",
-        data: require("./otras/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/otras/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -131,7 +132,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Pensiones",
-        data: require("./pensiones/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/pensiones/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -139,7 +140,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Progresar",
-        data: require("./progresar/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/progresar/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -147,7 +148,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Proyectos Comunitarios",
-        data: require("./proyectoscomunitarios/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/proyectoscomunitarios/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -155,7 +156,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "PUAM",
-        data: require("./puam/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/puam/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -163,7 +164,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Seguro Capacitacion",
-        data: require("./segcapacitacion/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/segcapacitacion/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -171,7 +172,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Seguro Desempleo",
-        data: require("./segdesempleo/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/segdesempleo/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -179,7 +180,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Seguro Desempleo (otros)",
-        data: require("./segdesempleootros/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/segdesempleootros/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -188,6 +189,6 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

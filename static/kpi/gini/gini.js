@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "gini"
 
   await parsers.parseWorldBank(kpi, "argentina", 'https://api.worldbank.org/v2/country/arg/indicator/SI.POV.GINI?format=json&per_page=500')
@@ -17,12 +18,12 @@ module.exports = (async function() {
   "max": 55,
   "min": 35,
   chartdata: {
-    labels: require("./argentina/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/argentina/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0.05)",
         label: "Argentina GINI",
-        data: require("./argentina/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/argentina/d.json`),
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -31,7 +32,7 @@ module.exports = (async function() {
 }
   }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

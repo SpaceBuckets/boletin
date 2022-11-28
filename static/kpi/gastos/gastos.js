@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "gastos"
  
   const kpidata = {
@@ -24,12 +25,12 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   cat: "Cuentas Nacionales",
   chartdata: {
-    labels: require("./transporte/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/transporte/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Transporte",
-        data: require("./transporte/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/transporte/d.json`),
         borderColor: "rgba(46,120,210,1)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -37,7 +38,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Agua",
-        data: require("./agua/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/agua/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -45,7 +46,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Vivienda",
-        data: require("./vivienda/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/vivienda/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -53,7 +54,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Energia",
-        data: require("./energia/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/energia/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -61,7 +62,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Educacion",
-        data: require("./educacion/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/educacion/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -70,6 +71,6 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

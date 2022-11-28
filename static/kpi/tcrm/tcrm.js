@@ -1,9 +1,10 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "tcrm"
   const kpidata = {
-    url: 'http://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xls',
+    url: 'https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xlsx',
     sheet: 0,
     date: 0,
     items: [
@@ -27,12 +28,12 @@ module.exports = (async function() {
   min: 0,
   cat: "Política Monetaria",
   chartdata: {
-    labels: require("./dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/itcrm/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "TCRM",
-        data: require("./itcrm.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/itcrm/d.json`),
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -40,7 +41,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(122, 73, 165,0)",
         label: "TCRUS",
-        data: require("./itcrus.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/itcrus/d.json`),
         borderColor: "rgba(122, 73, 165,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -48,7 +49,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "TRCB",
-        data: require("./itcrb.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/itcrb/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -57,7 +58,7 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
 

@@ -1,10 +1,11 @@
 module.exports = (async function () {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "ipifiel"
 
   kpidata = { 
-    "url": "http://www.fiel.org/publicaciones/CuadrosIC/CUAD_INDI_1666801187774.xls", 
+    "url": "http://www.fiel.org/publicaciones/CuadrosIC/CUAD_INDI_1669221056699.xls", 
     "sheet": "0", 
     "date": "0", 
     "items": [{ "name": "estacional", "id": "1" }] }
@@ -21,12 +22,12 @@ module.exports = (async function () {
     d: "",
     cat: "Actividad Económica",
     chartdata: {
-      labels: require("./estacional/dates.json"),
+      labels: require(`../../data/${generatedTime}/${kpi}/estacional/dates.json`),
       datasets: [
         {
           backgroundColor: "rgba(46,120,210,0)",
           label: "IPI FIEL",
-          data: require("./estacional/d.json"),
+          data: require(`../../data/${generatedTime}/${kpi}/estacional/d.json`),
           borderColor: "rgba(46,120,210,1)",
           pointRadius: 0,
           borderWidth: 1.5,
@@ -35,6 +36,6 @@ module.exports = (async function () {
     }
   }
 
-  parsers.writeFileSyncRecursive('./static/kpi/ipifiel/ipifiel.json', JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

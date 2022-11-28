@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   
   const kpi = "ipi"
   const kpidata = {
@@ -26,12 +27,12 @@ module.exports = (async function() {
   max: 160,
   cat: "Actividad Económica",
   chartdata: {
-    labels: require("./base/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/base/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Desestacionalizado",
-        data: require("./estacional/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/estacional/d.json`),
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -39,7 +40,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Tendencia",
-        data: require("./tendencia/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/tendencia/d.json`),
         borderColor: "#7a49a580",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -47,7 +48,7 @@ module.exports = (async function() {
       {
         fill: false,
         label: "Base",
-        data: require("./base/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/base/d.json`),
         borderColor: "rgba(46,120,210,0.25)",
         pointBackgroundColor: "#C1D7F2",
         pointRadius: 0,
@@ -57,6 +58,6 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()

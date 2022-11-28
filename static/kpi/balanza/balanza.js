@@ -1,6 +1,7 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
+const generatedTime = require(`../../generatedTime.json`)
   const kpi = "balanza"
 
   await parsers.datosGobarAPI(kpi, "impo", '74.3_IIT_0_M_25')
@@ -17,12 +18,12 @@ module.exports = (async function() {
     d: "El intercambio comercial argentino (ICA) muestra la evolución de la balanza comercial, la relación entre los ingresos en dólares provenientes de los productos que exporta el país y aquellos artículos que se compran en el exterior.",
     cat: "Cuentas Nacionales",
     chartdata: {
-    labels: require("./impo/dates.json"),
+    labels: require(`../../data/${generatedTime}/${kpi}/impo/dates.json`),
     datasets: [
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Importaciones",
-        data: require("./impo/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/impo/d.json`),
         borderColor: "#b22222CC",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -30,7 +31,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(146,220,210,0)",
         label: "Exportaciones",
-        data: require("./expo/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/expo/d.json`),
         borderColor: "#009966",
         pointRadius: 0,
         borderWidth: 1.5,
@@ -39,7 +40,7 @@ module.exports = (async function() {
         backgroundColor: "#ccc",
         label: "Saldo Comercial",
         type: "bar",
-        data: require("./saldo/d.json"),
+        data: require(`../../data/${generatedTime}/${kpi}/saldo/d.json`),
         borderColor: "#ccc",
         pointRadius: 0,
         borderWidth: 0,
@@ -48,6 +49,6 @@ module.exports = (async function() {
   },
   }
 
-  parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
 })()
