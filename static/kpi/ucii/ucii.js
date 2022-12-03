@@ -18,6 +18,7 @@ const generatedTime = require(`../../generatedTime.json`)
     papel: "31.3_UPC_2004_M_17",
     minerales: "31.3_UMNM_2004_M_27",
   }
+  try {
   for (let [key, value] of Object.entries(ucii)) {
     await parsers.datosGobarAPI(kpi, key, value)
   }
@@ -156,5 +157,8 @@ const generatedTime = require(`../../generatedTime.json`)
 
 parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
+} catch (error) {
+  console.log('\x1b[41m', '\x1b[37m',`✕ [${kpi}] failed to fetch!` ,'\x1b[0m');
+}
 })()
 

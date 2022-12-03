@@ -12,6 +12,7 @@ const generatedTime = require(`../../generatedTime.json`)
     agua: '452.3_CAPITAL_AGION_0_M_41_40',
     otros: '452.3_CAPITAL_OTION_0_M_20_10'
   }
+  try {
   for (let [key, value] of Object.entries(kpidata)) {
     await parsers.datosGobarAPI(kpi, key, value)
   }
@@ -73,4 +74,7 @@ const generatedTime = require(`../../generatedTime.json`)
 
 parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
+} catch (error) {
+  console.log('\x1b[41m', '\x1b[37m',`✕ [${kpi}] failed to fetch!` ,'\x1b[0m');
+}
 })()

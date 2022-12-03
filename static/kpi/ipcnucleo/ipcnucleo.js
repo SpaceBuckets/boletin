@@ -4,7 +4,7 @@ module.exports = (async function() {
   const parsers = require("../../parsers");
 const generatedTime = require(`../../generatedTime.json`)
   const kpi = "ipcnucleo"
- 
+  try { 
   await parsers.datosGobarAPI(kpi, "ipcnucleo", '148.3_INUCLEONAL_DICI_M_19&representation_mode=percent_change')
 
   var post = {
@@ -35,4 +35,7 @@ labels: require(`../../data/${generatedTime}/${kpi}/ipcnucleo/dates.json`),
 }
 parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
+} catch (error) {
+  console.log('\x1b[41m', '\x1b[37m',`✕ [${kpi}] failed to fetch!` ,'\x1b[0m');
+}
 })()

@@ -9,7 +9,7 @@ const generatedTime = require(`../../generatedTime.json`)
     tendencia: '453.1_SERIE_TENDCLO_0_0_21_61',
     base: '453.1_SERIE_ORIGNAL_0_0_14_46',
   }
-
+try {
   for (let [key, value] of Object.entries(kpidata)) {
     await parsers.datosGobarAPI(kpi, key, value)
   }
@@ -60,4 +60,7 @@ const generatedTime = require(`../../generatedTime.json`)
 
 parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
+} catch (error) {
+  console.log('\x1b[41m', '\x1b[37m',`✕ [${kpi}] failed to fetch!` ,'\x1b[0m');
+}
 })()

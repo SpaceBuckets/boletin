@@ -135,6 +135,7 @@ async function datosGobarCSV(kpi,name) {
 async function genericXLS(kpi,name) {
 
   const resA = await fetch(kpi.url);
+
   var data = xlsx.parse(await resA.arrayBuffer())[kpi.sheet].data
 
   // DATES

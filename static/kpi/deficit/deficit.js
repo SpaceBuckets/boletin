@@ -8,6 +8,7 @@ const generatedTime = require(`../../generatedTime.json`)
     gastos: '379.9_GTOS_CORR_017__14_1',
     ahorro: '379.9_RESULTADO_017__41_83',
   }
+  try {
   for (let [key, value] of Object.entries(deficit)) {
     await parsers.datosGobarAPI(kpi, key, value)
   }
@@ -55,5 +56,8 @@ const generatedTime = require(`../../generatedTime.json`)
 
 parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${kpi}.json`, JSON.stringify(post));
 
+} catch (error) {
+  console.log('\x1b[41m', '\x1b[37m',`✕ [${kpi}] failed to fetch!` ,'\x1b[0m');
+}
 })()
 

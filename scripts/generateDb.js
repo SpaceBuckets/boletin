@@ -102,7 +102,9 @@ global.bonosusd = {
 }
 
 async function parseBonos(cat) {
+
   for (let [key, value] of Object.entries(global[`${cat}`])) {
+    try {
 
  var resA = await fetch("https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas", {
    "headers": { "content-type": "application/x-www-form-urlencoded; charset=UTF-8", },
@@ -132,14 +134,16 @@ var pepeLength
    writeFileSyncRecursive(`./static/data/${generatedTime}/${cat}/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
    writeFileSyncRecursive(`./static/data/${generatedTime}/${cat}/${key}/d.json`, JSON.stringify(tempArray.reverse()));
    console.log(`♥ [bonos] ${key} updated`) 
-
+  } catch (error) {
+    console.log(`✕ [${key}] failed to fetch!`)
+  }
  }  
 
 }
 
 
 async function getUSD() {
-
+try {
   const resA = await fetch('https://api.bluelytics.com.ar/v2/evolution.json');
    var emaeB = await resA.json();
   var dateUSD = []
@@ -168,12 +172,14 @@ async function getUSD() {
   writeFileSyncRecursive(`./static/data/${generatedTime}/brecha/blue/blue.json`, JSON.stringify(valBlue.reverse()));
   writeFileSyncRecursive(`./static/data/${generatedTime}/brecha/blue/usd.json`, JSON.stringify(valUSD.reverse()));
   writeFileSyncRecursive(`./static/data/${generatedTime}/brecha/blue/gap.json`, JSON.stringify(valGap.reverse()));
-  console.log(`♥ [monetaria] Dolar/blue updated`)
-
+  console.log(`♥ [monetaria] Brecha updated`)
+} catch (error) {
+  console.log(`✕ [brecha] failed to fetch!`)
+}
 }
 
 async function getBRCASeries() {
-
+try {
   const resA = await fetch('http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm');
    var emaeB = await resA.arrayBuffer();
   var obj = xlsx.parse(emaeB);
@@ -304,7 +310,9 @@ async function getBRCASeries() {
  
  
    console.log(`♥ [monetaria] Base Monetaria updated`)
-
+  } catch (error) {
+    console.log(`✕ [monetaria] Base Monetaria failed to fetch!`)
+  }
 }
 
 async function parseAmbito() {
@@ -312,6 +320,7 @@ async function parseAmbito() {
   const generatedTime = require(`../static/generatedTime.json`)
 
   for (let [key, value] of Object.entries(ambito)) {
+    try {
     const resA = await fetch(value);
     var emaeB = JSON.parse(await resA.text())
     var datesArray = []
@@ -329,7 +338,9 @@ async function parseAmbito() {
   writeFileSyncRecursive(`./static/data/${generatedTime}/cambio/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
     writeFileSyncRecursive(`./static/data/${generatedTime}/cambio/${key}/d.json`, JSON.stringify(tempArray.reverse()));
     console.log(`♥ [ambito] ${key} updated`)
-
+  } catch (error) {
+    console.log(`✕ [${key}] failed to fetch!`)
+  }
    } 
 
 }
@@ -346,7 +357,13 @@ async function megaContent(src) {
   categoriesObject = {}
   tableObject = []
 
-  for (const singleFolder of folders) { categories.push(await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`).cat) };
+  for (const singleFolder of folders) { 
+    try {
+      categories.push(await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`).cat) 
+    } catch (error) {
+      console.log(`✕ [${singleFolder}] failed to content!`)
+    }    
+  };
   categories = [...new Set(categories)]
   writeFileSyncRecursive(`./static/categories.json`, JSON.stringify(categories));
 
@@ -355,10 +372,14 @@ async function megaContent(src) {
   categoriesObject['Todos'] = []
 
   for (const singleFolder of folders) {
+    try {
       var post = await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`)
       categoriesObject['Todos'].push({t:post.t,kpi:post.kpi})
       categoriesObject[post.cat].push({t:post.t,kpi:post.kpi})
       tableObject.push({t:post.t,kpi:post.kpi,cat:post.cat,desc:post.st})
+    } catch (error) {
+      console.log(`✕ [${singleFolder}] failed to content!`)
+    }       
   };
 
   for (const singleCaet of Object.keys(categoriesObject)) {
@@ -399,14 +420,14 @@ async function processItems(arr){
  
  
     await parseAmbito() 
-    await getUSD()
+    await getUSD() 
     await getBRCASeries()   
     await parseBonos('bonoscer')   
     await parseBonos('bonosusd')   
  
   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
-    await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](500)
+    await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](400)
  
   } 
   console.log("---------------------") 
