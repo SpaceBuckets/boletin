@@ -2,7 +2,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 var xlsx = require('node-xlsx');
 const parse5 = require('parse5');
-//process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const glob = require('glob');
 const matter = require('gray-matter');
 const Papa = require('papaparse')
@@ -47,7 +47,7 @@ async function datosGobarAPI(kpi, name, value) {
   writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/dates.json`, JSON.stringify(tempDates));
   writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/d.json`, JSON.stringify(tempDataBase));
   await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](800)
-  console.log(`♥ [${kpi}] ${name} updated`)
+  console.log('\x1b[42m',`♥ [${kpi}] ${name} updated` ,'\x1b[0m');
 
 
 }
@@ -96,7 +96,8 @@ async function parseWorldBank(kpi,name,value) {
   }
   writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/dates.json`, JSON.stringify(datesArray.reverse()));
   writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/d.json`, JSON.stringify(tempArray.reverse())); 
-  console.log(`♥ [${kpi}] ${name} updated`)
+  console.log('\x1b[42m',`♥ [${kpi}] ${name} updated` ,'\x1b[0m');
+
 }
 
 async function datosGobarCSV(kpi,name) {
@@ -122,13 +123,13 @@ async function datosGobarCSV(kpi,name) {
 
     }
     writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${key}.json`, JSON.stringify(tempArray));
-    console.log(`♥ [${name}] ${name} updated`)
+    console.log('\x1b[42m',`♥ [${name}] ${name} updated` ,'\x1b[0m');
 
   }
 
   writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/dates.json`, JSON.stringify(datesArray));
 
-  console.log(`♥ [${name}] dates updated`)
+  console.log('\x1b[42m',`♥ [${name}] dates updated` ,'\x1b[0m');
 
 }
 
@@ -219,7 +220,7 @@ async function genericXLS(kpi,name) {
 
   }
    writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${kpi.items[0].name}/dates.json`, JSON.stringify(datesArray));
-  console.log(`♥ [${name}] dates updated`)
+  console.log('\x1b[42m',`♥ [${name}] dates updated` ,'\x1b[0m');
 
   // VALUES
   if (name.includes("ipifiel")) { 
@@ -230,8 +231,8 @@ async function genericXLS(kpi,name) {
         //if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value.id]).toFixed(3))}
       }
      writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${value.name}/d.json`, JSON.stringify(tempArray));
-     console.log(`♥ [${name}] updated`)
-  
+     console.log('\x1b[42m',`♥ [${name}] updated` ,'\x1b[0m');
+
     }
   } else {
     for (let [key, value] of Object.entries(kpi.items)) {
@@ -240,7 +241,7 @@ async function genericXLS(kpi,name) {
       if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value.id]).toFixed(3))}
     }
     writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${value.name}/d.json`, JSON.stringify(tempArray));
-    console.log(`♥ [${name}] updated`)
+    console.log('\x1b[42m',`♥ [${name}] updated` ,'\x1b[0m');
 
   }
   }
@@ -269,7 +270,7 @@ async function scrapeBCRA(serie, name) {
 
     writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/datos/dates.json`, JSON.stringify(dateInfla));
     writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/datos/d.json`, JSON.stringify(inflaVal));
-    console.log(`♥ [${name}] updated`)
+    console.log('\x1b[42m',`♥ [${name}] updated` ,'\x1b[0m');
 
 
 }

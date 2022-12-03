@@ -1,15 +1,9 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
 var xlsx = require('node-xlsx');
-const parse5 = require('parse5');
-//process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-const glob = require('glob');
-const matter = require('gray-matter');
- const Papa = require('papaparse')
- const path = require('path')
- var moment = require('moment'); // require
- const cliProgress = require('cli-progress');
- global.crypto = require('crypto')
+  const glob = require('glob');
+  const path = require('path')
+  global.crypto = require('crypto')
 
  function writeFileSyncRecursive(filename, content, charset) {
    const folders = filename.split(path.sep).slice(0, -1)
@@ -133,7 +127,8 @@ var pepeLength
 
    writeFileSyncRecursive(`./static/data/${generatedTime}/${cat}/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
    writeFileSyncRecursive(`./static/data/${generatedTime}/${cat}/${key}/d.json`, JSON.stringify(tempArray.reverse()));
-   console.log(`♥ [bonos] ${key} updated`) 
+   console.log('\x1b[42m',`♥ [bonos] ${key} updated` ,'\x1b[0m');
+
   } catch (error) {
     console.log(`✕ [${key}] failed to fetch!`)
   }
@@ -172,7 +167,8 @@ try {
   writeFileSyncRecursive(`./static/data/${generatedTime}/brecha/blue/blue.json`, JSON.stringify(valBlue.reverse()));
   writeFileSyncRecursive(`./static/data/${generatedTime}/brecha/blue/usd.json`, JSON.stringify(valUSD.reverse()));
   writeFileSyncRecursive(`./static/data/${generatedTime}/brecha/blue/gap.json`, JSON.stringify(valGap.reverse()));
-  console.log(`♥ [monetaria] Brecha updated`)
+  console.log('\x1b[42m',`♥ [monetaria] Brecha updated` ,'\x1b[0m');
+
 } catch (error) {
   console.log(`✕ [brecha] failed to fetch!`)
 }
@@ -217,7 +213,7 @@ try {
   writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0], foundArr[1])));
   writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
 
-  console.log(`♥ [monetaria] Reservas updated`)
+  console.log('\x1b[42m',`♥ [monetaria] Reservas updated` ,'\x1b[0m');
 
   // Sheet 5/6: TASAS
 
@@ -258,7 +254,7 @@ try {
   writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasatasa.json`, JSON.stringify(valTasa));
   writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasapases.json`, JSON.stringify(valPases));
 
-  console.log(`♥ [monetaria] Tasas updated`)
+  console.log('\x1b[42m',`♥ [monetaria] Tasas updated` ,'\x1b[0m');
 
    // Sheet 7: BASE MONETARIA
    var dateBasemonetaria = []
@@ -309,7 +305,8 @@ try {
    writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,refoundArr[0])));
  
  
-   console.log(`♥ [monetaria] Base Monetaria updated`)
+   console.log('\x1b[42m',`♥ [monetaria] Base Monetaria updated` ,'\x1b[0m');
+
   } catch (error) {
     console.log(`✕ [monetaria] Base Monetaria failed to fetch!`)
   }
@@ -337,7 +334,8 @@ async function parseAmbito() {
   tempArray.length = pepeLength  
   writeFileSyncRecursive(`./static/data/${generatedTime}/cambio/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
     writeFileSyncRecursive(`./static/data/${generatedTime}/cambio/${key}/d.json`, JSON.stringify(tempArray.reverse()));
-    console.log(`♥ [ambito] ${key} updated`)
+    console.log('\x1b[42m',`♥ [ambito] ${key} updated` ,'\x1b[0m');
+
   } catch (error) {
     console.log(`✕ [${key}] failed to fetch!`)
   }
@@ -418,12 +416,12 @@ async function processTime(arr){
 async function processItems(arr){
   console.log("◷ Starting API")
  
- 
+
     await parseAmbito() 
     await getUSD() 
     await getBRCASeries()   
     await parseBonos('bonoscer')   
-    await parseBonos('bonosusd')   
+    await parseBonos('bonosusd')    
  
   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
@@ -433,9 +431,9 @@ async function processItems(arr){
   console.log("---------------------") 
  megaContent("kpi")  
 };
- processTime();
+processTime();
 processItems(glob.sync('*', { cwd: `static/kpi/` }));
-//processItems(['cambio','brecha']);
+//processItems(['ipicammesa']);
 
 
 
