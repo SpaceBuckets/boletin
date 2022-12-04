@@ -1,5 +1,5 @@
 const fs = require('fs');
-const fetch = require('node-fetch');
+const fetch = require('@adobe/node-fetch-retry');
 var xlsx = require('node-xlsx');
   const glob = require('glob');
   const path = require('path')
@@ -397,24 +397,24 @@ async function megaContent(src) {
   writeFileSyncRecursive(`./static/tableObject.json`, JSON.stringify(tableObject));
   writeFileSyncRecursive(`./static/kpis.json`, JSON.stringify(ordered)); 
   
-  console.log(`✓ Content regenerated`)
- 
+  console.log('\x1b[43m',`✓ Content regenerated` ,'\x1b[0m');
+
 };
 
  
 
 
 async function processTime(arr){
-  console.log("◷ Starting up... Please be patient")
+  console.log("---------------------") 
   var reuuid = crypto.randomUUID().split("-").slice(-1)[0]
   reuuid = new Date().getTime();
   writeFileSyncRecursive(`./static/generatedTime.json`, JSON.stringify(reuuid));
-  console.log("◷ Generated Time")
- 
+  console.log('\x1b[46m',`◷ Generated Time: ${reuuid}` ,'\x1b[0m');
+
 };
 
 async function processItems(arr){
-  console.log("◷ Starting API")
+  console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
 
   await parseAmbito() 
   await getUSD() 
@@ -424,12 +424,10 @@ async function processItems(arr){
 
   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
-    await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](400)
+    //await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](400)
   } 
- 
-  console.log("---------------------") 
-  console.log("◷ Wrapping Up...")
  megaContent("kpi")  
+
 };
 processTime();
 processItems(glob.sync('*', { cwd: `static/kpi/` }));

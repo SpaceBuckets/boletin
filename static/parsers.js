@@ -1,5 +1,5 @@
 const fs = require('fs');
-const fetch = require('node-fetch');
+const fetch = require('@adobe/node-fetch-retry');
 var xlsx = require('node-xlsx');
 const parse5 = require('parse5');
 //process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
@@ -44,7 +44,7 @@ async function datosGobarAPI(kpi, name, value) {
   }
   writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/dates.json`, JSON.stringify(tempDates));
   writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/d.json`, JSON.stringify(tempDataBase));
-  await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](800)
+  //await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](800)
   console.log('\x1b[42m',`♥ [${kpi}] ${name} updated` ,'\x1b[0m');
 
 
