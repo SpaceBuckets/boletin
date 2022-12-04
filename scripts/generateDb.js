@@ -415,20 +415,20 @@ async function processTime(arr){
 
 async function processItems(arr){
   console.log("◷ Starting API")
- 
 
-    await parseAmbito() 
-    await getUSD() 
-    await getBRCASeries()   
-    await parseBonos('bonoscer')   
-    await parseBonos('bonosusd')    
- 
+  await parseAmbito() 
+  await getUSD() 
+  await getBRCASeries()   
+  await parseBonos('bonoscer')   
+  await parseBonos('bonosusd')    
+
   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
     await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](400)
- 
   } 
+ 
   console.log("---------------------") 
+  console.log("◷ Wrapping Up...")
  megaContent("kpi")  
 };
 processTime();
