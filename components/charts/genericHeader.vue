@@ -1,8 +1,8 @@
 <template>
   <section class="chart">
-    <h2>
+    <h1>
        <strong>{{chart.t}}</strong>
-    </h2>
+    </h1>
     <div class="numcontain" style="position: absolute;top: 55px;bottom: 15px;left: 20px;right:15px; padding-right:50px;">
        
       <div v-html="chart.c"></div>

@@ -38,12 +38,15 @@ a {
 }
  .numcontain {
    display: flex;
- 
+  position: relative !important;
+  inset: initial !important;
  }
  h2 {
-   margin-bottom: 0 !important;
-   max-height: 20px;
+   //margin-bottom: 0 !important;
+   //max-height: 20px;
    overflow: hidden;
+   font-size: 24px;
+   margin-bottom: 15px !important;
  }
 h4 {
   font-size: 20px;

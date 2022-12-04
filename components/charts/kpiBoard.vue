@@ -475,10 +475,11 @@ export default {
   position: relative;
   background: #000;
   gap: 8px;
+  column-gap: 0;
   //  border-left: 1px dashed #444;
   // border-top: 1px dashed #444;
   margin: 0px 0 0 0;
-  max-width: 1440px; 
+  max-width: 1366px; 
   @media only screen and (max-width: 980px) {
     display: block;
     border: 0;
@@ -512,6 +513,7 @@ export default {
   > section {
     background: #fff;
     border-radius: 4px;
+    border-radius: 0;
     position: absolute;
     left: 0;
     bottom: 0;

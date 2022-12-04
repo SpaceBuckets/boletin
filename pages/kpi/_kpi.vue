@@ -15,7 +15,7 @@ export default {
 
     const savedCells = {
       1246: {
-        area: "2 / 1 / 5 / 6",
+        area: "2 / 1 / 5 / 7",
         kpi: params.kpi,
         type: "Line",
         hasChart: true,
@@ -31,13 +31,7 @@ export default {
         subtitle: "Último Dato"      
       },       
 
-       2626: {
-        area: "2 / 6 / 5 / 6",
-        kpi: params.kpi,
-        type: "KpiUpdated",
-        hasChart: true,
-   
-      },   
+ 
        1616: {
         area: "1 / 6 / 1 / 6",
         kpi: params.kpi,

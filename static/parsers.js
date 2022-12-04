@@ -129,7 +129,7 @@ async function datosGobarCSV(kpi,name) {
 
   writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/dates.json`, JSON.stringify(datesArray));
 
-  console.log('\x1b[42m',`♥ [${name}] dates updated` ,'\x1b[0m');
+  //console.log('\x1b[42m',`♥ [${name}] dates updated` ,'\x1b[0m');
 
 }
 
@@ -220,7 +220,7 @@ async function genericXLS(kpi,name) {
 
   }
    writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${kpi.items[0].name}/dates.json`, JSON.stringify(datesArray));
-  console.log('\x1b[42m',`♥ [${name}] dates updated` ,'\x1b[0m');
+  //console.log('\x1b[42m',`♥ [${name}] dates updated` ,'\x1b[0m');
 
   // VALUES
   if (name.includes("ipifiel")) { 
