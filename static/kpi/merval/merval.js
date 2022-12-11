@@ -12,7 +12,11 @@ const generatedTime = require(`../../generatedTime.json`)
     st: "Indice",
     sd: "",
     c: "",
-    f: "",
+    fd: "datos.gob.ar",
+    fdr: "https://datos.gob.ar/dataset/sspm-indices-bursatiles-argentina/archivo/sspm_169.1",
+    fu: "MECON",
+    fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
+    frec: "Mensual", 
     d: "",
     cat: "Sector Financiero",
     chartdata: {

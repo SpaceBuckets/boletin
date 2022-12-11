@@ -11,7 +11,11 @@ const generatedTime = require(`../../generatedTime.json`)
     t: "Coeficiente de Variacion Salarial",
     st: "",
     c: "",
-    f: "",
+    fd: "datos.gob.ar",
+    fdr: "https://datos.gob.ar/sv/dataset/sspm-coeficiente-variacion-salarial-cvs/archivo/sspm_447.1",
+    fu: "MECON",
+    fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
+    frec: "Diaria", 
     d: "",
     cat: "Salarios",
     chartdata: {

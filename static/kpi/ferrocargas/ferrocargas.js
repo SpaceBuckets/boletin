@@ -11,7 +11,11 @@ const generatedTime = require(`../../generatedTime.json`)
     t: "Cargas Ferrocarril",
     st: "",
     c: "",
-    f: "",
+    fd: "datos.gob.ar",
+    fdr: "https://datos.gob.ar/dataset/sspm-estadisticas-servicios-publicos/archivo/sspm_302.3",
+    fu: "MECON",
+    fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
+    frec: "Mensual", 
     d: "",
     cat: "Producción",
     chartdata: {

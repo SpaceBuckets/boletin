@@ -11,7 +11,11 @@ const generatedTime = require(`../../generatedTime.json`)
     t: "Depositos privados",
     st: "",
     c: "",
-    f: "",
+    fd: "datos.gob.ar",
+    fdr: "https://datos.gob.ar/dataset/sspm_90/archivo/sspm_90.1",
+    fu: "MECON",
+    fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
+    frec: "Mensual", 
     d: "",
     cat: "Sector Financiero",
     chartdata: {

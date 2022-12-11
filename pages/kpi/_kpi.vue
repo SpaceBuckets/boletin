@@ -19,8 +19,8 @@ export default {
         kpi: params.kpi,
         type: "Line",
         hasChart: true,
-        title: "Serie de Tiempo",
-        subtitle: rekpi.t        
+        subtitle: "Serie de Tiempo",
+        title: rekpi.t        
       },
        1515: {
         area: "1 / 5 / 1 / 5",
@@ -34,7 +34,7 @@ export default {
  
        1616: {
         area: "1 / 6 / 1 / 6",
-        kpi: params.kpi,
+        kpi: params.kpi,        
         type: "Fuente",
         hasChart: true,
      

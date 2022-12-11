@@ -11,7 +11,11 @@ const generatedTime = require(`../../generatedTime.json`)
     t: "Liquidacion Agro",
     st: "",
     c: "",
-    f: "",
+    fd: "datos.gob.ar",
+    fdr: "https://datos.gob.ar/ja/dataset/sspm_349/archivo/sspm_349.2",
+    fu: "MECON",
+    fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
+    frec: "Mensual", 
     d: "",
     cat: "Producción",
     chartdata: {

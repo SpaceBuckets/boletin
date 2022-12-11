@@ -1,17 +1,17 @@
 <template>
   <section class="chart">
       <h2>
-        <strong>{{ chart.t }}</strong>. Último Dato
+         Último Dato
       </h2>
  
     <div class="numcontain" >
        <h4>{{getLastUpdated()}}</h4>
-  <div class="numcontain" style="position: absolute;top: 55px;bottom: 15px;left: 15px;right:15px">
-      <h5 :class="{ negative: getVariation(0) < 0 }">
+             <p>Frecuencia: {{chart.frec}}</p>
+
+      <!-- <h5 :class="{ negative: getVariation(0) < 0 }">
         <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg> {{getVariation(0)}}%</h5>
-        
-    </div>      
-    </div>
+         -->
+     </div>
   </section>
 </template>
 
@@ -54,11 +54,9 @@ export default {
       date = date.setDate(date.getDate() + 1)
 
 
-      const lastupdate = formatter.format(
-date
-      );
+      const lastupdate = formatter.format(date);
       var day = this.chart.chartdata.labels.slice(-1)[0].slice(-2)
-      if (day === "01") {
+      if (day === "01" || day === "02") {
        return lastupdate.replace("de","").replace(" ","");
 
       }
@@ -79,7 +77,8 @@ a {
    display: flex;
    flex-direction: column;
     justify-content: center;
-    position: absolute;top: 30px;bottom: 15px;left: 15px;right:15px;
+    text-align: center;
+    position: absolute;top: 75px;bottom: 15px;left: 15px;right:15px;
      @media only screen and (max-width: 980px) {
            top: 0;
            bottom: 0;
@@ -90,16 +89,12 @@ a {
            }
            }
  }
- h2 {
-   margin-bottom: 0 !important;
-   max-height: 20px;
-   overflow: hidden;
- }
+ 
 h4 {
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   margin: 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-transform: capitalize;
  }
 h5 {

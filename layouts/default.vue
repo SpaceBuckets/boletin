@@ -96,10 +96,10 @@ export default {
 .content-container {
   //max-width: 1440px;
   margin: 0px;
-  padding: 10px 0 0 250px;
+  padding: 16px 20px 0 200px;
   &.index {
     padding: 20px 20px 0;
-  max-width: 1440px;
+  max-width: 1366px;
   margin: 0 auto;
 
   }
@@ -120,7 +120,12 @@ html {
   box-sizing: border-box;
   font-family: arial, helvetica, sans-serif;
   * {
-    color: #262626;
+    color: #ddd;
+    color: #333;
+    //color: #a4a8ad;
+  }
+  p {
+    color: #676c6f;
   }
 }
 *,
@@ -182,7 +187,7 @@ header {
       color: #ddd;
       font-family: Helvetica, Arial, sans-serif;
       font-size: 18px;
-      text-decoration: none;
+      //text-decoration: none;
       font-weight: lighter;
       //line-height: 60px;
       span {
@@ -202,6 +207,7 @@ body {
   background: #f7f5f0;
   background: rgb(247, 246, 243);
   background: #000;
+  background: #070b0d;
   margin: 0;
   font-size: 15px;
         @media only screen and (max-width: 980px) {
@@ -213,7 +219,7 @@ body {
 p {
   margin-top: 0;
   line-height: 1.4;
-  color: #262626;
+  //color: #262626;
 }
 
 em {
@@ -225,17 +231,23 @@ em {
 
 a {
   color: #2e78d2;
+  text-decoration: none;
+  &:hover {
+   // text-decoration: underline;
+  }
 }
 
 .chart h2 {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
   min-width: 300px;
   font-weight: 400;
   font-family: Helvetica, Arial, sans-serif;
-  font-weight: lighter;
-  color: #888;
+  //font-weight: lighter;
+  //color: #888;
   padding-right: 90px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px !important;
   i {
     display: block;
     font-size: 14px;

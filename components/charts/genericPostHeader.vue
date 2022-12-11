@@ -45,8 +45,8 @@ a {
    //margin-bottom: 0 !important;
    //max-height: 20px;
    overflow: hidden;
-   font-size: 24px;
-   margin-bottom: 15px !important;
+   //font-size: 24px;
+   //margin-bottom: 15px !important;
  }
 h4 {
   font-size: 20px;

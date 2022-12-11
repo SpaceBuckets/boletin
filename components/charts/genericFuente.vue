@@ -1,8 +1,7 @@
 <template>
   <section class="chart flexedheat">
     <h2 v-if="!title">
-      <strong>Fuente</strong
-      >.
+       Metadata
     </h2>
     <h2 v-if="title">
       <strong>{{ title }}</strong
@@ -10,8 +9,10 @@
     </h2>
 
     <div class="flexedcontent nofont">
-       <h4><a :href="chart.f">Ver fuente original</a></h4>
-              <h4> {{ chart.fu }}</h4>
+      <div class="scorecard">
+        <p>Fuente: <a :href="chart.fur">{{chart.fu}}</a></p>
+        <p>Data: <a :href="chart.fdr">{{chart.fd}}</a></p>
+      </div>
 
     </div>
   </section>
@@ -96,6 +97,7 @@ export default {
   padding: 0;
   padding-right: 0px;
   overflow: auto;
+
   h2 {
     margin-bottom: 10px !important;
   }
@@ -118,13 +120,16 @@ export default {
     max-height: 100%;
     overflow: auto;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column !important;
       overflow: auto;
     @media only screen and (max-width: 980px) {
   flex-direction: row !important;
 
     }  
     &.flexedcontent {
+      h3 {
+        margin-bottom: 0px;
+      }
       .grey {
         background: #eee;
       }
@@ -137,7 +142,7 @@ export default {
     }
     > div {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: wrap;flex-direction: column;
           @media only screen and (max-width: 980px) {
   flex: 1;
 
@@ -153,5 +158,13 @@ export default {
     }
   }
 }
+
+.scorecard {
+  margin-top: 15px;
+  p {
+    margin-bottom: 8px;
+  }
+}
+
 </style>
  

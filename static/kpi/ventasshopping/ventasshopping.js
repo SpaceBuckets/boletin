@@ -14,8 +14,11 @@ await parsers.datosGobarAPI(kpi,'resto','458.1_VENTAS_RESTES_ABRI_M_31_8')
     t: "Ventas Shopping",
     st: "Total, GBA y Resto",
     c: "",
-    f: "",
-    fu: "",
+    fd: "datos.gob.ar",
+    fdr: "https://datos.gob.ar/ar/dataset/sspm-ventas-centros-compras-nacional/archivo/sspm_458.1",
+    fu: "MECON",
+    fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
+    frec: "Mensual", 
     d: "",
     cat: "Consumo",
     chartdata: {

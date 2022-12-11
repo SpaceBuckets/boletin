@@ -142,7 +142,7 @@ select#fecha {
  }
 
  .chartcontain {
-   position: absolute;top: 55px;bottom: 15px;left: 20px;right:15px;
+   position: absolute;top: 80px;bottom: 15px;left: 20px;right:15px;
    > * {
          position: absolute;top: 0;bottom: 0;left: 0;right:0;
 

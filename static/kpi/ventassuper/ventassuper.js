@@ -16,8 +16,11 @@ await parsers.datosGobarAPI(kpi,'Otros','455.1_OTROS_MEDIIOS_0_M_12_32')
     t: "Ventas Supermercados",
     st: "Medios de Pago",
     c: "",
-    f: "",
-    fu: "",
+    fd: "datos.gob.ar",
+    fdr: "https://datos.gob.ar/dataset/sspm_455/archivo/sspm_455.1",
+    fu: "MECON",
+    fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
+    frec: "Mensual", 
     d: "",
     cat: "Consumo",
     chartdata: {

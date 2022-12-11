@@ -195,7 +195,8 @@ export default {
   }
 }
 .pepeboard {
-  padding: 0 6px;
+  max-width: 1366px;
+  margin: 0 auto;
 }
 .pepeboard > h2 {
   color: #eee;

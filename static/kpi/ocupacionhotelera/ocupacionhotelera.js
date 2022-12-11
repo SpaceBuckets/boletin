@@ -18,7 +18,11 @@ const generatedTime = require(`../../generatedTime.json`)
     st: "Viajeros Hospedados",
     sd: "",
     c: "",
-    f: "",
+    fd: "datos.gob.ar",
+    fdr: "https://datos.gob.ar/dataset/sspm_457/archivo/sspm_457.1",
+    fu: "MECON",
+    fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
+    frec: "Mensual", 
     d: "",
     cat: "Turismo",
     chartdata: {

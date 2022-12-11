@@ -11,7 +11,11 @@ const generatedTime = require(`../../generatedTime.json`)
     t: "Turismo Receptivo",
     st: "",
     c: "",
-    f: "",
+    fd: "datos.gob.ar",
+    fdr: "https://datos.gob.ar/dataset/sspm_322/archivo/sspm_322.2",
+    fu: "MECON",
+    fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
+    frec: "Mensual", 
     d: "",
     cat: "Turismo",
     chartdata: {

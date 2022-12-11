@@ -44,7 +44,7 @@ export default {
   color: rgba(25, 23, 17, 0.6);
   padding: 4px 15px;
   text-decoration: none;
-  color: #eee;
+  color: #a4a8ad;
   padding-left: 25px;
   &:hover {
     color: rgba(253, 216, 53, 1) !important;
@@ -83,6 +83,7 @@ export default {
   padding-top:10px;
   width: 220px;
   z-index: 999;
+  //border-right: 2px solid red;
   &.index {
     display: none;
   }

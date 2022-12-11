@@ -473,13 +473,15 @@ export default {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   position: relative;
-  background: #000;
+  //background: #000;
   gap: 8px;
   column-gap: 0;
+  gap: 14px;
   //  border-left: 1px dashed #444;
   // border-top: 1px dashed #444;
   margin: 0px 0 0 0;
-  max-width: 1366px; 
+  max-width: 1366px;
+  margin: 0 auto;
   @media only screen and (max-width: 980px) {
     display: block;
     border: 0;
@@ -488,11 +490,11 @@ export default {
   > i {
     //  border-right: 1px dashed #444;
     //  border-bottom: 1px dashed #444;
-    height: 182px;
+    height: 180px;
     pointer-events: none;
     cursor: pointer;
     @media only screen and (max-width: 980px) {
-  display: none;
+      display: none;
 
     }      
     &.active {
@@ -512,8 +514,13 @@ export default {
   }
   > section {
     background: #fff;
+    background: #151a1e;
+    background: #fff;
     border-radius: 4px;
     border-radius: 0;
+    border-radius: 6px;
+    border: 1px solid #1c2126;
+    border: 1px solid #eee;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -529,14 +536,14 @@ export default {
       width: calc(100% - 12px);
     }      
     a {
-      text-decoration: none;
+      //text-decoration: none;
     }
     .chart h2 {
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       overflow: hidden;
       padding: 0;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       min-width: 100%;
       height: 20px;
     }

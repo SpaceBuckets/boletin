@@ -19,7 +19,11 @@ const generatedTime = require(`../../generatedTime.json`)
   st: "Impuestos y subcategorias",
   sd: "El indicador de la utilización de la capacidad instalada en la industria manufacturera mide la proporción utilizada, en términos porcentuales, de la capacidad productiva del sector industrial.",
   c: "<p>Ingresos tributarios: son los originados en la potestad que tiene el Estado de establecer gravámenes (impuestos sobre la renta, sobre el patrimonio, sobre la producción, venta, compra o utilización de bienes y servicios que se cargan a los costos de producción y/o comercialización).</p>",
-  f: "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf",
+  fd: "datos.gob.ar",
+  fdr: "https://datos.gob.ar/sv/dataset/sspm-principales-subgrupos-recaudacion-tributaria/archivo/sspm_172.3",
+  fu: "MECON",
+  fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
+  frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   cat: "Cuentas Nacionales",
   chartdata: {

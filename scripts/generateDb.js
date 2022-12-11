@@ -397,7 +397,7 @@ async function megaContent(src) {
   writeFileSyncRecursive(`./static/tableObject.json`, JSON.stringify(tableObject));
   writeFileSyncRecursive(`./static/kpis.json`, JSON.stringify(ordered)); 
   
-  console.log('\x1b[43m',`✓ Content regenerated` ,'\x1b[0m');
+  console.log('\x1b[46m',`✓ Content regenerated` ,'\x1b[0m');
 
 };
 
@@ -421,7 +421,7 @@ async function processItems(arr){
   await getBRCASeries()   
   await parseBonos('bonoscer')   
   await parseBonos('bonosusd')    
-
+ 
   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
     //await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](400)
@@ -431,7 +431,7 @@ async function processItems(arr){
 };
 processTime();
 processItems(glob.sync('*', { cwd: `static/kpi/` }));
-//processItems(['ipicammesa']);
+//processItems(['emae']); 
 
 
 

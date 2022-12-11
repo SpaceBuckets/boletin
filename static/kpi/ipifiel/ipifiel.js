@@ -17,8 +17,11 @@ try {
     t: "IPI FIEL",
     st: "",
     c: "",
-    f: "",
-    fu: "",
+    fd: "Scraped",
+    fdr: "http://www.fiel.org/publicaciones/CuadrosIC/CUAD_INDI_1669221056699.xls",
+    fu: "FIEL",
+    fur: "http://www.fiel.org/",
+    frec: "Mensual",   
     d: "",
     cat: "Actividad Económica",
     chartdata: {
