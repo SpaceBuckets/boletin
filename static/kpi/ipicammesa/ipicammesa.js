@@ -5,7 +5,7 @@ module.exports = (async function() {
 
   const kpi = "ipicammesa"
   const kpidata = {
-    url: 'http://datos.produccion.gob.ar/dataset/2c91f1eb-1eff-47e2-9122-42275e15ad9d/resource/9f5150e2-7de5-4233-b906-a52d26c625c6/download/ipi-cammesa.csv',
+    url: 'https://datos.produccion.gob.ar/dataset/2c91f1eb-1eff-47e2-9122-42275e15ad9d/resource/9f5150e2-7de5-4233-b906-a52d26c625c6/download/ipi-cammesa.csv',
     date: 0,
     items: {
       interanual: 1

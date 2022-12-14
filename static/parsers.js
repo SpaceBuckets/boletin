@@ -100,7 +100,7 @@ async function parseWorldBank(kpi,name,value) {
 
 async function datosGobarCSV(kpi,name) {
 
-  const resA = await fetch(kpi.url);
+  const resA = await fetch(kpi.url,{rejectUnauthorized: false,});
   var emaeB = await resA.text()
   var data = Papa.parse(emaeB).data
  
