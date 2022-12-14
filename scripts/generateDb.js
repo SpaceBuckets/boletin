@@ -4,7 +4,10 @@ var xlsx = require('node-xlsx');
   const glob = require('glob');
   const path = require('path')
   global.crypto = require('crypto')
- 
+  var sslRootCAs = require('ssl-root-cas')
+  .inject()
+  .addFile('./static/cert/sectigo.crt');
+  
 
  function writeFileSyncRecursive(filename, content, charset) {
    const folders = filename.split(path.sep).slice(0, -1)
@@ -417,12 +420,12 @@ async function processTime(arr){
 async function processItems(arr){
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
 
- await parseAmbito() 
+   await parseAmbito() 
   await getUSD() 
   await getBRCASeries()   
   await parseBonos('bonoscer')   
   await parseBonos('bonosusd')    
-  
+ 
   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
     //await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](400)
