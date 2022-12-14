@@ -420,11 +420,11 @@ async function processTime(arr){
 async function processItems(arr){
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
 
-/*    await parseAmbito() 
+     await parseAmbito() 
   await getUSD() 
   await getBRCASeries()   
   await parseBonos('bonoscer')   
-  await parseBonos('bonosusd')     */
+  await parseBonos('bonosusd')   
  
   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
@@ -433,9 +433,9 @@ async function processItems(arr){
  megaContent("kpi")  
 
 };
-//processTime();
-//processItems(glob.sync('*', { cwd: `static/kpi/` }));
-processItems(['ipicammesa']); 
+processTime();
+processItems(glob.sync('*', { cwd: `static/kpi/` }));
+//processItems(['ipicammesa']); 
 
 
 
