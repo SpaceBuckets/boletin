@@ -8,6 +8,9 @@
   "ChartsGenericComment": {
     "description": "Auto imported from components/charts/genericComment.vue"
   },
+  "ChartsGenericFuente": {
+    "description": "Auto imported from components/charts/genericFuente.vue"
+  },
   "ChartsGenericHeader": {
     "description": "Auto imported from components/charts/genericHeader.vue"
   },

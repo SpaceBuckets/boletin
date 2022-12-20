@@ -1,7 +1,24 @@
 const fetch = require('@adobe/node-fetch-retry');
 const xlsx = require('node-xlsx');
 const glob = require('glob');
-const parsers = require("../static/parsers");
+const path = require('path')
+const fs = require('fs');
+
+global.crypto = require('crypto')
+
+function writeFileSyncRecursive(filename, content, charset) {
+  const folders = filename.split(path.sep).slice(0, -1)
+  if (folders.length) {
+    folders.reduce((last, folder) => {
+      const folderPath = last ? last + path.sep + folder : folder
+      if (!fs.existsSync(folderPath)) {
+        fs.mkdirSync(folderPath)
+      }
+      return folderPath
+    })
+  }
+  fs.writeFileSync(filename, content, charset)
+}
 
 
 async function getBRCASeries() {
@@ -32,16 +49,16 @@ try {
   const generatedTime = require(`../static/generatedTime.json`)
 
 
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/total.json`, JSON.stringify(valRes.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/total.json`, JSON.stringify(valRes.slice(0, foundArr[0])));
 
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/mensualdates.json`, JSON.stringify(dateUSD.slice(foundArr[0], foundArr[1])));
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/anualdates.json`, JSON.stringify(dateUSD.slice(foundArr[1])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/mensualdates.json`, JSON.stringify(dateUSD.slice(foundArr[0], foundArr[1])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/anualdates.json`, JSON.stringify(dateUSD.slice(foundArr[1])));
 
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/diaria.json`, JSON.stringify(valUSD.slice(0, foundArr[0])));
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0], foundArr[1])));
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/diaria.json`, JSON.stringify(valUSD.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0], foundArr[1])));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
 
   console.log('\x1b[42m',`♥ [monetaria] Reservas updated` ,'\x1b[0m');
 
@@ -78,11 +95,11 @@ try {
     }
   }
 
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasadates.json`, JSON.stringify(dateTasa));
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasaplazo.json`, JSON.stringify(valPlazo));
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasabadlar.json`, JSON.stringify(valBadlar));
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasatasa.json`, JSON.stringify(valTasa));
-  parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasapases.json`, JSON.stringify(valPases));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasadates.json`, JSON.stringify(dateTasa));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasaplazo.json`, JSON.stringify(valPlazo));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasabadlar.json`, JSON.stringify(valBadlar));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasatasa.json`, JSON.stringify(valTasa));
+  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasapases.json`, JSON.stringify(valPases));
 
   console.log('\x1b[42m',`♥ [monetaria] Tasas updated` ,'\x1b[0m');
 
@@ -130,9 +147,9 @@ try {
     }
   }
 
-   parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus.slice(0,refoundArr[0])));
-   parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,refoundArr[0])));
-   parsers.writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,refoundArr[0])));
+   writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus.slice(0,refoundArr[0])));
+   writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,refoundArr[0])));
+   writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,refoundArr[0])));
  
  
    console.log('\x1b[42m',`♥ [monetaria] Base Monetaria updated` ,'\x1b[0m');
@@ -161,7 +178,7 @@ async function megaContent(src) {
     }    
   };
   categories = [...new Set(categories)]
-  parsers.writeFileSyncRecursive(`./static/categories.json`, JSON.stringify(categories));
+  writeFileSyncRecursive(`./static/categories.json`, JSON.stringify(categories));
 
   for (const singleCat of categories) { categoriesObject[singleCat] = [] }
 
@@ -205,8 +222,8 @@ async function megaContent(src) {
   ordered['Consumo'] = categoriesObject['Consumo']
   ordered['Otros'] = categoriesObject['Otros']
   
-  parsers.writeFileSyncRecursive(`./static/tableObject.json`, JSON.stringify(tableObject));
-  parsers.writeFileSyncRecursive(`./static/kpis.json`, JSON.stringify(ordered)); 
+  writeFileSyncRecursive(`./static/tableObject.json`, JSON.stringify(tableObject));
+  writeFileSyncRecursive(`./static/kpis.json`, JSON.stringify(ordered)); 
   
   console.log('\x1b[46m',`✓ Content regenerated` ,'\x1b[0m');
 
@@ -217,14 +234,16 @@ async function megaContent(src) {
 
 async function processTime(arr){
   console.log("---------------------") 
-  parsers.writeFileSyncRecursive(`./static/generatedTime.json`, JSON.stringify(new Date().getTime()));
-  console.log('\x1b[46m',`◷ Generated Time` ,'\x1b[0m');
-  console.log("---------------------") 
+  var reuuid = crypto.randomUUID().split("-").slice(-1)[0]
+  reuuid = new Date().getTime();
+  writeFileSyncRecursive(`./static/generatedTime.json`, JSON.stringify(reuuid));
+  console.log('\x1b[46m',`◷ Generated Time: ${reuuid}` ,'\x1b[0m');
+
 };
 
 async function processItems(arr){
+await processTime();
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
-
  
   await getBRCASeries()   
  
@@ -236,7 +255,7 @@ async function processItems(arr){
  megaContent("kpi")  
 
 };
-processTime();
+
 processItems(glob.sync('*', { cwd: `static/kpi/` }));
 //processItems(['tasasinternacionales']); 
 
