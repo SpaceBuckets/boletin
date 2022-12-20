@@ -1,22 +1,15 @@
 <template>
   <div>
-    <div class="meganav" >
+    <div class="meganav">
 
-  
-       <div class="meganavsection nochild">
+      <div class="meganavsection nochild">
         <div><input type="text" placeholder="Search..."> </div>
       </div>    
+
       <div class="meganavsection open" v-if="i !== 'Todos'" @click="sectionOpen = i" v-for="(parent, i) in nav" :class="{open: sectionOpen === i}" :key="">
-        <div>
-        {{i.replace(/-/g, ' ')}} <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em; fill: #888;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg>
-
-        </div>
-           <nuxt-link v-for="kpi in parent" :key='`${i}-${kpi.kpi}`' :to="{ name: `kpi-kpi`, params: { kpi: kpi.kpi, parent: i } }" >
-
-            {{kpi.t}}
-          </nuxt-link>
+        <div>{{i.replace(/-/g, ' ')}} <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em; fill: #888;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg></div>
+        <nuxt-link v-for="kpi in parent" :key='`${i}-${kpi.kpi}`' :to="{ name: `kpi-kpi`, params: { kpi: kpi.kpi, parent: i } }">{{kpi.t}}</nuxt-link>
       </div>
-
     </div>
  
   </div>
@@ -44,7 +37,7 @@ export default {
   color: rgba(25, 23, 17, 0.6);
   padding: 4px 15px;
   text-decoration: none;
-  color: #a4a8ad;
+  color: #eee;
   padding-left: 25px;
   &:hover {
     color: rgba(253, 216, 53, 1) !important;
@@ -83,7 +76,9 @@ export default {
   padding-top:10px;
   width: 220px;
   z-index: 999;
+  //display:none;
   //border-right: 2px solid red;
+  //background: #1f2325;
   &.index {
     display: none;
   }

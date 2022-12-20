@@ -195,8 +195,8 @@ export default {
   }
 }
 .pepeboard {
-  max-width: 1366px;
-  margin: 0 auto;
+  max-width: 1440px;
+  margin: 0;
 }
 .pepeboard > h2 {
   color: #eee;
@@ -218,6 +218,7 @@ export default {
 display: block;
   @media only screen and (max-width: 980px) {
     width: 100%;
+    display: flex;
   }
   .rangeselector {
     display: none !important;

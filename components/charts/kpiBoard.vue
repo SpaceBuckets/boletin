@@ -23,7 +23,7 @@
         @pointerdown="startDrag($event)"
         @pointerup="endDrag($event)"
         @mousemove="hoverling($event)"
-        v-for="cells in 60"
+        v-for="cells in 44"
         :data-row-start="Math.ceil(cells / columnAmount)"
         :data-row-end="Math.ceil(cells / columnAmount) + 1"
         :data-col-start="getColStart(cells)"
@@ -480,8 +480,8 @@ export default {
   //  border-left: 1px dashed #444;
   // border-top: 1px dashed #444;
   margin: 0px 0 0 0;
-  max-width: 1366px;
-  margin: 0 auto;
+  max-width: 1440px;
+  margin: 0;
   @media only screen and (max-width: 980px) {
     display: block;
     border: 0;

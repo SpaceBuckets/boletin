@@ -20,7 +20,7 @@ const generatedTime = require(`../../generatedTime.json`)
   st: "Índice de Ventas Minoristas",
   sd: "El Índice de Ventas Minoristas (IVM) es un indicador de coyuntura que mide mensualmente la evolución de la facturación de los comercios minoristas PyMEs que desarrollan sus actividades dentro del país. Los establecimientos fueron seleccionados como representativos dadas nuestras estimaciones.",
   c: "<p>El Índice de Ventas Minoristas (IVM) es un indicador de coyuntura que mide mensualmente la evolución de la facturación de los comercios minoristas PyMEs que desarrollan sus actividades dentro del país. Los establecimientos fueron seleccionados como representativos dadas nuestras estimaciones.</p>",
-  fd: "Scraped",
+  fd: "Scraped (XLS)",
   fdr: "https://estudioseconomicos.ec.gba.gov.ar/datos/nac/contnac-ventas-minoristas.xlsx",
   fu: "CAME",
   fur: "https://www.redcame.org.ar/estadisticas-pyme/78/ndice-de-ventas-minoristas",
@@ -28,7 +28,7 @@ const generatedTime = require(`../../generatedTime.json`)
   d: "El Índice de Ventas Minoristas (IVM) es un indicador de coyuntura que mide mensualmente la evolución de la facturación de los comercios minoristas PyMEs que desarrollan sus actividades dentro del país. Los establecimientos fueron seleccionados como representativos dadas nuestras estimaciones.",
   max: 200,
   min: 0,
-  cat: "Precios",
+  cat: "Consumo",
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/valor/dates.json`),
     datasets: [

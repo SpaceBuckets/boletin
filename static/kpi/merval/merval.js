@@ -18,7 +18,7 @@ const generatedTime = require(`../../generatedTime.json`)
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-    cat: "Sector Financiero",
+    cat: "Política Monetaria",
     chartdata: {
       labels: require(`../../data/${generatedTime}/${kpi}/datos/dates.json`),
       datasets: [

@@ -12,7 +12,7 @@ const generatedTime = require(`../../generatedTime.json`)
   st: "En millones de USD",
   sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   c: "",
-  fd: "Scraped",
+  fd: "Scraped (XLS)",
   fdr: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",
   fu: "BCRA",
   fur: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",
@@ -20,7 +20,7 @@ const generatedTime = require(`../../generatedTime.json`)
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 300,
   min: -300,
-  cat: "Política Monetaria",  
+  cat: "hide",  
   chartdata: {
   labels: require(`../../data/${generatedTime}/${kpi}/diariadates.json`),
   datasets: [

@@ -1,10 +1,21 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
-const generatedTime = require(`../../generatedTime.json`)
+  const generatedTime = require(`../../generatedTime.json`)
   const kpi = "bonosusd"
+  const bonosusd = {
+    al29d: '13076',
+    al30d: '13078',
+    al41d: '13083',
+    gd30d: '13092',
+    gd35d: '13089',
+    gd41d: '13093'
+  }
  
+
   try {
+    await parsers.parseBonos(kpi, bonosusd)
+
 
   var post = {
     kpi,
@@ -12,7 +23,7 @@ const generatedTime = require(`../../generatedTime.json`)
     st: "Bonos Ley Argentina y NY",
     sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     c: "<p></p>",
-    fd: "Scraped",
+    fd: "API",
     fdr: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",
     fu: "Intervalores",
     fur: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",

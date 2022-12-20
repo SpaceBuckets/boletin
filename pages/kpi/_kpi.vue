@@ -40,17 +40,17 @@ export default {
      
       },    
                           
-      2367: {
-        area: "5 / 6 / 8 / 6",
+        2367: {
+        area: "5 / 5 / 8 / 7",
         kpi: params.kpi,
         type: "Heatmap",
         hasChart: true,
         title: rekpi.t,
         subtitle: "Variación"
-      },
+      },  
 
       4757: {
-        area: "5 / 1 / 8 / 6",
+        area: "5 / 1 / 8 / 5",
         kpi: params.kpi,
         type: "Table",
         hasChart: true,

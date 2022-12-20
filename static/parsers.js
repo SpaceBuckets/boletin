@@ -50,33 +50,6 @@ async function datosGobarAPI(kpi, name, value) {
 
 }
 
-async function parseAmbito(obj) {
-  var pepeLength
- 
-  for (let [key, value] of Object.entries(obj)) {
-    const resA = await fetch(value);
-    var emaeB = JSON.parse(await resA.text())
-    var datesArray = []
-    var tempArray = []
-   for (let i = 1; i < emaeB.length; i++) {
- 
-    datesArray.push(emaeB[i][0].split('-').reverse().join('-'))
-   // datesArray.push(new Date (emaeB[1][i].date).toLocaleDateString("en-CA", {timeZone: "UTC"}))
-
-    tempArray.push(Number(emaeB[i][1].replace(',','.')))
-      
-  }
-  if (key === 'oficial') { pepeLength = tempArray.length }
-  tempArray.length = pepeLength  
-   writeFileSyncRecursive(`./static/data/${generatedTime}/cambio/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
-    writeFileSyncRecursive(`./static/data/${generatedTime}/cambio/${key}/d.json`, JSON.stringify(tempArray.reverse()));
-    console.log(`♥ [ambito] ${key} updated`)
-
-   } 
-
-}
-
-
 
 async function parseWorldBank(kpi,name,value) {
  
@@ -273,5 +246,45 @@ async function scrapeBCRA(serie, name) {
 
 }
 
+async function parseBonos(kpi, obj) {
+  var pepeLength
 
-module.exports = {scrapeBCRA,genericXLS, datosGobarCSV,parseWorldBank, parseAmbito,writeFileSyncRecursive, datosGobarAPI }
+  for (let [key, value] of Object.entries(obj)) {
+  
+    try {
+
+      var resA = await fetch("https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas", {
+        "headers": { "content-type": "application/x-www-form-urlencoded; charset=UTF-8", },
+        "body": `idEspecie=${value}&fechaDesde=01%2F01%2F1900&fechaHasta=01%2F01%2F2100`,
+        "method": "POST"
+      });
+
+      var emaeB = JSON.parse(await resA.text())
+      var datesArray = []
+      var tempArray = []
+
+      for (let i = 1; i < emaeB.length; i++) {
+        datesArray.push(emaeB[i].FechaString.split('/').reverse().join('-'))
+        tempArray.push(Number(emaeB[i].PrecioUltimo))   
+      }
+
+      if (key === 'tx23' || key === 'al29d') { pepeLength = tempArray.length }
+      tempArray.length = pepeLength  
+ 
+      for (let i = 1; i < tempArray.length; i++) { if(tempArray[i] === undefined) { tempArray[i] = null } }
+      for (let o = 1; o < datesArray.length; o++) { if(datesArray[o] === undefined) { datesArray[o] = null } }
+      
+      const generatedTime = require(`../static/generatedTime.json`)
+
+      writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
+      writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${key}/d.json`, JSON.stringify(tempArray.reverse()));
+      console.log('\x1b[42m',`♥ [bonos] ${key} updated` ,'\x1b[0m');
+    } catch (error) {
+ 
+      console.log(`✕ [${key}] failed to fetch!`)
+    }  
+  }
+}
+
+
+module.exports = {scrapeBCRA,genericXLS, datosGobarCSV,parseWorldBank,parseBonos,writeFileSyncRecursive, datosGobarAPI }

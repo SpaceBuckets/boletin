@@ -8,7 +8,14 @@ const generatedTime = require(`../../generatedTime.json`)
     "url": "http://www.fiel.org/publicaciones/CuadrosIC/CUAD_INDI_1669221056699.xls", 
     "sheet": "0", 
     "date": "0", 
-    "items": [{ "name": "estacional", "id": "1" }] }
+    "items": [{ 
+      "name": "estacional", 
+      "id": "1" 
+    },{ 
+      "name": "desestacional", 
+      "id": "4" 
+    }] 
+  }
 try {
   await parsers.genericXLS(kpidata, kpi)
 
@@ -16,13 +23,14 @@ try {
     kpi,
     t: "IPI FIEL",
     st: "",
-    c: "",
-    fd: "Scraped",
+    c: "<p>Este indice mide la evolución mensual de la actividad productiva de las ramas industriales. Es decir, de las industrias extractivas, manufactureras y de producción y distribución de energía eléctrica, agua y gas y; como así también la captación, depuración y distribución de agua. Refleja la evolución conjunta de la cantidad y de la calidad, eliminando la influencia de los precios.</p>",
+    fd: "Scraped (XLS)",
     fdr: "http://www.fiel.org/publicaciones/CuadrosIC/CUAD_INDI_1669221056699.xls",
     fu: "FIEL",
     fur: "http://www.fiel.org/",
     frec: "Mensual",   
     d: "",
+    min: 80,
     cat: "Actividad Económica",
     chartdata: {
       labels: require(`../../data/${generatedTime}/${kpi}/estacional/dates.json`),
@@ -31,10 +39,18 @@ try {
           backgroundColor: "rgba(46,120,210,0)",
           label: "IPI FIEL",
           data: require(`../../data/${generatedTime}/${kpi}/estacional/d.json`),
-          borderColor: "rgba(46,120,210,1)",
+          borderColor: "rgba(46,120,210,0.25)",
           pointRadius: 0,
           borderWidth: 1.5,
           },
+          {
+            backgroundColor: "rgba(46,120,210,0)",
+            label: "IPI FIEL",
+            data: require(`../../data/${generatedTime}/${kpi}/desestacional/d.json`),
+            borderColor: "rgba(46,120,210,1)",
+            pointRadius: 0,
+            borderWidth: 1.5,
+            },          
       ],
     }
   }

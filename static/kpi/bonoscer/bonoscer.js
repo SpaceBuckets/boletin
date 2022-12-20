@@ -1,9 +1,19 @@
 module.exports = (async function() {
 
   const parsers = require("../../parsers");
-const generatedTime = require(`../../generatedTime.json`)
+  const generatedTime = require(`../../generatedTime.json`)
   const kpi = "bonoscer"
+  const bonoscer = {
+    tx23: '12185',
+    tx24: '12304',
+    tx26: '13029',
+    tx28: '13031',
+    t2x2: '12416'
+  }
+
+  
   try {
+    await parsers.parseBonos(kpi, bonoscer)
 
   var post = {
     kpi,
@@ -11,7 +21,7 @@ const generatedTime = require(`../../generatedTime.json`)
     st: "Bonos del Tesoro",
     sd: "El capital de los bonos CER capital se ajusta por el Índice de Precios al Consumidor y los intereses son calculados sobre saldos ajustados.",
     c: "<p>El capital de los bonos CER se ajusta por el Índice de Precios al Consumidor y los intereses son calculados sobre saldos ajustados.</p>",
-    fd: "Scraped",
+    fd: "API",
     fdr: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",
     fu: "Intervalores",
     fur: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",

@@ -96,7 +96,7 @@ export default {
   padding-right: 0px;
   overflow: auto;
   h2 {
-    margin-bottom: 10px !important;
+    margin-bottom: 2px !important;
   }
   @media only screen and (max-width: 600px) {
     max-width: 100%;

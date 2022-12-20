@@ -21,7 +21,7 @@ const generatedTime = require(`../../generatedTime.json`)
   sd: "El IPIP es un indicador de coyuntura que mide mensualmente la evolución de la facturación de la industria manufacturera PyME que desarrollan su actividad dentro del país y producen bienes seleccionados como representativos de la industria PyME.",
   c: "<p>El IPIP es un indicador de coyuntura que mide mensualmente la evolución de la facturación de la industria manufacturera PyME que desarrollan su actividad dentro del país y producen bienes seleccionados como representativos de la industria PyME.</p>",
   fdr: "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf",
-  fd: "Scraped",
+  fd: "Scraped (XLS)",
   fdr: "https://estudioseconomicos.ec.gba.gov.ar/datos/nac/contnac-indice-de-produccion-industrial-pyme.xlsx",
   fu: "CAME",
   fur: "https://www.redcame.org.ar/estadisticas-pyme/79/ndice-de-produccion-industrial-pyme--ipip",

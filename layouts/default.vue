@@ -96,11 +96,11 @@ export default {
 .content-container {
   //max-width: 1440px;
   margin: 0px;
-  padding: 16px 20px 0 200px;
+  padding: 20px 20px 0 240px;
   &.index {
     padding: 20px 20px 0;
   max-width: 1366px;
-  margin: 0 auto;
+  //margin: 0 auto;
 
   }
   &.menued {
@@ -143,6 +143,7 @@ html {
   align-items: center;
   bottom: 0;
   color: #666;
+  //background: #1f2325;
       @media only screen and (max-width: 980px) {
   display: none;
 
@@ -151,11 +152,12 @@ html {
 header {
   //background: rgba(55, 53, 47, 0.08);
   //background: #000;
+  //background: #1f2325;
   position: fixed;
   top: 0;
   height: 60px;
   left: 0;
-  width: 230px;
+  width: 220px;
   //right: 0;
   backface-visibility: hidden;
   display: flex;
@@ -239,13 +241,13 @@ a {
 
 .chart h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 18px;
   min-width: 300px;
   font-weight: 400;
   font-family: Helvetica, Arial, sans-serif;
   //font-weight: lighter;
   //color: #888;
-  padding-right: 90px;
+  padding-right: 120px;
   border-bottom: 1px solid #eee;
   padding-bottom: 15px !important;
   i {
@@ -279,6 +281,8 @@ canvas {
 .chart {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  flex: 1;
   > * {
     flex: 1;
   }
