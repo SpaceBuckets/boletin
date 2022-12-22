@@ -8,7 +8,7 @@ const generatedTime = require(`../../generatedTime.json`)
     
   var post = {
     kpi,
-    t: "Depositos privados",
+    t: "Depositos Privados",
     st: "",
     c: "",
     fd: "datos.gob.ar",

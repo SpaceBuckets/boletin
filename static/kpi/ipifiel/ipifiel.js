@@ -5,7 +5,7 @@ const generatedTime = require(`../../generatedTime.json`)
   const kpi = "ipifiel"
 
   kpidata = { 
-    "url": "http://www.fiel.org/publicaciones/CuadrosIC/CUAD_INDI_1669221056699.xls", 
+    "url": "http://www.fiel.org/publicaciones/CuadrosIC/CUAD_INDI_1671639236948.xls", 
     "sheet": "0", 
     "date": "0", 
     "items": [{ 
@@ -25,7 +25,7 @@ try {
     st: "",
     c: "<p>Este indice mide la evolución mensual de la actividad productiva de las ramas industriales. Es decir, de las industrias extractivas, manufactureras y de producción y distribución de energía eléctrica, agua y gas y; como así también la captación, depuración y distribución de agua. Refleja la evolución conjunta de la cantidad y de la calidad, eliminando la influencia de los precios.</p>",
     fd: "Scraped (XLS)",
-    fdr: "http://www.fiel.org/publicaciones/CuadrosIC/CUAD_INDI_1669221056699.xls",
+    fdr: "http://www.fiel.org/publicaciones/CuadrosIC/CUAD_INDI_1671639236948.xls",
     fu: "FIEL",
     fur: "http://www.fiel.org/",
     frec: "Mensual",   

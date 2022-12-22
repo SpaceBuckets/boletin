@@ -10,9 +10,10 @@
 
     <div class="flexedcontent nofont">
       <div class="scorecard">
+        <p>Frecuencia: {{chart.frec}}</p>
         <p>Fuente: <a :href="chart.fur">{{chart.fu}}</a></p>
-        <p>Metodo: <a :href="chart.fdr">{{chart.fd}}</a></p>
-        <p><a style="opacity:0.5;pointer-events:none" :href="chart.data"> <svg style="width:16px;height:auto;margin-right:6px;position:relative;top:2px;" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#aaa' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'> <polyline fill="none" points="10,75 10,90 90,90 90,75"/> <line x1="50" y1="15" x2="50" y2="65" /> <polyline fill="none" points="30,50 50,65 70,50" /></svg>Descargar Datos</a></p>
+        <p>Método: <a :href="chart.fdr">{{chart.fd}}</a></p>
+        <p><a style="opacity:0.5;pointer-events:none" :href="chart.data">Descargar Datos <svg style="width:16px;height:auto;margin-right:6px;position:relative;top:2px;" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#aaa' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'> <polyline fill="none" points="10,75 10,90 90,90 90,75"/> <line x1="50" y1="15" x2="50" y2="65" /> <polyline fill="none" points="30,50 50,65 70,50" /></svg></a></p>
       </div>
 
     </div>
@@ -161,9 +162,9 @@ export default {
 }
 
 .scorecard {
-  margin-top: 15px;
+  margin-top: 5px;
   p {
-    margin-bottom: 8px;
+    margin-bottom: 5px;
   }
 }
 

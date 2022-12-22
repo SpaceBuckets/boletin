@@ -6,11 +6,13 @@
  
     <div class="numcontain" >
        <h4>{{getLastUpdated()}}</h4>
-             <p>Frecuencia: {{chart.frec}}</p>
-
-      <!-- <h5 :class="{ negative: getVariation(0) < 0 }">
-        <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg> {{getVariation(0)}}%</h5>
-         -->
+ 
+     <h5 :class="{ negative: getVariation(0) < 0 }">
+{{getLastValue()}}
+        <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg> {{getVariation(0)}}%
+        
+      </h5>
+          
      </div>
   </section>
 </template>
@@ -34,6 +36,11 @@ export default {
     //console.log(this.chart)
   },
     methods: {
+      getLastValue() {
+        
+var lastValue = JSON.parse(JSON.stringify(this.chart.chartdata.datasets[0].data[0]));
+return lastValue
+      },
     getVariation(i) {
       var currentNum = this.chart.chartdata.datasets[0].data
         .filter((val, index, arr) => index > arr.length - 24)
@@ -78,7 +85,7 @@ a {
    flex-direction: column;
     justify-content: center;
     text-align: center;
-    position: absolute;top: 75px;bottom: 15px;left: 15px;right:15px;
+    position: absolute;top: 70px;bottom: 15px;left: 15px;right:15px;
      @media only screen and (max-width: 980px) {
            top: 0;
            bottom: 0;
@@ -100,7 +107,7 @@ h4 {
 h5 {
   font-size: 18px;
   margin: 0;
-  margin-top: 10px;
+  margin-top: 5px;
   text-align: center;
   color: #009966;
     svg { 

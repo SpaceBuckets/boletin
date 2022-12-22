@@ -4,8 +4,7 @@ const glob = require('glob');
 const path = require('path')
 const fs = require('fs');
 
-global.crypto = require('crypto')
-
+ 
 function writeFileSyncRecursive(filename, content, charset) {
   const folders = filename.split(path.sep).slice(0, -1)
   if (folders.length) {
@@ -234,8 +233,7 @@ async function megaContent(src) {
 
 async function processTime(arr){
   console.log("---------------------") 
-  var reuuid = crypto.randomUUID().split("-").slice(-1)[0]
-  reuuid = new Date().getTime();
+  var reuuid = new Date().getTime();
   writeFileSyncRecursive(`./static/generatedTime.json`, JSON.stringify(reuuid));
   console.log('\x1b[46m',`◷ Generated Time: ${reuuid}` ,'\x1b[0m');
 
@@ -257,7 +255,7 @@ await processTime();
 };
 
 processItems(glob.sync('*', { cwd: `static/kpi/` }));
-//processItems(['tasasinternacionales']); 
+//processItems(['ipicammesa']); 
 
 
 

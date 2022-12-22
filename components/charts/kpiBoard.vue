@@ -480,7 +480,7 @@ export default {
   //  border-left: 1px dashed #444;
   // border-top: 1px dashed #444;
   margin: 0px 0 0 0;
-  max-width: 1440px;
+  max-width: 1366px;
   margin: 0;
   @media only screen and (max-width: 980px) {
     display: block;

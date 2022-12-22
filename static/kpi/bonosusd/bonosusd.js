@@ -12,7 +12,6 @@ module.exports = (async function() {
     gd41d: '13093'
   }
  
-
   try {
     await parsers.parseBonos(kpi, bonosusd)
 
