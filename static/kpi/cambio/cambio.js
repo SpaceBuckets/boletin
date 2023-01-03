@@ -54,7 +54,7 @@ module.exports = (async function() {
     fur: "https://www.bcra.gob.ar/publicacionesestadisticas/tipos_de_cambios.asp",
     frec: "Diaria", 
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-    max: 350,
+    max: 400,
     cat: "Política Monetaria",  
     chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/oficial/dates.json`),

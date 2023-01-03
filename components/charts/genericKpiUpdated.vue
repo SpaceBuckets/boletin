@@ -101,7 +101,7 @@ h4 {
   font-size: 18px;
   text-align: center;
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   text-transform: capitalize;
  }
 h5 {
@@ -123,6 +123,8 @@ h5 {
   }
 }
 
-
+.chart {
+  position:relative;
+}
 
 </style>

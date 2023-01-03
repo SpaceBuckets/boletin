@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const state = {
+var state = {
   updated: 0,
   isOpen: false,
   generatedTime: require(`../static/generatedTime.json`),
@@ -20,7 +20,13 @@ const state = {
     maintainAspectRatio: false,
     animation: { duration: 0 },
     bezierCurve: true,
-
+    plugins: [{
+      beforeInit: function(chart, options) {
+        chart.legend.afterFit = function() {
+          this.height = this.height + 150;
+        };
+      }
+    }],
     layout: {
       padding: {
         left: 0,
@@ -41,7 +47,7 @@ const state = {
             offsetGridLines: false,
             color: "#F7F5F0",
           },
-          ticks: { fontColor: "#bbb", fontSize: 13 },
+          ticks: { fontColor: "#bbb", fontSize: 13.5 },
           time: {
             tooltipFormat: "DD/MM/YY",
             unit: "year",
@@ -52,6 +58,7 @@ const state = {
         {
           ticks: {
             fontColor: "#bbb",
+            fontSize: 13.5
 /*             callback: function (value, index, values) {
               return "$" + value / 1e4 + "M";
             }, */
@@ -70,14 +77,19 @@ const state = {
             fontColor: "#888",
           },
           position: "right",
+          //align: "center",
         },
       ],
     },
     legend: {
       display: true,
-      position: 'bottom',
-      labels: {
-        boxWidth: 12,
+      position: "bottom",
+      align: "end",
+      padding: 150,
+
+       labels: {
+        boxWidth: 10,
+        usePointStyle: true
        }
     },
   }

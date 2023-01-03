@@ -15,33 +15,19 @@ export default {
 
     const savedCells = {
       1246: {
-        area: "2 / 1 / 5 / 7",
+        area: "1 / 1 / 4 / 7",
         kpi: params.kpi,
-        type: "Line",
+        type: "LineHeader",
         hasChart: true,
         subtitle: "Serie de Tiempo",
         title: rekpi.t        
       },
-       1515: {
-        area: "1 / 5 / 1 / 5",
-        kpi: params.kpi,
-        type: "KpiUpdated",
-        hasChart: true,
-        title: rekpi.t,
-        subtitle: "Último Dato"      
-      },       
-
  
-       1616: {
-        area: "1 / 6 / 1 / 6",
-        kpi: params.kpi,        
-        type: "Fuente",
-        hasChart: true,
-     
-      },    
+ 
+ 
                           
         2367: {
-        area: "5 / 5 / 8 / 7",
+        area: "4 / 5 / 8 / 7",
         kpi: params.kpi,
         type: "Heatmap",
         hasChart: true,
@@ -50,21 +36,14 @@ export default {
       },  
 
       4757: {
-        area: "5 / 1 / 8 / 5",
+        area: "4 / 1 / 8 / 5",
         kpi: params.kpi,
         type: "Table",
         hasChart: true,
         title: rekpi.t,
         subtitle:  'Últimos 24 meses'
       },
-      1215: {
-        area: "1 / 1 / 2 / 5",
-        kpi: params.kpi,
-        type: "PostHeader",
-        hasChart: true,
-        title: rekpi.t,
-        subtitle: rekpi.st        
-    },
+ 
  
  
        

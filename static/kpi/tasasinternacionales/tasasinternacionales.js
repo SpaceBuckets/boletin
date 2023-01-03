@@ -2,7 +2,6 @@ module.exports = (async function() {
 
   const parsers = require("../../parsers");
 const generatedTime = require(`../../generatedTime.json`)
-console.log(generatedTime)
   const kpi = "tasasinternacionales"
  
   const kpidata = {

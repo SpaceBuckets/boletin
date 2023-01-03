@@ -115,7 +115,7 @@ export default {
       flex: 1;
       display: flex;
       gap: 20px;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #eee;
 
       > div {
         flex: 1;

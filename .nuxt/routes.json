@@ -1,5 +1,12 @@
 [
   {
+    "name": "actividad",
+    "path": "/actividad",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/actividad.vue",
+    "chunkName": "pages/actividad",
+    "_name": "_dd09f890"
+  },
+  {
     "name": "admin",
     "path": "/admin",
     "component": "/Users/agustin.capeletto/fed/beo/pages/admin/index.vue",

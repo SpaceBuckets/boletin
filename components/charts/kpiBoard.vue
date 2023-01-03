@@ -480,8 +480,8 @@ export default {
   //  border-left: 1px dashed #444;
   // border-top: 1px dashed #444;
   margin: 0px 0 0 0;
-  max-width: 1366px;
-  margin: 0;
+  max-width: 1280px;
+  margin: 0 auto;
   @media only screen and (max-width: 980px) {
     display: block;
     border: 0;
@@ -490,7 +490,7 @@ export default {
   > i {
     //  border-right: 1px dashed #444;
     //  border-bottom: 1px dashed #444;
-    height: 180px;
+    height: 200px;
     pointer-events: none;
     cursor: pointer;
     @media only screen and (max-width: 980px) {
@@ -530,6 +530,7 @@ export default {
     margin-bottom: 1px;
     margin-right: 1px;
     overflow: hidden;
+    &:first-of-type { padding: 0; }
     @media only screen and (max-width: 980px) {
       position: relative;
       float: left;

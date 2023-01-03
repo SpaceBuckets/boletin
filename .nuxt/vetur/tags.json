@@ -35,8 +35,17 @@
   "ChartsGenericKpiUpdatedBox": {
     "description": "Auto imported from components/charts/genericKpiUpdatedBox.vue"
   },
+  "ChartsGenericKpiUpdatedPepe": {
+    "description": "Auto imported from components/charts/genericKpiUpdatedPepe.vue"
+  },
   "ChartsGenericLine": {
     "description": "Auto imported from components/charts/genericLine.vue"
+  },
+  "ChartsGenericLineHeader": {
+    "description": "Auto imported from components/charts/genericLineHeader.vue"
+  },
+  "ChartsGenericLineMaster": {
+    "description": "Auto imported from components/charts/genericLineMaster.vue"
   },
   "ChartsGenericPostHeader": {
     "description": "Auto imported from components/charts/genericPostHeader.vue"

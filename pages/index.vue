@@ -195,7 +195,7 @@ export default {
   }
 }
 .pepeboard {
-  max-width: 1440px;
+  //max-width: 1440px;
   margin: 0;
 }
 .pepeboard > h2 {

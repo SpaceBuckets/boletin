@@ -172,9 +172,7 @@ async function megaContent(src) {
   for (const singleFolder of folders) { 
     try {
       categories.push(await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`).cat) 
-    } catch (error) {
-      console.log(`✕ [${singleFolder}] failed to content!`)
-    }    
+    } catch (error) { }    
   };
   categories = [...new Set(categories)]
   writeFileSyncRecursive(`./static/categories.json`, JSON.stringify(categories));
@@ -190,7 +188,8 @@ async function megaContent(src) {
       categoriesObject[post.cat].push({t:post.t,kpi:post.kpi})
       tableObject.push({t:post.t,kpi:post.kpi,cat:post.cat,desc:post.st})
     } catch (error) {
-      console.log(`✕ [${singleFolder}] failed to content!`)
+       console.log('\x1b[41m', '\x1b[37m',`✕ [${singleFolder}] failed to content!` ,'\x1b[0m');
+
     }       
   };
 
@@ -229,6 +228,36 @@ async function megaContent(src) {
 };
 
  
+async function processVariation(src){
+  const generatedTime = require(`../static/generatedTime.json`)
+  var folders = glob.sync('*', { cwd: `static/${src}/` })
+  var variArr = {}
+  for (const singleFolder of folders) {
+    try {
+      var post = await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`)
+ 
+        var currentNum = post.chartdata.datasets[0].data
+          .filter((val, index, arr) => index > arr.length - 24)
+          .reverse();
+        var A = currentNum[0];
+        var B = currentNum[0 + 1];
+        var C = (((A - B) / A) * 100.0).toFixed(1);
+  
+
+ 
+      variArr[post.kpi] = C
+ 
+    } catch (error) {
+       console.log('\x1b[41m', '\x1b[37m',`✕ [${singleFolder}] failed to content!` ,'\x1b[0m');
+
+    }       
+  };
+
+
+  writeFileSyncRecursive(`./static/variations.json`, JSON.stringify(variArr)); 
+  console.log('\x1b[46m',`✓ Variations generated` ,'\x1b[0m');
+
+}
 
 
 async function processTime(arr){
@@ -240,22 +269,23 @@ async function processTime(arr){
 };
 
 async function processItems(arr){
-await processTime();
+//await processTime();
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
  
-  await getBRCASeries()   
+  //await getBRCASeries()   
  
  
-  for(const kpi of arr) {
+/*   for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
     //await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](400)
-  } 
- megaContent("kpi")  
+  }   */ 
+ megaContent("kpi")
+await processVariation("kpi");
 
 };
 
-processItems(glob.sync('*', { cwd: `static/kpi/` }));
-//processItems(['ipicammesa']); 
+//processItems(glob.sync('*', { cwd: `static/kpi/` }));
+processItems(['cambio']); 
 
 
 

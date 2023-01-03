@@ -1,12 +1,9 @@
 <template>
   <section class="chart flexedheat">
-    <h2 v-if="!title">
+    <h2>
        Metadata
     </h2>
-    <h2 v-if="title">
-      <strong>{{ title }}</strong
-      >. {{ subtitle }}
-    </h2>
+ 
 
     <div class="flexedcontent nofont">
       <div class="scorecard">
@@ -161,12 +158,7 @@ export default {
   }
 }
 
-.scorecard {
-  margin-top: 5px;
-  p {
-    margin-bottom: 5px;
-  }
-}
+
 
 </style>
  
