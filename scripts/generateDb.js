@@ -269,23 +269,23 @@ async function processTime(arr){
 };
 
 async function processItems(arr){
-//await processTime();
+ await processTime();
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
  
-  //await getBRCASeries()   
+  await getBRCASeries()   
  
  
-/*   for(const kpi of arr) {
+  for(const kpi of arr) {
     await require(`../static/kpi/${kpi}/${kpi}`) 
     //await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](400)
-  }   */ 
+  }   
  megaContent("kpi")
 await processVariation("kpi");
 
 };
 
-//processItems(glob.sync('*', { cwd: `static/kpi/` }));
-processItems(['cambio']); 
+processItems(glob.sync('*', { cwd: `static/kpi/` }));
+//processItems(['cambio']); 
 
 
 
