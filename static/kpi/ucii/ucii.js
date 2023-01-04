@@ -33,7 +33,7 @@ const generatedTime = require(`../../generatedTime.json`)
   fu: "INDEC",
   fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-6-15",
   frec: "Mensual", 
-  "d": "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
+  "d": "El indicador de la utilización de la capacidad instalada en la industria manufacturera mide la proporción utilizada, en términos porcentuales, de la capacidad productiva del sector industrial.",
   "cat": "Actividad Económica",
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/general/dates.json`),

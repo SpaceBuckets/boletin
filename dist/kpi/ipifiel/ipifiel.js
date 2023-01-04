@@ -29,7 +29,7 @@ try {
     fu: "FIEL",
     fur: "http://www.fiel.org/",
     frec: "Mensual",   
-    d: "",
+    d: "Este indice mide la evolución mensual de la actividad productiva de las ramas industriales. Es decir, de las industrias extractivas, manufactureras y de producción y distribución de energía eléctrica, agua y gas.",
     min: 80,
     cat: "Actividad Económica",
     chartdata: {

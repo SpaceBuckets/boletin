@@ -216,6 +216,7 @@ h2 {
   grid-area: 1 / 1 / 3 / 2; 
   position:relative;    
   padding: 15px 15px 10px;
+  display: block;
   }
 .lastup { 
   grid-area: 1 / 2 / 3 / 3; 
@@ -323,8 +324,9 @@ display: flex;
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 14px;
-  position: absolute;
-  left: 20px;
+  padding-left: 6px;
+  //position: absolute;
+  //left: 20px;
  }
 
  .repepe div {

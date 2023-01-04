@@ -490,7 +490,7 @@ export default {
   > i {
     //  border-right: 1px dashed #444;
     //  border-bottom: 1px dashed #444;
-    height: 200px;
+    height: 181px;
     pointer-events: none;
     cursor: pointer;
     @media only screen and (max-width: 980px) {

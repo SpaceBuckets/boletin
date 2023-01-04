@@ -25,7 +25,7 @@ try {
   fu: "INDEC",
   fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-6-14",
   frec: "Mensual", 
-  d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
+  d: "El Índice de Producción Industrial Manufacturero (IPI) se calcula a partir de las variables de producción, ventas, utilización de insumos, consumo, cantidad de horas trabajadas del personal y ventas a precios corrientes.",
   min: 60,
   max: 160,
   cat: "Actividad Económica",

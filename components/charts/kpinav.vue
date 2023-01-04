@@ -3,7 +3,7 @@
     <div class="meganav">
 
       <div class="meganavsection nochild" style="padding:0">
-         <input type="text" placeholder="Buscar Indicadores...">  
+         <input class="searcher" type="text" placeholder="Buscar Indicadores...">  
       </div>    
 
       <div class="meganavsection open" v-if="i !== 'Todos'" @click="sectionOpen = i" v-for="(parent, i) in nav" :class="{open: sectionOpen === i}" :key="">
@@ -158,7 +158,7 @@ export default {
   border-radius: 2px;
     > div {
       text-transform: uppercase;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.03em;
       color: rgba(55, 53, 47, 0.5);
     color: #ccc;
@@ -175,7 +175,7 @@ export default {
   > a { display: none; }
   &.open > a { display: flex; }
   &.open svg { transform: rotateZ(180deg); }
-  input[type=text] {
+  .searcher {
      background: #333;
      width: 100%;
     border: 0;

@@ -16,7 +16,7 @@ const generatedTime = require(`../../generatedTime.json`)
     fur: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",
     frec: "Diaria", 
     min: 0,
-    d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
+    d: "La Base Monetaria (BM) está constituida por todo el dinero legal en circulación (es decir, billetes y monedas), sumado a las reservas de los bancos comerciales en el banco central.",
     cat: "Política Monetaria",
     chartdata: {
       labels: require(`../../data/${generatedTime}/${kpi}/total/dates.json`),

@@ -17,7 +17,7 @@ const generatedTime = require(`../../generatedTime.json`)
   fu: "Banco Mundial",
   fur: "https://datos.bancomundial.org/indicator/NY.GDP.PCAP.KD?locations=AR",
   frec: "Mensual", 
-  d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
+  d: "El producto bruto interno (PBI)​ es una magnitud macroeconómica que expresa el valor monetario de la producción de bienes y servicios de demanda final de un país o región durante un período determinado.",
   cat: "Actividad Económica",
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/pbi/dates.json`),
