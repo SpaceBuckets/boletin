@@ -15,7 +15,7 @@
     <h2 v-if="title">
         <strong>{{ title }}</strong>. {{subtitle}}
     </h2>
-    <div class="updatedPill" v-if="$route.path === '/'">{{ getLastUpdated()}}</div>
+    <div class="updatedPill" >{{ getLastUpdated()}}</div>
     <div class="chartcontain">
     <charts-line
       :chart="chart"
@@ -142,7 +142,7 @@ select#fecha {
  }
 
  .chartcontain {
-   position: absolute;top: 80px;bottom: 15px;left: 20px;right:15px;
+   position: absolute;top: 60px;bottom: 15px;left: 20px;right:15px;
    > * {
          position: absolute;top: 0;bottom: 0;left: 0;right:0;
 
@@ -167,6 +167,7 @@ select#fecha {
   transform: rotate(180deg);
 display: flex;
     align-items: center;
+    display:none;
            @media only screen and (max-width: 980px) {
            display: none;
            }

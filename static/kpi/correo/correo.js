@@ -19,6 +19,7 @@ const generatedTime = require(`../../generatedTime.json`)
     frec: "Mensual", 
     d: "",
     cat: "Otros",
+    catslug: "otros",
     chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/datos/dates.json`),
     datasets: [

@@ -25,10 +25,38 @@ try {
   fu: "INDEC",
   fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-6-14",
   frec: "Mensual", 
-  d: "El Índice de Producción Industrial Manufacturero (IPI) se calcula a partir de las variables de producción, ventas, utilización de insumos, consumo, cantidad de horas trabajadas del personal y ventas a precios corrientes.",
+  d: "El Índice de Producción Industrial Manufacturero (IPI) se calcula a partir de las variables de producción, ventas, utilización de insumos, consumo, cantidad de horas trabajadas del personal y ventas.",
   min: 60,
   max: 160,
-  cat: "Actividad Económica",
+   cat: "Actividad Económica",
+   catslug: "actividad-economica",
+  cells: {
+ 
+    "1416": {
+      "area": "1 / 1 / 4 / 7",
+      "kpi": "ipi",
+      "type": "LineHeader",
+      "hasChart": true
+    },
+    "4177": {
+      "area": "4 / 1 / 6 / 3",
+      "kpi": "ipicammesa",
+      "type": "Line",
+      "hasChart": true
+    },    
+    "4477": {
+      "area": "4 / 3 / 6 / 5",
+      "kpi": "ipifiel",
+      "type": "Line",
+      "hasChart": true
+    },       
+    "4447": {
+      "area": "4 / 5 / 6 / 7",
+      "kpi": "ipip",
+      "type": "Line",
+      "hasChart": true
+    },    
+  },  
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/base/dates.json`),
     datasets: [

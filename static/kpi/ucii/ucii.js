@@ -35,6 +35,7 @@ const generatedTime = require(`../../generatedTime.json`)
   frec: "Mensual", 
   "d": "El indicador de la utilización de la capacidad instalada en la industria manufacturera mide la proporción utilizada, en términos porcentuales, de la capacidad productiva del sector industrial.",
   "cat": "Actividad Económica",
+  catslug: "actividad-economica",
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/general/dates.json`),
     datasets: [

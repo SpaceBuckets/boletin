@@ -95,6 +95,7 @@ export default {
   border: 0;
   position: absolute;
   right: 0;
+  z-index: 99999;
       @media only screen and (max-width: 980px) {
   display: block;
 
@@ -104,7 +105,7 @@ export default {
   background: rgba(0,0,0,0.4);
     top: 0;
     right: 0;
-    left: 220px;
+    left: 320px;
     bottom: 0;
     position: fixed;
     display: none; 
@@ -218,6 +219,9 @@ header {
     svg {
       position: relative;
       right: -15px;
+        @media only screen and (max-width: 980px) {
+        display: none;
+        }
     }
     a {
       color: #ddd;
@@ -251,6 +255,7 @@ body {
 
         @media only screen and (max-width: 980px) {
   padding-top: 60px;
+    padding-left: 0px;
 
     }   
 }
@@ -287,6 +292,10 @@ a {
   //padding-right: 120px;
   //border-bottom: 1px solid #eee;
   //padding-bottom: 15px !important;
+          @media only screen and (max-width: 980px) {
+              padding-right: 120px;
+
+          }
   i {
     display: block;
     font-size: 14px;

@@ -171,7 +171,7 @@ async function megaContent(src) {
 
   for (const singleFolder of folders) { 
     try {
-      categories.push(await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`).cat) 
+      categories.push(await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`).catslug) 
     } catch (error) { }    
   };
   categories = [...new Set(categories)]
@@ -185,7 +185,7 @@ async function megaContent(src) {
     try {
       var post = await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`)
       categoriesObject['Todos'].push({t:post.t,kpi:post.kpi})
-      categoriesObject[post.cat].push({t:post.t,kpi:post.kpi})
+      categoriesObject[post.catslug].push({t:post.t,kpi:post.kpi})
       tableObject.push({t:post.t,kpi:post.kpi,cat:post.cat,desc:post.st})
     } catch (error) {
        console.log('\x1b[41m', '\x1b[37m',`✕ [${singleFolder}] failed to content!` ,'\x1b[0m');
@@ -269,7 +269,7 @@ async function processTime(arr){
 };
 
 async function processItems(arr){
- await processTime();
+ //await processTime();
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
  
   await getBRCASeries()   
@@ -285,7 +285,7 @@ await processVariation("kpi");
 };
 
 processItems(glob.sync('*', { cwd: `static/kpi/` }));
-//processItems(['cambio']); 
+//processItems(['subsidios']); 
 
 
 

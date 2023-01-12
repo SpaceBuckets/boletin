@@ -29,6 +29,7 @@ const generatedTime = require(`../../generatedTime.json`)
   max: 200,
   min: 0,
   cat: "Consumo",
+  catslug: "consumo",
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/valor/dates.json`),
     datasets: [

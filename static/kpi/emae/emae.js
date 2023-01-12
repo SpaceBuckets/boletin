@@ -43,6 +43,7 @@ const generatedTime = require(`../../generatedTime.json`)
   frec: "Mensual", 
   "d": "El Estimador Mensual de Actividad Económica (EMAE) refleja la <strong>evolución mensual de la actividad económica</strong> del conjunto de los sectores productivos a nivel nacional.",
   "cat": "Actividad Económica",
+  catslug: "actividad-economica",
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/base/dates.json`),
     datasets: [

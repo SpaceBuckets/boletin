@@ -25,6 +25,7 @@ const generatedTime = require(`../../generatedTime.json`)
   fdr: "https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_emae_ago_16.pdf",
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   cat: "Energia",
+  catslug: "energia",
   fd: "Scraped (XLS)",
   fdr: "https://www.bcsf.com.ar/ces/base-datos/bases/download-public-file/6",
   fu: "BCSF",

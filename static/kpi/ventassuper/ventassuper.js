@@ -23,6 +23,7 @@ await parsers.datosGobarAPI(kpi,'Otros','455.1_OTROS_MEDIIOS_0_M_12_32')
     frec: "Mensual", 
     d: "",
     cat: "Consumo",
+    catslug: "consumo",
     chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/Totales/dates.json`),
     datasets: [

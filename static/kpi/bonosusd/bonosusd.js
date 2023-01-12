@@ -28,8 +28,24 @@ module.exports = (async function() {
     fur: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",
     frec: "Diaria", 
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-    cat: "Política Monetaria",
+    cat: "Sector Financiero",
+    catslug: "sector-financiero",
     min: 0,
+    "cells": {
+ 
+      "1416": {
+        "area": "1 / 1 / 4 / 7",
+        "kpi": "bonosusd",
+        "type": "LineHeader",
+        "hasChart": true
+      },
+      "4177": {
+        "area": "4 / 1 / 7 / 7",
+        "kpi": "bonoscer",
+        "type": "LineHeader",
+        "hasChart": true
+      },    
+    },    
     chartdata: {
       labels: require(`../../data/${generatedTime}/${kpi}/al30d/dates.json`),
       datasets: [

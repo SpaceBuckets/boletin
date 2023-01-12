@@ -6,16 +6,23 @@
          <input class="searcher" type="text" placeholder="Buscar Indicadores...">  
       </div>    
 
-      <div class="meganavsection open" v-if="i !== 'Todos'" @click="sectionOpen = i" v-for="(parent, i) in nav" :class="{open: sectionOpen === i}" :key="">
-         <div class="separmaster">{{i.replace(/-/g, ' ')}} </div> 
-        <nuxt-link  v-for="kpi in parent" :key='`${i}-${kpi.kpi}`' :to="{ name: `kpi-kpi`, params: { kpi: kpi.kpi, parent: i } }">
-            <div><!-- <input :checked="items.includes(kpi.kpi)" type="checkbox"> --> {{kpi.t}}</div> 
+      <div class="meganavsection" v-if="i !== 'Todos'" @click="sectionOpen = i" v-for="(parent, i) in nav" :class="{open: sectionOpen === i}" :key="">
+         <nuxt-link 
+          :to="{ name: `cat`, 
+            params: { 
+              cat: `${i.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, '-')}`,
+              recat: i,
+                },
+              }" class="separmaster">{{i.split("-").join(" ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})}} </nuxt-link> 
+        <nuxt-link  v-for="kpi in parent" :key='`${i}-${kpi.kpi}`' :to="{ name: `cat-kpi`, params: { kpi: kpi.kpi, parent: i } }">
+             <div> {{kpi.t}}</div> 
             <div :class="{ negative: variete[kpi.kpi] < 0, neutral: variete[kpi.kpi] === '0.0' }">
             <svg v-if="variete[kpi.kpi] !== '0.0'" viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg> 
               {{ variete[kpi.kpi].replace("-","") }}
             </div>
          </nuxt-link>
-      </div>
+
+    </div>
     </div>
  
   </div>
@@ -37,7 +44,6 @@ export default {
     };
   },
   created() {
-    console.log(this.variete)
    },
   methods: {
    
@@ -172,9 +178,16 @@ export default {
 
 .meganavsection {
   cursor: pointer;
-  > a { display: none; }
-  &.open > a { display: flex; }
+  > a ~ a { 
+    display: none; 
+    background: #333;
+    border-bottom: 1px solid #1f2325;
+    }
+  &.open > a ~ a { display: flex; }
   &.open svg { transform: rotateZ(180deg); }
+  .separmaster {
+    padding: 10px 15px;
+  }
   .searcher {
      background: #333;
      width: 100%;

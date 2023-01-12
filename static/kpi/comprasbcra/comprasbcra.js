@@ -21,6 +21,7 @@ const generatedTime = require(`../../generatedTime.json`)
   max: 300,
   min: -300,
   cat: "hide",  
+  catslug: "hide",
   chartdata: {
   labels: require(`../../data/${generatedTime}/${kpi}/diariadates.json`),
   datasets: [

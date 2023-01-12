@@ -19,6 +19,7 @@ const generatedTime = require(`../../generatedTime.json`)
   frec: "Mensual", 
   d: "El producto bruto interno (PBI)​ es una magnitud macroeconómica que expresa el valor monetario de la producción de bienes y servicios de demanda final de un país o región durante un período determinado.",
   cat: "Actividad Económica",
+  catslug: "actividad-economica",
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/pbi/dates.json`),
     datasets: [

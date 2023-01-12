@@ -33,6 +33,7 @@ const generatedTime = require(`../../generatedTime.json`)
   d: "Índice calculado por JP Morgan Chase que mide la diferencia entre la tasa de interés que un país debe de pagar por emitir deuda en el exterior.",
   max: 50,
   cat: "Política Monetaria",
+  catslug: "politica-monetaria",
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/argentina/dates.json`),
     datasets: [

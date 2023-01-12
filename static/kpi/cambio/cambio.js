@@ -56,6 +56,7 @@ module.exports = (async function() {
     d: "El tipo de cambio es el precio de una unidad de moneda extranjera expresado en términos de la moneda local.",
     max: 400,
     cat: "Política Monetaria",  
+    catslug: "politica-monetaria",
     chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/oficial/dates.json`),
     datasets: [

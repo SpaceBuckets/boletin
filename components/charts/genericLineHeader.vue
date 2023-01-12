@@ -12,8 +12,8 @@
 
     <div class="updatedPill" v-if="$route.path === '/'">{{ getLastUpdated()}}</div>
     <div class="repepe">
-      <h6>Serie de Tiempo (2004-2022)</h6>
-    <charts-line
+<!--       <h6>Serie de Tiempo (2004-2022)</h6>
+ -->    <charts-line
       :chart="chart"
       :key="updated"
     />
@@ -215,18 +215,18 @@ h2 {
 .charte { 
   grid-area: 1 / 1 / 3 / 2; 
   position:relative;    
-  padding: 15px 15px 10px;
+  //padding: 15px 15px 10px;
   display: block;
   }
 .lastup { 
   grid-area: 1 / 2 / 3 / 3; 
-  background: #f5f5f5;
-  padding: 20px 20px 15px;
+  //background: #f5f5f5;
+  //padding: 20px 20px 5px;
   display: flex;
-  border-bottom: 2px solid #eee; 
+  //border-bottom: 2px solid #eee; 
   max-height: 115px;
   overflow: hidden;
-  gap: 20px;
+  gap: 40px;
   > * {
     flex: 1;
     max-width: 210px;
@@ -329,7 +329,10 @@ display: flex;
   //left: 20px;
  }
 
- .repepe div {
+ .repepe {
   height: 100%;
+  > div {
+    height: 100%;
+  }
  }
  </style>

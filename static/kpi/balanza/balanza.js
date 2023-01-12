@@ -22,6 +22,7 @@ const generatedTime = require(`../../generatedTime.json`)
     frec: "Mensual", 
     d: "El intercambio comercial argentino (ICA) muestra la evolución de la balanza comercial, la relación entre los ingresos en dólares provenientes de los productos que exporta el país y aquellos artículos que se compran en el exterior.",
     cat: "Cuentas Nacionales",
+    catslug: "cuentas-nacionales",
     chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/impo/dates.json`),
     datasets: [

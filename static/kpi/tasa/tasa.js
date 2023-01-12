@@ -57,6 +57,8 @@ try {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 100,
   cat: "Política Monetaria",
+  catslug: "politica-monetaria",
+
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/tasadates.json`),
     datasets: [

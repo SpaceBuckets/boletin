@@ -4,11 +4,10 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _dd09f890 = () => interopDefault(import('../pages/actividad.vue' /* webpackChunkName: "pages/actividad" */))
-const _04e48e4d = () => interopDefault(import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
-const _25872145 = () => interopDefault(import('../pages/kpi/_kpi.vue' /* webpackChunkName: "pages/kpi/_kpi" */))
 const _5514d34d = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
-const _e8f9f44c = () => interopDefault(import('../pages/_.vue' /* webpackChunkName: "pages/_" */))
+const _bed56b22 = () => interopDefault(import('../pages/_cat/index.vue' /* webpackChunkName: "pages/_cat/index" */))
+const _51792edb = () => interopDefault(import('../pages/_cat/_kpi/index.vue' /* webpackChunkName: "pages/_cat/_kpi/index" */))
+const _68df4408 = () => interopDefault(import('../pages/_cat/_.vue' /* webpackChunkName: "pages/_cat/_" */))
 
 const emptyFn = () => {}
 
@@ -22,25 +21,21 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
-    path: "/actividad",
-    component: _dd09f890,
-    name: "actividad"
-  }, {
-    path: "/admin",
-    component: _04e48e4d,
-    name: "admin"
-  }, {
-    path: "/kpi/:kpi?",
-    component: _25872145,
-    name: "kpi-kpi"
-  }, {
     path: "/",
     component: _5514d34d,
     name: "index"
   }, {
-    path: "/*",
-    component: _e8f9f44c,
-    name: "all"
+    path: "/:cat",
+    component: _bed56b22,
+    name: "cat"
+  }, {
+    path: "/:cat/:kpi",
+    component: _51792edb,
+    name: "cat-kpi"
+  }, {
+    path: "/:cat/*",
+    component: _68df4408,
+    name: "cat-all"
   }],
 
   fallback: false

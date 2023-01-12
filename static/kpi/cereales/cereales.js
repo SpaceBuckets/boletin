@@ -25,6 +25,7 @@ const generatedTime = require(`../../generatedTime.json`)
   "d": "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   "max": 80000000,
   "cat": "Producción",
+  catslug: "produccion",
 chartdata: {
   labels: require(`../../data/${generatedTime}/${kpi}/soja/dates.json`),
     datasets: [

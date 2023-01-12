@@ -1,32 +1,30 @@
 [
   {
-    "name": "actividad",
-    "path": "/actividad",
-    "component": "/Users/agustin.capeletto/fed/beo/pages/actividad.vue",
-    "chunkName": "pages/actividad"
-  },
-  {
-    "name": "admin",
-    "path": "/admin",
-    "component": "/Users/agustin.capeletto/fed/beo/pages/admin/index.vue",
-    "chunkName": "pages/admin/index"
-  },
-  {
-    "name": "kpi-kpi",
-    "path": "/kpi/:kpi?",
-    "component": "/Users/agustin.capeletto/fed/beo/pages/kpi/_kpi.vue",
-    "chunkName": "pages/kpi/_kpi"
-  },
-  {
     "name": "index",
     "path": "/",
     "component": "/Users/agustin.capeletto/fed/beo/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_5514d34d"
   },
   {
-    "name": "all",
-    "path": "/*",
-    "component": "/Users/agustin.capeletto/fed/beo/pages/_.vue",
-    "chunkName": "pages/_"
+    "name": "cat",
+    "path": "/:cat",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/_cat/index.vue",
+    "chunkName": "pages/_cat/index",
+    "_name": "_bed56b22"
+  },
+  {
+    "name": "cat-kpi",
+    "path": "/:cat/:kpi",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/_cat/_kpi/index.vue",
+    "chunkName": "pages/_cat/_kpi/index",
+    "_name": "_51792edb"
+  },
+  {
+    "name": "cat-all",
+    "path": "/:cat/*",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/_cat/_.vue",
+    "chunkName": "pages/_cat/_",
+    "_name": "_68df4408"
   }
 ]

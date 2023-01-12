@@ -32,6 +32,7 @@ try {
   max: 300,
   min: 0,
   cat: "Política Monetaria",
+  catslug: "politica-monetaria",
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/itcrm/dates.json`),
     datasets: [

@@ -19,6 +19,8 @@ const generatedTime = require(`../../generatedTime.json`)
   frec: "Diaria", 
   d: "El Índice de Contratos de Locación (ICL) es un indicador creado por la Ley 27.551 con el fin de poder establecer parámetros de actualización a la hora de celebrar contratos de alquiler.",
   cat: "hide",
+  catslug: "hide",
+
   chartdata: {
     labels: require(`../../data/${generatedTime}/${kpi}/datos/dates.json`),
     datasets: [
