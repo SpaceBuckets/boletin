@@ -21,6 +21,7 @@
     "glob": "^8.0.3",
     "gray-matter": "^4.0.3",
     "mapbox-gl": "^2.12.0",
+    "module-alias": "^2.2.2",
     "moment": "^2.29.4",
     "node-xlsx": "^0.21.0",
     "nuxt": "^2.15.8",
@@ -36,5 +37,8 @@
     "vue-server-renderer": "2.6.14",
     "vue-template-compiler": "2.6.14",
     "webpack": "^4.46.0"
-  }
+  },
+  "_moduleAliases": {
+    "@parsers" : "scripts/parsers.js"
+  }  
 }

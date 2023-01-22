@@ -81,7 +81,6 @@ export default {
   },
     methods: {
       getLastValue() {
-        
 var lastValue = JSON.parse(JSON.stringify(this.chart.chartdata.datasets[0].data.slice(-1)[0]));
 return lastValue
       },

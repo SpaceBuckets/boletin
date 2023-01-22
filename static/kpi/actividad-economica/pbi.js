@@ -1,9 +1,9 @@
 module.exports = (async function() {
 
-  const parsers = require("../../parsers");
+  const parsers = require("@parsers");
 
   const kpi = "pbi"
-  try { 
+   
   const payload = await parsers.parseWorldBank(kpi, "pbi", 'https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000')
 
   var post = {
@@ -37,9 +37,7 @@ module.exports = (async function() {
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
 
-} catch (error) {
-  console.log('\x1b[41m', '\x1b[37m',`✕ [${kpi}] failed to fetch!` ,'\x1b[0m');
-}
+
 })()
 
 

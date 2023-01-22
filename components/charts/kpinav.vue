@@ -100,7 +100,7 @@ export default {
       content: "";
       display: block;
       left: 7px;
-      width: 12px;
+      width: 13px;
       top: 8px;
       border-top: 1px dotted #555;
       position: absolute;
@@ -139,6 +139,21 @@ export default {
 
  }
 
+.separmaster ~ .meganavsection > .separmaster {
+      &:after {
+      content: "";
+      display: block;
+      left: 7px;
+      width: 17px;
+      top: 8px;
+      border-top: 1px dotted #555;
+      position: absolute;
+    }
+}
+
+.separmaster ~ .meganavsection > .separmaster span:after { 
+  bottom: 18px;
+  }
 
 .meganav {
   position: fixed;
@@ -164,7 +179,7 @@ export default {
   position: relative;
   overflow: hidden;
  &.open a:last-of-type {
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }  
   div:first-child ~ * {
     padding-left: 25px;
@@ -182,6 +197,8 @@ export default {
   &.open span {
     background: #555;
     color: #eee;
+padding-bottom: 1px;
+    font-weight: normal;    
   }
   .searcher {
     background: transparent;

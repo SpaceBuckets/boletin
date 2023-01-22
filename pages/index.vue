@@ -84,13 +84,13 @@
 </template>
 
 <script>
-import megatable from '~/static/tableObject.json'
+//import megatable from '~/static/tableObject.json'
 
 export default {
   name: "IndexPage",
   data() {
     return {
-      items: megatable,      
+      //items: megatable,      
       savedIndex: [
         {
           title: "Dólar vs. Peso",
