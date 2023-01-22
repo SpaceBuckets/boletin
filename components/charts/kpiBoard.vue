@@ -23,7 +23,7 @@
         @pointerdown="startDrag($event)"
         @pointerup="endDrag($event)"
         @mousemove="hoverling($event)"
-        v-for="cells in 30"
+        v-for="cells in 45"
         :data-row-start="Math.ceil(cells / columnAmount)"
         :data-row-end="Math.ceil(cells / columnAmount) + 1"
         :data-col-start="getColStart(cells)"
@@ -476,7 +476,7 @@ export default {
   //background: #000;
   gap: 8px;
   column-gap: 0;
-  gap: 14px;
+  gap: 10px;
   //  border-left: 1px dashed #444;
   // border-top: 1px dashed #444;
   margin: 0px 0 0 0;
@@ -490,7 +490,7 @@ export default {
   > i {
     //  border-right: 1px dashed #444;
     //  border-bottom: 1px dashed #444;
-    height: 185px;
+    height: 125px;
     pointer-events: none;
     cursor: pointer;
     @media only screen and (max-width: 980px) {
@@ -516,11 +516,11 @@ export default {
     background: #fff;
     background: #151a1e;
     background: #fff;
-    border-radius: 4px;
+    border-radius: 3px;
     //border-radius: 0;
     //border-radius: 6px;
     border: 1px solid #1c2126;
-    border: 1px solid #eee;
+    //border: 1px solid #eee;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -530,7 +530,7 @@ export default {
     margin-bottom: 1px;
     margin-right: 1px;
     overflow: hidden;
-    //&:first-of-type { padding: 0; }
+ 
     @media only screen and (max-width: 980px) {
       position: relative;
       float: left;

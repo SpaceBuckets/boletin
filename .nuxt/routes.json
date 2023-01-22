@@ -1,5 +1,12 @@
 [
   {
+    "name": "mapusa",
+    "path": "/mapusa",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/mapusa.vue",
+    "chunkName": "pages/mapusa",
+    "_name": "_836d7588"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/Users/agustin.capeletto/fed/beo/pages/index.vue",
@@ -19,12 +26,5 @@
     "component": "/Users/agustin.capeletto/fed/beo/pages/_cat/_kpi/index.vue",
     "chunkName": "pages/_cat/_kpi/index",
     "_name": "_51792edb"
-  },
-  {
-    "name": "cat-all",
-    "path": "/:cat/*",
-    "component": "/Users/agustin.capeletto/fed/beo/pages/_cat/_.vue",
-    "chunkName": "pages/_cat/_",
-    "_name": "_68df4408"
   }
 ]

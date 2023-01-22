@@ -3,7 +3,6 @@ import Vue from 'vue'
 var state = {
   updated: 0,
   isOpen: false,
-  generatedTime: require(`../static/generatedTime.json`),
   kpidates: {
     balanza: "2004-06-01",
     deficit: "2018-12-01",
@@ -81,6 +80,11 @@ var state = {
         },
       ],
     },
+    elements: {
+      line: {
+          tension: 0.1
+      }
+  },    
     legend: {
       display: true,
       position: "bottom",

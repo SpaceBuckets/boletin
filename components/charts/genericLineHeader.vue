@@ -1,25 +1,5 @@
 <template>
-<div class="masterflex">
-  <section class="charte chart">
    
-    <div class="rangeselector">
-      <span>{{ maxVal }}</span>
-      <input ref="magicRange" @change="triggerRange($event)" type="range" step="1" :min="-maxVal" :max="-minVal">
-      <span>{{ minVal }}</span>
-
-    </div>
-
-
-    <div class="updatedPill" v-if="$route.path === '/'">{{ getLastUpdated()}}</div>
-    <div class="repepe">
-<!--       <h6>Serie de Tiempo (2004-2022)</h6>
- -->    <charts-line
-      :chart="chart"
-      :key="updated"
-    />
-    </div>
-
-  </section>
   <section class="lastup">
             <div>
 
@@ -48,12 +28,11 @@
     </div>      
   </section>
  
-</div>
-
+ 
 </template>
 
 <script>
-   const generatedTime = require(`~/static/generatedTime.json`)
+   
 
 export default {
   props: {  
@@ -84,7 +63,7 @@ export default {
   },
   data() {
     return {
-      chart: require(`~/static/data/${generatedTime}/${this.data}/${this.data}.json`),
+      chart: require(`~/static/data/${this.data}.json`),
       minVal: 0,
       maxVal: 0,
       startingVal: 0,
@@ -93,32 +72,11 @@ export default {
   },
   created() {
  
-    let modifiedArr = this.chart.chartdata.labels.map(function (element) {
-      return element.slice(0, -6);
-    });
-
-    const obj = {};
-    for (let i = 0; i < modifiedArr.length; i++) {
-      obj[modifiedArr[i]] = [];
-    }
-
-    var keys = Object.keys(obj).map(i=>Number(i));
-
-
-    this.maxVal = Math.max.apply(Math, keys)
-    this.minVal = Math.min.apply(Math, keys)
-   
+ 
 
   },
   mounted() {
-    if(this.$state.kpidates[this.data]) {
-          this.$refs.magicRange.value = -this.$state.kpidates[this.data].slice(0, -6)
-
-    } else {
-         this.$state.kpidates[this.data] = `${this.minVal}-01-01`
-          this.$refs.magicRange.value = -this.$state.kpidates[this.data].slice(0, -6)
-
-    }
+ 
 
   },
     methods: {
@@ -275,7 +233,7 @@ select#fecha {
   transform: rotate(180deg);
 display: flex;
     align-items: center;
-    display: none;
+    //display: none;
            @media only screen and (max-width: 980px) {
            display: none;
            }

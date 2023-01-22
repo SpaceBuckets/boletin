@@ -45,21 +45,20 @@ try {
       foundArr.push(e)
     }
   }
-  const generatedTime = require(`../static/generatedTime.json`)
 
 
-  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/total.json`, JSON.stringify(valRes.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/reservas/total.json`, JSON.stringify(valRes.slice(0, foundArr[0])));
 
-  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
-  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/mensualdates.json`, JSON.stringify(dateUSD.slice(foundArr[0], foundArr[1])));
-  writeFileSyncRecursive(`./static/data/${generatedTime}/reservas/anualdates.json`, JSON.stringify(dateUSD.slice(foundArr[1])));
+  writeFileSyncRecursive(`./static/data/reservas/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/reservas/mensualdates.json`, JSON.stringify(dateUSD.slice(foundArr[0], foundArr[1])));
+  writeFileSyncRecursive(`./static/data/reservas/anualdates.json`, JSON.stringify(dateUSD.slice(foundArr[1])));
 
-  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
-  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/diaria.json`, JSON.stringify(valUSD.slice(0, foundArr[0])));
-  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0], foundArr[1])));
-  writeFileSyncRecursive(`./static/data/${generatedTime}/comprasbcra/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
+  writeFileSyncRecursive(`./static/data/comprasbcra/diariadates.json`, JSON.stringify(dateUSD.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/comprasbcra/diaria.json`, JSON.stringify(valUSD.slice(0, foundArr[0])));
+  writeFileSyncRecursive(`./static/data/comprasbcra/mensual.json`, JSON.stringify(valUSD.slice(foundArr[0], foundArr[1])));
+  writeFileSyncRecursive(`./static/data/comprasbcra/anual.json`, JSON.stringify(valUSD.slice(foundArr[1])));
 
-  console.log('\x1b[42m',`♥ [monetaria] Reservas updated` ,'\x1b[0m');
+  console.log('\x1b[42m',`♥ [monetaria] reservas updated` ,'\x1b[0m');
 
   // Sheet 5/6: TASAS
 
@@ -94,13 +93,13 @@ try {
     }
   }
 
-  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasadates.json`, JSON.stringify(dateTasa));
-  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasaplazo.json`, JSON.stringify(valPlazo));
-  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasabadlar.json`, JSON.stringify(valBadlar));
-  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasatasa.json`, JSON.stringify(valTasa));
-  writeFileSyncRecursive(`./static/data/${generatedTime}/tasa/tasapases.json`, JSON.stringify(valPases));
+  writeFileSyncRecursive(`./static/data/tasa/tasadates.json`, JSON.stringify(dateTasa));
+  writeFileSyncRecursive(`./static/data/tasa/tasaplazo.json`, JSON.stringify(valPlazo));
+  writeFileSyncRecursive(`./static/data/tasa/tasabadlar.json`, JSON.stringify(valBadlar));
+  writeFileSyncRecursive(`./static/data/tasa/tasatasa.json`, JSON.stringify(valTasa));
+  writeFileSyncRecursive(`./static/data/tasa/tasapases.json`, JSON.stringify(valPases));
 
-  console.log('\x1b[42m',`♥ [monetaria] Tasas updated` ,'\x1b[0m');
+  console.log('\x1b[42m',`♥ [monetaria] tasas updated` ,'\x1b[0m');
 
    // Sheet 7: BASE MONETARIA
    var dateBasemonetaria = []
@@ -146,22 +145,22 @@ try {
     }
   }
 
-   writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus.slice(0,refoundArr[0])));
-   writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,refoundArr[0])));
-   writeFileSyncRecursive(`./static/data/${generatedTime}/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,refoundArr[0])));
+   writeFileSyncRecursive(`./static/data/basemonetaria/totalplus/d.json`, JSON.stringify(BaseMonetariaPlus.slice(0,refoundArr[0])));
+   writeFileSyncRecursive(`./static/data/basemonetaria/total/d.json`, JSON.stringify(valTotal.slice(0,refoundArr[0])));
+   writeFileSyncRecursive(`./static/data/basemonetaria/total/dates.json`, JSON.stringify(redateBasemonetaria.slice(0,refoundArr[0])));
  
  
-   console.log('\x1b[42m',`♥ [monetaria] Base Monetaria updated` ,'\x1b[0m');
+   console.log('\x1b[42m',`♥ [monetaria] base monetaria updated` ,'\x1b[0m');
 
   } catch (error) {
-    console.log(`✕ [monetaria] Base Monetaria failed to fetch!`)
+    console.log(`✕ [monetaria] base monetaria failed to fetch!`)
   }
 }
 
  
 async function megaContent(src) {
   
-  const generatedTime = require(`../static/generatedTime.json`)
+  
 
    //Get post names
   var folders = glob.sync('*', { cwd: `static/${src}/` })
@@ -171,7 +170,7 @@ async function megaContent(src) {
 
   for (const singleFolder of folders) { 
     try {
-      categories.push(await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`).catslug) 
+      categories.push(await require(`../static/data/${singleFolder}.json`).catslug) 
     } catch (error) { }    
   };
   categories = [...new Set(categories)]
@@ -183,10 +182,10 @@ async function megaContent(src) {
 
   for (const singleFolder of folders) {
     try {
-      var post = await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`)
+      var post = await require(`../static/data/${singleFolder}.json`)
       categoriesObject['Todos'].push({t:post.t,kpi:post.kpi})
-      categoriesObject[post.catslug].push({t:post.t,kpi:post.kpi})
-      tableObject.push({t:post.t,kpi:post.kpi,cat:post.cat,desc:post.st})
+/*       categoriesObject[post.catslug].push({t:post.t,kpi:post.kpi})
+ */      tableObject.push({t:post.t,kpi:post.kpi,cat:post.cat,desc:post.st})
     } catch (error) {
        console.log('\x1b[41m', '\x1b[37m',`✕ [${singleFolder}] failed to content!` ,'\x1b[0m');
 
@@ -200,7 +199,7 @@ async function megaContent(src) {
     });
   }
 
-  const ordered = Object.keys(categoriesObject).sort().reduce( (obj, key) => { obj[key] = categoriesObject[key]; return obj; },{} );
+/*   const ordered = Object.keys(categoriesObject).sort().reduce( (obj, key) => { obj[key] = categoriesObject[key]; return obj; },{} );
   delete ordered['hide']
   delete ordered['Otros']
   delete ordered['Consumo']
@@ -218,10 +217,10 @@ async function megaContent(src) {
   ordered['Precios'] = categoriesObject['Precios']
 
   ordered['Consumo'] = categoriesObject['Consumo']
-  ordered['Otros'] = categoriesObject['Otros']
+  ordered['Otros'] = categoriesObject['Otros'] */
   
   writeFileSyncRecursive(`./static/tableObject.json`, JSON.stringify(tableObject));
-  writeFileSyncRecursive(`./static/kpis.json`, JSON.stringify(ordered)); 
+  writeFileSyncRecursive(`./static/kpis.json`, JSON.stringify(categoriesObject)); 
   
   console.log('\x1b[46m',`✓ Content regenerated` ,'\x1b[0m');
 
@@ -229,16 +228,17 @@ async function megaContent(src) {
 
  
 async function processVariation(src){
-  const generatedTime = require(`../static/generatedTime.json`)
+  
   var folders = glob.sync('*', { cwd: `static/${src}/` })
   var variArr = {}
   for (const singleFolder of folders) {
     try {
-      var post = await require(`../static/data/${generatedTime}/${singleFolder}/${singleFolder}.json`)
- 
+      var post = await require(`../static/data/${singleFolder}/${singleFolder}.json`)
         var currentNum = post.chartdata.datasets[0].data
           .filter((val, index, arr) => index > arr.length - 24)
           .reverse();
+
+ 
         var A = currentNum[0];
         var B = currentNum[0 + 1];
         var C = (((A - B) / A) * 100.0).toFixed(1);
@@ -248,7 +248,7 @@ async function processVariation(src){
       variArr[post.kpi] = C
  
     } catch (error) {
-       console.log('\x1b[41m', '\x1b[37m',`✕ [${singleFolder}] failed to content!` ,'\x1b[0m');
+       console.log('\x1b[41m', '\x1b[37m',`✕ [${singleFolder}] failed to variate!` ,'\x1b[0m');
 
     }       
   };
@@ -259,33 +259,94 @@ async function processVariation(src){
 
 }
 
+var parser = require('tree-parser');
 
-async function processTime(arr){
-  console.log("---------------------") 
-  var reuuid = new Date().getTime();
-  writeFileSyncRecursive(`./static/generatedTime.json`, JSON.stringify(reuuid));
-  console.log('\x1b[46m',`◷ Generated Time: ${reuuid}` ,'\x1b[0m');
+ function removeMeta(obj) {
+  for(prop in obj) {
+    if (prop === '_contents') {
 
-};
+      for (let e = 0; e < obj[prop].length; e++) {
+        obj[prop][e] = obj[prop][e].slice(0, -3);
+      }
+
+      obj['kpi'] = obj[prop]
+
+       delete obj[prop];
+    }
+    else if (typeof obj[prop] === 'object') {
+      removeMeta(obj[prop]);
+    }
+  }
+  return obj
+}
+
+
+async function processNamers() {
+
+  var folders = await require(`../static/refolders.json`)
+  var files = []
+  var kpeis = {}
+
+  for (let [key, type] of Object.entries(folders)) {
+    if (folders[key]['_contents']) {
+
+        files.push(folders[key]['_contents']) 
+
+      
+    }
+   
+    for (let [rekey, retype] of Object.entries(folders[key])) {
+
+         if (folders[key][rekey]['_contents']) {
+
+          files.push(folders[key][rekey]['_contents']) 
+  
+        
+      }
+    }
+  
+  }
+  files = [...new Set(files.flat(1))]
+
+  for (let e = 0; e < files.length; e++) {
+
+ 
+    kpeis[await require(`../static/data/${files[e].slice(0,-3)}.json`).kpi] = await require(`../static/data/${files[e].slice(0,-3)}.json`).t
+ 
+   }
+   writeFileSyncRecursive(`./static/kpis.json`, JSON.stringify(kpeis)); 
+
+
+}
+
+async function processFolders( ){
+  const tree = parser('static/kpi');
+  delete tree['_contents']
+   writeFileSyncRecursive(`./static/refolders.json`, JSON.stringify(tree)); 
+  console.log('\x1b[46m',`✓ Folders generated` ,'\x1b[0m');
+}
 
 async function processItems(arr){
- //await processTime();
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
- 
+
+
+
   await getBRCASeries()   
  
  
-  for(const kpi of arr) {
-    await require(`../static/kpi/${kpi}/${kpi}`) 
-    //await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](400)
+  for(const kpi of arr) { 
+    if (kpi.slice(-3) === '.js') {
+      await require(`../static/kpi/${kpi}`) 
+    }
+   
   }   
- megaContent("kpi")
-await processVariation("kpi");
+
+  //megaContent("kpi")
+  //await processVariation("kpi");
+  processFolders(); 
+  processNamers()  
 
 };
 
-processItems(glob.sync('*', { cwd: `static/kpi/` }));
-//processItems(['subsidios']); 
-
-
-
+processItems(glob.sync('**', { cwd: `static/kpi/` }));
+//processItems(['actividad-economica/ipi.js']);

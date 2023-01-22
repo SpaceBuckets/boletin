@@ -6,16 +6,16 @@
 </template>
 
 <script>
-   const generatedTime = require(`~/static/generatedTime.json`)
+   
 
 export default {
   name: "Details",
   async asyncData({ params }) {
-    const rekpi = require(`~/static/data/${generatedTime}/${params.kpi}/${params.kpi}.json`)
+    const rekpi = require(`~/static/data/${params.kpi}.json`)
 
     const savedCells = {
-      1246: {
-        area: "1 / 1 / 4 / 7",
+      header: {
+        area: "1 / 1 / 2 / 7",
         kpi: params.kpi,
         type: "LineHeader",
         hasChart: true,
@@ -23,29 +23,43 @@ export default {
         title: rekpi.t        
       },
  
- 
- 
-                          
-        2367: {
-        area: "4 / 5 / 8 / 7",
+       chart: {
+        area: "2 / 1 / 6 / 7",
         kpi: params.kpi,
-        type: "Heatmap",
+        type: "Line",
         hasChart: true,
-        title: rekpi.t,
-        subtitle: "Variación"
-      },  
-
-      4757: {
-        area: "4 / 1 / 8 / 5",
-        kpi: params.kpi,
-        type: "Table",
-        hasChart: true,
-        title: rekpi.t,
-        subtitle:  'Últimos 24 meses'
+        subtitle: "Serie de Tiempo",
+        title: rekpi.t        
       },
+        first: {
+        area: "8 / 3 / 6 / 1",
+        kpi: params.kpi,
+        type: "Line",
+        hasChart: true,
+        subtitle: "Serie de Tiempo",
+        title: rekpi.t        
+      },
+                          
  
+         second: {
+        area: "8 / 3 / 6 / 5",
+        kpi: params.kpi,
+        type: "Line",
+        hasChart: true,
+        subtitle: "Serie de Tiempo",
+        title: rekpi.t        
+      },
+                 
  
- 
+         random: {
+        area: "8 / 5 / 6 / 7",
+        kpi: params.kpi,
+        type: "Box",
+        hasChart: true,
+        subtitle: "Serie de Tiempo",
+        title: rekpi.t        
+      },
+                 
        
     };
 
@@ -53,7 +67,7 @@ export default {
   },
   data() {
     return {
-      kpi: require(`~/static/data/${generatedTime}/${this.$route.params.kpi}/${this.$route.params.kpi}.json`)
+      kpi: require(`~/static/data/${this.$route.params.kpi}.json`)
 
     }
   },

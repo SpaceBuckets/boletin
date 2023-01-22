@@ -8,7 +8,7 @@ module.exports = (async function() {
     ahorro: '379.9_RESULTADO_017__41_83',
   }
   for (let [key, value] of Object.entries(deficit)) {
-    await parsers.datosGobarAPI(kpi, key, value)
+    const payload = await parsers.datosGobarAPI(kpi, key, value)
   }
 
   var post = {
@@ -36,7 +36,7 @@ module.exports = (async function() {
 }
 }
 
-parsers.writeFileSyncRecursive(`./static/kpi/${kpi}/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/kpi/${kpi}.json`, JSON.stringify(post));
 
 } catch (error) {
   console.log('\x1b[41m', '\x1b[37m',`✕ [${kpi}] failed to fetch!` ,'\x1b[0m');

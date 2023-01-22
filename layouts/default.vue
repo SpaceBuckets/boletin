@@ -66,9 +66,8 @@
  -->
     </header>
     <div class="content-container" :class="{menued: $state.isOpen}">
-      <charts-kpinav />
-
-      <nuxt />
+      <charts-kpinav v-if="$route.name !== 'mapusa'"/>
+       <nuxt />
     </div>
   </div>
 </template>
@@ -89,6 +88,10 @@ export default {
 };
 </script>  
 <style lang="scss">
+
+hr {
+  border-color: #333;
+}
  .floatmaster {
   display: none;
   background: none;
@@ -178,12 +181,12 @@ html {
 header {
   //background: rgba(55, 53, 47, 0.08);
   //background: #000;
-  background: #1f2325;
+  //background: #1f1f1f;
   position: fixed;
   top: 0;
   height: 60px;
   left: 0;
-  width: 300px;
+  //width: 300px;
    // border-right: 2px solid #333;
 
   //right: 0;
@@ -201,6 +204,7 @@ header {
     width: 80px;
     padding: 15px;
     height: 60px;
+    display: none;
       path {
       fill: #aaa;
     }
@@ -250,7 +254,7 @@ body {
   background: #070b0d;
   margin: 0;
   font-size: 15px;
-    padding-left: 320px;
+    padding-left: 200px;
   padding-top: 20px;
 
         @media only screen and (max-width: 980px) {

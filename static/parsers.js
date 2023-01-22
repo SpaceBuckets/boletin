@@ -6,7 +6,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const Papa = require('papaparse')
 const path = require('path')
 var moment = require('moment'); // require
-const generatedTime = require(`../static/generatedTime.json`)
+
 
 function writeFileSyncRecursive(filename, content, charset) {
   const folders = filename.split(path.sep).slice(0, -1)
@@ -23,10 +23,12 @@ function writeFileSyncRecursive(filename, content, charset) {
 }
 
 async function datosGobarAPI(kpi, name, value) {
-
+  var payload = {}
   var tempDates = [];
   var tempDataBase = [];
   const resB = await fetch(`https://apis.datos.gob.ar/series/api/series/?limit=5000&format=json&ids=${value}`);
+  //console.log(resB)
+
   var emaeB = await resB.json();
   for (let i = 0; i < emaeB.data.length; i++) {
     if (emaeB.data[i][1] == null) { emaeB.data[i][1] = 0 }
@@ -42,17 +44,20 @@ async function datosGobarAPI(kpi, name, value) {
 
     tempDates.push(emaeB.data[i][0]);
   }
-  writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/dates.json`, JSON.stringify(tempDates));
-  writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/d.json`, JSON.stringify(tempDataBase));
-  //await setTimeout[Object.getOwnPropertySymbols(setTimeout)[0]](800)
+ 
+ 
+  payload.dates = tempDates
+  payload.d = tempDataBase
+  
   console.log('\x1b[42m',`♥ [${kpi}] ${name} updated` ,'\x1b[0m');
 
+  return payload
 
 }
 
 
 async function parseWorldBank(kpi,name,value) {
- 
+    var payload = {}
     const resA = await fetch(value);
     var emaeB = JSON.parse(await resA.text())
     var datesArray = [], tempArray = []
@@ -65,14 +70,17 @@ async function parseWorldBank(kpi,name,value) {
       }
   
   }
-  writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/dates.json`, JSON.stringify(datesArray.reverse()));
-  writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${name}/d.json`, JSON.stringify(tempArray.reverse())); 
+ 
+  payload.dates = datesArray.reverse()
+  payload.d = tempArray.reverse()
+  
   console.log('\x1b[42m',`♥ [${kpi}] ${name} updated` ,'\x1b[0m');
 
+  return payload
 }
 
 async function datosGobarCSV(kpi,name) {
-
+  const payload = {}
   const resA = await fetch(kpi.url,{rejectUnauthorized: false,});
   var emaeB = await resA.text()
   var data = Papa.parse(emaeB).data
@@ -93,19 +101,19 @@ async function datosGobarCSV(kpi,name) {
       if (new Date(data[i][kpi.date]).toUTCString() !== 'Invalid Date') { tempArray.push(Number(data[i][value]).toFixed(3))}
 
     }
-    writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${key}.json`, JSON.stringify(tempArray));
+    payload[key] = tempArray;
     console.log('\x1b[42m',`♥ [${name}] ${name} updated` ,'\x1b[0m');
 
   }
 
-  writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/dates.json`, JSON.stringify(datesArray));
-
+ payload.dates = datesArray;
+return payload
   //console.log('\x1b[42m',`♥ [${name}] dates updated` ,'\x1b[0m');
 
 }
 
 async function genericXLS(kpi,name) {
-
+  const payload = {}
   const resA = await fetch(kpi.url);
 
   var data = xlsx.parse(await resA.arrayBuffer())[kpi.sheet].data
@@ -190,7 +198,8 @@ async function genericXLS(kpi,name) {
     datesArray = newDatesArray
 
   }
-   writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${kpi.items[0].name}/dates.json`, JSON.stringify(datesArray));
+   payload.dates = datesArray;
+
   //console.log('\x1b[42m',`♥ [${name}] dates updated` ,'\x1b[0m');
 
   // VALUES
@@ -201,25 +210,31 @@ async function genericXLS(kpi,name) {
         tempArray.push(Number(data[i][value.id]).toFixed(3))
         //if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value.id]).toFixed(3))}
       }
-     writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${value.name}/d.json`, JSON.stringify(tempArray));
+      payload[value.name] = tempArray;
      console.log('\x1b[42m',`♥ [${name}] updated` ,'\x1b[0m');
 
     }
+    return payload
+
   } else {
+
     for (let [key, value] of Object.entries(kpi.items)) {
     var tempArray = []
     for (let i = 0; i < data.length; i++) {
       if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value.id]).toFixed(3))}
     }
-    writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/${value.name}/d.json`, JSON.stringify(tempArray));
+     payload[value.name] = tempArray;
+
     console.log('\x1b[42m',`♥ [${name}] updated` ,'\x1b[0m');
 
   }
+  return payload
+
   }
 }
 
 async function scrapeBCRA(serie, name) {
-
+  var payload = {}
   const resA = await fetch('http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp?fecha_desde=1900-01-01&fecha_hasta=2040-04-30&primeravez=1&serie=' + serie);
   var emaeB = await resA.text();
   var json = parse5.parse(emaeB)
@@ -239,15 +254,17 @@ async function scrapeBCRA(serie, name) {
     }
   }
 
-    writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/datos/dates.json`, JSON.stringify(dateInfla));
-    writeFileSyncRecursive(`./static/data/${generatedTime}/${name}/datos/d.json`, JSON.stringify(inflaVal));
+    payload.dates = dateInfla
+    payload.d = inflaVal
+    
     console.log('\x1b[42m',`♥ [${name}] updated` ,'\x1b[0m');
 
-
+    return payload
 }
 
 async function parseBonos(kpi, obj) {
   var pepeLength
+  var payload = {}
 
   for (let [key, value] of Object.entries(obj)) {
   
@@ -274,16 +291,20 @@ async function parseBonos(kpi, obj) {
       for (let i = 1; i < tempArray.length; i++) { if(tempArray[i] === undefined) { tempArray[i] = null } }
       for (let o = 1; o < datesArray.length; o++) { if(datesArray[o] === undefined) { datesArray[o] = null } }
       
-      const generatedTime = require(`../static/generatedTime.json`)
 
-      writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${key}/dates.json`, JSON.stringify(datesArray.reverse()));
-      writeFileSyncRecursive(`./static/data/${generatedTime}/${kpi}/${key}/d.json`, JSON.stringify(tempArray.reverse()));
+      payload.dates = datesArray.reverse()
+      payload[key] = tempArray.reverse()
+      
       console.log('\x1b[42m',`♥ [bonos] ${key} updated` ,'\x1b[0m');
+  
+
     } catch (error) {
  
       console.log(`✕ [${key}] failed to fetch!`)
     }  
   }
+  return payload
+
 }
 
 

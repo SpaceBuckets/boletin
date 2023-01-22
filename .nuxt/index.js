@@ -14,6 +14,7 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 import nuxt_plugin_plugin_73c751ca from 'nuxt_plugin_plugin_73c751ca' // Source: ./components/plugin.js (mode: 'all')
 import nuxt_plugin_axios_768c12b1 from 'nuxt_plugin_axios_768c12b1' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_mapbox_54f571b8 from 'nuxt_plugin_mapbox_54f571b8' // Source: ./mapbox.js (mode: 'all')
 import nuxt_plugin_globalObject_a43db082 from 'nuxt_plugin_globalObject_a43db082' // Source: ../plugins/globalObject.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -64,7 +65,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"BOLETIN EXTRAOFICIAL","htmlAttrs":{"lang":"en"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Esta colección de indicadores intenta develar de donde viene y hacia donde va la macroeconomía Argentina."},{"name":"format-detection","content":"telephone=no"}],"link":[{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Montserrat:wght@400;500&display=auto"},{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[],"script":[]},
+    head: {"title":"BOLETIN EXTRAOFICIAL","htmlAttrs":{"lang":"en"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Esta colección de indicadores intenta develar de donde viene y hacia donde va la macroeconomía Argentina."},{"name":"format-detection","content":"telephone=no"}],"link":[{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Montserrat:wght@400;500&display=auto"},{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Fapi.mapbox.com\u002Fmapbox-gl-js\u002Fv1.10.0\u002Fmapbox-gl.css"}],"style":[],"script":[]},
 
     router,
     nuxt: {
@@ -184,6 +185,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_axios_768c12b1 === 'function') {
     await nuxt_plugin_axios_768c12b1(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_mapbox_54f571b8 === 'function') {
+    await nuxt_plugin_mapbox_54f571b8(app.context, inject)
   }
 
   if (typeof nuxt_plugin_globalObject_a43db082 === 'function') {

@@ -1,52 +1,73 @@
 <template>
-  <div>
-    <div class="meganav">
-
-      <div class="meganavsection nochild" style="padding:0">
+  <div class="meganav">
+                     <div class="meganavsection nochild" style="padding:0">
          <input class="searcher" type="text" placeholder="Buscar Indicadores...">  
       </div>    
+    <div
+      class="meganavsection"
+      v-for="(parent, i) in nav"
+      :class="{ open: sectionOpen.includes(i) }"
+      :key=""
+    >
+      <div class="separmaster" @click="handleOpen(i)">
+        <span v-if="sectionOpen.includes(i)">-</span><span v-else>+</span>
+        {{i.split("-").join(" ").replace(/\w\S*/g, function (txt) {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})}}
+      </div>
+         <nuxt-link v-for="kpi in parent._contents" :key="`${i}-${kpi}`" :to="{ name: `cat-kpi`, params: { kpi: kpi.slice(0, -3), cat: i } }">
+          {{ repenav[kpi.slice(0, -3)] }}
+        </nuxt-link>
 
-      <div class="meganavsection" v-if="i !== 'Todos'" @click="sectionOpen = i" v-for="(parent, i) in nav" :class="{open: sectionOpen === i}" :key="">
-         <nuxt-link 
-          :to="{ name: `cat`, 
-            params: { 
-              cat: `${i.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, '-')}`,
-              recat: i,
-                },
-              }" class="separmaster">{{i.split("-").join(" ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})}} </nuxt-link> 
-        <nuxt-link  v-for="kpi in parent" :key='`${i}-${kpi.kpi}`' :to="{ name: `cat-kpi`, params: { kpi: kpi.kpi, parent: i } }">
-             <div> {{kpi.t}}</div> 
-            <div :class="{ negative: variete[kpi.kpi] < 0, neutral: variete[kpi.kpi] === '0.0' }">
-            <svg v-if="variete[kpi.kpi] !== '0.0'" viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg> 
-              {{ variete[kpi.kpi].replace("-","") }}
-            </div>
-         </nuxt-link>
+        <div 
+              class="meganavsection"
+                    :class="{ open: sectionOpen.includes(u) }"
 
-    </div>
-    </div>
- 
+          v-for="(rekpi, u) in parent" v-if="rekpi._contents">
+          <div class="separmaster" @click="handleOpen(u)">
+            <span v-if="sectionOpen.includes(u)">-</span><span v-else>+</span>
+            {{u.split("-").join(" ").replace(/\w\S*/g, function (txt) {return (txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());})}}
+          </div>
+          <nuxt-link v-for="deepkpi in rekpi._contents" :key="`${u}-${deepkpi}`" :to="{name: `cat-kpi`,params: { kpi: deepkpi.slice(0, -3), cat: i },}" >
+            {{ repenav[deepkpi.slice(0, -3)] }}
+          </nuxt-link>
+        </div>
+     </div>
   </div>
 </template>
 
 <script>
-import meganav from '~/static/kpis.json'
-import megavariations from '~/static/variations.json'
+import meganav from "~/static/refolders.json";
+import meganaver from "~/static/kpis.json";
+import megavariations from "~/static/variations.json";
 
 export default {
   name: "Details",
   data() {
     return {
-      sectionOpen: '',
+      sectionOpen: ["actividad-economica"],
       nav: meganav,
+      repenav: meganaver,
       variete: megavariations,
-      items: ["emae", "cambio","tcrm",'balanza',"tasa","basemonetaria",'ipc','petroleo'],
-
+      items: [
+        "emae",
+        "cambio",
+        "tcrm",
+        "balanza",
+        "tasa",
+        "basemonetaria",
+        "ipc",
+        "petroleo",
+      ],
     };
   },
-  created() {
-   },
+  created() {},
   methods: {
-   
+    handleOpen(i) {
+      if (this.sectionOpen.includes(i)) {
+        this.sectionOpen = this.sectionOpen.filter(item => item !== i)
+      } else {
+        this.sectionOpen.push(i)
+      }
+     },
     getVariation(i) {
       var currentNum = this.chart.chartdata.datasets[0].data
         .filter((val, index, arr) => index > arr.length - 24)
@@ -54,152 +75,123 @@ export default {
       var A = currentNum[i];
       var B = currentNum[i + 1];
       return (((A - B) / A) * 100.0).toFixed(2);
-    },    
-  }
-  
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-
-//.meganav {display:none}
- 
 .meganav a {
   display: block;
-  color: rgba(25, 23, 17, 0.6);
   text-decoration: none;
-  color: #eee;
-  padding-left: 10px;
-  display: flex;
-  justify-content: space-between;
-      border-bottom: 1px dotted #333;
-  //opacity: 0.5;
-  &.active {
-    opacity: 1;
-    background: red;
-  }
-  > * {
-    flex: 1;
-  color: #eee;
-  padding: 8px 15px;
-  svg {
+  color: #ddd;
+  //background: #000;
+     padding-bottom: 5px;
+     position: relative;
+     &:hover {
+            color: rgba(253,216,53,1);
+
+     }
+     &.nuxt-link-exact-active.nuxt-link-active {
+      color: rgba(253,216,53,1);
+      font-weight:bold;
+     }
+    &:after {
+      content: "";
+      display: block;
+      left: 7px;
+      width: 12px;
+      top: 8px;
+      border-top: 1px dotted #555;
+      position: absolute;
+    }
+}
+
+.meganav span {
+  color: #aaa;
+  display: inline-block;
+  border: 1px solid #aaa;
+    width: 12px;
+    height: 12px;
+    font-size: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     margin-right: 2px;
-  }
-    &:last-child {
-      text-align: center;
-      background: rgba(0, 153, 102, 0.35);
-        fill: #eee;
-        padding-left: 0;
-        padding-right: 0;
-        max-width: 80px;
-        svg {
-          transform: rotate(0)
-        }
-    }  
-    &.neutral {
-      background: #222;
+    border-radius: 2px;
+    &:after {
+      content: "";
+    display: block;
+    width: 1px;
+    top: 15px;
+    bottom: 0;
+    border-right: 1px dotted #555;
+    position: absolute;
     }
-    &.negative {
-         background: rgba(178, 34, 34, 0.35);
-           fill: #ddd;
-    svg {
-          transform: rotate(180deg)
-        }
-    }
+}
+.separmaster {
+    color: #eee;
+    padding-bottom: 10px;
+    
+        display: flex;
+    align-items: center;
+    gap: 5px;
 
-  }
-  &:hover {
-    color: rgba(253, 216, 53, 1) !important;
-    background: #333;
-  }
-  &.nuxt-link-exact-active {
-     color: rgba(253, 216, 53, 1) !important;
-    color: #fff;
-    font-weight: bold;
-    background: #333;
- 
-  }
  }
 
- .meganav .nochild a {
-   padding: 0;
-  &.nuxt-link-exact-active {
-     color: rgba(253, 216, 53, 1) !important;
-    color: #fff;
-    font-weight: bold;
- 
-  }   
- }
 
- 
 .meganav {
   position: fixed;
   left: 0;
   top: 60px;
   bottom: 0;
-  //background: rgb(247, 246, 243);
   padding: 0;
   overflow: auto;
-  padding-bottom: 0px;
-  //padding-top:10px;
-  width: 300px;
+  padding-bottom: 100px;
+  color: #eee;
+
   z-index: 999;
-  //display:none;
-  //border-top: 1px solid #333;
 
-  //border-right: 2px solid #333;
- background: #1f2325;
-  &.index {
-    display: none;
-  }
-    @media only screen and (max-width: 980px) {
-     transform: translateX(-100%);
-
-    }      
-  > div {
-   // margin: 0 0 15px 15px;
-    //padding-bottom: 20px;
-  //border: 1px solid #333;
-  background: #1f2325;
-  border-radius: 2px;
-    > div {
-      text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: 0.03em;
-      color: rgba(55, 53, 47, 0.5);
-    color: #ccc;
-    font-weight: 600;
-      padding: 12px 16px;
-      border-bottom: 1px solid #333;
-
-    }
+  @media only screen and (max-width: 980px) {
+    transform: translateX(-100%);
   }
 }
 
 .meganavsection {
   cursor: pointer;
-  > a ~ a { 
-    display: none; 
-    background: #333;
-    border-bottom: 1px solid #1f2325;
-    }
-  &.open > a ~ a { display: flex; }
-  &.open svg { transform: rotateZ(180deg); }
-  .separmaster {
-    padding: 10px 15px;
+  padding-left: 15px;
+  //padding-bottom: 15px;
+  position: relative;
+  overflow: hidden;
+ &.open a:last-of-type {
+    padding-bottom: 15px;
+}  
+  div:first-child ~ * {
+    padding-left: 25px;
+    position: relative;
+    overflow: hidden;  
+    display: none;  
+  }
+  &.open > div:first-child ~ * {
+    display: block;
+  }
+  .separmaster:hover,
+  &.open > .separmaster {
+    font-weight: bold;
+  }
+  &.open span {
+    background: #555;
+    color: #eee;
   }
   .searcher {
-     background: #333;
-     width: 100%;
+    background: transparent;
+    width: 100%;
     border: 0;
-    padding: 15px;
+    padding: 10px 15px;
     font-size: 15px;
-     
+    margin-bottom: 10px;
   }
 }
-
-
-
 </style>
 
  

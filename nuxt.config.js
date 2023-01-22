@@ -16,28 +16,30 @@ export default {
     ],
     link: [
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=auto' },      
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css',
+      },      
     ]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+ 
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/globalObject.js'],
-
+  plugins: [{src:'~/plugins/globalObject.js'} ],
+   mapbox: {
+    accessToken: 'pk.eyJ1IjoiZWtyb2YiLCJhIjoiY2xjdjkwb3F5MWdvcTNvcGh0OXl2aTZuaCJ9.V4FeZelBAA7iWaQSdVi0Fw'
+  },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-  ],
+ 
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios',
+    'nuxt-mapbox-gl','@nuxtjs/axios',
 
 /*     ['nuxt-supabase', {
       supabaseUrl: 'https://pibxnftttuyvvbnbkqtf.supabase.co',
@@ -61,5 +63,7 @@ export default {
 
       // ....
    }
-  }
-}
+  },
+ 
+ 
+ }

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-   const generatedTime = require(`~/static/generatedTime.json`)
+   
 
 export default {
   props: {
@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      chart: require(`~/static/data/${generatedTime}/${this.data}/${this.data}.json`),
+      chart: require(`~/static/data/${this.data}.json`),
       heatdata: "",
     };
   },

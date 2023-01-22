@@ -4,10 +4,10 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _836d7588 = () => interopDefault(import('../pages/mapusa.vue' /* webpackChunkName: "pages/mapusa" */))
 const _5514d34d = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 const _bed56b22 = () => interopDefault(import('../pages/_cat/index.vue' /* webpackChunkName: "pages/_cat/index" */))
 const _51792edb = () => interopDefault(import('../pages/_cat/_kpi/index.vue' /* webpackChunkName: "pages/_cat/_kpi/index" */))
-const _68df4408 = () => interopDefault(import('../pages/_cat/_.vue' /* webpackChunkName: "pages/_cat/_" */))
 
 const emptyFn = () => {}
 
@@ -21,6 +21,10 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/mapusa",
+    component: _836d7588,
+    name: "mapusa"
+  }, {
     path: "/",
     component: _5514d34d,
     name: "index"
@@ -32,10 +36,6 @@ export const routerOptions = {
     path: "/:cat/:kpi",
     component: _51792edb,
     name: "cat-kpi"
-  }, {
-    path: "/:cat/*",
-    component: _68df4408,
-    name: "cat-all"
   }],
 
   fallback: false

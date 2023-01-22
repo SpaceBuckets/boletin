@@ -1,25 +1,14 @@
 <template>
-  <section class="chart">
-       <h2 v-if="!title">
-        <strong>{{ chart.t }}</strong>. {{chart.st}}
-      </h2>
-    <h2 v-if="title">
-        <strong>{{ title }}</strong>. {{subtitle}}
-    </h2>   
+  <div class="footerpepe">
+  <div>Ver Indicador al Azar</div>
  
-     <div v-html="chart.c">
-       
-     </div>
-     <div>
-      Fuente:  <a :href="chart.f">{{chart.fu}}</a>
-     </div>
-<!--      <charts-genericKpiUpdatedBox :data="chart.kpi"/>
-     <charts-genericHeatmapBox :data="chart.kpi"/> -->
-  </section>
+ 
+ 
+  </div>
 </template>
 
 <script>
-   const generatedTime = require(`~/static/generatedTime.json`)
+   
 
 export default {
   props: {
@@ -50,7 +39,7 @@ export default {
   },
   data() {
     return {
-      chart: require(`~/static/data/${generatedTime}/${this.data}/${this.data}.json`),
+      chart: require(`~/static/data/${this.data}.json`),
     };
   },
   methods: { 
@@ -71,4 +60,7 @@ export default {
 };
 </script>
 
+ <style scoped>
  
+ 
+ </style>

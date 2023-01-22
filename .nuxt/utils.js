@@ -200,7 +200,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {}
+      env: {"MAPBOX_ACCESS_TOKEN":"pk.eyJ1IjoiZWtyb2YiLCJhIjoiY2xjdjkwb3F5MWdvcTNvcGh0OXl2aTZuaCJ9.V4FeZelBAA7iWaQSdVi0Fw"}
     }
     // Only set once
 
