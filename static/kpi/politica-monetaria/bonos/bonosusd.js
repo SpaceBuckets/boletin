@@ -31,21 +31,7 @@ module.exports = (async function() {
     cat: "Sector Financiero",
     catslug: "sector-financiero",
     min: 0,
-    "cells": {
- 
-      "1416": {
-        "area": "1 / 1 / 4 / 7",
-        "kpi": "bonosusd",
-        "type": "LineHeader",
-        "hasChart": true
-      },
-      "4177": {
-        "area": "4 / 1 / 7 / 7",
-        "kpi": "bonoscer",
-        "type": "LineHeader",
-        "hasChart": true
-      },    
-    },    
+   
     chartdata: {
       labels: payload.dates,
       datasets: [

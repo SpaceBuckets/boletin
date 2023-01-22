@@ -5,7 +5,7 @@ module.exports = (async function() {
   const kpi = "consumogas"
   
 
-  const payload = await parsers.datosGobarAPI(kpi, "consumo", '302.3_ELEC_GAS_A_M3_0_S_33')
+  const payload = await parsers.datosGobarAPI(kpi, "consumo", '364.3_TOTALTAL__5')
 
   var post = {
     kpi,

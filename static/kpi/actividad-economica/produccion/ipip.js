@@ -37,7 +37,7 @@ module.exports = (async function() {
       {
         backgroundColor: "rgba(46,120,210,0)",
         label: "Desestacionalizado",
-        data: payload.d,
+        data: payload.valor,
         borderColor: "#2E78D2",
         pointRadius: 0,
         borderWidth: 1.5,

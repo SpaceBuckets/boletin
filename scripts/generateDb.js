@@ -20,11 +20,13 @@ function writeFileSyncRecursive(filename, content, charset) {
 
 async function processVariation(src){
   
-  var folders = glob.sync('*', { cwd: `static/${src}/` })
+  var folders = glob.sync('**', { cwd: `static/${src}/` })
   var variArr = {}
   for (const singleFolder of folders) {
+    if (singleFolder.slice(-3) === '.js') { 
+
     try {
-      var post = await require(`../static/data/${singleFolder}/${singleFolder}.json`)
+      var post = await require(`../static/data/${singleFolder.split("/").pop().slice(0,-3)}.json`)
         var currentNum = post.chartdata.datasets[0].data
           .filter((val, index, arr) => index > arr.length - 24)
           .reverse();
@@ -37,9 +39,10 @@ async function processVariation(src){
       variArr[post.kpi] = C
  
     } catch (error) {
-       console.log('\x1b[41m', '\x1b[37m',`✕ [${singleFolder}] failed to variate!` ,'\x1b[0m');
+       console.log('\x1b[41m', '\x1b[37m',`✕ [${singleFolder.split("/").pop().slice(0,-3)}] failed to variate!` ,'\x1b[0m');
 
-    }       
+    }   
+  }    
   };
 
 
@@ -73,8 +76,23 @@ async function processNamers() {
 
 async function processFolders( ){
   const tree = parsertree('static/kpi');
-  delete tree['_contents']
-   writeFileSyncRecursive(`./static/refolders.json`, JSON.stringify(tree)); 
+
+   const orderedtree = {
+    'actividad-economica': tree['actividad-economica'],
+    'politica-monetaria': tree['politica-monetaria'],
+    'energia': tree['energia'],
+    'cuentas-nacionales': tree['cuentas-nacionales'],
+    'politica-social': tree['politica-social'],
+    'precios': tree['precios'],
+    'salarios': tree['salarios'],
+    'consumo': tree['consumo'],
+    'turismo': tree['turismo'],
+    'agro': tree['agro'],
+    'transporte': tree['transporte'],
+    'otros': tree['otros']
+  }
+ 
+   writeFileSyncRecursive(`./static/refolders.json`, JSON.stringify(orderedtree)); 
   console.log('\x1b[46m',`✓ Folders generated` ,'\x1b[0m');
 }
 
@@ -91,13 +109,13 @@ async function processItems(arr){
 
       }
     }
-  }   
+  }    
  
-  //await processVariation("kpi");
+  await processVariation("kpi");
   processFolders(); 
   processNamers()  
 
 };
 
-processItems(glob.sync('**', { cwd: `static/kpi/` }));
-//processItems(['politica-monetaria/tipo-de-cambio/cambio.js']);
+//processItems(glob.sync('**', { cwd: `static/kpi/` }));
+processItems(['energia/petroleo/metrosperforados.js']);

@@ -3,8 +3,8 @@
     <header>
       <h1 class="nav-logo">
         <nuxt-link to="/"><span>BOLETÍN</span>EXTRAOFICIAL</nuxt-link>
-     <svg width="126" height="110" viewBox="0 0 126 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_1017_42)">
+<!--    <svg width="126" height="110" viewBox="0 0 126 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <g clip-path="url(#clip0_1017_42)">
 <path d="M125.364 17.66C107.8 2.38727 85.6545 0.0963621 73.4363 11.5509C64.5684 23.4072 65.3586 37.3675 75.7273 52.0236C74.9636 52.0236 73.4363 52.7873 72.6727 53.5509C64.9714 38.8848 63.6466 23.7827 68.8545 10.0236C85.6545 -3.72182 108.564 -5.2491 125.364 17.66V17.66Z" fill="#843511"/>
 <path d="M97.8727 13.0781C87.9454 13.0781 85.6545 15.369 81.0727 19.1872C76.4909 23.0054 74.2 22.2418 73.4364 23.0054C72.6727 23.769 73.4364 26.0599 74.9636 25.2963C76.4909 24.5327 79.5454 23.0054 84.1273 19.1872C88.7091 15.369 93.2909 15.369 97.8727 15.369C111.618 15.369 119.255 26.8236 120.782 26.0599C122.309 25.2963 113.145 13.0781 97.8727 13.0781V13.0781Z" fill="#843511"/>
 <path d="M115.436 26.0602C105.509 15.3693 87.1818 14.6056 79.5455 26.8238H82.6C90.2364 14.6056 108.564 19.9511 110.091 25.2965V26.8238" fill="#843511"/>
@@ -24,7 +24,7 @@
 <rect width="126" height="110" fill="white"/>
 </clipPath>
 </defs>
-</svg>
+</svg> -->
       </h1>
       <div class="renav" style="display:none">
         Esta colección de indicadores intenta develar de donde viene y hacia
@@ -204,7 +204,7 @@ header {
     width: 80px;
     padding: 15px;
     height: 60px;
-    display: none;
+    //display: none;
       path {
       fill: #aaa;
     }

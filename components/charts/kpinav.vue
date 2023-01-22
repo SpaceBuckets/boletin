@@ -92,25 +92,41 @@ export default {
             color: rgba(253,216,53,1);
 
      }
-     &.nuxt-link-exact-active.nuxt-link-active {
-      color: rgba(253,216,53,1);
-      font-weight:bold;
-     }
+
+&:before {
+  content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 1px solid #555;
+    border-radius: 50px;
+    margin-right: 3px;
+    position: relative;
+    top: 1px;
+}     
     &:after {
       content: "";
       display: block;
       left: 7px;
-      width: 13px;
+      width: 17px;
       top: 8px;
       border-top: 1px dotted #555;
       position: absolute;
     }
+         &.nuxt-link-exact-active.nuxt-link-active {
+      color: rgba(253,216,53,1);
+      font-weight:bold;
+      &:before {
+              background: #444;
+
+      }
+     }
 }
 
 .meganav span {
   color: #aaa;
   display: inline-block;
-  border: 1px solid #aaa;
+  border: 1px solid #888;
     width: 12px;
     height: 12px;
     font-size: 10px;
@@ -130,7 +146,7 @@ export default {
     }
 }
 .separmaster {
-    color: #eee;
+    color: #ddd;
     padding-bottom: 10px;
     
         display: flex;
@@ -138,7 +154,9 @@ export default {
     gap: 5px;
 
  }
-
+  .meganavsection:last-of-type span:after {
+    bottom: 18px;
+  }
 .separmaster ~ .meganavsection > .separmaster {
       &:after {
       content: "";
@@ -163,7 +181,7 @@ export default {
   padding: 0;
   overflow: auto;
   padding-bottom: 100px;
-  color: #eee;
+  color: #ddd;
 
   z-index: 999;
 
@@ -178,6 +196,7 @@ export default {
   //padding-bottom: 15px;
   position: relative;
   overflow: hidden;
+  user-select:none;
  &.open a:last-of-type {
     padding-bottom: 10px;
 }  
@@ -190,14 +209,16 @@ export default {
   &.open > div:first-child ~ * {
     display: block;
   }
+
   .separmaster:hover,
   &.open > .separmaster {
     font-weight: bold;
-  }
-  &.open span {
-    background: #555;
-    color: #eee;
-padding-bottom: 1px;
+    span { font-weight: normal; }
+   }
+  &.open > .separmaster span {
+    background: #444;
+    color: #ddd;
+    padding-bottom: 1px;
     font-weight: normal;    
   }
   .searcher {
