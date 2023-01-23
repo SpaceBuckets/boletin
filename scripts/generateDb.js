@@ -117,5 +117,5 @@ async function processItems(arr){
 
 };
 
-//processItems(glob.sync('**', { cwd: `static/kpi/` }));
-processItems(['energia/petroleo/metrosperforados.js']);
+processItems(glob.sync('**', { cwd: `static/kpi/` }));
+//processItems(['energia/petroleo/metrosperforados.js']);
