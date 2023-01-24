@@ -23,7 +23,7 @@
         @pointerdown="startDrag($event)"
         @pointerup="endDrag($event)"
         @mousemove="hoverling($event)"
-        v-for="cells in 45"
+        v-for="cells in 65"
         :data-row-start="Math.ceil(cells / columnAmount)"
         :data-row-end="Math.ceil(cells / columnAmount) + 1"
         :data-col-start="getColStart(cells)"

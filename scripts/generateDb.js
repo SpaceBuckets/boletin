@@ -3,6 +3,7 @@ const glob = require('glob');
 const path = require('path')
 const fs = require('fs');
 var parsertree = require('tree-parser');
+const cliProgress = require('cli-progress');
 
 function writeFileSyncRecursive(filename, content, charset) {
   const folders = filename.split(path.sep).slice(0, -1)
@@ -88,8 +89,6 @@ async function processFolders( ){
     'consumo': tree['consumo'],
     'turismo': tree['turismo'],
     'agro': tree['agro'],
-    'transporte': tree['transporte'],
-    'otros': tree['otros']
   }
  
    writeFileSyncRecursive(`./static/refolders.json`, JSON.stringify(orderedtree)); 
@@ -117,5 +116,5 @@ async function processItems(arr){
 
 };
 
-processItems(glob.sync('**', { cwd: `static/kpi/` }));
-//processItems(['energia/petroleo/metrosperforados.js']);
+//processItems(glob.sync('**', { cwd: `static/kpi/` }));
+processItems(['politica-monetaria/dolar/dxy.js']);

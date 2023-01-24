@@ -96,7 +96,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .flexedheat {
   flex: 1;
   padding: 0;

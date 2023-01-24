@@ -39,6 +39,6 @@
     "webpack": "^4.46.0"
   },
   "_moduleAliases": {
-    "@parsers" : "scripts/parsers.js"
-  }  
+    "@parsers": "scripts/parsers.js"
+  }
 }

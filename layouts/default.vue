@@ -254,7 +254,9 @@ body {
   background: #070b0d;
   margin: 0;
   font-size: 15px;
-    padding-left: 200px;
+    padding-left: 220px;
+    padding-right: 20px;
+
   padding-top: 20px;
 
         @media only screen and (max-width: 980px) {

@@ -32,29 +32,21 @@ export default {
         title: rekpi.t        
       },
         first: {
-        area: "8 / 3 / 6 / 1",
+        area: "10 / 5 / 6 / 1",
         kpi: params.kpi,
-        type: "Line",
+        type: "Table",
         hasChart: true,
         subtitle: "Serie de Tiempo",
         title: rekpi.t        
       },
                           
  
-         second: {
-        area: "8 / 3 / 6 / 5",
-        kpi: params.kpi,
-        type: "Line",
-        hasChart: true,
-        subtitle: "Serie de Tiempo",
-        title: rekpi.t        
-      },
                  
  
          random: {
-        area: "8 / 5 / 6 / 7",
+        area: "10 / 5 / 6 / 7",
         kpi: params.kpi,
-        type: "Box",
+        type: "Heatmap",
         hasChart: true,
         subtitle: "Serie de Tiempo",
         title: rekpi.t        
