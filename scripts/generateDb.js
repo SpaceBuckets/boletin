@@ -116,5 +116,5 @@ async function processItems(arr){
 
 };
 
-//processItems(glob.sync('**', { cwd: `static/kpi/` }));
-processItems(['politica-monetaria/dolar/dxy.js']);
+processItems(glob.sync('**', { cwd: `static/kpi/` }));
+//processItems(['salarios/salariopromedio.js']);
