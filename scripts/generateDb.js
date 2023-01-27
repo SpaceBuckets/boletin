@@ -80,7 +80,8 @@ async function processFolders( ){
 
    const orderedtree = {
     'actividad-economica': tree['actividad-economica'],
-    'politica-monetaria': tree['politica-monetaria'],
+    'dolar': tree['dolar'],
+    'bcra': tree['bcra'],
     'energia': tree['energia'],
     'cuentas-nacionales': tree['cuentas-nacionales'],
     'politica-social': tree['politica-social'],

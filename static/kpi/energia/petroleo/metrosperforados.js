@@ -18,8 +18,6 @@ module.exports = (async function () {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-    cat: "Hidrocarburos",
-    catslug: "hidrocarburos",
      chartdata: {
       labels: payload.dates,
       datasets: [

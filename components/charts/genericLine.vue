@@ -167,7 +167,7 @@ select#fecha {
   transform: rotate(180deg);
 display: flex;
     align-items: center;
-    display:none;
+    //display:none;
            @media only screen and (max-width: 980px) {
            display: none;
            }

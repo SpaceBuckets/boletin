@@ -18,8 +18,7 @@ module.exports = (async function() {
   fur: "http://www.bcra.gob.ar/pdfs/PublicacionesEstadisticas/bolmetes.pdf",
   frec: "Diaria", 
   d: "El Índice de Contratos de Locación (ICL) es un indicador creado por la Ley 27.551 con el fin de poder establecer parámetros de actualización a la hora de celebrar contratos de alquiler.",
-  cat: "hide",
-  catslug: "hide",
+
 
   chartdata: {
     labels: payload.dates,

@@ -31,8 +31,6 @@ module.exports = (async function () {
     frec: "Mensual",   
     d: "",
     min: 80,
-    cat: "Actividad Económica",
-    catslug: "actividad-economica",
     chartdata: {
       labels: payload.dates,
       datasets: [

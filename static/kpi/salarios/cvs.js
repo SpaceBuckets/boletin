@@ -17,8 +17,7 @@ module.exports = (async function() {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Diaria", 
     d: "",
-    cat: "hide",
-    catslug: "hide",
+
     chartdata: {
     labels: payload.dates,
     datasets: [

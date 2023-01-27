@@ -18,8 +18,7 @@ module.exports = (async function() {
   fur: "https://datos.bancomundial.org/indicator/SI.POV.GINI",
   frec: "Mensual", 
   "d": "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-  "cat": "Otros",
-  catslug: "otros",
+
   "max": 55,
   "min": 35,
   chartdata: {

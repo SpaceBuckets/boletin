@@ -21,8 +21,7 @@ module.exports = (async function() {
      d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base.",
   max: 10,
   min: 0,
-  cat: "Precios",  
-  catslug: "precios",
+
   chartdata: {
 labels: payload.dates,
   datasets: [

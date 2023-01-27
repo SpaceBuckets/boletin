@@ -262,6 +262,7 @@ body {
         @media only screen and (max-width: 980px) {
   padding-top: 60px;
     padding-left: 0px;
+    padding-right: 0px;
 
     }   
 }
@@ -335,6 +336,9 @@ canvas {
   flex-direction: column;
   width: 100%;
   flex: 1;
+  .updatedPill {
+    display: none;
+  }
   > * {
     flex: 1;
   }

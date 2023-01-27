@@ -22,8 +22,6 @@ const otros = await parsers.datosGobarAPI(kpi,'otros','455.1_OTROS_MEDIIOS_0_M_1
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-    cat: "Consumo",
-    catslug: "consumo",
     chartdata: {
     labels: totales.dates,
     datasets: [

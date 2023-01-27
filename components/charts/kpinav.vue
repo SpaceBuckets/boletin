@@ -43,7 +43,7 @@ export default {
   name: "Details",
   data() {
     return {
-      sectionOpen: ["actividad-economica"],
+      sectionOpen: ["actividad-economica",'dolar'],
       nav: meganav,
       repenav: meganaver,
       variete: megavariations,

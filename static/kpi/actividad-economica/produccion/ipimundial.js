@@ -15,8 +15,7 @@ module.exports = (async function() {
   
   const payload = await parsers.datosGobarCSV(kpidata,kpi)
 
-  
-   var post = {
+  var post = {
     kpi,
   t: "IPI Mundial",
   st: "CEP XXI",
@@ -30,8 +29,6 @@ module.exports = (async function() {
   d: "Este índice mide el precio relativo de los bienes y servicios de la economía argentina con respecto al de los de los principales 12 socios comerciales del país, en función del flujo de comercio de manufacturas.",
   max: 220,
   min: 80,
-  cat: "Política Monetaria",
-  catslug: "politica-monetaria",
   chartdata: {
     labels: payload.dates,
     datasets: [

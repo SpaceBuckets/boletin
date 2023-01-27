@@ -18,8 +18,6 @@ module.exports = (async function() {
   fur: "https://datos.bancomundial.org/indicator/NY.GDP.PCAP.KD?locations=AR",
   frec: "Mensual", 
   d: "El producto bruto interno (PBI)​ es una magnitud macroeconómica que expresa el valor monetario de la producción de bienes y servicios de demanda final de un país o región durante un período determinado.",
-  cat: "Actividad Económica",
-  catslug: "actividad-economica",
   chartdata: {
     labels: payload.dates,
     datasets: [

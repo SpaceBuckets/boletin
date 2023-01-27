@@ -4,9 +4,6 @@ module.exports = (async function() {
 
   const kpi = "isac"
  
- 
-  
- 
   const estacional = await parsers.datosGobarAPI(kpi, 'estacional', '33.2_ISAC_SIN_EDAD_0_M_23_56')
   const tendencia = await parsers.datosGobarAPI(kpi, 'tendencia', '33.2_ISAC_CICLOCIA_0_M_20_62')
   const base = await parsers.datosGobarAPI(kpi, 'base', '33.2_ISAC_NIVELRAL_0_M_18_63')
@@ -25,8 +22,6 @@ module.exports = (async function() {
   d: "El indicador ISAC <em>muestra la evolución del sector de la construcción</em> tomando como referencia los consumos aparentes de insumos requeridos en la actividad. ",
   min: 0,
   max: 300,
-  cat: "Actividad Económica",
-  catslug: "actividad-economica",
   chartdata: {
     labels: base.dates,
     datasets: [

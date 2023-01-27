@@ -32,8 +32,7 @@ module.exports = (async function() {
   frec: "Diaria", 
   d: "Índice calculado por JP Morgan Chase que mide la diferencia entre la tasa de interés que un país debe de pagar por emitir deuda en el exterior.",
   max: 50,
-  cat: "Política Monetaria",
-  catslug: "politica-monetaria",
+
   chartdata: {
     labels: payload.dates,
     datasets: [

@@ -20,9 +20,6 @@ const resto = await parsers.datosGobarAPI(kpi,'resto','458.1_VENTAS_RESTES_ABRI_
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-    cat: "Consumo",
-    catslug: "consumo",
-
     chartdata: {
     labels: total.dates,
     datasets: [

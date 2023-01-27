@@ -57,8 +57,7 @@ module.exports = (async function() {
     frec: "Diaria", 
     d: "El tipo de cambio es el precio de una unidad de moneda extranjera expresado en términos de la moneda local.",
     //max: 400,
-    cat: "Política Monetaria",  
-    catslug: "politica-monetaria",
+
     chartdata: {
     labels: payload.dates,
     datasets: [

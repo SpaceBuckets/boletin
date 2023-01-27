@@ -27,8 +27,7 @@ module.exports = (async function() {
     fur: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",
     frec: "Diaria", 
     d: "El capital de los bonos CER capital se ajusta por el Índice de Precios al Consumidor y los intereses son calculados sobre saldos ajustados.",
-    cat: "Sector Financiero",
-    catslug: "sector-financiero",
+
     chartdata: {
     labels: payload.dates,
     datasets: [

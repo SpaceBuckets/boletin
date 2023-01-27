@@ -18,8 +18,7 @@ module.exports = (async function() {
   fur: "https://datos.bancomundial.org/indicator/NY.GDP.PCAP.KD?locations=AR",
   frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-  cat: "Otros",
-  catslug: "otros",
+
   min: 0,
   //max: 6000000,
   chartdata: {

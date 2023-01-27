@@ -71,8 +71,7 @@ module.exports = (async function() {
     frec: "Diaria", 
     min: 0,
     d: "La Base Monetaria (BM) está constituida por todo el dinero legal en circulación (es decir, billetes y monedas), sumado a las reservas de los bancos comerciales en el banco central.",
-    cat: "Política Monetaria",
-    catslug: "politica-monetaria",
+
     chartdata: {
       labels: payload.dates,
       datasets: [

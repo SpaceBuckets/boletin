@@ -29,8 +29,6 @@ module.exports = (async function() {
   d: "El IPIP es un indicador de coyuntura que mide mensualmente la evolución de la facturación de la industria manufacturera PyME que desarrollan su actividad dentro del país y producen bienes seleccionados como representativos de la industria PyME.",
   min: 0,
   max: 140,
-  cat: "Actividad Económica",
-  catslug: "actividad-economica",
   chartdata: {
     labels: payload.dates,
     datasets: [

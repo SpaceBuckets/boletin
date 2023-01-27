@@ -220,6 +220,9 @@ display: block;
     width: 100%;
     display: flex;
   }
+  .updatedPill {
+    display: block !important;
+  }
   .rangeselector {
     display: none !important;
   }

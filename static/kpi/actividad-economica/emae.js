@@ -40,8 +40,6 @@ module.exports = (async function() {
   fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-9-48",
   frec: "Mensual", 
   "d": "El Estimador Mensual de Actividad Económica (EMAE) refleja la <strong>evolución mensual de la actividad económica</strong> del conjunto de los sectores productivos a nivel nacional.",
-  "cat": "Actividad Económica",
-  catslug: "actividad-economica",
   chartdata: {
     labels: base.dates,
     datasets: [

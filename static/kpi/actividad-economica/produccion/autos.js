@@ -5,8 +5,7 @@ module.exports = (async function() {
 
   const kpi = "autos"
   
-
-    const payload = await parsers.datosGobarAPI(kpi,'produccion','330.1_PRODUCCIONLES__22') 
+  const payload = await parsers.datosGobarAPI(kpi,'produccion','330.1_PRODUCCIONLES__22') 
 
   var post = {
     kpi,
@@ -20,8 +19,6 @@ module.exports = (async function() {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-    cat: "Producción",
-    catslug: "produccion",
     chartdata: {
     labels: payload.dates,
     datasets: [

@@ -4,8 +4,7 @@ module.exports = (async function() {
 
   const kpi = "ucii"
     
-  
-     const general = await parsers.datosGobarAPI(kpi, 'general', '31.3_UNG_2004_M_18')
+    const general = await parsers.datosGobarAPI(kpi, 'general', '31.3_UNG_2004_M_18')
     const metales = await parsers.datosGobarAPI(kpi, 'metales', "31.3_UIMB_2004_M_33")
     const edicion = await parsers.datosGobarAPI(kpi, 'edicion',  "31.3_UEI_2004_M_22")
     const textiles = await parsers.datosGobarAPI(kpi, 'textiles', "31.3_UPT_2004_M_23")
@@ -31,8 +30,6 @@ module.exports = (async function() {
   fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-6-15",
   frec: "Mensual", 
   "d": "El indicador de la utilización de la capacidad instalada en la industria manufacturera mide la proporción utilizada, en términos porcentuales, de la capacidad productiva del sector industrial.",
-  "cat": "Actividad Económica",
-  catslug: "actividad-economica",
   chartdata: {
     labels: general.dates,
     datasets: [
