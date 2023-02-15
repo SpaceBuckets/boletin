@@ -22,56 +22,46 @@ module.exports = (async function() {
  
   
   
-  const estacional = await parsers.datosGobarAPI(kpi, 'estacional', '143.3_NO_PR_2004_A_31')
-  const tendencia = await parsers.datosGobarAPI(kpi, 'tendencia', '143.3_NO_PR_2004_A_28')
-  const base = await parsers.datosGobarAPI(kpi, 'base', '143.3_NO_PR_2004_A_21')
+  const estacional = await parsers.datosGobarAPI('143.3_NO_PR_2004_A_31')
+  const tendencia = await parsers.datosGobarAPI('143.3_NO_PR_2004_A_28')
+  const base = await parsers.datosGobarAPI('143.3_NO_PR_2004_A_21')
 
   var post = {
     kpi,
-  "t": "EMAE",
-  "st": "Estimador Mensual de Actividad Económica",
-  "sd": "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-  "min": 80,
-  "max": 180,
-  "c": "<p><strong>El Estimador Mensual de Actividad Económica (EMAE) es un indicador de la evolución del PIB</strong> a precios constantes de 2004 que se difunde mensualmente de acuerdo al <a href='/'>calendario de difusión del INDEC</a>. Incluye la serie original (número índice y la variación porcentual respecto al mismo mes del año anterior), la serie desestacionalizada y la tendencia–ciclo (número índice y variación respecto al mes inmediato anterior).</p>",
-  fd: "API (datos.gob.ar)",
-  fdr: "https://datos.gob.ar/it/dataset/sspm-estimador-mensual-actividad-economica-emae-base-2004/archivo/sspm_143.3",
-  fu: "INDEC",
-  fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-9-48",
-  frec: "Mensual", 
-  "d": "El Estimador Mensual de Actividad Económica (EMAE) refleja la <strong>evolución mensual de la actividad económica</strong> del conjunto de los sectores productivos a nivel nacional.",
-  chartdata: {
-    labels: base.dates,
-    datasets: [
+    "t": "EMAE",
+    "st": "Estimador Mensual de Actividad Económica",
+    "sd": "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
+    "min": 80,
+    "max": 180,
+    "c": "<p><strong>El Estimador Mensual de Actividad Económica (EMAE) es un indicador de la evolución del PIB</strong> a precios constantes de 2004 que se difunde mensualmente de acuerdo al <a href='/'>calendario de difusión del INDEC</a>. Incluye la serie original (número índice y la variación porcentual respecto al mismo mes del año anterior), la serie desestacionalizada y la tendencia–ciclo (número índice y variación respecto al mes inmediato anterior).</p>",
+    fd: "API (datos.gob.ar)",
+    fdr: "https://datos.gob.ar/it/dataset/sspm-estimador-mensual-actividad-economica-emae-base-2004/archivo/sspm_143.3",
+    fu: "INDEC",
+    fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-9-48",
+    frec: "Mensual", 
+    "d": "El Estimador Mensual de Actividad Económica (EMAE) refleja la <strong>evolución mensual de la actividad económica</strong> del conjunto de los sectores productivos a nivel nacional.",
+    chart: {
+    dates: estacional,
+    dimensions: [
       {
-        fill: false,
         label: "Desestacionalizado",
-        data: estacional.d,
-        borderColor: "#2E78D2",
-        pointBackgroundColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: estacional,
+        color: "#2E78D2",
       },
       {
-        fill: false,
         label: "Tendencia",
-        data: tendencia.d,
-        borderColor: "#7a49a580",
-        pointBackgroundColor: "#7a49a580",
-        pointRadius: 0,
+        data: tendencia,
+        color: "#7a49a580",        
         borderWidth: 1,
       },
       {
-        fill: false,
         label: "Base",
-        data: base.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointBackgroundColor: "rgba(46,120,210,0.25)",
-        pointRadius: 0,
+        data: base,
+        color: "rgba(46,120,210,0.25)",        
         borderWidth: 1,
       },
-]
-}
+    ]
+  }
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

@@ -29,16 +29,16 @@ module.exports = (async function() {
   fu: "BCSF",
   fur: "https://www.bcsf.com.ar/",
   frec: "Mensual",   
-  chartdata: {
-    labels: payload.dates,
-    datasets: [
+  chart: {
+    dates:payload,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0.05)",
+        fillColor: "rgba(46,120,210,0.05)",
         label: "Energy Price Index",
         data: payload.valor,
-        borderColor: "rgba(46,120,210,1)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "rgba(46,120,210,1)",
+        
+        
       },
 ]
 }
@@ -48,3 +48,4 @@ parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post)
 
 
 })()
+

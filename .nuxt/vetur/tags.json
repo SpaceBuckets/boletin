@@ -56,6 +56,9 @@
   "ChartsGenericTable": {
     "description": "Auto imported from components/charts/genericTable.vue"
   },
+  "ChartsGenericnewLine": {
+    "description": "Auto imported from components/charts/genericnewLine.vue"
+  },
   "ChartsKpiBoard": {
     "description": "Auto imported from components/charts/kpiBoard.vue"
   },

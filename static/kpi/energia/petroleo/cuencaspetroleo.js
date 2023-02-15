@@ -33,48 +33,48 @@ module.exports = (async function() {
   frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
-  chartdata: {
-    labels: payload.dates,
-    datasets: [
+  chart: {
+    dates:payload,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0.0)",
+        fillColor: "rgba(46,120,210,0.0)",
         label: "Neuquina",
         data: payload.neuquina,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "#2E78D2",
+        
+        
       },
       {
-        backgroundColor: "rgba(46,120,210,0.0)",
+        fillColor: "rgba(46,120,210,0.0)",
         label: "Austral",
         data: payload.austral,
-        borderColor: "#2E78D250",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "#2E78D250",
+        
+        
       },
       {
-        backgroundColor: "rgba(46,120,210,0.0)",
+        fillColor: "rgba(46,120,210,0.0)",
         label: "Golfo",
         data: payload.golfo,
-        borderColor: "#2E78D250",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "#2E78D250",
+        
+        
       },
       {
-        backgroundColor: "rgba(46,120,210,0.0)",
+        fillColor: "rgba(46,120,210,0.0)",
         label: "Noroeste",
         data: payload.noroeste,
-        borderColor: "#2E78D250",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "#2E78D250",
+        
+        
       },    
       {
-        backgroundColor: "rgba(46,120,210,0.0)",
+        fillColor: "rgba(46,120,210,0.0)",
         label: "Cuyana",
         data: payload.cuyana,
-        borderColor: "#2E78D250",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "#2E78D250",
+        
+        
       },                               
 ]
 }

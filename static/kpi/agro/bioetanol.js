@@ -6,7 +6,7 @@ module.exports = (async function() {
   const kpi = "bioetanol"
   
 
-  const bioetanol = await parsers.datosGobarAPI(kpi, "bioetanol", '368.3_BIOETANOL_ION__26')
+  const bioetanol = await parsers.datosGobarAPI('368.3_BIOETANOL_ION__26')
  
    var post = {
     kpi,
@@ -21,18 +21,15 @@ module.exports = (async function() {
   frec: "Mensual", 
   "d": "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 180000,
-chartdata: {
-  labels: bioetanol.dates,
-    datasets: [
+chart: {
+  dates:bioetanol,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0.1)",
+        fillColor: "rgba(46,120,210,0.1)",
         label: "Producción de Bioetanol",
-        data: bioetanol.d,
-        borderColor: "rgba(46,120,210,0.8)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: bioetanol,
+        color: "rgba(46,120,210,0.8)",
       },
- 
     ],
   }
 }

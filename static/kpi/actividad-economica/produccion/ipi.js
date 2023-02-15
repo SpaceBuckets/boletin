@@ -2,9 +2,9 @@ module.exports = (async function() {
 
   const parsers = require("@parsers");
   const kpi = "ipi"
-  const estacional = await parsers.datosGobarAPI(kpi, 'estacional', '453.1_SERIE_DESEADA_0_0_24_58')
-  const tendencia = await parsers.datosGobarAPI(kpi, 'tendencia', '453.1_SERIE_TENDCLO_0_0_21_61')
-  const base = await parsers.datosGobarAPI(kpi, 'base', '453.1_SERIE_ORIGNAL_0_0_14_46')
+  const estacional = await parsers.datosGobarAPI('453.1_SERIE_DESEADA_0_0_24_58')
+  const tendencia = await parsers.datosGobarAPI('453.1_SERIE_TENDCLO_0_0_21_61')
+  const base = await parsers.datosGobarAPI('453.1_SERIE_ORIGNAL_0_0_14_46')
 
   var post = {
     kpi,
@@ -22,33 +22,23 @@ module.exports = (async function() {
     max: 160,
     cat: "Actividad Económica",
     catslug: "actividad-economica",  
-    chartdata: {
-      labels: base.dates,
-      datasets: [
+    chart: {
+      dates:base,
+      dimensions: [
         {
-          backgroundColor: "rgba(46,120,210,0)",
           label: "Desestacionalizado",
-          data: estacional.d,
-          borderColor: "#2E78D2",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          data: estacional,
+          color: "#2E78D2", 
         },
         {
-          fill: false,
           label: "Tendencia",
-          data: tendencia.d,
-          borderColor: "#7a49a580",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          data: tendencia,
+          color: "#7a49a580", 
         },
         {
-          fill: false,
           label: "Base",
-          data: base.d,
-          borderColor: "rgba(46,120,210,0.25)",
-          pointBackgroundColor: "#C1D7F2",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          data: base,
+          color: "rgba(46,120,210,0.25)",
         },
       ]
     }

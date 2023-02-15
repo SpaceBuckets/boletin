@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "salariominimo"
    
-  const payload = await parsers.datosGobarAPI(kpi, "salariominimo", '57.1_SMVMM_0_M_34')
+  const payload = await parsers.datosGobarAPI('57.1_SMVMM_0_M_34')
 
   var post = {
     kpi,
@@ -20,16 +20,16 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
   max: 80000,
-  chartdata: {
-    labels: payload.dates,
-    datasets: [
+  chart: {
+    dates:payload,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0.05)",
+        fillColor: "rgba(46,120,210,0.05)",
         label: "RIPTE",
-        data: payload.d,
-        borderColor: "rgba(46,120,210,1)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: payload,
+        color: "rgba(46,120,210,1)",
+        
+        
       },
 ]
 }

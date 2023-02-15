@@ -29,24 +29,24 @@ module.exports = (async function() {
   d: "Este índice mide el precio relativo de los bienes y servicios de la economía argentina con respecto al de los de los principales 12 socios comerciales del país, en función del flujo de comercio de manufacturas.",
   max: 220,
   min: 80,
-  chartdata: {
-    labels: payload.dates,
-    datasets: [
+  chart: {
+    dates:payload,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0)",
+        
         label: "Estacionalizado",
         data: payload.estacional,
-        borderColor: "#2E78D250",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "#2E78D250",
+        
+        
       },
       {
-        backgroundColor: "rgba(46,120,210,0)",
+        
         label: "Desestacionalizado",
         data: payload.desestacional,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "#2E78D2",
+        
+        
       },
 ]
 }

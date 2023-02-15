@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "ferrocargas"
   
-  const payload = await parsers.datosGobarAPI(kpi,'datos','302.3_TRANSP_CAR_KM_0_S_36') 
+  const payload = await parsers.datosGobarAPI('302.3_TRANSP_CAR_KM_0_S_36') 
     
   var post = {
     kpi,
@@ -18,16 +18,16 @@ module.exports = (async function() {
     frec: "Mensual", 
     d: "",
 
-    chartdata: {
-    labels: payload.dates,
-    datasets: [
+    chart: {
+    dates:payload,
+    dimensions: [
         {
-        backgroundColor: "rgba(46,120,210,0.05)",
+        fillColor: "rgba(46,120,210,0.05)",
         label: "Cargas Ferrocarril",
-        data: payload.d,
-        borderColor: "rgba(46,120,210,1)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: payload,
+        color: "rgba(46,120,210,1)",
+        
+        
         },
     ],
     }

@@ -8,12 +8,12 @@ module.exports = (async function() {
   
  
 
-  const energia = await parsers.datosGobarAPI(kpi, "energia", '452.2_CAPITAL_ENION_0_T_22_35')
-  const transporte = await parsers.datosGobarAPI(kpi, "transporte", '452.3_CAPITAL_TRION_0_M_25_82')
-  const educacion = await parsers.datosGobarAPI(kpi, "educacion", '452.3_CAPITAL_EDION_0_M_24_92')
-  const vivienda = await parsers.datosGobarAPI(kpi, "vivienda", '452.3_CAPITAL_VIION_0_M_23_52')
-  const agua = await parsers.datosGobarAPI(kpi, "agua", '452.3_CAPITAL_AGION_0_M_41_40')
-  const otros = await parsers.datosGobarAPI(kpi, "otros", '452.3_CAPITAL_OTION_0_M_20_10')
+  const energia = await parsers.datosGobarAPI('452.2_CAPITAL_ENION_0_T_22_35')
+  const transporte = await parsers.datosGobarAPI('452.3_CAPITAL_TRION_0_M_25_82')
+  const educacion = await parsers.datosGobarAPI('452.3_CAPITAL_EDION_0_M_24_92')
+  const vivienda = await parsers.datosGobarAPI('452.3_CAPITAL_VIION_0_M_23_52')
+  const agua = await parsers.datosGobarAPI('452.3_CAPITAL_AGION_0_M_41_40')
+  const otros = await parsers.datosGobarAPI('452.3_CAPITAL_OTION_0_M_20_10')
 
 
   var post = {
@@ -28,48 +28,38 @@ module.exports = (async function() {
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
   frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-  chartdata: {
-    labels: transporte.dates,
-    datasets: [
+  chart: {
+    dates:transporte,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0)",
         label: "Transporte",
-        data: transporte.d,
-        borderColor: "rgba(46,120,210,1)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: transporte,
+        color: "rgba(46,120,210,1)",
+
       },
       {
-        backgroundColor: "rgba(46,120,210,0)",
         label: "Agua",
-        data: agua.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: agua,
+        color: "rgba(46,120,210,0.25)",
+
       },
       {
-        backgroundColor: "rgba(46,120,210,0)",
         label: "Vivienda",
-        data: vivienda.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: vivienda,
+        color: "rgba(46,120,210,0.25)",
+
       },
       {
-        backgroundColor: "rgba(46,120,210,0)",
         label: "Energia",
-        data: energia.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: energia,
+        color: "rgba(46,120,210,0.25)",
+
       },
       {
-        backgroundColor: "rgba(46,120,210,0)",
         label: "Educacion",
-        data: educacion.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: educacion,
+        color: "rgba(46,120,210,0.25)",
+
       },
 ]
 }

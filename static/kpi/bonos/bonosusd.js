@@ -31,56 +31,56 @@ module.exports = (async function() {
 
     min: 0,
    
-    chartdata: {
-      labels: payload.dates,
-      datasets: [
+    chart: {
+      dates:payload,
+      dimensions: [
         {
-          backgroundColor: "rgba(46,120,210,0.0)",
+          fillColor: "rgba(46,120,210,0.0)",
           label: "AL30D",
           data: payload.al30d,
-          borderColor: "rgba(46,120,210,1)",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          color: "rgba(46,120,210,1)",
+          
+          
         },
         {
-          backgroundColor: "rgba(46,120,210,0.0)",
+          fillColor: "rgba(46,120,210,0.0)",
           label: "AL29D",
           data: payload.al29d,
-          borderColor: "rgba(46,120,210,0.25)",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          color: "rgba(46,120,210,0.25)",
+          
+          
         },
         {
-          backgroundColor: "rgba(46,120,210,0.0)",
+          fillColor: "rgba(46,120,210,0.0)",
           label: "AL41D",
           data: payload.al41d,
-          borderColor: "rgba(46,120,210,0.25)",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          color: "rgba(46,120,210,0.25)",
+          
+          
         },
         {
-          backgroundColor: "rgba(46,120,210,0.0)",
+          fillColor: "rgba(46,120,210,0.0)",
           label: "GD30D",
           data: payload.gd30d,
-          borderColor: "rgba(46,120,210,0.25)",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          color: "rgba(46,120,210,0.25)",
+          
+          
         },
         {
-          backgroundColor: "rgba(46,120,210,0.0)",
+          fillColor: "rgba(46,120,210,0.0)",
           label: "GD35D",
           data: payload.gd35d,
-          borderColor: "rgba(46,120,210,0.25)",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          color: "rgba(46,120,210,0.25)",
+          
+          
         },
         {
-          backgroundColor: "rgba(46,120,210,0.0)",
+          fillColor: "rgba(46,120,210,0.0)",
           label: "GD41D",
           data: payload.gd41d,
-          borderColor: "rgba(46,120,210,0.25)",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          color: "rgba(46,120,210,0.25)",
+          
+          
         },
       ],
     }

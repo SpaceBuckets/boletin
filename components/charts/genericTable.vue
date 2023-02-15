@@ -14,7 +14,7 @@
         <div>Serie</div>
         <div>Variacion</div>
      </div>
-      <div v-for="(dates, i) in filteredArray()" :key="`aa${i}`">
+<!--       <div v-for="(dates, i) in filteredArray()" :key="`aa${i}`">
         <div>{{ dates }}</div>
         <div>
           {{
@@ -30,7 +30,7 @@
         <div class="green" :class="{ red: getVariation(i) < 0 }">
           {{ getVariation(i) + "%" }}
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>

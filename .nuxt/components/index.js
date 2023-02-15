@@ -17,6 +17,7 @@ export { default as ChartsGenericLineMaster } from '../../components/charts/gene
 export { default as ChartsGenericPostHeader } from '../../components/charts/genericPostHeader.vue'
 export { default as ChartsGenericSol } from '../../components/charts/genericSol.vue'
 export { default as ChartsGenericTable } from '../../components/charts/genericTable.vue'
+export { default as ChartsGenericnewLine } from '../../components/charts/genericnewLine.vue'
 export { default as ChartsKpiBoard } from '../../components/charts/kpiBoard.vue'
 export { default as ChartsKpinav } from '../../components/charts/kpinav.vue'
 export { default as ChartsLine } from '../../components/charts/line.js'

@@ -10,10 +10,10 @@
       <p v-html="chart.d"></p>
     </div>
         <div>
-      <h4>{{getLastUpdated()}}</h4>
+<!--       <h4>{{getLastUpdated()}}</h4>
       <h5 :class="{ negative: getVariation(0) < 0 }">{{getLastValue()}}
         <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg> {{getVariation(0)}}%
-      </h5>
+      </h5> -->
             <p style="text-align:center;margin-top:5px;margin-bottom:0">Frecuencia: {{chart.frec}}</p>
 
     </div>

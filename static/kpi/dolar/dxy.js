@@ -30,16 +30,16 @@ module.exports = (async function() {
   max: 200,
   min: 0,
 
-  chartdata: {
-    labels: payload.dates,
-    datasets: [
+  chart: {
+    dates:payload,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0)",
+        
         label: "DXY",
-        data: payload.d,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: payload,
+        color: "#2E78D2",
+        
+        
       },
   
 ]

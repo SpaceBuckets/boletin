@@ -4,9 +4,9 @@ module.exports = (async function() {
 
   const kpi = "isac"
  
-  const estacional = await parsers.datosGobarAPI(kpi, 'estacional', '33.2_ISAC_SIN_EDAD_0_M_23_56')
-  const tendencia = await parsers.datosGobarAPI(kpi, 'tendencia', '33.2_ISAC_CICLOCIA_0_M_20_62')
-  const base = await parsers.datosGobarAPI(kpi, 'base', '33.2_ISAC_NIVELRAL_0_M_18_63')
+  const estacional = await parsers.datosGobarAPI('33.2_ISAC_SIN_EDAD_0_M_23_56')
+  const tendencia = await parsers.datosGobarAPI('33.2_ISAC_CICLOCIA_0_M_20_62')
+  const base = await parsers.datosGobarAPI('33.2_ISAC_NIVELRAL_0_M_18_63')
 
   var post = {
     kpi,
@@ -22,35 +22,25 @@ module.exports = (async function() {
   d: "El indicador ISAC <em>muestra la evolución del sector de la construcción</em> tomando como referencia los consumos aparentes de insumos requeridos en la actividad. ",
   min: 0,
   max: 300,
-  chartdata: {
-    labels: base.dates,
-    datasets: [
+  chart: {
+    dates: base,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0)",
         label: "Desestacionalizado",
-        data: estacional.d,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: estacional,
+        color: "#2E78D2", 
       },
       {
-        fill: false,
         label: "Tendencia",
-        data: tendencia.d,
-        borderColor: "#7a49a580",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: tendencia,
+        color: "#7a49a580",
       },
       {
-        fill: false,
         label: "Base",
-        data: base.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointBackgroundColor: "#C1D7F2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: base,
+        color: "rgba(46,120,210,0.25)",    
       },
-]
+    ] 
 }
 }
 

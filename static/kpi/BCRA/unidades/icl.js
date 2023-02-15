@@ -20,16 +20,16 @@ module.exports = (async function() {
   d: "El Índice de Contratos de Locación (ICL) es un indicador creado por la Ley 27.551 con el fin de poder establecer parámetros de actualización a la hora de celebrar contratos de alquiler.",
 
 
-  chartdata: {
-    labels: payload.dates,
-    datasets: [
+  chart: {
+    dates:payload,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0.05)",
+        fillColor: "rgba(46,120,210,0.05)",
         label: "ICL",
-        data: payload.d,
-        borderColor: "rgba(46,120,210,1)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: payload,
+        color: "rgba(46,120,210,1)",
+        
+        
       },
 ]
 }

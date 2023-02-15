@@ -255,7 +255,7 @@ body {
   margin: 0;
   font-size: 15px;
     padding-left: 220px;
-    padding-right: 20px;
+    padding-right: 0px;
 
   padding-top: 20px;
 

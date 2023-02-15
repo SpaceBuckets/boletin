@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "pbi"
    
-  const payload = await parsers.parseWorldBank(kpi, "pbi", 'https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000')
+  const payload = await parsers.parseWorldBank('https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000')
 
   var post = {
     kpi,
@@ -18,16 +18,16 @@ module.exports = (async function() {
   fur: "https://datos.bancomundial.org/indicator/NY.GDP.PCAP.KD?locations=AR",
   frec: "Mensual", 
   d: "El producto bruto interno (PBI)​ es una magnitud macroeconómica que expresa el valor monetario de la producción de bienes y servicios de demanda final de un país o región durante un período determinado.",
-  chartdata: {
-    labels: payload.dates,
-    datasets: [
+  chart: {
+    dates:payload,
+    dimensions: [
       {
-        backgroundColor: 'rgba(46,120,210,0)',
+        fillColor: 'rgba(46,120,210,0)',
         label: "PBI per capita",
-        data: payload.d,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: payload,
+        color: "#2E78D2",
+        
+        
       },
 ]
 }

@@ -6,8 +6,8 @@ module.exports = (async function() {
  
  
   
-    const subenergia = await parsers.datosGobarAPI(kpi, 'subenergia', '452.2_ENERGIAGIA_0_T_7_56')
-    const subtransporte = await parsers.datosGobarAPI(kpi, 'subtransporte', '452.2_TRANSPORTERTE_0_T_10_32')
+    const subenergia = await parsers.datosGobarAPI('452.2_ENERGIAGIA_0_T_7_56')
+    const subtransporte = await parsers.datosGobarAPI('452.2_TRANSPORTERTE_0_T_10_32')
  
   var post = {
     kpi,
@@ -22,24 +22,20 @@ module.exports = (async function() {
    frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 250000,
-  chartdata: {
-    labels: subenergia.dates,
-    datasets: [
+  chart: {
+    dates:subenergia,
+    dimensions: [
       {
-        backgroundColor: "rgba(146,220,210,0)",
         label: "Transporte",
-        data: subtransporte.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: subtransporte,
+        color: "rgba(46,120,210,0.25)",
+
       },
       {
-        backgroundColor: "rgba(146,220,210,0)",
         label: "Energia",
-        data: subenergia.d,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: subenergia,
+        color: "#2E78D2",
+
       },
 ]
 }

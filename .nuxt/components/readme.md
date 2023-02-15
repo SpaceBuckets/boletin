@@ -25,6 +25,7 @@ You can directly use them in pages and other components without the need to impo
 - `<ChartsGenericPostHeader>` | `<charts-generic-post-header>` (components/charts/genericPostHeader.vue)
 - `<ChartsGenericSol>` | `<charts-generic-sol>` (components/charts/genericSol.vue)
 - `<ChartsGenericTable>` | `<charts-generic-table>` (components/charts/genericTable.vue)
+- `<ChartsGenericnewLine>` | `<charts-genericnew-line>` (components/charts/genericnewLine.vue)
 - `<ChartsKpiBoard>` | `<charts-kpi-board>` (components/charts/kpiBoard.vue)
 - `<ChartsKpinav>` | `<charts-kpinav>` (components/charts/kpinav.vue)
 - `<ChartsLine>` | `<charts-line>` (components/charts/line.js)

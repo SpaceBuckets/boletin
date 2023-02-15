@@ -21,16 +21,16 @@ module.exports = (async function() {
     fur: "https://www.argentina.gob.ar/produccion/cep/estudios-coyuntura",
     frec: "Mensual",   
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-    chartdata: {
-      labels: payload.dates,
-      datasets: [
+    chart: {
+      dates:payload,
+      dimensions: [
         {
-          backgroundColor: "rgba(46,120,210,0)",
+          
           label: "IPI CAMMESA",
           data: payload.interanual,
-          borderColor: "#2E78D2",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          color: "#2E78D2",
+          
+          
         },
       ]
     }

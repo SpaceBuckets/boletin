@@ -4,9 +4,7 @@ module.exports = (async function () {
 
   const kpi = "auh"
 
-  
-
-  const payload = await parsers.datosGobarAPI(kpi, 'datos', '188.1_AUH_ASIGNAADO_0_0_48')
+  const payload = await parsers.datosGobarAPI('188.1_AUH_ASIGNAADO_0_0_48')
 
   const post = {
     kpi,
@@ -20,18 +18,15 @@ module.exports = (async function () {
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual",    
-    chartdata: {
-      labels: payload.dates,
-      datasets: [
+    chart: {
+      dates:payload,
+      dimensions: [
         {
-          backgroundColor: "rgba(146,220,210,0)",
           label: "AUH",
-          data: payload.d,
-          borderColor: "#2E78D2CC",
-          backgroundColor: "#2E78D2CC",
+          data: payload,
+          color: "#2E78D2CC",
+          fillColor: "#2E78D2CC",
           type: 'bar',
-          pointRadius: 0,
-          borderWidth: 1.5,
         },
 
       ]

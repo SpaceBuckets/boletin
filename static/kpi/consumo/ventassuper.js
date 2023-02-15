@@ -4,11 +4,11 @@ module.exports = (async function() {
 
   const kpi = "ventassuper"
   
-  const totales = await parsers.datosGobarAPI(kpi,'totales','455.1_VENTAS_TOTAGO_0_M_25_99')
-const efectivo = await parsers.datosGobarAPI(kpi,'efectivo','455.1_EFECTIVOIVO_0_M_8_15')
-const debito = await parsers.datosGobarAPI(kpi,'debito','455.1_TARJETAS_DITO_0_M_15_92')
-const credito = await parsers.datosGobarAPI(kpi,'credito','455.1_TARJETAS_CITO_0_M_16_85')
-const otros = await parsers.datosGobarAPI(kpi,'otros','455.1_OTROS_MEDIIOS_0_M_12_32')
+  const totales = await parsers.datosGobarAPI('455.1_VENTAS_TOTAGO_0_M_25_99')
+  const efectivo = await parsers.datosGobarAPI('455.1_EFECTIVOIVO_0_M_8_15')
+  const debito = await parsers.datosGobarAPI('455.1_TARJETAS_DITO_0_M_15_92')
+  const credito = await parsers.datosGobarAPI('455.1_TARJETAS_CITO_0_M_16_85')
+  const otros = await parsers.datosGobarAPI('455.1_OTROS_MEDIIOS_0_M_12_32')
 
     
   var post = {
@@ -22,48 +22,33 @@ const otros = await parsers.datosGobarAPI(kpi,'otros','455.1_OTROS_MEDIIOS_0_M_1
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-    chartdata: {
-    labels: totales.dates,
-    datasets: [
+    chart: {
+    dates:totales,
+    dimensions: [
         {
-            backgroundColor: "rgba(46,120,210,0)",
             label: "Totales",
-            data: totales.d,
-            borderColor: "rgba(46,120,210,1)",
-            pointRadius: 0,
-            borderWidth: 1.5,
+            data: totales,
+            color: "rgba(46,120,210,1)",
             },
-{
-            backgroundColor: "rgba(46,120,210,0)",
+        {    
             label: "Efectivo",
-            data: efectivo.d,
-            borderColor: "rgba(46,120,210,0.25)",
-            pointRadius: 0,
-            borderWidth: 1.5,
+            data: efectivo,
+            color: "rgba(46,120,210,0.25)",   
             },
-{
-            backgroundColor: "rgba(46,120,210,0)",
+        {    
             label: "Debito",
-            data: debito.d,
-            borderColor: "rgba(46,120,210,0.25)",
-            pointRadius: 0,
-            borderWidth: 1.5,
+            data: debito,
+            color: "rgba(46,120,210,0.25)",   
             },
-{
-            backgroundColor: "rgba(46,120,210,0)",
+        {   
             label: "Credito",
-            data: credito.d,
-            borderColor: "rgba(46,120,210,0.25)",
-            pointRadius: 0,
-            borderWidth: 1.5,
+            data: credito,
+            color: "rgba(46,120,210,0.25)",   
             },
-{
-            backgroundColor: "rgba(46,120,210,0)",
+        {    
             label: "Otros",
-            data: otros.d,
-            borderColor: "rgba(46,120,210,0.25)",
-            pointRadius: 0,
-            borderWidth: 1.5,
+            data: otros,
+            color: "rgba(46,120,210,0.25)",   
             },
 
     ],

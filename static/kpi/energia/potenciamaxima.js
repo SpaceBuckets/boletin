@@ -4,7 +4,7 @@ module.exports = (async function () {
 
   const kpi = "potenciamaxima"
   
-  const payload = await parsers.datosGobarAPI(kpi, 'datos', '367.3_POTENCIA_MIMA__15')
+  const payload = await parsers.datosGobarAPI('367.3_POTENCIA_MIMA__15')
 
   const post = {
     kpi,
@@ -18,16 +18,16 @@ module.exports = (async function () {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-    chartdata: {
-      labels: payload.dates,
-      datasets: [
+    chart: {
+      dates:payload,
+      dimensions: [
         {
-          backgroundColor: "rgba(146,220,210,0)",
+          
           label: "Potencia Electrica Maxima",
-          data: payload.d,
-          borderColor: "#2E78D2CC",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          data: payload,
+          color: "#2E78D2CC",
+          
+          
         },
 
       ]

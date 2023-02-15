@@ -8,9 +8,9 @@ module.exports = (async function () {
   
   		
 
-  const total = await parsers.datosGobarAPI(kpi, 'total', '457.1_VIAJEROS_TLES_0_M_16_50')
-  const residentes = await parsers.datosGobarAPI(kpi, 'residentes', '457.1_VIAJEROS_RTES_0_M_19_94')
-  const noresidentes = await parsers.datosGobarAPI(kpi, 'noresidentes', '457.1_VIAJEROS_NTES_0_M_22_86')
+  const total = await parsers.datosGobarAPI('457.1_VIAJEROS_TLES_0_M_16_50')
+  const residentes = await parsers.datosGobarAPI('457.1_VIAJEROS_RTES_0_M_19_94')
+  const noresidentes = await parsers.datosGobarAPI('457.1_VIAJEROS_NTES_0_M_22_86')
 
   const post = {
     kpi,
@@ -25,32 +25,32 @@ module.exports = (async function () {
     frec: "Mensual", 
     d: "",
 
-    chartdata: {
-      labels: total.dates,
-      datasets: [
+    chart: {
+      dates:total,
+      dimensions: [
         {
-          backgroundColor: "rgba(146,220,210,0)",
+          
           label: "Viajeros Hospedados",
-          data: total.d,
-          borderColor: "#2E78D2CC",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          data: total,
+          color: "#2E78D2CC",
+          
+          
         },
         {
-          backgroundColor: "rgba(146,220,210,0)",
+          
           label: "Residentes",
-          data: residentes.d,
-          borderColor: "#2E78D250",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          data: residentes,
+          color: "#2E78D250",
+          
+          
         },
         {
-          backgroundColor: "rgba(146,220,210,0)",
+          
           label: "No Residentes",
-          data: noresidentes.d,
-          borderColor: "#2E78D250",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          data: noresidentes,
+          color: "#2E78D250",
+          
+          
         },        
       ]
     }

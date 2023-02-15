@@ -30,9 +30,9 @@ module.exports = (async function() {
       }
     }
  
-    var valLeliqFiltered = valLeliq.map(e => parseFloat(e.toString().replace('s/o', '0')))
-    var valPasesFiltered = valPases.map(e => parseFloat(e.toString().replace('s/o', '0')))
-    var valNobacFiltered = valNobac.map(e => parseFloat(e.toString().replace('s/o', '0')))
+    var valLeliqFiltered = valLeliq.map(e => Number(e.toString().replace('s/o', '0')))
+    var valPasesFiltered = valPases.map(e => Number(e.toString().replace('s/o', '0')))
+    var valNobacFiltered = valNobac.map(e => Number(e.toString().replace('s/o', '0')))
  
     var BaseMonetariaPlus = valLeliqFiltered.map(function (num, idx) { return (num + valPasesFiltered[idx] +  valNobacFiltered[idx]).toFixed(2); });
  
@@ -72,24 +72,24 @@ module.exports = (async function() {
     min: 0,
     d: "La Base Monetaria (BM) está constituida por todo el dinero legal en circulación (es decir, billetes y monedas), sumado a las reservas de los bancos comerciales en el banco central.",
 
-    chartdata: {
-      labels: payload.dates,
-      datasets: [
+    chart: {
+      dates:payload,
+      dimensions: [
         {
-          backgroundColor: 'rgba(46,120,210,0)',
+          fillColor: 'rgba(46,120,210,0)',
           label: "Base Monetaria",
           data: payload.total,
-          borderColor: "#2E78D2",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          color: "#2E78D2",
+          
+          
         },
         {
-          backgroundColor: 'rgba(46,120,210,0)',
+          fillColor: 'rgba(46,120,210,0)',
           label: "Base Monetaria + Instrumentos (LELIQ y Otros)",
           data: payload.plus,
-          borderColor: "#2E78D280",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          color: "#2E78D280",
+          
+          
         },
       ],
     }

@@ -5,7 +5,7 @@ module.exports = (async function() {
 
   const kpi = "ipcnucleo"
    
-  const payload = await parsers.datosGobarAPI(kpi, "ipcnucleo", '148.3_INUCLEONAL_DICI_M_19&representation_mode=percent_change')
+  const payload = await parsers.datosGobarAPI('148.3_INUCLEONAL_DICI_M_19&representation_mode=percent_change')
 
   var post = {
     kpi,
@@ -22,16 +22,16 @@ module.exports = (async function() {
   max: 10,
   min: 0,
 
-  chartdata: {
-labels: payload.dates,
-  datasets: [
+  chart: {
+dates:payload,
+  dimensions: [
     {
-      backgroundColor: "#2E78D295",
+      fillColor: "#2E78D295",
       label: "IPC Núcleo",
-      data: payload.d,
+      data: payload,
       type: 'bar',
-      borderColor: "#2E78D2",
-      pointRadius: 0,
+      color: "#2E78D2",
+      
       borderWidth: 0,
     },
   ],

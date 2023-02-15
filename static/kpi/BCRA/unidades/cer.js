@@ -5,7 +5,7 @@ module.exports = (async function() {
   const kpi = "cer"
   
 
-  const payload = await parsers.datosGobarAPI(kpi, "cer", '94.2_CD_D_0_0_10&start_date=2012-01-01')
+  const payload = await parsers.datosGobarAPI('94.2_CD_D_0_0_10&start_date=2012-01-01')
 
   
   var post = {
@@ -23,16 +23,16 @@ module.exports = (async function() {
   fu: "MECON",
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
   frec: "Diaria", 
-  chartdata: {
-  labels: payload.dates,
-  datasets: [
+  chart: {
+  dates:payload,
+  dimensions: [
     {
-      backgroundColor: "rgba(46,120,210,0.05)",
+      fillColor: "rgba(46,120,210,0.05)",
       label: "CER",
-      data: payload.d,
-      borderColor: "rgba(46,120,210,1)",
-      pointRadius: 0,
-      borderWidth: 1.5,
+      data: payload,
+      color: "rgba(46,120,210,1)",
+      
+      
     },
 
   ],

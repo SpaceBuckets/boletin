@@ -59,9 +59,9 @@ export default {
       heatdata: "",
     };
   },
-  created() {
+/*   created() {
 
-//console.log(this.chart.chartdata.labels)
+console.log(this.chart.chartdata.labels)
     let modifiedArr = this.chart.chartdata.labels.map(function (element) {
       return element.slice(0, -6);
     });
@@ -92,7 +92,7 @@ export default {
         obj[i] = mergeResult;
       }
     }
-  },
+  }, */
 };
 </script>
 

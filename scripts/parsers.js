@@ -22,58 +22,35 @@ function writeFileSyncRecursive(filename, content, charset) {
   fs.writeFileSync(filename, content, charset)
 }
 
-async function datosGobarAPI(kpi, name, value) {
-  var payload = {}
-  var tempDates = [];
-  var tempDataBase = [];
-  const resB = await fetch(`https://apis.datos.gob.ar/series/api/series/?limit=5000&format=json&ids=${value}`);
- 
-  var emaeB = await resB.json();
-  for (let i = 0; i < emaeB.data.length; i++) {
-    if (emaeB.data[i][1] == null) { emaeB.data[i][1] = 0 }
+async function datosGobarAPI(value) {
+  var payload = []
+  const data = (await (await fetch(`https://apis.datos.gob.ar/series/api/series/?limit=5000&format=json&ids=${value}`)).json()).data;
 
-    if (name === 'ipcgba' || name === 'ipcnucleo' || name === 'ipib' || name === 'ipim') {
-      tempDataBase.push((emaeB.data[i][1] * 100).toFixed(2))
-
-    } else {
-      tempDataBase.push(emaeB.data[i][1].toFixed(2));
-
-    }
-
-
-    tempDates.push(emaeB.data[i][0]);
+  for (let i = 0; i < data.length; i++) {
+    if (data[i][1] == null) { data[i][1] = 0 }
+    payload[i] = {}
+    payload[i].x = data[i][0]
+    payload[i].y = Number((data[i][1]).toFixed(2))
   }
  
- 
-  payload.dates = tempDates
-  payload.d = tempDataBase
-  
-  //console.log('\x1b[42m',`♥ [${kpi}] ${name} updated` ,'\x1b[0m');
-
   return payload
 
 }
 
+async function parseWorldBank(value) {
+    var payload = []
+    var data = JSON.parse(await (await fetch(value)).text())[1].slice().reverse()
 
-async function parseWorldBank(kpi,name,value) {
-    var payload = {}
-    const resA = await fetch(value);
-    var emaeB = JSON.parse(await resA.text())
-    var datesArray = [], tempArray = []
-
-    for (let i = 0; i < emaeB[1].length; i++) {
-
-      if (emaeB[1][i].value !== null) {
-        datesArray.push(new Date (emaeB[1][i].date).toLocaleDateString("en-CA", {timeZone: "UTC"}))
-        tempArray.push(emaeB[1][i].value)
+    for (let i = 0; i < data.length; i++) {
+      payload[i] = {}
+      if (data[i].value !== null) {
+        payload[i].x = new Date(data[i].date).toISOString().substring(0, 10)
+        payload[i].y = Number((data[i].value).toFixed(2))
+      } else {
+        payload[i].x = new Date(data[i].date).toISOString().substring(0, 10)
+        payload[i].y = Number(0)        
       }
-  
   }
- 
-  payload.dates = datesArray.reverse()
-  payload.d = tempArray.reverse()
-  
-  //console.log('\x1b[42m',`♥ [${kpi}] ${name} updated` ,'\x1b[0m');
 
   return payload
 }
@@ -98,8 +75,11 @@ async function datosGobarCSV(kpi,name) {
     var tempArray = []
     for (let i = 0; i < data.length; i++) {
       if (new Date(data[i][kpi.date]).toUTCString() !== 'Invalid Date') { tempArray.push(Number(data[i][value]).toFixed(3))}
-
     }
+    for (let i = 0; i < tempArray.length; i++) {
+      if (tempArray[i] === 'NaN') { tempArray[i] = tempArray[i-1] }
+    }
+
     payload[key] = tempArray;
     //console.log('\x1b[42m',`♥ [${name}] ${name} updated` ,'\x1b[0m');
 
@@ -151,16 +131,6 @@ async function genericXLS(kpi,name) {
       if(data[i][kpi.date] && data[i][kpi.date].includes("A") && data[i-1][kpi.date].includes("Jul")) { data[i][kpi.date] = data[i][kpi.date].replace("A","Aug") }
       if(data[i][kpi.date] && data[i][kpi.date].includes("Jun") && data[i-1][kpi.date].includes("Jun")) { data[i][kpi.date] = data[i][kpi.date].replace("Jun","Jul") }
 
-/*             if(data[i][kpi.date] && data[i][kpi.date].includes("A")) { data[i][kpi.date] = data[i][kpi.date].replace("A","Apr") }
-
-      if(data[i][kpi.date] && data[i][kpi.date].includes("J")) { data[i][kpi.date] = data[i][kpi.date].replace("J","Jun") }
-      if(data[i][kpi.date] && data[i][kpi.date].includes("Junul")) { data[i][kpi.date] = data[i][kpi.date].replace("Junul","Jul") }
-      if(data[i][kpi.date] && data[i][kpi.date].includes("M")) { data[i][kpi.date] = data[i][kpi.date].replace("M","Mar") }
-      if(data[i][kpi.date] && data[i][kpi.date].includes("Mayar")) { data[i][kpi.date] = data[i][kpi.date].replace("Mayar","May") }
-      if(data[i][kpi.date] && data[i][kpi.date].includes("Junan")) { data[i][kpi.date] = data[i][kpi.date].replace("Junan","Jan") }
- */
-
-      //var date = moment(new Date(data[i][kpi.date])).utc().format("YYYY-MM-DD");
       datesArray.push(data[i][kpi.date])
 
     } else {
@@ -187,7 +157,6 @@ async function genericXLS(kpi,name) {
         if(datesArrayObj[key][i].includes(key)) { datesArrayObj[key][i] = datesArrayObj[key][i].replace(key,"") }
         var date = datesArrayObj[key][i] + key
         date = date.replace("**","")
-        //console.log(date)
 
         newDatesArray.push(moment(new Date(date)).format("YYYY-MM-DD"))
 
@@ -199,7 +168,6 @@ async function genericXLS(kpi,name) {
   }
    payload.dates = datesArray;
 
-  //console.log('\x1b[42m',`♥ [${name}] dates updated` ,'\x1b[0m');
 
   // VALUES
   if (name.includes("ipifiel")) { 
@@ -207,10 +175,8 @@ async function genericXLS(kpi,name) {
       var tempArray = []
       for (let i = 5; i < datesArray.length+5; i++) {
         tempArray.push(Number(data[i][value.id]).toFixed(3))
-        //if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value.id]).toFixed(3))}
       }
       payload[value.name] = tempArray;
-     //console.log('\x1b[42m',`♥ [${name}] updated` ,'\x1b[0m');
 
     }
     return payload
@@ -223,8 +189,6 @@ async function genericXLS(kpi,name) {
       if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value.id]).toFixed(3))}
     }
      payload[value.name] = tempArray;
-
-    //console.log('\x1b[42m',`♥ [${name}] updated` ,'\x1b[0m');
 
   }
   return payload
@@ -256,7 +220,6 @@ async function scrapeBCRA(serie, name) {
     payload.dates = dateInfla
     payload.d = inflaVal
     
-    //console.log('\x1b[42m',`♥ [${name}] updated` ,'\x1b[0m');
 
     return payload
 }
@@ -306,5 +269,50 @@ async function parseBonos(kpi, obj) {
 
 }
 
+async function newgenericXLS(kpi,name) {
+  const payload = {}
+  const resA = await fetch(kpi.url);
 
-module.exports = {scrapeBCRA,genericXLS, datosGobarCSV,parseWorldBank,parseBonos,writeFileSyncRecursive, datosGobarAPI }
+  var data = xlsx.parse(await resA.arrayBuffer())[kpi.sheet].data
+  //var data = xlsx.parse(await (await fetch(kpi.url)).arrayBuffer())[kpi.sheet].data
+    // DATES
+  var datesArray = []
+
+  for (let dimension in kpi.items) {
+    payload[dimension.name] = []
+
+    for (let i = 0; i < data.length; i++) {
+      payload[dimension.name][i] = {}
+
+
+
+     if (data[i][kpi.date] && data[i][kpi.date] != 'Invalid Date') {
+        var date = new Date(Date.UTC(0, 0, data[i][kpi.date]));
+        if (date != 'Invalid Date') { 
+          payload[dimension.name][i].x = new Date(Date.UTC(0, 0, data[i][kpi.date]))
+          payload[dimension.name][i].y = Number(data[i][dimension.id]).toFixed(3)
+        } 
+      }  
+    }
+
+  }
+  console.log(payload)
+   //payload.dates = datesArray;
+
+/* 
+  // VALUES
+
+    for (let [key, value] of Object.entries(kpi.items)) {
+    var tempArray = []
+    for (let i = 0; i < data.length; i++) {
+      if (new Date(Date.UTC(0, 0, data[i][kpi.date])) != 'Invalid Date') { tempArray.push(Number(data[i][value.id]).toFixed(3))}
+    }
+     payload[value.name] = tempArray;
+
+  }
+  return payload
+ */
+  
+}
+
+module.exports = {scrapeBCRA,genericXLS,newgenericXLS, datosGobarCSV,parseWorldBank,parseBonos,writeFileSyncRecursive, datosGobarAPI }

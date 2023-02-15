@@ -6,11 +6,11 @@ module.exports = (async function() {
  
  
   
-      const fed = await parsers.datosGobarAPI(kpi, 'fed', '131.1_FET_0_0_12&start_date=1999-01-01')
-    const euro = await parsers.datosGobarAPI(kpi, 'euro', '131.1_MZT_0_0_18&start_date=1999-01-01')
-    const brasil = await parsers.datosGobarAPI(kpi, 'brasil', '131.1_SBT_0_0_17&start_date=1999-01-01')
-    const inglaterra = await parsers.datosGobarAPI(kpi, 'inglaterra', '131.1_RIT_0_0_20&start_date=1999-01-01')
-    const japon = await parsers.datosGobarAPI(kpi, 'japon', '131.1_OIRJT_0_0_34&start_date=1999-01-01')
+      const fed = await parsers.datosGobarAPI('131.1_FET_0_0_12&start_date=1999-01-01')
+    const euro = await parsers.datosGobarAPI('131.1_MZT_0_0_18&start_date=1999-01-01')
+    const brasil = await parsers.datosGobarAPI('131.1_SBT_0_0_17&start_date=1999-01-01')
+    const inglaterra = await parsers.datosGobarAPI('131.1_RIT_0_0_20&start_date=1999-01-01')
+    const japon = await parsers.datosGobarAPI('131.1_OIRJT_0_0_34&start_date=1999-01-01')
  
   var post = {
     kpi,
@@ -26,48 +26,48 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 30,
 
-  chartdata: {
-    labels: fed.dates,
-    datasets: [
+  chart: {
+    dates:fed,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0.0)",
+        fillColor: "rgba(46,120,210,0.0)",
         label: "Tasa FED",
-        data: fed.d,
-        borderColor: "rgba(46,120,210,1)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: fed,
+        color: "rgba(46,120,210,1)",
+        
+        
       },
       {
-        backgroundColor: "rgba(46,120,210,0.0)",
+        fillColor: "rgba(46,120,210,0.0)",
         label: "Tasa Euro",
-        data: euro.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: euro,
+        color: "rgba(46,120,210,0.25)",
+        
+        
       },
       /*     {
-            backgroundColor: "rgba(46,120,210,0.0)",
+            fillColor: "rgba(46,120,210,0.0)",
             label: "Tasa Japon",
             data: require(`../../data/${kpi}/japon/d.json`),
-            borderColor: "rgba(46,120,210,0.25)",
-            pointRadius: 0,
-            borderWidth: 1.5,
+            color: "rgba(46,120,210,0.25)",
+            
+            
           }, */
       {
-        backgroundColor: "rgba(46,120,210,0.0)",
+        fillColor: "rgba(46,120,210,0.0)",
         label: "Tasa Inglaterra",
-        data: inglaterra.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: inglaterra,
+        color: "rgba(46,120,210,0.25)",
+        
+        
       },
       {
-        backgroundColor: "rgba(46,120,210,0.0)",
+        fillColor: "rgba(46,120,210,0.0)",
         label: "Tasa Brasil",
-        data: brasil.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: brasil,
+        color: "rgba(46,120,210,0.25)",
+        
+        
       },
 ]
 }

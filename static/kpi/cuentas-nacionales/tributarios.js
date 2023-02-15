@@ -5,10 +5,10 @@ module.exports = (async function() {
   const kpi = "tributarios"
  
   
-     const dga = await parsers.datosGobarAPI(kpi, 'dga', '172.3_SOTAL_DDGA_M_0_0_12')
-    const dgi = await parsers.datosGobarAPI(kpi, 'dgi', '172.3_SOTAL_DDGI_M_0_0_12')
-    const total = await parsers.datosGobarAPI(kpi, 'total', '172.3_TL_RECAION_M_0_0_17')
-    const seguridad = await parsers.datosGobarAPI(kpi, 'seguridad', '172.3_SRIDAD_IAL_M_0_0_16')
+     const dga = await parsers.datosGobarAPI('172.3_SOTAL_DDGA_M_0_0_12')
+    const dgi = await parsers.datosGobarAPI('172.3_SOTAL_DDGI_M_0_0_12')
+    const total = await parsers.datosGobarAPI('172.3_TL_RECAION_M_0_0_17')
+    const seguridad = await parsers.datosGobarAPI('172.3_SRIDAD_IAL_M_0_0_16')
  
   var post = {
     kpi,
@@ -22,42 +22,31 @@ module.exports = (async function() {
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
   frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-  chartdata: {
-    labels: total.dates,
-    datasets: [
+  chart: {
+    dates:total,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0)",
         label: "Total",
-        data: total.d,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: total,
+        color: "#2E78D2",
+
       },
       {
-        fill: false,
         label: "DGA",
-        data: dga.d,
-        borderColor: "#7a49a580",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: dga,
+        color: "#7a49a580",
+
       },
       {
-        fill: false,
         label: "DGI",
-        data: dgi.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointBackgroundColor: "#C1D7F2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: dgi,
+        color: "rgba(46,120,210,0.25)",
+
       },
       {
-        fill: false,
         label: "Seguridad Social",
-        data: seguridad.d,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointBackgroundColor: "#C1D7F2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: seguridad,
+        color: "rgba(46,120,210,0.25)",
       },
 ]
 }

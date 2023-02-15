@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "cvs"
   
-  const payload = await parsers.datosGobarAPI(kpi,'datos','447.1_TOTALTAL_0_0_5_37') 
+  const payload = await parsers.datosGobarAPI('447.1_TOTALTAL_0_0_5_37') 
     
   var post = {
     kpi,
@@ -18,16 +18,16 @@ module.exports = (async function() {
     frec: "Diaria", 
     d: "",
 
-    chartdata: {
-    labels: payload.dates,
-    datasets: [
+    chart: {
+    dates:payload,
+    dimensions: [
         {
-        backgroundColor: "rgba(46,120,210,0.05)",
+        fillColor: "rgba(46,120,210,0.05)",
         label: "Coeficiente de Variacion Salarial",
-        data: payload.d,
-        borderColor: "rgba(46,120,210,1)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: payload,
+        color: "rgba(46,120,210,1)",
+        
+        
         },
     ],
     }

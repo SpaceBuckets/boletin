@@ -33,61 +33,61 @@ module.exports = (async function() {
   d: "Índice calculado por JP Morgan Chase que mide la diferencia entre la tasa de interés que un país debe de pagar por emitir deuda en el exterior.",
   max: 50,
 
-  chartdata: {
-    labels: payload.dates,
-    datasets: [
+  chart: {
+    dates:payload,
+    dimensions: [
       {
-        backgroundColor: 'rgba(46,120,210,0)',
+        fillColor: 'rgba(46,120,210,0)',
         label: "EMBI Brasil",
         data: payload.brasil,
-        borderColor: "rgba(46,120,210,0.3)",
+        color: "rgba(46,120,210,0.3)",
 
-        pointRadius: 0,
+        
         borderWidth: 1,
       },
       {
-        backgroundColor: 'rgba(46,120,210,0)',
+        fillColor: 'rgba(46,120,210,0)',
         label: "EMBI Chile",
         data: payload.chile,
-        borderColor: "rgba(46,120,210,0.3)",
+        color: "rgba(46,120,210,0.3)",
 
-        pointRadius: 0,
+        
         borderWidth: 1,
       },
       {
-        backgroundColor: 'rgba(46,120,210,0)',
+        fillColor: 'rgba(46,120,210,0)',
         label: "EMBI Colombia",
         data: payload.colombia,
-        borderColor: "rgba(46,120,210,0.3)",
+        color: "rgba(46,120,210,0.3)",
 
-        pointRadius: 0,
+        
         borderWidth: 1,
       },
       {
-        backgroundColor: 'rgba(46,120,210,0)',
+        fillColor: 'rgba(46,120,210,0)',
         label: "EMBI Mexico",
         data: payload.mexico,
-        borderColor: "rgba(46,120,210,0.3)",
+        color: "rgba(46,120,210,0.3)",
 
-        pointRadius: 0,
+        
         borderWidth: 1,
       },
       {
-        backgroundColor: 'rgba(46,120,210,0)',
+        fillColor: 'rgba(46,120,210,0)',
         label: "EMBI Latino",
         data: payload.latino,
-        borderColor: "#7a49a580",
+        color: "#7a49a580",
 
-        pointRadius: 0,
+        
         borderWidth: 1,
       },
       {
-        backgroundColor: 'rgba(146,220,210,0)',
+        fillColor: 'rgba(146,220,210,0)',
         label: "EMBI Argentina",
         data: payload.argentina,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "#2E78D2",
+        
+        
 
       }
     ]

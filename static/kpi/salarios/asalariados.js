@@ -2,8 +2,8 @@ module.exports = (async function() {
   
   const parsers = require("@parsers");
   const kpi = "asalariados"
-  const privadob = await parsers.datosGobarAPI(kpi, "privadob", '151.1_AARIADODAD_2012_M_31')
-  const privadod = await parsers.datosGobarAPI(kpi, "privadod", '151.1_AARIADOTAC_2012_M_26')
+  const privadob = await parsers.datosGobarAPI('151.1_AARIADODAD_2012_M_31')
+  const privadod = await parsers.datosGobarAPI('151.1_AARIADOTAC_2012_M_26')
 
   var post = {
     kpi,
@@ -18,24 +18,24 @@ module.exports = (async function() {
     frec: "Mensual",
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
-    chartdata: {
-      labels: privadob.dates,
-      datasets: [
+    chart: {
+      dates:privadob,
+      dimensions: [
         {
-          backgroundColor: 'rgba(46,120,210,0)',
+          fillColor: 'rgba(46,120,210,0)',
           label: "Empleo Privado",
-          data: privadod.d,
-          borderColor: "#2E78D2",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          data: privadod,
+          color: "#2E78D2",
+          
+          
         },
         {
-          backgroundColor: 'rgba(46,120,210,0)',
+          fillColor: 'rgba(46,120,210,0)',
           label: "Empleo Publico",
-          data: privadob.d,
-          borderColor: "rgba(46,120,210,0.25)",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          data: privadob,
+          color: "rgba(46,120,210,0.25)",
+          
+          
         },
       ],
     }    

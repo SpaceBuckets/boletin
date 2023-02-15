@@ -81,7 +81,8 @@ async function processFolders( ){
    const orderedtree = {
     'actividad-economica': tree['actividad-economica'],
     'dolar': tree['dolar'],
-    'bcra': tree['bcra'],
+    'BCRA': tree['BCRA'],
+    'bonos': tree['bonos'],
     'energia': tree['energia'],
     'cuentas-nacionales': tree['cuentas-nacionales'],
     'politica-social': tree['politica-social'],
@@ -90,6 +91,7 @@ async function processFolders( ){
     'consumo': tree['consumo'],
     'turismo': tree['turismo'],
     'agro': tree['agro'],
+    'otros': tree['otros'],
   }
  
    writeFileSyncRecursive(`./static/refolders.json`, JSON.stringify(orderedtree)); 
@@ -98,24 +100,30 @@ async function processFolders( ){
 
 async function processItems(arr){
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
- 
+  console.log('\x1b[46m',`☺ Have a nice day` ,'\x1b[0m');
+ // const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+  //bar1.start(arr.length, 0);
+  
   for(const kpi of arr) { 
     if (kpi.slice(-3) === '.js') { 
       try {
         await require(`../static/kpi/${kpi}`) 
+        //bar1.increment();
         console.log('\x1b[42m',`♥ [${kpi.split("/").pop().slice(0,-3)}] updated` ,'\x1b[0m');
       } catch (error) {
         console.log('\x1b[41m', '\x1b[37m',`✕ [${kpi.split("/").pop().slice(0,-3)}] failed to fetch!` ,'\x1b[0m');
+        console.log(error);
 
       }
     }
   }    
  
-  await processVariation("kpi");
+  //bar1.stop();
+  //await processVariation("kpi");
   processFolders(); 
   processNamers()  
 
 };
 
-processItems(glob.sync('**', { cwd: `static/kpi/` }));
-//processItems(['salarios/salariopromedio.js']);
+//processItems(glob.sync('**', { cwd: `static/kpi/` }));
+processItems(['dolar/tcrm.js']);

@@ -15,7 +15,7 @@ module.exports = (async function() {
     ]
   }
 
-  const payload = await parsers.genericXLS(kpidata, kpi)
+  const payload = await parsers.newgenericXLS(kpidata, kpi)
    var post = {
     kpi,
   t: "TCRM",
@@ -31,40 +31,40 @@ module.exports = (async function() {
   max: 300,
   min: 0,
 
-  chartdata: {
-    labels: payload.dates,
-    datasets: [
+  chart: {
+    dates:payload,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0)",
+        
         label: "TCRM",
         data: payload.itcrm,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "#2E78D2",
+        
+        
       },
       {
-        backgroundColor: "rgba(122, 73, 165,0)",
+        fillColor: "rgba(122, 73, 165,0)",
         label: "TCRUS",
         data: payload.itcrus,
-        borderColor: "rgba(122, 73, 165,0.25)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "rgba(122, 73, 165,0.25)",
+        
+        
       },
       {
-        backgroundColor: "rgba(46,120,210,0)",
+        
         label: "TRCB",
         data: payload.itcrb,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "rgba(46,120,210,0.25)",
+        
+        
       },
       {
-        backgroundColor: "rgba(46,120,210,0)",
+        
         label: "Zona Euro",
         data: payload.itcreur,
-        borderColor: "rgba(46,120,210,0.25)",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        color: "rgba(46,120,210,0.25)",
+        
+        
       },      
 ]
 }

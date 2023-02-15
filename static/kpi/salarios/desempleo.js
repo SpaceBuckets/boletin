@@ -7,14 +7,14 @@ module.exports = (async function() {
    
   
  
-  const general = await parsers.datosGobarAPI(kpi, 'general', '45.2_ECTDT_0_T_33')
-  const cuyo = await parsers.datosGobarAPI(kpi, 'cuyo', '45.2_ECTDTCU_0_T_38')
-  const patagonia = await parsers.datosGobarAPI(kpi, 'patagonia', '45.2_ECTDTP_0_T_43')
-  const gba = await parsers.datosGobarAPI(kpi, 'gba', '45.2_ECTDTG_0_T_37')
-  const caba = await parsers.datosGobarAPI(kpi, 'caba', '45.2_ECTDTC_0_T_38')
-  const pampeana = await parsers.datosGobarAPI(kpi, 'pampeana', '45.2_ECTDTRP_0_T_49')
-  const noroeste = await parsers.datosGobarAPI(kpi, 'noroeste', '45.2_ECTDTNO_0_T_42')
-  const nordeste = await parsers.datosGobarAPI(kpi, 'nordeste', '45.2_ECTDTNE_0_T_42')
+  const general = await parsers.datosGobarAPI('45.2_ECTDT_0_T_33')
+  const cuyo = await parsers.datosGobarAPI('45.2_ECTDTCU_0_T_38')
+  const patagonia = await parsers.datosGobarAPI('45.2_ECTDTP_0_T_43')
+  const gba = await parsers.datosGobarAPI('45.2_ECTDTG_0_T_37')
+  const caba = await parsers.datosGobarAPI('45.2_ECTDTC_0_T_38')
+  const pampeana = await parsers.datosGobarAPI('45.2_ECTDTRP_0_T_49')
+  const noroeste = await parsers.datosGobarAPI('45.2_ECTDTNO_0_T_42')
+  const nordeste = await parsers.datosGobarAPI('45.2_ECTDTNE_0_T_42')
  
 
 
@@ -31,79 +31,79 @@ module.exports = (async function() {
   frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
-  chartdata: {
-    labels: general.dates,
-    datasets: [
+  chart: {
+    dates:general,
+    dimensions: [
       {
-        backgroundColor: 'rgba(46,120,210,0.0)',
+        fillColor: 'rgba(46,120,210,0.0)',
         label: "General",
-        data: general.d,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: general,
+        color: "#2E78D2",
+        
+        
       },
       {
-        fill: false,
+        
         label: "CABA",
-        data: caba.d,
-        borderColor: "rgba(46,120,210,0.15)",
-        pointBackgroundColor: "#C1D7F2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: caba,
+        color: "rgba(46,120,210,0.15)",
+        
+        
+        
       },
       {
-        fill: false,
+        
         label: "Cuyo",
-        data: cuyo.d,
-        borderColor: "rgba(46,120,210,0.15)",
-        pointBackgroundColor: "#C1D7F2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: cuyo,
+        color: "rgba(46,120,210,0.15)",
+        
+        
+        
       },
       {
-        fill: false,
+        
         label: "GBA",
-        data: gba.d,
-        borderColor: "rgba(46,120,210,0.15)",
-        pointBackgroundColor: "#C1D7F2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: gba,
+        color: "rgba(46,120,210,0.15)",
+        
+        
+        
       },
       {
-        fill: false,
+        
         label: "Nordeste",
-        data: nordeste.d,
-        borderColor: "rgba(46,120,210,0.15)",
-        pointBackgroundColor: "#C1D7F2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: nordeste,
+        color: "rgba(46,120,210,0.15)",
+        
+        
+        
       },
       {
-        fill: false,
+        
         label: "Noroeste",
-        data: noroeste.d,
-        borderColor: "rgba(46,120,210,0.15)",
-        pointBackgroundColor: "#C1D7F2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: noroeste,
+        color: "rgba(46,120,210,0.15)",
+        
+        
+        
       },
       {
-        fill: false,
+        
         label: "Pampeana",
-        data: pampeana.d,
-        borderColor: "rgba(46,120,210,0.15)",
-        pointBackgroundColor: "#C1D7F2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: pampeana,
+        color: "rgba(46,120,210,0.15)",
+        
+        
+        
       },
       {
-        fill: false,
+        
         label: "Patagonia",
-        data: patagonia.d,
-        borderColor: "rgba(46,120,210,0.15)",
-        pointBackgroundColor: "#C1D7F2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: patagonia,
+        color: "rgba(46,120,210,0.15)",
+        
+        
+        
       },
 ]
 }

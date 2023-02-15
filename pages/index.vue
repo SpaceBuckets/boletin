@@ -53,7 +53,7 @@
         <h2>{{ indexItem.title }}</h2>
         <div class="mastersection">
            <nuxt-link class="mincharto" v-for="indexChart in savedIndex[i].items" :to="`kpi/${indexChart}`" :key="`a-${indexChart}`">
-                <charts-genericLine :data="indexChart" />
+             <!--   <charts-genericnewLine :data="indexChart" />-->
             </nuxt-link> 
         </div>
     </template>

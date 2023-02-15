@@ -4,9 +4,9 @@ module.exports = (async function() {
 
   const kpi = "ventasshopping"
   
-  const total = await parsers.datosGobarAPI(kpi,'total','458.1_VENTAS_TOTTES_ABRI_M_33_40 ')
-const gba = await parsers.datosGobarAPI(kpi,'GBA','458.1_VENTAS_GBATES_ABRI_M_29_80')
-const resto = await parsers.datosGobarAPI(kpi,'resto','458.1_VENTAS_RESTES_ABRI_M_31_8')
+  const total = await parsers.datosGobarAPI('458.1_VENTAS_TOTTES_ABRI_M_33_40 ')
+  const gba = await parsers.datosGobarAPI('458.1_VENTAS_GBATES_ABRI_M_29_80')
+  const resto = await parsers.datosGobarAPI('458.1_VENTAS_RESTES_ABRI_M_31_8')
 
     
   var post = {
@@ -20,32 +20,23 @@ const resto = await parsers.datosGobarAPI(kpi,'resto','458.1_VENTAS_RESTES_ABRI_
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-    chartdata: {
-    labels: total.dates,
-    datasets: [
+    chart: {
+    dates:total,
+    dimensions: [
         {
-            backgroundColor: "rgba(46,120,210,0)",
             label: "Total",
-            data: total.d,
-            borderColor: "rgba(46,120,210,1)",
-            pointRadius: 0,
-            borderWidth: 1.5,
+            data: total,
+            color: "rgba(46,120,210,1)",
             },
-{
-            backgroundColor: "rgba(46,120,210,0)",
+        {    
             label: "GBA",
-            data: gba.d,
-            borderColor: "rgba(46,120,210,0.25)",
-            pointRadius: 0,
-            borderWidth: 1.5,
+            data: gba,
+            color: "rgba(46,120,210,0.25)",   
             },
-{
-            backgroundColor: "rgba(46,120,210,0)",
+        {    
             label: "Resto",
-            data: resto.d,
-            borderColor: "rgba(46,120,210,0.25)",
-            pointRadius: 0,
-            borderWidth: 1.5,
+            data: resto,
+            color: "rgba(46,120,210,0.25)",
             },
 
     ],

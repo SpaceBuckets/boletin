@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "gini"
   
-  const payload = await parsers.parseWorldBank(kpi, "argentina", 'https://api.worldbank.org/v2/country/arg/indicator/SI.POV.GINI?format=json&per_page=500')
+  const payload = await parsers.parseWorldBank('https://api.worldbank.org/v2/country/arg/indicator/SI.POV.GINI?format=json&per_page=500')
 
   var post = {
     kpi,
@@ -21,16 +21,16 @@ module.exports = (async function() {
 
   "max": 55,
   "min": 35,
-  chartdata: {
-    labels: payload.dates,
-    datasets: [
+  chart: {
+    dates:payload,
+    dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0.05)",
+        fillColor: "rgba(46,120,210,0.05)",
         label: "Argentina GINI",
-        data: payload.d,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: payload,
+        color: "#2E78D2",
+        
+        
       },
     ]
 }

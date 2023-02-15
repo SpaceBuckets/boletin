@@ -4,7 +4,7 @@ module.exports = (async function () {
 
   const kpi = "pozosterminados"
   
-  const payload = await parsers.datosGobarAPI(kpi, 'datos', '366.3_POZOS_TERMRAL__30')
+  const payload = await parsers.datosGobarAPI('366.3_POZOS_TERMRAL__30')
 
   const post = {
     kpi,
@@ -21,17 +21,17 @@ module.exports = (async function () {
     cat: "Hidrocarburos",
     catslug: "hidrocarburos",
     max: 200,
-    chartdata: {
-      labels: payload.dates,
-      datasets: [
+    chart: {
+      dates:payload,
+      dimensions: [
         {
-          backgroundColor: "rgba(146,220,210,0)",
+          
           label: "Pozos de Petroleo terminados",
-          data: payload.d,
-          borderColor: "#2E78D2CC",
+          data: payload,
+          color: "#2E78D2CC",
            //type: 'bar',
-          pointRadius: 0,
-          borderWidth: 1.5,
+          
+          
         },
 
       ]

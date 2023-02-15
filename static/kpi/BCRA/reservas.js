@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "reservas"
    
-  const payload = await parsers.datosGobarAPI(kpi, "datos", '174.1_RRVAS_IDOS_0_0_36')
+  const payload = await parsers.datosGobarAPI('174.1_RRVAS_IDOS_0_0_36')
 
   var post = {
     kpi,
@@ -19,16 +19,16 @@ module.exports = (async function() {
   frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 90000,
-  chartdata: {
-    labels: payload.dates,
-    datasets: [
+  chart: {
+    dates:payload,
+    dimensions: [
       {
-        backgroundColor: 'rgba(46,120,210,0.1)',
+        fillColor: 'rgba(46,120,210,0.1)',
         label: "Reservas Internacionales",
-        data: payload.d,
-        borderColor: '#2E78D2',
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: payload,
+        color: '#2E78D2',
+        
+        
       },
 ]
 }

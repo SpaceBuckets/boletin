@@ -6,10 +6,10 @@ module.exports = (async function() {
   const kpi = "cereales"
   
 
-  const soja = await parsers.datosGobarAPI(kpi, "soja", '34.2_STSOJ_0_P_16')
-  const trigo = await parsers.datosGobarAPI(kpi, "trigo", '34.2_TTTRI_0_P_17')
-  const girasol = await parsers.datosGobarAPI(kpi, "girasol", '34.2_GTGIR_0_P_19')
-  const maiz = await parsers.datosGobarAPI(kpi, "maiz", '34.2_MTMAI_0_P_16')
+  const soja = await parsers.datosGobarAPI('34.2_STSOJ_0_P_16')
+  const trigo = await parsers.datosGobarAPI('34.2_TTTRI_0_P_17')
+  const girasol = await parsers.datosGobarAPI('34.2_GTGIR_0_P_19')
+  const maiz = await parsers.datosGobarAPI('34.2_MTMAI_0_P_16')
  
   var post = {
     kpi,
@@ -24,44 +24,28 @@ module.exports = (async function() {
   frec: "Mensual", 
   "d": "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   "max": 80000000,
-chartdata: {
-  labels: soja.dates,
-    datasets: [
-      {
-        backgroundColor: "rgba(146,220,210,0)",
+chart: {
+  dates:soja,
+    dimensions: [
+      { 
         label: "Girasol",
-        data: girasol.d,
-        borderColor: "rgba(46,120,210,0.25)",
-
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: girasol,
+        color: "rgba(46,120,210,0.25)",
       },
-      {
-        backgroundColor: "rgba(146,220,210,0)",
+      { 
         label: "Maiz",
-        data: maiz.d,
-        borderColor: "rgba(46,120,210,0.25)",
-
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: maiz,
+        color: "rgba(46,120,210,0.25)",
       },
-      {
-        backgroundColor: "rgba(146,220,210,0)",
+      { 
         label: "Trigo",
-        data: trigo.d,
-        borderColor: "rgba(46,120,210,0.25)",
-
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: trigo,
+        color: "rgba(46,120,210,0.25)",
       },                    
       {
-        backgroundColor: "rgba(146,220,210,0)",
         label: "Soja",
-
-        data: soja.d,
-        borderColor: "#2E78D2",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: soja,
+        color: "#2E78D2",
       },
     ],
   }

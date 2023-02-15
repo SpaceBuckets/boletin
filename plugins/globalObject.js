@@ -82,8 +82,13 @@ var state = {
     },
     elements: {
       line: {
-          tension: 0.1
-      }
+          tension: 0.1,
+          borderWidth: 1.5
+      },
+        point:{
+            radius: 0
+        }
+    
   },    
     legend: {
       display: true,

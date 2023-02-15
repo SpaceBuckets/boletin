@@ -4,10 +4,9 @@ module.exports = (async function() {
 
   const kpi = "balanza"
   
-
-  const impo = await parsers.datosGobarAPI(kpi, "impo", '74.3_IIT_0_M_25')
-  const expo = await parsers.datosGobarAPI(kpi, "expo", '74.3_IET_0_M_16')
-  const saldo = await parsers.datosGobarAPI(kpi, "saldo", '74.3_ISC_0_M_19')
+  const impo = await parsers.datosGobarAPI('74.3_IIT_0_M_25')
+  const expo = await parsers.datosGobarAPI('74.3_IET_0_M_16')
+  const saldo = await parsers.datosGobarAPI('74.3_ISC_0_M_19')
 
   var post = {
     kpi,
@@ -21,33 +20,28 @@ module.exports = (async function() {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "El intercambio comercial argentino (ICA) muestra la evolución de la balanza comercial, la relación entre los ingresos en dólares provenientes de los productos que exporta el país y aquellos artículos que se compran en el exterior.",
-    chartdata: {
-    labels: impo.dates,
-    datasets: [
+    chart: {
+      dates:impo,
+      dimensions: [
       {
-        backgroundColor: "rgba(46,120,210,0)",
         label: "Importaciones",
-        data: impo.d,
-        borderColor: "#b22222CC",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: impo,
+        color: "#b22222CC",
+
       },
       {
-        backgroundColor: "rgba(146,220,210,0)",
         label: "Exportaciones",
-        data: expo.d,
-        borderColor: "#009966",
-        pointRadius: 0,
-        borderWidth: 1.5,
+        data: expo,
+        color: "#009966",
+
       },
       {
-        backgroundColor: "#ccc",
+        fillColor: "#ccc",
         label: "Saldo Comercial",
         type: "bar",
-        data: saldo.d,
-        borderColor: "#ccc",
-        pointRadius: 0,
-        borderWidth: 0,
+        data: saldo,
+        color: "#ccc",
+        //borderWidth: 0,
       },
     ],
   },

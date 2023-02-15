@@ -27,17 +27,17 @@ module.exports = (async function () {
     frec: "Mensual", 
     d: "",
 
-    chartdata: {
-      labels: payload.dates,
-      datasets: [
+    chart: {
+      dates:payload,
+      dimensions: [
         {
-          backgroundColor: "transparent",
+          fillColor: "transparent",
           label: "Indice Merval",
-          data: payload.d,
-          borderColor: "#2E78D2CC",
+          data: payload,
+          color: "#2E78D2CC",
           type: 'line',
-          pointRadius: 0,
-          borderWidth: 1.5,
+          
+          
         },
 
       ]

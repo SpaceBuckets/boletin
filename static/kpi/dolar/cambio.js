@@ -58,78 +58,78 @@ module.exports = (async function() {
     d: "El tipo de cambio es el precio de una unidad de moneda extranjera expresado en términos de la moneda local.",
     //max: 400,
 
-    chartdata: {
-    labels: payload.dates,
-    datasets: [
+    chart: {
+    dates:payload,
+    dimensions: [
         {
-          backgroundColor: "rgba(0,153,102,0.0)",
+          fillColor: "rgba(0,153,102,0.0)",
           label: "Oficial",
           data: payload.oficial,
-          borderColor: "#009966",
-          pointRadius: 0,
-          borderWidth: 1.5,
+          color: "#009966",
+          
+          
           //fill: "-1", //fill until previous dataset
 
         },
         {
-          backgroundColor: "rgba(178,34,34,0)",
+          fillColor: "rgba(178,34,34,0)",
           label: "Blue",
           data: payload.blue,
-          //borderColor: "#2E78D2",
-          borderColor: "rgba(46,120,210,1)",
-          pointRadius: 0,
+          //color: "#2E78D2",
+          color: "rgba(46,120,210,1)",
+          
           borderWidth: 1.25,
 
         },
         {
-          backgroundColor: "rgba(178,34,34,0)",
+          fillColor: "rgba(178,34,34,0)",
           label: "CCL",
           data: payload.ccl,
-          borderColor: "#b22222CC",
+          color: "#b22222CC",
           
 
-          pointRadius: 0,
+          
           borderWidth: 1.25,
         },
         {
-          backgroundColor: "rgba(178,34,34,0)",
+          fillColor: "rgba(178,34,34,0)",
           label: "MEP",
           data: payload.mep,
-          borderColor: "#b2222240",
+          color: "#b2222240",
     
-          pointRadius: 0,
+          
           borderWidth: 1.25,
         },
         {
-          backgroundColor: "rgba(178,34,34,0)",
+          fillColor: "rgba(178,34,34,0)",
           label: "Turista",
           data: payload.turista,
-          borderColor: "#00996640",
-          pointRadius: 0,
+          color: "#00996640",
+          
           borderWidth: 1.25,
         },
         {
-          backgroundColor: "rgba(178,34,34,0)",
+          fillColor: "rgba(178,34,34,0)",
           label: "Qatar",
           data: payload.qatar,
-          borderColor: "#00996640",
-          pointRadius: 0,
+          color: "#00996640",
+          
           borderWidth: 1.25,
         },    
         {
-          backgroundColor: "rgba(178,34,34,0)",
+          fillColor: "rgba(178,34,34,0)",
           label: "Ahorro",
           data: payload.ahorro,
-          borderColor: "#00996640",
-          pointRadius: 0,
+          color: "#00996640",
+          
           borderWidth: 1.25,
         },    
         {
-          backgroundColor: "rgba(178,34,34,0)",
+          fillColor: "rgba(178,34,34,0)",
           label: "Lujo",
           data: payload.lujo,
-          borderColor: "#00996640",
-          pointRadius: 0,
+          color: "#00996640",
+          
           borderWidth: 1.25,
         },    
       ],
