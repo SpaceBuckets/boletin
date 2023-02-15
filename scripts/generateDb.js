@@ -125,5 +125,5 @@ async function processItems(arr){
 
 };
 
-//processItems(glob.sync('**', { cwd: `static/kpi/` }));
-processItems(['dolar/tcrm.js']);
+processItems(glob.sync('**', { cwd: `static/kpi/` }));
+//processItems(['dolar/tcrm.js']);

@@ -15,7 +15,7 @@ module.exports = (async function() {
     ]
   }
 
-  const payload = await parsers.newgenericXLS(kpidata, kpi)
+  const payload = await parsers.genericXLS(kpidata, kpi)
    var post = {
     kpi,
   t: "TCRM",
