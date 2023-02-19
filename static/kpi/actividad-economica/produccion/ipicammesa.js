@@ -7,7 +7,7 @@ module.exports = (async function() {
     date: 0,
     items: { interanual: 1 }
   }
-  const payload = await parsers.datosGobarCSV(kpidata,kpi)
+  const payload = await parsers.datosGobarCSV(kpidata)
 
   var post = {
     kpi,
@@ -22,7 +22,7 @@ module.exports = (async function() {
     frec: "Mensual",   
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     chart: {
-      dates:payload,
+      dates:payload.interanual,
       dimensions: [
         {
           

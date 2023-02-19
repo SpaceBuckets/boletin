@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
   
   const kpi = "bonosusd"
-  const bonosusd = {
+  const reambito = {
     al29d: '13076',
     al30d: '13078',
     al41d: '13083',
@@ -11,9 +11,33 @@ module.exports = (async function() {
     gd35d: '13089',
     gd41d: '13093'
   }
- 
+
+    var payload = {}
+    var fillLength = []
+    var chosenOne = ''
+    for (let [key, value] of Object.entries(reambito)) {
+      payload[key] = []
+      var data = await parsers.parseBonos(value)
+      fillLength.push(data.length)
+    }
   
-    const payload = await parsers.parseBonos(kpi, bonosusd)
+    for (let [key, value] of Object.entries(reambito)) {
+      var data = (await parsers.parseBonos(value)).reverse()
+
+      for (let i = 0; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: 0} }
+      for (let i = 0; i < data.length; i++) {
+        payload[key][i].x = data[i].x
+        payload[key][i].y = data[i].y
+      }
+  
+      payload[key] = payload[key].filter(element => { if (Object.keys(element).length !== 0) { return true; } return false; }).reverse();
+      if (payload[key][0].x !== 0) { chosenOne = key }
+    }
+    
+  
+    for (let [key, value] of Object.entries(reambito)) {
+      for (let i = 0; i < payload[chosenOne].length; i++) { payload[key][i].x = payload[chosenOne][i].x }
+    }
 
 
   var post = {
@@ -32,7 +56,7 @@ module.exports = (async function() {
     min: 0,
    
     chart: {
-      dates:payload,
+      dates:payload.al30d,
       dimensions: [
         {
           fillColor: "rgba(46,120,210,0.0)",
@@ -79,8 +103,6 @@ module.exports = (async function() {
           label: "GD41D",
           data: payload.gd41d,
           color: "rgba(46,120,210,0.25)",
-          
-          
         },
       ],
     }

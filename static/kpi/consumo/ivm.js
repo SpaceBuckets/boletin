@@ -8,11 +8,11 @@ module.exports = (async function() {
     sheet: 0,
     date: 0,
     items: [{
-      name: "valor", id: 1
+      name: "ivm", id: 1
     }]      
   }
   
-  const payload = await parsers.genericXLS(kpidata, kpi)
+  const payload = await parsers.genericXLS(kpidata)
 
   var post = {
     kpi,
@@ -29,12 +29,12 @@ module.exports = (async function() {
   max: 200,
   min: 0,
   chart: {
-    dates:payload,
+    dates:payload.ivm,
     dimensions: [
       {
         
         label: "IVM",
-        data: payload.valor,
+        data: payload.ivm,
         color: "#2E78D2",
         
         

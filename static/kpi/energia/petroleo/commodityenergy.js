@@ -8,13 +8,13 @@ module.exports = (async function() {
       sheet: 2,
       date: 0,
       items: [{
-        name: "valor",
+        name: "commodityenergy",
         id: 1,
       }] 
   }
   
 
-  const payload = await parsers.genericXLS(kpidata, kpi)
+  const payload = await parsers.genericXLS(kpidata)
 
   var post = {
     kpi,
@@ -30,12 +30,12 @@ module.exports = (async function() {
   fur: "https://www.bcsf.com.ar/",
   frec: "Mensual",   
   chart: {
-    dates:payload,
+    dates:payload.commodityenergy,
     dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Energy Price Index",
-        data: payload.valor,
+        data: payload.commodityenergy,
         color: "rgba(46,120,210,1)",
         
         

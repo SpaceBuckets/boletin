@@ -5,35 +5,24 @@ module.exports = (async function() {
   const fetch = require('@adobe/node-fetch-retry');
   const xlsx = require('node-xlsx');
   const kpi = "comprasbcra"
-  
+  const payload = await parsers.scrapeBCRA("247")
 
 
-    const resA = await fetch('http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm');
-   var emaeB = await resA.arrayBuffer();
-  var obj = xlsx.parse(emaeB);
-  var dateUSD = []
-  var valUSD = []
-  var valRes = []
-    var payload = {}
+
+/*   var obj = xlsx.parse(await (await fetch('http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm')).arrayBuffer());
+ 
+    var payload = []
+
    for (let i = 0; i < obj[2].data.length; i++) {
+    payload[i] = {}
     var date = new Date(Date.UTC(0, 0, obj[2].data[i][0]));
     if (date != 'Invalid Date') {
-      dateUSD.push(date.toLocaleDateString("en-CA"))
-      valUSD.push(obj[2].data[i][7])
-      valRes.push(obj[2].data[i][3])
+      payload[i].x = date.toLocaleDateString("en-CA")
+      payload[i].y = obj[2].data[i][7]
     }
   }
-
-  var foundArr = []
-  for (let e = 0; e < dateUSD.length; e++) {
-    if (dateUSD[e] === '2003-01-01' || dateUSD[e] === '2003-01-02' && e !== 0) {
-      foundArr.push(e)
-    }
-  }
-
-  payload.dates = dateUSD.slice(0, foundArr[0]);
-  payload.diaria =  valUSD.slice(0, foundArr[0]);
- 
+  payload = payload.filter(element => { if (Object.keys(element).length !== 0) { return true; } return false; }).reverse();
+ */
 
   var post = {
     kpi,
@@ -55,7 +44,7 @@ module.exports = (async function() {
     {
       fillColor: "",
       label: "Compras Divisas USD",
-      data: payload.diaria,
+      data: payload,
       barThickness: 1,
       
     },

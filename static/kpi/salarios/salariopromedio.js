@@ -7,12 +7,12 @@ module.exports = (async function() {
     url: 'https://cdn.produccion.gob.ar/cdn-cep/datos-por-actividad/salarios/w-mean/w_mean_privado_total.csv',
      date: 0,
     items: {
-      d: 1,
+      valor: 1,
   
     }
   }
   
-  const payload = await parsers.datosGobarCSV(kpidata,kpi)
+  const payload = await parsers.datosGobarCSV(kpidata)
  
   var post = {
     kpi,
@@ -28,12 +28,12 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
    chart: {
-    dates:payload,
+    dates:payload.valor,
     dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Salario Promedio",
-        data: payload,
+        data: payload.valor,
         color: "rgba(46,120,210,1)",
         
         

@@ -16,33 +16,29 @@ module.exports = (async function() {
     ahorro: 'https://mercados.ambito.com//dolarahorro/historico-general/01-01-1900/01-01-2100',
   }   
 
-  var pepeLength
   var payload = {}
+  var fillLength = []
+  var chosenOne = ''
+  for (let [key, value] of Object.entries(reambito)) {
+    payload[key] = []
+    var data = JSON.parse(await (await fetch(value)).text())
+    for (let i = 1; i < data.length; i++) { fillLength.push(data.length) }
+  } 
 
   for (let [key, value] of Object.entries(reambito)) {
-  
-      const resA = await fetch(value);
-      var emaeB = JSON.parse(await resA.text())
+    var data = JSON.parse(await (await fetch(value)).text())
+    for (let i = 1; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: 0} }
+    for (let i = 1; i < data.length; i++) {
+      payload[key][i].x = new Date(data[i][0].split('-').reverse().join('-')).toISOString().substring(0, 10)
+      payload[key][i].y = Number(data[i][1].replace(',','.'))
+    }
+    payload[key] = payload[key].filter(element => { if (Object.keys(element).length !== 0) { return true; } return false; }).reverse();
+    if (payload[key][0].x !== 0) { chosenOne = key }
+  }
 
-      var datesArray = []
-      var tempArray = []
-
-      for (let i = 1; i < emaeB.length; i++) {
-        datesArray.push(emaeB[i][0].split('-').reverse().join('-'))
-        tempArray.push(Number(emaeB[i][1].replace(',','.')))  
-      }
-
-      if (key === 'oficial') { 
-        pepeLength = tempArray.length 
-        payload.dates = datesArray.reverse();
-      }
-
-      tempArray.length = pepeLength  
-      payload[key] = tempArray.reverse();
-      
-      //console.log('\x1b[42m',`♥ [ambito] ${key} updated` ,'\x1b[0m');
-  } 
-  
+  for (let [key, value] of Object.entries(reambito)) {
+    for (let i = 0; i < payload[chosenOne].length; i++) { payload[key][i].x = payload[chosenOne][i].x }
+  }
 
   var post = {
     kpi,
@@ -57,81 +53,56 @@ module.exports = (async function() {
     frec: "Diaria", 
     d: "El tipo de cambio es el precio de una unidad de moneda extranjera expresado en términos de la moneda local.",
     //max: 400,
-
     chart: {
-    dates:payload,
-    dimensions: [
+      dates: payload.oficial,
+      dimensions: [
         {
-          fillColor: "rgba(0,153,102,0.0)",
           label: "Oficial",
           data: payload.oficial,
           color: "#009966",
-          
-          
-          //fill: "-1", //fill until previous dataset
-
         },
-        {
-          fillColor: "rgba(178,34,34,0)",
+         {
           label: "Blue",
           data: payload.blue,
-          //color: "#2E78D2",
           color: "rgba(46,120,210,1)",
-          
           borderWidth: 1.25,
-
         },
         {
-          fillColor: "rgba(178,34,34,0)",
           label: "CCL",
           data: payload.ccl,
           color: "#b22222CC",
-          
-
-          
           borderWidth: 1.25,
         },
         {
-          fillColor: "rgba(178,34,34,0)",
           label: "MEP",
           data: payload.mep,
           color: "#b2222240",
-    
-          
           borderWidth: 1.25,
         },
         {
-          fillColor: "rgba(178,34,34,0)",
           label: "Turista",
           data: payload.turista,
           color: "#00996640",
-          
           borderWidth: 1.25,
         },
         {
-          fillColor: "rgba(178,34,34,0)",
           label: "Qatar",
           data: payload.qatar,
           color: "#00996640",
-          
           borderWidth: 1.25,
         },    
         {
-          fillColor: "rgba(178,34,34,0)",
           label: "Ahorro",
           data: payload.ahorro,
           color: "#00996640",
-          
           borderWidth: 1.25,
         },    
         {
-          fillColor: "rgba(178,34,34,0)",
           label: "Lujo",
           data: payload.lujo,
           color: "#00996640",
-          
           borderWidth: 1.25,
-        },    
+        }, 
       ],
     }
   }

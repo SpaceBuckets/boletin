@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
   
   const kpi = "bonoscer"
-  const bonoscer = {
+  const reambito = {
     tx23: '12185',
     tx24: '12304',
     tx26: '13029',
@@ -11,9 +11,32 @@ module.exports = (async function() {
     t2x2: '12416'
   }
 
+    var payload = {}
+    var fillLength = []
+    var chosenOne = ''
+    for (let [key, value] of Object.entries(reambito)) {
+      payload[key] = []
+      var data = await parsers.parseBonos(value)
+      fillLength.push(data.length)
+    }
   
+    for (let [key, value] of Object.entries(reambito)) {
+      var data = (await parsers.parseBonos(value)).reverse()
+
+      for (let i = 0; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: 0} }
+      for (let i = 0; i < data.length; i++) {
+        payload[key][i].x = data[i].x
+        payload[key][i].y = data[i].y
+      }
   
-    const payload = await parsers.parseBonos(kpi, bonoscer)
+      payload[key] = payload[key].filter(element => { if (Object.keys(element).length !== 0) { return true; } return false; }).reverse();
+      if (payload[key][0].x !== 0) { chosenOne = key }
+    }
+    
+  
+    for (let [key, value] of Object.entries(reambito)) {
+      for (let i = 0; i < payload[chosenOne].length; i++) { payload[key][i].x = payload[chosenOne][i].x }
+    }
 
   var post = {
     kpi,
@@ -29,47 +52,32 @@ module.exports = (async function() {
     d: "El capital de los bonos CER capital se ajusta por el Índice de Precios al Consumidor y los intereses son calculados sobre saldos ajustados.",
 
     chart: {
-    dates:payload,
+    dates:payload.tx24,
     dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.0)",
         label: "TX24",
         data: payload.tx24,
         color: "rgba(46,120,210,1)",
-        
-        
       },
       {
-        fillColor: "rgba(46,120,210,0.0)",
         label: "TX23",
         data: payload.tx23,
         color: "rgba(46,120,210,0.25)",
-        
-        
       },
       {
-        fillColor: "rgba(46,120,210,0.0)",
         label: "T2X2",
         data: payload.t2x2,
         color: "rgba(46,120,210,0.25)",
-        
-        
       },
       {
-        fillColor: "rgba(46,120,210,0.0)",
         label: "TX26",
         data: payload.tx26,
         color: "rgba(46,120,210,0.25)",
-        
-        
       },
       {
-        fillColor: "rgba(46,120,210,0.0)",
         label: "TX28",
         data: payload.tx28,
         color: "rgba(46,120,210,0.25)",
-        
-        
       },
     ],
   }

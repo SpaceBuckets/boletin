@@ -15,7 +15,7 @@ module.exports = (async function() {
     ]
   }
 
-  const payload = await parsers.genericXLS(kpidata, kpi)
+  const payload = await parsers.genericXLS(kpidata)
    var post = {
     kpi,
   t: "TCRM",
@@ -32,7 +32,7 @@ module.exports = (async function() {
   min: 0,
 
   chart: {
-    dates:payload,
+    dates:payload.itcrm,
     dimensions: [
       {
         

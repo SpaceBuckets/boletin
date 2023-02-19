@@ -13,7 +13,7 @@ module.exports = (async function() {
     }
   }
   
-  const payload = await parsers.datosGobarCSV(kpidata,kpi)
+  const payload = await parsers.datosGobarCSV(kpidata)
 
 
    var post = {
@@ -31,7 +31,7 @@ module.exports = (async function() {
   max: 100,
   min: 0,
   chart: {
-    dates:payload,
+    dates:payload.porcentaje,
     dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",

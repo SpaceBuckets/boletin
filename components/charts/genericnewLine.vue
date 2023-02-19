@@ -25,16 +25,17 @@
         </div>
         <svg 
           id="chart" 
+          :class="{animation}"
           :width="$refs.c.clientWidth" 
           :height="$refs.c.clientHeight" 
           :viewBox="`0 0 ${$refs.c.clientWidth } ${$refs.c.clientHeight}`"
         >
           <clipPath id="clip">
-            <rect :x="`${cells[0]}px`" y="0" :height="$refs.c.clientHeight" :width="$refs.c.clientWidth -50-cells[0]"></rect>
+            <rect :x="`${cells[0]}px`" y="0" :height="$refs.c.clientHeight" :width="$refs.c.clientWidth-50-cells[0]"></rect>
           </clipPath>  
 
           <g class="axis xAxis"><g :transform="`translate(0,${$refs.c.clientHeight-20})`" v-for="(ticks,u) in axisBottom" v-html="ticks.outerHTML" :key="`${u}`"></g></g>
-          <g class="axis yAxis" :transform="`translate(${$refs.c.clientWidth-30},0)`"><g v-for="(ticks,j) in axisRight" v-html="ticks.outerHTML"></g></g>
+          <g class="axis yAxis" :transform="`translate(${$refs.c.clientWidth-30},0)`"><g v-for="(ticks,j) in axisRight" v-html="ticks.outerHTML" :key="`${j}`"></g></g>
 
           <path 
             v-for="(d, rekpi) in kpi.dimensions" 
@@ -51,7 +52,7 @@
     </div>
     <div class="legends" style="min-height:14px;">
       <template v-if="kpi">
-        <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions">
+        <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions" :key="`${kpi.label}`">
           <span class="circle" :style="{background: kpi.color }"></span> {{kpi.label}}
         </div>
       </template>
@@ -83,15 +84,20 @@ export default {
       defaultView: false,
       recursor: 'crosshair',
       parseTime: d3.timeParse("%Y-%m-%d"),
+      animation: true,
     }
   },
-  mounted() { this.remount() },
+  mounted() { 
+    //console.log(this.kpi.dimensions[0].data.length)
+    if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
+    this.remount() 
+  },
   methods: {
     setMinMax() {
       this.allValues.splice(0)
       for (let i in this.kpi.dimensions) { 
         for (let e = this.dateIndex[0]; e < this.dateIndex[1]; e++) { 
-          this.allValues.push(this.kpi.dimensions[i].data[e].y) 
+          this.allValues.push(this.kpi.dimensions[i].data[e]?.y) 
         } 
       };   
       this.maxValue = Math.max(...this.allValues)
@@ -123,7 +129,6 @@ export default {
       this.defaultView = true    
     },
     generateChart() {
- 
       //create X axis with start and end dates
       this.dateStart = this.parseTime(this.kpi.dates[this.dateIndex[0]].x)
       this.dateEnd = this.parseTime(this.kpi.dates[this.dateIndex[1]].x)
@@ -181,7 +186,6 @@ export default {
 
       this.dateIndex.splice(0)
       for (let e = 0; e < this.kpi.dates.length; e++) {
-  
         if (this.parseTime(this.kpi.dates[e].x).getTime() === this.parseTime(this.dateStart).getTime()) { this.dateIndex.push(e) }
         if (this.parseTime(this.kpi.dates[e].x).getTime() === this.parseTime(this.dateEnd).getTime()) { this.dateIndex.push(e) }
       }
@@ -232,8 +236,10 @@ export default {
   bottom: 0;
   right: 0;
   user-select:none;  
+  &.animation path {
+        transition: all .4s linear; 
+  }
   path { 
-    transition: all .4s linear; 
     fill: none;
     stroke-linejoin: round;    
   }

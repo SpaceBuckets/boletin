@@ -7,12 +7,12 @@ module.exports = (async function () {
     url: 'https://query1.finance.yahoo.com/v7/finance/download/M.BA?period1=0&period2=9674456596&interval=1d&events=history&includeAdjustedClose=true',
      date: 0,
     items: {
-      d: 4,
+      merval: 4,
  
     }
   }
   
-  const payload = await parsers.datosGobarCSV(kpidata,kpi)
+  const payload = await parsers.datosGobarCSV(kpidata)
 
   const post = {
     kpi,
@@ -28,12 +28,12 @@ module.exports = (async function () {
     d: "",
 
     chart: {
-      dates:payload,
+      dates:payload.merval,
       dimensions: [
         {
           fillColor: "transparent",
           label: "Indice Merval",
-          data: payload,
+          data: payload.merval,
           color: "#2E78D2CC",
           type: 'line',
           

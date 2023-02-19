@@ -17,7 +17,7 @@ module.exports = (async function() {
     ]
   }
   
-  const payload = await parsers.genericXLS(kpidata, kpi)
+  const payload = await parsers.genericXLS(kpidata)
 
   var post = {
     kpi,
@@ -34,7 +34,7 @@ module.exports = (async function() {
   max: 50,
 
   chart: {
-    dates:payload,
+    dates:payload.argentina,
     dimensions: [
       {
         fillColor: 'rgba(46,120,210,0)',

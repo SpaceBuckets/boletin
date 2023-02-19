@@ -7,12 +7,12 @@ module.exports = (async function() {
     url: 'https://query1.finance.yahoo.com/v7/finance/download/DX-Y.NYB?period1=0&period2=9674456596&interval=1d&events=history&includeAdjustedClose=true',
      date: 0,
     items: {
-      d: 4,
+      dxy: 4,
  
     }
   }
   
-  const payload = await parsers.datosGobarCSV(kpidata,kpi)
+  const payload = await parsers.datosGobarCSV(kpidata)
 
   
    var post = {
@@ -31,12 +31,12 @@ module.exports = (async function() {
   min: 0,
 
   chart: {
-    dates:payload,
+    dates:payload.dxy,
     dimensions: [
       {
         
         label: "DXY",
-        data: payload,
+        data: payload.dxy,
         color: "#2E78D2",
         
         

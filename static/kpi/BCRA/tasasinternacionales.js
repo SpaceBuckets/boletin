@@ -5,13 +5,42 @@ module.exports = (async function() {
   const kpi = "tasasinternacionales"
  
  
-  
-      const fed = await parsers.datosGobarAPI('131.1_FET_0_0_12&start_date=1999-01-01')
-    const euro = await parsers.datosGobarAPI('131.1_MZT_0_0_18&start_date=1999-01-01')
-    const brasil = await parsers.datosGobarAPI('131.1_SBT_0_0_17&start_date=1999-01-01')
-    const inglaterra = await parsers.datosGobarAPI('131.1_RIT_0_0_20&start_date=1999-01-01')
-    const japon = await parsers.datosGobarAPI('131.1_OIRJT_0_0_34&start_date=1999-01-01')
  
+
+    const reambito = {
+      fed: '131.1_FET_0_0_12&start_date=1999-01-01',
+      euro: '131.1_MZT_0_0_18&start_date=1999-01-01',
+      brasil: '131.1_SBT_0_0_17&start_date=1999-01-01',
+      inglaterra: '131.1_RIT_0_0_20&start_date=1999-01-01',
+      japon: '131.1_OIRJT_0_0_34&start_date=1999-01-01',
+    }
+   
+    var payload = {}
+    var fillLength = []
+    var chosenOne = ''
+    for (let [key, value] of Object.entries(reambito)) {
+      payload[key] = []
+      var data = await parsers.datosGobarAPI(value)
+      fillLength.push(data.length)
+    }
+  
+    for (let [key, value] of Object.entries(reambito)) {
+      var data = (await parsers.datosGobarAPI(value)).reverse()
+      for (let i = 0; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: 0} }
+      for (let i = 0; i < data.length; i++) {
+        payload[key][i].x = data[i].x
+        payload[key][i].y = data[i].y
+      }
+  
+      payload[key] = payload[key].filter(element => { if (Object.keys(element).length !== 0) { return true; } return false; }).reverse();
+      if (payload[key][0].x !== 0) { chosenOne = key }
+    }
+    
+  
+    for (let [key, value] of Object.entries(reambito)) {
+      for (let i = 0; i < payload[chosenOne].length; i++) { payload[key][i].x = payload[chosenOne][i].x }
+    }
+
   var post = {
     kpi,
   t: "Tasas Internacionales",
@@ -27,12 +56,12 @@ module.exports = (async function() {
   max: 30,
 
   chart: {
-    dates:fed,
+    dates:payload.fed,
     dimensions: [
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Tasa FED",
-        data: fed,
+        data: payload.fed,
         color: "rgba(46,120,210,1)",
         
         
@@ -40,23 +69,15 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Tasa Euro",
-        data: euro,
+        data: payload.euro,
         color: "rgba(46,120,210,0.25)",
         
         
       },
-      /*     {
-            fillColor: "rgba(46,120,210,0.0)",
-            label: "Tasa Japon",
-            data: require(`../../data/${kpi}/japon/d.json`),
-            color: "rgba(46,120,210,0.25)",
-            
-            
-          }, */
-      {
+       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Tasa Inglaterra",
-        data: inglaterra,
+        data: payload.inglaterra,
         color: "rgba(46,120,210,0.25)",
         
         
@@ -64,11 +85,15 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Tasa Brasil",
-        data: brasil,
+        data: payload.brasil,
         color: "rgba(46,120,210,0.25)",
-        
-        
-      },
+      },  
+/*       {
+        fillColor: "rgba(46,120,210,0.0)",
+        label: "Tasa Japon",
+        data: payload.japon,
+        color: "rgba(46,120,210,0.25)",
+      },      */   
 ]
 }
 }
