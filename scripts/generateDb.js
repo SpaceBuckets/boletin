@@ -125,5 +125,5 @@ async function processItems(arr){
 
 };
 
-processItems(glob.sync('**', { cwd: `static/kpi/` }));
-//processItems(['actividad-economica/ucii.js']);
+//processItems(glob.sync('**', { cwd: `static/kpi/` }));
+processItems(['bcra/reservas.js']);

@@ -1,7 +1,7 @@
 <template>
   <div class="megacontainer">
      <div class="flexer">
-      <h2><strong>{{ retitle }}</strong>. {{resubtitle}}</h2>
+      <h2><strong>{{ retitle }}</strong>. Serie de Tiempo</h2>
       <div class="innerflexer" v-if="index === undefined">   
           <div v-if="defaultView" class="date-display"> {{ kpi.dates[dateIndex[0]].x }}&nbsp;&#8211&nbsp;{{ kpi.dates[dateIndex[1]].x }} </div>
           <button @click="remount()">Reset</button>
@@ -9,7 +9,7 @@
     </div>
     <div class="chartcontainer" ref="c">
       <template v-if="defaultView">
-        <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': getTemplateCols(),'cursor': recursor}">
+        <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': `${this.cells.slice(0, -1).map(c => `${c}px`).join(' ')} 1fr`,'cursor': recursor}">
          <div  
             v-for="cell in cells.length"  :key="`${cell}-col`"
             @pointerdown="startDrag($event)"
@@ -18,7 +18,8 @@
             :data-col-start="getCols(cell)"
             :data-col-end="getCols(cell) + 1"         
             :data-date-start="getColDate(getCols(cell)-2)"          
-            :data-date-end="getColDate(getCols(cell)-1)"          
+            :data-date-end="getColDate(getCols(cell)-1)"      
+                
           >  
           </div>
           <div ref="reselecter" class="reselecter-cell"></div>
@@ -50,7 +51,7 @@
         </svg>   
       </template>
     </div>
-    <div class="legends" style="min-height:14px;">
+    <div class="legends" v-if="index" style="min-height:14px;">
       <template v-if="kpi">
         <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions" :key="`${kpi.label}`">
           <span class="circle" :style="{background: kpi.color }"></span> {{kpi.label}}
@@ -88,60 +89,44 @@ export default {
       recursor: 'crosshair',
       parseTime: d3.timeParse("%Y-%m-%d"),
       animation: true,
+      maxZoom: false
     }
   },
   mounted() { 
     //console.log(this.kpi.dimensions[0].data.length)
     if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
     for (let e = 0; e < this.kpi.dates.length; e++) {  this.allDates.push(this.kpi.dates[e]?.x)  }    
-
-
     this.remount() 
   },
   methods: {
     setMinMax() {
       this.allValues.splice(0)
-      for (let i in this.kpi.dimensions) { 
-        for (let e = this.dateIndex[0]; e < this.dateIndex[1]; e++) { 
-          this.allValues.push(this.kpi.dimensions[i].data[e]?.y) 
-        } 
-      };   
+      for (const { data } of this.kpi.dimensions) {
+        this.allValues.push(...data.slice(this.dateIndex[0], this.dateIndex[1]+1).map(({ y }) => y));
+      }
       this.maxValue = Math.max(...this.allValues)
       this.minValue = Math.min(...this.allValues)
     },    
-    getTemplateCols() {
-      var str = []
-      for (let e = 0; e < this.cells.length; e++) { str.push(`${this.cells[e]}px`) }
-      str[str.length-1] = '1fr'
-      return str.join(" ")
-    }, 
     getCols(i) {
-      if (Math.ceil(i % this.cells.length) === 0) { return this.cells.length; }
-      else { return Math.ceil(i % this.cells.length) }
+      return Math.ceil(i % this.cells.length) || this.cells.length;
     },
     getColDate(i) {
       if (i < 0) { i = 0 }
-      
       if (this.axisBottom[i]) { return this.axisBottom[i]['__data__'].toISOString().substring(0, 10)  }
       else { return this.kpi.dates[this.kpi.dates.length-1].x }  
     },    
     remount() {
       //reset min and max dates for brushing
       this.dateIndex.splice(0)
-
-
+      this.maxZoom = false
+      
       //get global min start date 
       if(this.$state.kpidates[this.data]) { 
         this.dateStart = this.$state.kpidates[this.data]
         
-        var dateStartCandidates = []
-        for (let e = 0; e < this.allDates.length; e++) { 
-            if (this.allDates[e].split('-')[0] === this.dateStart.split('-')[0] && this.allDates[e].split('-')[1] === this.dateStart.split('-')[1]) { dateStartCandidates.push(e) }
-        } 
-        this.dateIndex.push(Math.min(...dateStartCandidates))
+        this.dateIndex.push(this.allDates.findIndex(date => date.startsWith(this.dateStart.slice(0, 7))))
         this.dateIndex.push(this.kpi.dates.length-1)
         this.dateIndex.sort(function(a, b) { return a - b; });
-
 
       } else {
         this.dateIndex.push(0)
@@ -154,6 +139,7 @@ export default {
     },
     generateChart() {
       //create X axis with start and end dates
+
       this.dateStart = this.parseTime(this.kpi.dates[this.dateIndex[0]].x)
       this.dateEnd = this.parseTime(this.kpi.dates[this.dateIndex[1]].x)
       const scaleX = d3.scaleTime().domain([this.dateStart,this.dateEnd]).range([10, this.$refs.c.clientWidth-50])
@@ -164,8 +150,8 @@ export default {
       const scaleY = d3.scaleLinear().domain([this.minValue*0.9, this.maxValue*1.05]).range([this.$refs.c.clientHeight-30, 10]).nice();
       this.axisRight = [...d3.create("svg").call(d3.axisRight(scaleY).tickPadding(5).tickSizeInner(-this.$refs.c.clientWidth))._groups[0][0].children].slice(1);
 
-      //get cell width sizes by substracting X axis tick translates
-      this.getCellWidths() 
+      //set cell width sizes by substracting X axis tick translates
+      this.setCellWidths() 
 
       //draw a line for each of the chart kpi
       const pathGenerator = d3.line().x(d => scaleX(this.parseTime(d.x))).y(d => scaleY(d.y))
@@ -177,14 +163,13 @@ export default {
           }   
       }
     },    
-    getCellWidths() {
-      this.cells.splice(0)
-      for (let item in this.axisBottom) {
-        var value = this.axisBottom[item].attributes[2].value.replace('translate(','').replace(',0)','')
-        var previousValue = this.axisBottom[item-1]?.attributes[2].value.replace('translate(','').replace(',0)','') 
-        if (item > 0) { this.cells.push(Number(value) - Number(previousValue)) } else { this.cells.push(Number(value) - 0) }
-        if (+item+1 === this.axisBottom.length) { this.cells.push('initial') }
-      }
+    setCellWidths() {
+      this.cells = this.axisBottom.map((item, index) => {
+        const value = Number(item.attributes[2].value.match(/-?\d+(\.\d+)?/)[0]);
+        const previousValue = Number(this.axisBottom[index - 1]?.attributes[2].value.match(/-?\d+(\.\d+)?/)[0]);
+        return previousValue ? value - previousValue : value;
+      });
+      this.cells.push('initial');
     },
     startDrag(e) {
       this.dragging = true;
@@ -210,20 +195,13 @@ export default {
  
       //Reset dateIndex and try to find exact dates
       this.dateIndex.splice(0)
- 
-        var dateStartCandidates = []
-        var dateEndCandidates = []
-        for (let e = 0; e < this.allDates.length; e++) { 
-            if (this.allDates[e].split('-')[0] === this.dateStart.split('-')[0] && this.allDates[e].split('-')[1] === this.dateStart.split('-')[1]) { dateStartCandidates.push(e) }
-            if (this.allDates[e].split('-')[0] === this.dateEnd.split('-')[0] && this.allDates[e].split('-')[1] === this.dateEnd.split('-')[1]) { dateEndCandidates.push(e) }          
-        } 
-        this.dateIndex.push(Math.min(...dateStartCandidates))
-        this.dateIndex.push(Math.min(...dateEndCandidates))
-        this.dateIndex.sort(function(a, b) { return a - b; });
+      this.dateIndex.push(this.allDates.findIndex(date => date.startsWith(this.dateStart.slice(0, 7))))
+      this.dateIndex.push(this.allDates.findIndex(date => date.startsWith(this.dateEnd.slice(0, 7))))
+      this.dateIndex.sort(function(a, b) { return a - b; });
 
       if (this.dateIndex[0] !== this.dateIndex[1]) {
         this.generateChart()
-      }
+      } 
       
       this.recursor = 'crosshair'
       this.defaultView = true;

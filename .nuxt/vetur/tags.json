@@ -1,7 +1,4 @@
 {
-  "ChartsBar": {
-    "description": "Auto imported from components/charts/bar.js"
-  },
   "ChartsGenericBox": {
     "description": "Auto imported from components/charts/genericBox.vue"
   },
@@ -47,6 +44,9 @@
   "ChartsGenericLineMaster": {
     "description": "Auto imported from components/charts/genericLineMaster.vue"
   },
+  "ChartsGenericLineSidebar": {
+    "description": "Auto imported from components/charts/genericLineSidebar.vue"
+  },
   "ChartsGenericPostHeader": {
     "description": "Auto imported from components/charts/genericPostHeader.vue"
   },
@@ -64,8 +64,5 @@
   },
   "ChartsKpinav": {
     "description": "Auto imported from components/charts/kpinav.vue"
-  },
-  "ChartsLine": {
-    "description": "Auto imported from components/charts/line.js"
   }
 }

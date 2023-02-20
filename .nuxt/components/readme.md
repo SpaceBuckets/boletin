@@ -6,7 +6,6 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
-- `<ChartsBar>` | `<charts-bar>` (components/charts/bar.js)
 - `<ChartsGenericBox>` | `<charts-generic-box>` (components/charts/genericBox.vue)
 - `<ChartsGenericComment>` | `<charts-generic-comment>` (components/charts/genericComment.vue)
 - `<ChartsGenericFuente>` | `<charts-generic-fuente>` (components/charts/genericFuente.vue)
@@ -22,10 +21,10 @@ You can directly use them in pages and other components without the need to impo
 - `<ChartsGenericLine>` | `<charts-generic-line>` (components/charts/genericLine.vue)
 - `<ChartsGenericLineHeader>` | `<charts-generic-line-header>` (components/charts/genericLineHeader.vue)
 - `<ChartsGenericLineMaster>` | `<charts-generic-line-master>` (components/charts/genericLineMaster.vue)
+- `<ChartsGenericLineSidebar>` | `<charts-generic-line-sidebar>` (components/charts/genericLineSidebar.vue)
 - `<ChartsGenericPostHeader>` | `<charts-generic-post-header>` (components/charts/genericPostHeader.vue)
 - `<ChartsGenericSol>` | `<charts-generic-sol>` (components/charts/genericSol.vue)
 - `<ChartsGenericTable>` | `<charts-generic-table>` (components/charts/genericTable.vue)
 - `<ChartsGenericnewLine>` | `<charts-genericnew-line>` (components/charts/genericnewLine.vue)
 - `<ChartsKpiBoard>` | `<charts-kpi-board>` (components/charts/kpiBoard.vue)
 - `<ChartsKpinav>` | `<charts-kpinav>` (components/charts/kpinav.vue)
-- `<ChartsLine>` | `<charts-line>` (components/charts/line.js)

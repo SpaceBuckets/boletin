@@ -259,7 +259,7 @@ export default {
   },
   data() {
     return {
-      columnAmount: 6,
+      columnAmount: 8,
       kpeis: require(`~/static/kpis.json`),
       selectedCat: 'Todos',
       dragging: false,
@@ -475,8 +475,9 @@ export default {
   position: relative;
   //background: #000;
   gap: 8px;
-  column-gap: 0;
   gap: 10px;
+  //column-gap: 0;
+
   //  border-left: 1px dashed #444;
   // border-top: 1px dashed #444;
   margin: 0px 0 0 0;
@@ -516,10 +517,10 @@ export default {
     background: #fff;
     background: #151a1e;
     background: #fff;
-    border-radius: 3px;
+    border-radius: 2px;
     //border-radius: 0;
     //border-radius: 6px;
-    border: 1px solid #1c2126;
+    //border: 1px solid #1c2126;
     //border: 1px solid #eee;
     position: absolute;
     left: 0;

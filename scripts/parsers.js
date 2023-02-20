@@ -5,7 +5,6 @@ const parse5 = require('parse5');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const Papa = require('papaparse')
 const path = require('path')
-var moment = require('moment'); // require
 
 
 function writeFileSyncRecursive(filename, content, charset) {
@@ -74,7 +73,7 @@ async function datosGobarCSV(kpi) {
 
 async function scrapeBCRA(serie) {
   var payload = []
-  var data = parse5.parse(await (await fetch('http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp?fecha_desde=1900-01-01&fecha_hasta=2040-04-30&primeravez=1&serie=' + serie)).text()).childNodes[1].childNodes[2].childNodes[1].childNodes[7].childNodes[1].childNodes[3].childNodes[1].childNodes[1].childNodes[3].childNodes
+  var data = parse5.parse(await (await fetch('http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp?fecha_desde=1900-01-01&fecha_hasta=2040-04-30&primeravez=1&serie=' + serie)).text()).querySelector('.table-bcra')
  
   for (let i = 0; i < data.length; i++) {
     payload[i] = {}

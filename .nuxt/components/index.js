@@ -1,4 +1,3 @@
-export { default as ChartsBar } from '../../components/charts/bar.js'
 export { default as ChartsGenericBox } from '../../components/charts/genericBox.vue'
 export { default as ChartsGenericComment } from '../../components/charts/genericComment.vue'
 export { default as ChartsGenericFuente } from '../../components/charts/genericFuente.vue'
@@ -14,13 +13,13 @@ export { default as ChartsGenericKpiUpdatedPepe } from '../../components/charts/
 export { default as ChartsGenericLine } from '../../components/charts/genericLine.vue'
 export { default as ChartsGenericLineHeader } from '../../components/charts/genericLineHeader.vue'
 export { default as ChartsGenericLineMaster } from '../../components/charts/genericLineMaster.vue'
+export { default as ChartsGenericLineSidebar } from '../../components/charts/genericLineSidebar.vue'
 export { default as ChartsGenericPostHeader } from '../../components/charts/genericPostHeader.vue'
 export { default as ChartsGenericSol } from '../../components/charts/genericSol.vue'
 export { default as ChartsGenericTable } from '../../components/charts/genericTable.vue'
 export { default as ChartsGenericnewLine } from '../../components/charts/genericnewLine.vue'
 export { default as ChartsKpiBoard } from '../../components/charts/kpiBoard.vue'
 export { default as ChartsKpinav } from '../../components/charts/kpinav.vue'
-export { default as ChartsLine } from '../../components/charts/line.js'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

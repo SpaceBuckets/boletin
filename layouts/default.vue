@@ -344,10 +344,6 @@ canvas {
   }
 }
 
-.scorecard {
-   p {
-    margin-bottom: 7px;
-  }
-}
+
  
 </style>
