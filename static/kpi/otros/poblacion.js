@@ -11,7 +11,7 @@ module.exports = (async function() {
   t: "Población",
   st: "Cantidad de Habitantes",
   sd: "Sirve de referencia para estimar la evolución del mercado de deuda emergente y permite estudiar el comportamiento de una canasta de bonos que conforman la deuda de los países emergentes.",
-  c: "<p>En sociología, se refiere a un grupo de seres humanos o a toda la especie. La demografía es una ciencia social que implica el estudio estadístico de la población humana. Población, en un término más simple, es el número de personas en una ciudad o pueblo, región, país o mundo; la población generalmente está determinada por un proceso llamado censo, es decir, un proceso de recopilación, análisis, compilación y publicación de datos sobre la población y otras variables.</p>",
+  c: "<p>El índice de población, también conocido como la población total, es una medida estadística que se utiliza para representar el número total de personas que viven en un país o región en un momento determinado.</p><p>La población de Argentina ha ido en aumento desde principios del siglo XX, con un crecimiento acelerado en la primera mitad del siglo XX que se desaceleró en las últimas décadas. Según el Instituto Nacional de Estadística y Censos (INDEC), la población total de Argentina en 2020 era de aproximadamente 45,3 millones de habitantes.</p><p>Este indicador es importante para entender la composición y evolución de la sociedad argentina, así como para la planificación de políticas públicas y la toma de decisiones en áreas como la educación, la salud, la vivienda y el empleo, entre otras.</p>",
   fd: "Datos BM",
   fdr: "https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000",
   fu: "Banco Mundial",

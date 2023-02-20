@@ -1,15 +1,15 @@
 <template>
   <div class="megacontainer">
      <div class="flexer">
-      <h2><strong>{{ title }}</strong>. {{subtitle}}</h2>
-      <div class="innerflexer">   
+      <h2><strong>{{ retitle }}</strong>. {{resubtitle}}</h2>
+      <div class="innerflexer" v-if="index === undefined">   
           <div v-if="defaultView" class="date-display"> {{ kpi.dates[dateIndex[0]].x }}&nbsp;&#8211&nbsp;{{ kpi.dates[dateIndex[1]].x }} </div>
           <button @click="remount()">Reset</button>
        </div>
     </div>
     <div class="chartcontainer" ref="c">
       <template v-if="defaultView">
-        <div class="ranger" :class="{dragging}" :style="{'grid-template-columns': getTemplateCols(),'cursor': recursor}">
+        <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': getTemplateCols(),'cursor': recursor}">
          <div  
             v-for="cell in cells.length"  :key="`${cell}-col`"
             @pointerdown="startDrag($event)"
@@ -65,14 +65,17 @@
 import * as d3 from 'd3'
 export default {
   name: 'newLine',
-  props: ['title', 'subtitle', 'data'],  
+  props: ['title', 'subtitle', 'data','index'],  
   data() {
     return {
       kpi: require(`~/static/data/${this.data}.json`).chart,
+      retitle: require(`~/static/data/${this.data}.json`).t,
+      resubtitle: require(`~/static/data/${this.data}.json`).st,      
       startX: '',
       dateStart: '',
       dateEnd: '', 
       dateIndex: [],
+      allDates: [],
       cells: [],
       allValues: [],
       maxValue: '',
@@ -90,6 +93,7 @@ export default {
   mounted() { 
     //console.log(this.kpi.dimensions[0].data.length)
     if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
+    for (let e = 0; e < this.kpi.dates.length; e++) {  this.allDates.push(this.kpi.dates[e]?.x)  }     
     this.remount() 
   },
   methods: {
@@ -115,7 +119,8 @@ export default {
     },
     getColDate(i) {
       if (i < 0) { i = 0 }
-      if (this.axisBottom[i]) { return this.axisBottom[i]['__data__'].toISOString().substring(0, 10) }
+      
+      if (this.axisBottom[i]) { return this.axisBottom[i]['__data__'].toISOString().substring(0, 10)  }
       else { return this.kpi.dates[this.kpi.dates.length-1].x }  
     },    
     remount() {
@@ -183,14 +188,23 @@ export default {
         this.dateEnd = e.target.dataset.dateStart
         this.dateStart = this.dateStartInverted
       }  
-
+ 
+      //Reset dateIndex and try to find exact dates
       this.dateIndex.splice(0)
-      for (let e = 0; e < this.kpi.dates.length; e++) {
-        if (this.parseTime(this.kpi.dates[e].x).getTime() === this.parseTime(this.dateStart).getTime()) { this.dateIndex.push(e) }
-        if (this.parseTime(this.kpi.dates[e].x).getTime() === this.parseTime(this.dateEnd).getTime()) { this.dateIndex.push(e) }
+ 
+        var dateStartCandidates = []
+        var dateEndCandidates = []
+        for (let e = 0; e < this.allDates.length; e++) { 
+            if (this.allDates[e].split('-')[0] === this.dateStart.split('-')[0] && this.allDates[e].split('-')[1] === this.dateStart.split('-')[1]) { dateStartCandidates.push(e) }
+            if (this.allDates[e].split('-')[0] === this.dateEnd.split('-')[0] && this.allDates[e].split('-')[1] === this.dateEnd.split('-')[1]) { dateEndCandidates.push(e) }          
+        } 
+        this.dateIndex.push(Math.min(...dateStartCandidates))
+        this.dateIndex.push(Math.min(...dateEndCandidates))
+        this.dateIndex.sort(function(a, b) { return a - b; });
+
+      if (this.dateIndex[0] !== this.dateIndex[1]) {
+        this.generateChart()
       }
-      
-      this.generateChart()
       
       this.recursor = 'crosshair'
       this.defaultView = true;

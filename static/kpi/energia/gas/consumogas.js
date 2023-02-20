@@ -12,7 +12,7 @@ module.exports = (async function() {
   "t": "Consumo de Gas",
   "st": "En Toneladas",
   "sd": "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-  "c": "",
+  "c": "<p>El indicador de consumo de gas en Argentina mide la cantidad de gas natural que se consume en el país en un determinado período de tiempo. El gas natural es un recurso importante para la economía argentina, ya que es utilizado tanto por hogares como por industrias y comercios.</p><p>El consumo de gas se mide en miles de metros cúbicos por día (MMm3/día) y se utiliza para monitorear la oferta y la demanda de gas en el país, así como para planificar la inversión en infraestructura y producción.</p><p>El consumo de gas en Argentina ha experimentado fluctuaciones en las últimas décadas, afectado en gran medida por la producción nacional de gas y la importación de gas natural licuado (GNL) para cubrir la demanda insatisfecha. En los últimos años, ha habido un aumento en la producción de gas no convencional, lo que ha mejorado la oferta de gas en el país.</p>",
   fd: "datos.gob.ar",
   fdr: "https://datos.gob.ar/dataset/sspm-estadisticas-servicios-publicos/archivo/sspm_302.3",
   fu: "MECON",

@@ -33,7 +33,7 @@ export default {
         title: rekpi.t        
       },
         first: {
-        area: "10 / 5 / 6 / 1",
+        area: "10 / 5 / 6 / 7",
         kpi: params.kpi,
         type: "Table",
         hasChart: true,
@@ -45,9 +45,9 @@ export default {
                  
  
          random: {
-        area: "10 / 5 / 6 / 7",
+        area: "10 / 5 / 6 / 1",
         kpi: params.kpi,
-        type: "Heatmap",
+        type: "Comment",
         hasChart: true,
         subtitle: "Serie de Tiempo",
         title: rekpi.t        

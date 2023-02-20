@@ -10,7 +10,7 @@ module.exports = (async function() {
     t: "Asalariados",
     st: "Sector Público y Privado",
     sd: "Trabajadores registrados según modalidad ocupacional en valores mensuales.",
-    c: "<p>Trabajadores registrados según modalidad ocupacional en valores mensuales</p>",
+    c: "<p>En Argentina, el término 'asalariado' se refiere a una persona que recibe un salario fijo por su trabajo como empleado en relación de dependencia en una empresa, organización o institución. Los asalariados son una parte importante de la fuerza laboral en Argentina y están cubiertos por la legislación laboral del país, que establece regulaciones sobre sus derechos y obligaciones, así como los deberes y responsabilidades de los empleadores.</p><p>Los asalariados pueden estar empleados en diferentes sectores económicos, incluyendo la industria, el comercio, los servicios, la administración pública, entre otros. También pueden desempeñar diferentes roles en sus trabajos, como operarios, administrativos, profesionales, técnicos, gerentes, entre otros.</p><p>Es importante destacar que los asalariados tienen derecho a ciertos beneficios y protecciones laborales, como el pago de salarios, horas extras, vacaciones, aguinaldo, licencias, seguro de salud y pensiones, entre otros. Además, el gobierno de Argentina establece un salario mínimo para los trabajadores, que es revisado periódicamente para garantizar su actualización y ajuste a la inflación.</p>",
     fd: "datos.gob.ar",
     fdr: "https://datos.gob.ar/dataset/sspm-trabajadores-registrados-segun-modalidad-ocupacional-principal-base-2012/archivo/sspm_151.1",
     fu: "MECON",

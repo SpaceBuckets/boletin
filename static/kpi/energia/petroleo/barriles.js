@@ -21,7 +21,7 @@ module.exports = (async function() {
   t: "Produccion Diaria",
   st: "En miles de barriles",
   sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-  c: "<p>El petróleo es una mezcla de compuestos orgánicos, principalmente hidrocarburos insolubles en agua. También es conocido como oro negro, petróleo crudo o simplemente crudo. Se produce en el interior de la Tierra, por transformación de la materia orgánica acumulada en sedimentos del pasado geológico​ y puede acumularse en trampas geológicas naturales, que se localizan a nivel mundial​ y de donde se extrae mediante la perforación de pozos.</p>",
+  c: "<p>El indicador de producción diaria de petróleo en Argentina mide la cantidad de barriles de petróleo producidos por día en el país. El petróleo es un recurso natural no renovable y su producción es importante para la economía argentina, ya que es uno de los principales productos de exportación.</p><p>La producción de petróleo en Argentina ha experimentado altibajos a lo largo de los años debido a factores como la inversión en exploración y explotación de reservas, los precios internacionales del petróleo y la demanda interna del país.</p><p>Este indicador es relevante para medir la dependencia del país de este recurso, su capacidad para cubrir su demanda interna y su posición en el mercado internacional. Además, es un indicador importante para la industria energética del país y para los inversores interesados en el sector petrolero.</p>",
   fd: "datos.gob.ar",
   fdr: "https://datos.gob.ar/it/dataset/sspm-produccion-ventas-petroleo-derivados/archivo/sspm_363.3",
   fu: "MECON",

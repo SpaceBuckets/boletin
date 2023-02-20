@@ -126,4 +126,4 @@ async function processItems(arr){
 };
 
 processItems(glob.sync('**', { cwd: `static/kpi/` }));
-//processItems(['bonos/bonosusd.js']);
+//processItems(['actividad-economica/ucii.js']);

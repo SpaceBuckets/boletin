@@ -10,27 +10,21 @@
     <div class="flexedcontent">
           <div>
          <div>Fecha</div>
-        <div>Tendencia</div>
-        <div>Serie</div>
+        <div>Valor</div>
         <div>Variacion</div>
      </div>
-<!--       <div v-for="(dates, i) in filteredArray()" :key="`aa${i}`">
-        <div>{{ dates }}</div>
+       <div v-for="(date, i) in kpi.chart.dates.slice(0,24).reverse()" :key="`aa${i}`">
+        <div>{{ date.x }}</div>
         <div>
           {{
-            
-            parseFloat(chart.chartdata.datasets[0].data.filter((val, index, arr) => index > arr.length - 24).reverse()[i]).toFixed(2)
-          }}
-        </div>
-        <div>
-          {{
-            parseFloat(chart.chartdata.datasets[0].data.filter((val, index, arr) => index > arr.length - 24).reverse()[i]).toFixed(2)
+            date.y
+             
           }}
         </div>
         <div class="green" :class="{ red: getVariation(i) < 0 }">
           {{ getVariation(i) + "%" }}
-        </div>
-      </div> -->
+        </div> 
+      </div>  
     </div>
   </section>
 </template>
@@ -67,21 +61,13 @@ export default {
   },
   data() {
     return {
-      chart: require(`~/static/data/${this.data}.json`),
+      kpi: require(`~/static/data/${this.data}.json`),
     };
   },
   methods: {
-     filteredArray() {
-      return this.chart.chartdata.labels
-        .filter((val, index, arr) => index > arr.length - 23)
-        .reverse();
-    },
     getVariation(i) {
-      var currentNum = this.chart.chartdata.datasets[0].data
-        .filter((val, index, arr) => index > arr.length - 24)
-        .reverse();
-      var A = currentNum[i];
-      var B = currentNum[i + 1];
+      var A = this.kpi.chart.dimensions[0].data[this.kpi.chart.dimensions[0].data.length-1].y;
+      var B = this.kpi.chart.dimensions[0].data[this.kpi.chart.dimensions[0].data.length-2].y;
       return (((A - B) / A) * 100.0).toFixed(2);
     },    
   },

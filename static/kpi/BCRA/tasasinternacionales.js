@@ -46,7 +46,7 @@ module.exports = (async function() {
   t: "Tasas Internacionales",
   st: "Tasa de Política Monetaria",
   sd: "La tasa de referencia de la política monetaria es la de Letras de Liquidez (LELIQ). La tasa de política monetaria indica el sesgo de la política que adopta la autoridad monetaria para alcanzar sus metas de inflación.",
-  c: "",
+  c: "<p>Las tasas de interés internacionales son importantes porque pueden afectar la economía y las finanzas de los países en todo el mundo. Las decisiones de política monetaria de los bancos centrales de los países más influyentes, como la Reserva Federal de EE. UU., el Banco Central Europeo, el Banco de Japón y el Banco Central de Brasil, pueden tener un impacto significativo en las tasas de interés a nivel global y en la oferta y demanda de monedas.</p><p>Por ejemplo, si la Reserva Federal de EE. UU. decide aumentar las tasas de interés, esto puede atraer más inversiones en dólares, lo que puede hacer que el valor del dólar aumente en comparación con otras monedas. Esto a su vez puede afectar los flujos comerciales, la inversión extranjera, los precios de las materias primas y otros aspectos de la economía global.</p><p>Las tasas de interés internacionales también son importantes para los inversores y los mercados financieros. Los cambios en las tasas de interés pueden afectar el costo de los préstamos y la rentabilidad de las inversiones, lo que a su vez puede afectar el precio de los activos financieros, como las acciones y los bonos.</p>",
   fd: "datos.gob.ar",
   fdr: "https://datos.gob.ar/tr/dataset/sspm-principales-tasas-interes-referencia/archivo/sspm_131.1",
   fu: "MECON",

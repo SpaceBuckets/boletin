@@ -1,7 +1,7 @@
 <template>
   <section class="chart">
     <h2>
-       <strong>{{chart.t}}</strong>
+       <strong>{{chart.t}}</strong>. Descripción Metodológica
     </h2>
     <div class="numcontain" style="position: absolute;top: 55px;bottom: 15px;left: 20px;right:15px; padding-right:50px;">
        

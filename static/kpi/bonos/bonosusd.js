@@ -9,7 +9,7 @@ module.exports = (async function() {
     al41d: '13083',
     gd30d: '13092',
     gd35d: '13089',
-    gd41d: '13093'
+    gd41d: '13093'z
   }
 
     var payload = {}
@@ -45,7 +45,7 @@ module.exports = (async function() {
     t: "Bonos USD",
     st: "Bonos Ley Argentina y NY",
     sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-    c: "<p></p>",
+    c: "<p>Los bonos extranjeros emitidos por Argentina son instrumentos de deuda denominados en moneda extranjera (usualmente dólares estadounidenses) que son ofrecidos por el Gobierno argentino en los mercados internacionales. Los nombres de los bonos están compuestos por el código del país emisor (AR para Argentina), seguido de un código que indica la moneda en la que está denominado (en este caso, USD para dólares estadounidenses), y un número que indica la fecha de vencimiento del bono.</p><p>Por ejemplo, el bono AL30D es un bono soberano emitido por el Gobierno argentino en dólares estadounidenses con vencimiento en 2030, mientras que el bono AL41D es un bono con vencimiento en 2041.</p><p>Estos bonos se negocian en los mercados internacionales y sus precios varían en función de la oferta y la demanda de los inversores, así como de factores como la calificación crediticia del país emisor, las perspectivas económicas y políticas del país, las tasas de interés y otros factores macroeconómicos y financieros. Los bonos extranjeros de Argentina son una forma en que el país puede obtener financiamiento en el mercado internacional para cubrir sus necesidades de financiamiento y refinanciar su deuda existente.</p>",
     fd: "API",
     fdr: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",
     fu: "Intervalores",

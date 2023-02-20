@@ -53,7 +53,7 @@
         <h2>{{ indexItem.title }}</h2>
         <div class="mastersection">
            <nuxt-link class="mincharto" v-for="indexChart in savedIndex[i].items" :to="`kpi/${indexChart}`" :key="`a-${indexChart}`">
-             <!--   <charts-genericnewLine :data="indexChart" />-->
+                <charts-genericnewLine :index="true" :data="indexChart" />
             </nuxt-link> 
         </div>
     </template>
@@ -197,12 +197,14 @@ export default {
 .pepeboard {
   //max-width: 1440px;
   margin: 0;
+  
 }
 .pepeboard > h2 {
   color: #eee;
   margin-top: 0;
   padding-top: 20px;
   font-weight: normal;
+  margin-bottom: 15px;
   &:first-of-type { padding-top: 0; }
 }
 .mincharto {

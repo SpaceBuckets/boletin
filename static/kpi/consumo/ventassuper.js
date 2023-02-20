@@ -15,7 +15,7 @@ module.exports = (async function() {
     kpi,
     t: "Ventas Supermercados",
     st: "Medios de Pago",
-    c: "",
+    c: "<p>El indicador de Ventas totales en supermercados de Argentina mide la cantidad de ventas que se realizan en supermercados del país en un determinado periodo de tiempo. Estas ventas se desglosan por canal de venta (hipermercados, supermercados, etc.), medio de pago (efectivo, tarjeta de crédito, débito, etc.) y grupos de artículos (alimentos, bebidas, productos de limpieza, etc.).</p><p>Este indicador es relevante porque los supermercados son uno de los principales canales de distribución de bienes de consumo masivo en Argentina y las ventas que se realizan en ellos pueden dar una idea del nivel de consumo y de la demanda de distintos productos por parte de los consumidores.</p><p>La evolución por canal de venta permite analizar la distribución de las ventas en distintos tipos de supermercados, mientras que la evolución por medio de pago permite analizar los cambios en los hábitos de pago de los consumidores. Por último, la evolución por grupos de artículos permite identificar los sectores de mayor y menor crecimiento en términos de ventas.</p><p>Es importante tener en cuenta que este indicador se refiere exclusivamente a las ventas realizadas en supermercados y no incluye las ventas realizadas en otros tipos de establecimientos comerciales, como almacenes, ferias, tiendas de conveniencia, etc.</p>",
     fd: "datos.gob.ar",
     fdr: "https://datos.gob.ar/dataset/sspm_455/archivo/sspm_455.1",
     fu: "MECON",

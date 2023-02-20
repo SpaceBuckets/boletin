@@ -16,7 +16,7 @@ module.exports = (async function() {
   t: "Déficit Fiscal",
   st: "Ingresos, Gastos y Ahorro",
   sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-  c: "<p>El concepto de déficit fiscal, déficit presupuestario o déficit público describe la situación en la cual los gastos realizados por el Estado superan a los ingresos no financieros, en un determinado periodo (normalmente un año).</p>",
+  c: "<p>El déficit fiscal ocurre cuando los gastos del gobierno superan sus ingresos, lo que resulta en un endeudamiento del gobierno. Esto puede llevar a problemas económicos a largo plazo, ya que el gobierno debe pagar intereses sobre la deuda y eventualmente reembolsar el principal.</p><p>El déficit fiscal se mide generalmente en términos de porcentaje del producto interno bruto (PIB). Un déficit del 3% o menos se considera manejable, pero los déficits mayores pueden ser preocupantes y pueden requerir medidas de austeridad fiscal para equilibrar las cuentas públicas.</p><p>En Argentina, el déficit fiscal ha sido un problema recurrente en las últimas décadas, lo que ha llevado a una acumulación significativa de deuda pública. El gobierno ha implementado medidas para reducir el déficit fiscal, como la reducción de los subsidios a la energía y la eliminación de exenciones fiscales, aunque estas medidas también han generado críticas por su impacto en la población más vulnerable.</p>",
   fd: "datos.gob.ar",
   fdr: "https://datos.gob.ar/ar/dataset/sspm-esquema-ahorro---inversion---financimmiento-sector-publico-nacional-base-caja/archivo/sspm_379.9",
   fu: "MECON",
