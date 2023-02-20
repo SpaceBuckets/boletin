@@ -3,7 +3,6 @@ const glob = require('glob');
 const path = require('path')
 const fs = require('fs');
 var parsertree = require('tree-parser');
-const cliProgress = require('cli-progress');
 
 function writeFileSyncRecursive(filename, content, charset) {
   const folders = filename.split(path.sep).slice(0, -1)
@@ -125,5 +124,5 @@ async function processItems(arr){
 
 };
 
-//processItems(glob.sync('**', { cwd: `static/kpi/` }));
-processItems(['bcra/reservas.js']);
+processItems(glob.sync('**', { cwd: `static/kpi/` }));
+//processItems(['bcra/reservas.js']);
