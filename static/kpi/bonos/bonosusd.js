@@ -9,7 +9,7 @@ module.exports = (async function() {
     al41d: '13083',
     gd30d: '13092',
     gd35d: '13089',
-    gd41d: '13093'z
+    gd41d: '13093'
   }
 
     var payload = {}
