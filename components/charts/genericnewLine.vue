@@ -93,7 +93,9 @@ export default {
   mounted() { 
     //console.log(this.kpi.dimensions[0].data.length)
     if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
-    for (let e = 0; e < this.kpi.dates.length; e++) {  this.allDates.push(this.kpi.dates[e]?.x)  }     
+    for (let e = 0; e < this.kpi.dates.length; e++) {  this.allDates.push(this.kpi.dates[e]?.x)  }    
+
+
     this.remount() 
   },
   methods: {
@@ -126,8 +128,25 @@ export default {
     remount() {
       //reset min and max dates for brushing
       this.dateIndex.splice(0)
-      this.dateIndex.push(0)
-      this.dateIndex.push(this.kpi.dates.length-1)
+
+
+      //get global min start date 
+      if(this.$state.kpidates[this.data]) { 
+        this.dateStart = this.$state.kpidates[this.data]
+        
+        var dateStartCandidates = []
+        for (let e = 0; e < this.allDates.length; e++) { 
+            if (this.allDates[e].split('-')[0] === this.dateStart.split('-')[0] && this.allDates[e].split('-')[1] === this.dateStart.split('-')[1]) { dateStartCandidates.push(e) }
+        } 
+        this.dateIndex.push(Math.min(...dateStartCandidates))
+        this.dateIndex.push(this.kpi.dates.length-1)
+        this.dateIndex.sort(function(a, b) { return a - b; });
+
+
+      } else {
+        this.dateIndex.push(0)
+        this.dateIndex.push(this.kpi.dates.length-1)
+      }
 
       //create chart and enable render
       this.generateChart()
