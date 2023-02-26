@@ -1,6 +1,5 @@
 export { default as ChartsGenericBox } from '../../components/charts/genericBox.vue'
 export { default as ChartsGenericComment } from '../../components/charts/genericComment.vue'
-export { default as ChartsGenericFuente } from '../../components/charts/genericFuente.vue'
 export { default as ChartsGenericHeader } from '../../components/charts/genericHeader.vue'
 export { default as ChartsGenericHeatmap } from '../../components/charts/genericHeatmap.vue'
 export { default as ChartsGenericHeatmapBox } from '../../components/charts/genericHeatmapBox.vue'

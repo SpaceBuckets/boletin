@@ -3,19 +3,9 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "gasproducciondiaria"
-   
-  const kpidata = {
-    url: 'http://datos.energia.gob.ar/dataset/590d1284-fd6d-4686-afd8-b3da5d90a6e9/resource/6a7866a1-723f-420c-898f-c482613646c5/download/produccin-de-gas-promedio-diaria-por-cuenca.csv',
-    
-    date: 2,
-    items: {
-      valor: 4,
+  const url = 'http://datos.energia.gob.ar/dataset/590d1284-fd6d-4686-afd8-b3da5d90a6e9/resource/6a7866a1-723f-420c-898f-c482613646c5/download/produccin-de-gas-promedio-diaria-por-cuenca.csv'
   
-    }
-  }
-  
-  const payload = await parsers.datosGobarCSV(kpidata)
-  var post = {
+  const post = {
     kpi,
   t: "Producción Promedio Diaria",
   st: "En millones de metros cúbicos",
@@ -32,7 +22,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Produccion de Gas Diaria mm3",
-        data: payload.valor,
+        data: await parsers.datosGobarCSV(2,4,url),
         color: "rgba(46,120,210,1)",
         
         

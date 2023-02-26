@@ -3,19 +3,8 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
    const kpi = "dxy"
-  const kpidata = {
-    url: 'https://query1.finance.yahoo.com/v7/finance/download/DX-Y.NYB?period1=0&period2=9674456596&interval=1d&events=history&includeAdjustedClose=true',
-     date: 0,
-    items: {
-      dxy: 4,
- 
-    }
-  }
-  
-  const payload = await parsers.datosGobarCSV(kpidata)
-
-  
-   var post = {
+  const url = 'https://query1.finance.yahoo.com/v7/finance/download/DX-Y.NYB?period1=0&period2=9674456596&interval=1d&events=history&includeAdjustedClose=true'
+   const post = {
     kpi,
     t: "Indice DXY",
     st: "Tipo de Cambio Real Multilateral",
@@ -34,9 +23,8 @@ module.exports = (async function() {
       {
         
         label: "DXY",
-        data: payload.dxy,
+        data: await parsers.datosGobarCSV(0,4,url),
         color: "#2E78D2",
-        
         
       },
   

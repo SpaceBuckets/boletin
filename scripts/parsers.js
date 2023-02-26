@@ -8,18 +8,7 @@ const path = require('path')
 function writeFileSyncRecursive(e,i,t){let c=e.split(path.sep).slice(0,-1);c.length&&c.reduce((e,i)=>{let t=e?e+path.sep+i:i;return fs.existsSync(t)||fs.mkdirSync(t),t}),fs.writeFileSync(e,i,t)}
 
 
-/* -------------------------------------------------------------------------- */
-
-async function datosGobarAPI(value) {
-  const data = (await (await fetch(`https://apis.datos.gob.ar/series/api/series/?limit=5000&format=json&ids=${value}`)).json()).data;
-  return data.map(item => ({
-    x: item[0],
-    y: Number(item[1]?.toFixed(2)) || null
-  }));
-}
-
-/* -------------------------------------------------------------------------- */
-
+/* -Banco Mundial------------------------------------------------------------------------- */
 
 async function parseWorldBank(value) {
   const data = (await (await fetch(value)).json())[1].reverse()
@@ -29,9 +18,7 @@ async function parseWorldBank(value) {
   }))
 }
 
-
-/* -------------------------------------------------------------------------- */
-
+/* -Bonos Intervalores------------------------------------------------------------------------- */
 
 async function parseBonos(key) {
   const data = JSON.parse(await (await fetch("https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas", {"headers": { "content-type": "application/x-www-form-urlencoded; charset=UTF-8", },"body": `idEspecie=${key}&fechaDesde=01%2F01%2F1900&fechaHasta=01%2F01%2F2100`,"method": "POST"})).text())
@@ -41,30 +28,28 @@ async function parseBonos(key) {
     })).reverse();
 }
 
-/* -------------------------------------------------------------------------- */
+/* -API datos.gob.ar------------------------------------------------------------------------- */
 
+async function datosGobarAPI(value) {
+  const data = (await (await fetch(`https://apis.datos.gob.ar/series/api/series/?limit=5000&format=json&ids=${value}`)).json()).data;
+  return data.map(item => ({
+    x: item[0],
+    y: Number(item[1]?.toFixed(2)) || null
+  }));
+}
 
-async function datosGobarCSV(kpi) {
-  const payload = {} 
-  const data = Papa.parse(await (await fetch(kpi.url,{rejectUnauthorized: false,})).text()).data
+/* -CSV datos.gob.ar------------------------------------------------------------------------- */
 
-  for (let [key, value] of Object.entries(kpi.items)) {
-    payload[key] = data.map((datum) => {
-      if (!isNaN(new Date(datum[kpi.date]).getTime()) && !isNaN(Number(datum[value]))) {
-        return {
-          x: new Date(datum[kpi.date]).toISOString().substring(0, 10),
-          y: Number(Number(datum[value]).toFixed(2)),
-        };
-      }
-    }).filter(Boolean)
-   }
-
- return payload
- 
+async function datosGobarCSV(dates,values,url) {
+  const data = Papa.parse(await (await fetch(url,{rejectUnauthorized: false,})).text()).data
+  return data.map((item) => !isNaN(new Date(item[dates]).getTime()) && !isNaN(Number(item[values])) && ({
+    x: new Date(item[dates]).toISOString().substring(0, 10),
+    y: Number(item[values]).toFixed(2)
+  })).filter(Boolean);
 }
 
 
-/* -------------------------------------------------------------------------- */
+/* -Excel------------------------------------------------------------------------- */
 
 async function genericXLS(kpi) {
   const payload = {}
@@ -83,7 +68,7 @@ async function genericXLS(kpi) {
  
 }
 
-/* -------------------------------------------------------------------------- */
+/* -BCRA Parser------------------------------------------------------------------------- */
 
 async function scrapeBCRA(serie) {
   var data = parse5.parse(await (await fetch('http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp?fecha_desde=1900-01-01&fecha_hasta=2040-04-30&primeravez=1&serie=' + serie)).text()).childNodes[1].childNodes[2].childNodes[1].childNodes[7].childNodes[1].childNodes[3].childNodes[1].childNodes[1].childNodes[3].childNodes

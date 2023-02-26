@@ -18,7 +18,7 @@ module.exports = (async function () {
   }
 
   const payload = await parsers.genericXLS(kpidata)
-  var post = {
+  const post = {
     kpi,
     t: "IPIF",
     st: "Fundación FIEL",

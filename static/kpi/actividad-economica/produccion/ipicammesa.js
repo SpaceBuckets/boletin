@@ -2,14 +2,9 @@ module.exports = (async function() {
 
   const parsers = require("@parsers");
   const kpi = "ipicammesa"
-  const kpidata = {
-    url: 'https://datos.produccion.gob.ar/dataset/2c91f1eb-1eff-47e2-9122-42275e15ad9d/resource/9f5150e2-7de5-4233-b906-a52d26c625c6/download/ipi-cammesa.csv',
-    date: 0,
-    items: { interanual: 1 }
-  }
-  const payload = await parsers.datosGobarCSV(kpidata)
+  const url = 'https://datos.produccion.gob.ar/dataset/2c91f1eb-1eff-47e2-9122-42275e15ad9d/resource/9f5150e2-7de5-4233-b906-a52d26c625c6/download/ipi-cammesa.csv'
 
-  var post = {
+  const post = {
     kpi,
     t: "IPI CAMMESA",
     st: "Índice Adelantado de Producción Industrial",
@@ -22,13 +17,10 @@ module.exports = (async function() {
     frec: "Mensual",   
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     dimensions: [
-        {
-          
+        { 
           label: "IPI CAMMESA",
-          data: payload.interanual,
+          data: await parsers.datosGobarCSV(0,1,url),
           color: "#2E78D2",
-          
-          
         },
       ]
   }

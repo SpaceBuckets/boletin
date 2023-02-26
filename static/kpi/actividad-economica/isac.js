@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "isac"
 
-  var post = {
+  const post = {
     kpi,
   t: "ISAC",
   st: "Indicador Sintético de la Actividad de la Construcción",

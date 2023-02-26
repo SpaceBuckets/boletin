@@ -2,7 +2,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
   const kpi = "acero"
  
-  var post = {
+  const post = {
     kpi,
     t: "Producción de Acero",
     st: "En Toneladas",

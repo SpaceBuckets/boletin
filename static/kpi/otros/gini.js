@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "gini"
   
-  var post = {
+  const post = {
     kpi,
   t: "GINI",
   st: "Desigualdad según coeficiente de Gini",

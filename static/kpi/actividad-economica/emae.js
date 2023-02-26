@@ -20,7 +20,7 @@ module.exports = (async function() {
       n: '11.3_HR_2004_M_24',
       o: '11.3_TAC_2004_M_60',   */
  
-  var post = {
+  const post = {
     kpi,
     t: "EMAE",
     st: "Estimador Mensual de Actividad Económica",

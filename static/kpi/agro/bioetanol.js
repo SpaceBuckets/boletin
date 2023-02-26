@@ -5,7 +5,7 @@ module.exports = (async function() {
 
   const kpi = "bioetanol"
  
-   var post = {
+   const post = {
     kpi,
     t: "Producción de Bioetanol",
     st: "En Metros Cubicos",

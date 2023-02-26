@@ -3,22 +3,9 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "cuencasgas"
-  const kpidata = {
-    url: 'http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/a3244ddd-38bc-4800-a700-360b649d2f3a/download/serie-histrica-de-produccin-de-gas-natural-por-cuenca-y-sub-tipo-de-recurso-captulo-iv-.csv',
-     date: 0,
-    items: {
-      austral: 1,
-      golfo: 2,
-      neuquina: 3,
-      noroeste: 4,
-      cuyana: 5,
-      total: 6
-    }
-  }
-  
-  const payload = await parsers.datosGobarCSV(kpidata)
-
-  var post = {
+  const url = 'http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/a3244ddd-38bc-4800-a700-360b649d2f3a/download/serie-histrica-de-produccin-de-gas-natural-por-cuenca-y-sub-tipo-de-recurso-captulo-iv-.csv'
+ 
+  const post = {
     kpi,
     t: "Producción por Cuenca",
     st: "En millones de m3",
@@ -34,7 +21,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Neuquina",
-        data: payload.neuquina,
+        data: await parsers.datosGobarCSV(0,3,url),
         color: "#2E78D2",
         
         
@@ -42,7 +29,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Austral",
-        data: payload.austral,
+        data: await parsers.datosGobarCSV(0,1,url),
         color: "#2E78D250",
         
         
@@ -50,7 +37,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Golfo",
-        data: payload.golfo,
+        data: await parsers.datosGobarCSV(0,2,url),
         color: "#2E78D250",
         
         
@@ -58,7 +45,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Noroeste",
-        data: payload.noroeste,
+        data: await parsers.datosGobarCSV(0,4,url),
         color: "#2E78D250",
         
         
@@ -66,11 +53,20 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Cuyana",
-        data: payload.cuyana,
+        data: await parsers.datosGobarCSV(0,5,url),
         color: "#2E78D250",
         
         
-      },                               
+      },              
+      {
+        fillColor: "rgba(46,120,210,0.0)",
+        label: "Total",
+        data: await parsers.datosGobarCSV(0,6,url),
+        color: "#2E78D250",
+        
+        
+      },           
+      
     ] 
 }
 

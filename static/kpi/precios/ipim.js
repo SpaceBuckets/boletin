@@ -5,7 +5,7 @@ module.exports = (async function() {
 
   const kpi = "ipim"
    
-  var post = {
+  const post = {
     kpi,
   t: "IPIM",
   st: "Índice de Precios Internos al por Mayor",

@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "cvs"
     
-  var post = {
+  const post = {
     kpi,
     t: "Coeficiente de Variacion Salarial",
     st: "",

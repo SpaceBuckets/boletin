@@ -12,7 +12,7 @@ module.exports = (async function() {
  
   const payload = valGap.map((val, i) => ({ x: data[i].date, y: val })).reverse();
     
-  var post = {
+  const post = {
     kpi,
     t: "Brecha USD/Peso",
     st: "Gap",

@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "pbi"
 
-  var post = {
+  const post = {
     kpi,
   t: "PBI",
   st: "Producto Bruto Interno (per Capita)",

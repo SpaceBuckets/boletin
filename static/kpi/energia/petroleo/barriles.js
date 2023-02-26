@@ -3,20 +3,10 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "barriles"
-  const kpidata = {
-    url: 'http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/af8c50bb-fde0-43b7-98eb-7cd14daf586c/download/serie-histrica-de-produccin-de-petrleo-por-cuenca-y-sub-tipo-de-recurso-captulo-iv-.csv',
-    
-    date: 0,
-    items: {
-      porcentaje: 11,
+  const url = 'http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/af8c50bb-fde0-43b7-98eb-7cd14daf586c/download/serie-histrica-de-produccin-de-petrleo-por-cuenca-y-sub-tipo-de-recurso-captulo-iv-.csv'
   
-    }
-  }
-  
-  const payload = await parsers.datosGobarCSV(kpidata)
 
-
-   var post = {
+   const post = {
     kpi,
   t: "Produccion Diaria",
   st: "En miles de barriles",
@@ -32,7 +22,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "kbbl (miles de barriles)",
-        data: payload.porcentaje,
+        data: await parsers.datosGobarCSV(0,11,url),
         color: "#2E78D2",
         
         

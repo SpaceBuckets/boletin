@@ -3,18 +3,10 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "salariopromedio"
-  const kpidata = {
-    url: 'https://cdn.produccion.gob.ar/cdn-cep/datos-por-actividad/salarios/w-mean/w_mean_privado_total.csv',
-     date: 0,
-    items: {
-      valor: 1,
-  
-    }
-  }
-  
-  const payload = await parsers.datosGobarCSV(kpidata)
+  const url = 'https://cdn.produccion.gob.ar/cdn-cep/datos-por-actividad/salarios/w-mean/w_mean_privado_total.csv'
+
  
-  var post = {
+  const post = {
     kpi,
   t: "Salario Promedio",
   st: "Remuneración imponible promedio de los trabajadores estables",
@@ -31,7 +23,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Salario Promedio",
-        data: payload.valor,
+        data: await parsers.datosGobarCSV(0,1,url),
         color: "rgba(46,120,210,1)",
         
         

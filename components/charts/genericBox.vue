@@ -1,18 +1,12 @@
 <template>
   <div class="footerpepe">
-             <h2>Indicadores Similares</h2>
- <br>
-  <div v-for="related in recommended">
-    
+    <h2>Indicadores Similares</h2>
+    <br>
+      <div v-for="related in recommended">
          <nuxt-link :to="{ name: `cat-kpi`, params: { kpi: related } }">
           {{ related.t }}        </nuxt-link><br>
-
-          {{ related.st }}
-          <br><br>
-  </div>
- 
- 
- 
+          <p>{{ related.st }}</p>
+      </div>
   </div>
 </template>
 
@@ -22,30 +16,12 @@ import meganav from "~/static/refolders.json";
 
 export default {
   props: {
-    altTitle: {
-      type: String,
-      required: false,
-    },
-    title: {
-      type: String,
-      required: false,
-    },
-    subtitle: {
-      type: String,
-      required: false,
-    },
+ 
     data: {
       type: String,
       required: false,
     },
-    minDate: {
-      type: String,
-      required: false,
-    },
-    chartHeight: {
-      type: Number,
-      required: false,
-    },
+ 
   },
   data() {
     return {
@@ -55,46 +31,23 @@ export default {
     };
   },
   mounted() {
-  var results = this.findSiblings(`${this.data}.js`,this.renav);
+    var results = this.findSiblings(`${this.data}.js`,this.renav);
     for (const item of results) {
       this.recommended.push(require(`~/static/data/${item.replace('.js','')}.json`))
-  }
+    }
   },
   methods: { 
-  findSiblings(str, obj) {
-  for (const key in obj) {
-    if (typeof obj[key] === 'object' && obj[key] !== null) {
-      const siblings = obj[key]._contents;
-      if (siblings && siblings.includes(str)) {
-        return siblings.filter((sibling) => sibling !== str);
-      } else {
-        const result = this.findSiblings(str, obj[key]);
-        if (result) {
-          return result;
+    findSiblings(str, obj) {
+      return Object.values(obj).reduce((acc, val) => {
+        if (val && typeof val === 'object') {
+          if (val._contents && val._contents.includes(str)) {
+            return val._contents.filter((sibling) => sibling !== str);
+          }
+          return this.findSiblings(str, val) || acc;
         }
-      }
-    }
-  }
-  return null;
-},
-
-
-
-
-
-     filteredArray() {
-      return this.chart.chartdata.labels
-        .filter((val, index, arr) => index > arr.length - 23)
-        .reverse();
+        return acc;
+      }, null);
     },
-    getVariation(i) {
-      var currentNum = this.chart.chartdata.datasets[0].data
-        .filter((val, index, arr) => index > arr.length - 24)
-        .reverse();
-      var A = currentNum[i];
-      var B = currentNum[i + 1];
-      return (((A - B) / A) * 100.0).toFixed(2);
-    },    
   },
 };
 </script>

@@ -9,16 +9,16 @@
     </div>
     <div class="chartcontainer" ref="c">
       <template v-if="defaultView">
-        <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': `${this.cells.slice(0, -1).map(c => `${c}px`).join(' ')} 1fr`,'cursor': recursor}">
+        <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': `${axisBottom.map(c => `${c.width}px`).join(' ')} 1fr`,'cursor': recursor}">
          <div  
-            v-for="cell in cells.length"  :key="`${cell}-col`"
+            v-for="i in axisBottom.length+1"  :key="`${i}-col`"
             @pointerdown="startDrag($event)"
             @pointerup="endDrag($event)"
             @mousemove="hoverling($event)"          
-            :data-col-start="getCols(cell)"
-            :data-col-end="getCols(cell) + 1"         
-            :data-date-start="getColDate(getCols(cell)-2)"          
-            :data-date-end="getColDate(getCols(cell)-1)"      
+            :data-col-start="getCols(i)"
+            :data-col-end="getCols(i) + 1"         
+            :data-date-start="getColDate(getCols(i)-2)"          
+            :data-date-end="getColDate(getCols(i)-1)"      
           >  
           </div>
           <div ref="reselecter" class="reselecter-cell"></div>
@@ -31,11 +31,24 @@
           :viewBox="`0 0 ${$refs.c.clientWidth } ${$refs.c.clientHeight}`"
         >
           <clipPath id="clip">
-            <rect :x="`${cells[0]}px`" y="0" :height="$refs.c.clientHeight" :width="$refs.c.clientWidth-50-cells[0]"></rect>
+            <rect :x="`${axisBottom[0].width}px`" y="0" :height="$refs.c.clientHeight" :width="$refs.c.clientWidth-50-axisBottom[0].width"></rect>
           </clipPath>  
 
-          <g class="axis xAxis"><g :transform="`translate(0,${$refs.c.clientHeight-20})`" v-for="(ticks,u) in axisBottom" v-html="ticks.outerHTML" :key="`${u}`"></g></g>
-          <g class="axis yAxis" :transform="`translate(${$refs.c.clientWidth-30},0)`"><g v-for="(ticks,j) in axisRight" v-html="ticks.outerHTML" :key="`${j}`"></g></g>
+ 
+
+          <g class="axis xAxis">
+            <g v-for="tick in axisBottom" :transform="`translate(${tick.left},${$refs.c.clientHeight-20})`">
+                <line :y2="`-${$refs.c.clientHeight-20}`"></line>
+                <text x="5" dy="0.71em">{{tick.value}}</text>
+            </g>            
+          </g>
+
+          <g class="axis yAxis">
+            <g v-for="tick in axisRight" :transform="`translate(${$refs.c.clientWidth-30},${tick.top})`">
+                <line :x2="`-${$refs.c.clientWidth-30}`"></line>
+                <text x="5" dy="0.32em">{{tick.value}}</text>
+            </g>            
+          </g>
 
           <path 
             v-for="(d, rekpi) in kpi.dimensions" 
@@ -75,9 +88,6 @@ export default {
       dateEnd: '', 
       dateIndex: [],
       allDates: [],
-      cells: [],
-      maxValue: '',
-      minValue: '',
       axisBottom: [],
       axisRight: [],      
       dragging: false,
@@ -85,7 +95,8 @@ export default {
       defaultView: false,
       animation: true,
       maxZoom: false,
-      recursor: 'crosshair'
+      recursor: 'crosshair',
+      zoomLevel: 0
     }
   },
   mounted() { 
@@ -93,34 +104,25 @@ export default {
     this.remount() 
   },
   methods: {
-    setMinMax() {
-      const subset = this.kpi.dimensions.flatMap(d => d.data.slice(this.dateIndex[0], this.dateIndex[1] + 1).map(i => i.y));
-      this.maxValue = Math.max(...subset);
-      this.minValue = Math.min(...subset);
-    },    
     getCols(i) {
-      return Math.ceil(i % this.cells.length) || this.cells.length;
+      return Math.ceil(i % (this.axisBottom.length+1)) || this.axisBottom.length+1;
     },
     getColDate(i) {
-      if (i < 0) { i = 0 }
-      if (this.axisBottom[i]) { return this.axisBottom[i]['__data__'].toISOString().substring(0, 10)  }
-      else { return this.allDates[this.allDates.length-1] }  
+      return this.axisBottom[i]?.date ?? this.allDates[this.allDates.length - 1];
     },    
     remount() { 
       this.allDates = this.dates[0].data.slice().map(item => item.x).sort((a, b) => new Date(a) - new Date(b))
- 
       //reset min and max dates for brushing
       this.dateIndex.splice(0)
       this.maxZoom = false
+      this.zoomLevel = 0
 
       //get global min start date 
       if(this.$state.kpidates[this.data]) { 
         this.dateStart = this.$state.kpidates[this.data]
-        
         this.dateIndex.push(this.allDates.findIndex(date => date.startsWith(this.dateStart.slice(0, 7))))
         this.dateIndex.push(this.allDates.length-1)
         this.dateIndex.sort(function(a, b) { return a - b; });
-
       } else {
         this.dateIndex.push(0)
         this.dateIndex.push(this.allDates.length-1)
@@ -130,36 +132,44 @@ export default {
       this.generateChart()
       this.defaultView = true    
     },
+
     generateChart() {
-      //create X axis with start and end dates
       const parseTime = d3.timeParse("%Y-%m-%d")
+
+      const timeIntervals = [
+        {interval: d3.timeYear, format: '%Y'}, // show year at zoom level 0
+        {interval: d3.timeMonth, format: '%b %Y'}, // show month at zoom level 1
+        {interval: d3.timeDay, format: '%d %b %Y'} // show day at zoom level 2
+      ];
+
+      //get start and end dates to set selected domain
       this.dateStart = parseTime(this.allDates[this.dateIndex[0]])
       this.dateEnd = parseTime(this.allDates[this.dateIndex[1]])
-      const scaleX = d3.scaleTime().domain([this.dateStart,this.dateEnd]).range([10, this.$refs.c.clientWidth-50])
-      this.axisBottom = [...d3.create("svg").call(d3.axisBottom(scaleX).tickPadding(5).tickSizeInner(-this.$refs.c.clientHeight))._groups[0][0].children].slice(1);
+      const scaleX = d3.scaleTime().domain([this.dateStart,this.dateEnd]).range([0, this.$refs.c.clientWidth-50]).nice(d3.timeDay)
+        
+      //create the x axis object with value, translate and cell width
 
-      //set cell width sizes by substracting X axis tick translates
-      this.cells = this.axisBottom.map((item, index) => {
-        const value = Number(item.attributes[2].value.match(/-?\d+(\.\d+)?/)[0]);
-        const previousValue = Number(this.axisBottom[index - 1]?.attributes[2].value.match(/-?\d+(\.\d+)?/)[0]);
-        return previousValue ? value - previousValue : value;
-      }).concat('initial');
+      this.axisBottom = scaleX.ticks().flatMap((d, i, ticks) => ([{
+        value: d3.timeFormat(timeIntervals[this.zoomLevel].format)(d),
+        date: d.toISOString().substring(0, 10),
+        left: scaleX(d),
+        width: i > 0 ? scaleX(d) - scaleX(ticks[i-1]) : scaleX(d),
+      }]));
 
-      //create Y axis with min and max values
-      this.setMinMax() 
-      const scaleY = d3.scaleLinear().domain([this.minValue*0.9, this.maxValue*1.05]).range([this.$refs.c.clientHeight-30, 10]).nice();
-      this.axisRight = [...d3.create("svg").call(d3.axisRight(scaleY).tickPadding(5).tickSizeInner(-this.$refs.c.clientWidth))._groups[0][0].children].slice(1);
+      //get min and max values from all dimensions to set selected domain
+      const [minValue, maxValue] = d3.extent(this.kpi.dimensions.flatMap(d => d.data.slice(this.dateIndex[0], this.dateIndex[1] + 1).map(i => i.y)));
+      const scaleY = d3.scaleLinear().domain([minValue*0.9, maxValue*1.05]).range([this.$refs.c.clientHeight-30, 10]).nice();
 
-      //draw a line for each of the chart kpi
-      const pathGenerator = d3.line().x(d => scaleX(parseTime(d.x))).y(d => scaleY(d.y)).defined(d => d.y !== null)
-;
+      //create the y axis object with value and translate
+      this.axisRight = scaleY.ticks().map(d => ({ value: d, top: scaleY(d) }));      
+ 
+      //draw a line for each of the chart kpi, dropping null values
+      const pathGenerator = d3.line().x(d => scaleX(parseTime(d.x))).y(d => scaleY(d.y)).defined(d => d.y !== null);
+      this.kpi.dimensions = this.kpi.dimensions.map(d => ({
+        ...d,
+        path: pathGenerator(d.data)
+      }));
 
-      for (let i in this.kpi.dimensions) {
-          this.kpi.dimensions[i] = { 
-            ...this.kpi.dimensions[i],
-            path: pathGenerator(this.kpi.dimensions[i].data)
-          }   
-      }
     },    
     startDrag(e) {
       this.dragging = true;
@@ -192,6 +202,7 @@ export default {
       this.dateIndex.sort(function(a, b) { return a - b; });
 
       if (this.dateIndex[0] !== this.dateIndex[1]) {
+        this.zoomLevel++
         this.generateChart()
       } 
       
@@ -248,7 +259,8 @@ export default {
     stroke-linejoin: round;    
   }
   text { 
-    color: #aaa;    
+    color: #aaa;   
+    fill: #aaa; 
     font-size: 15px;
   }
   line{
@@ -338,7 +350,7 @@ export default {
     flex: 1;
     display: grid;
     &:first-child { pointer-events: none; }
-    &:hover { background: #f3f3f350; }
+    &:hover { background: #f3f3f330; }
     &.reselecter-cell {
       position: absolute;
       width: 100%;
@@ -351,6 +363,11 @@ export default {
     }
   }
   &.dragging > div:hover { background: transparent; } 
+}
+#chart .xAxis g:nth-child(even) line,
+#chart .xAxis g:nth-child(even) text {
+    fill: transparent;
+    stroke: transparent;
 }
 
  </style>

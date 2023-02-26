@@ -3,20 +3,10 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "noconvencional"
-  const kpidata = {
-    url: 'http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/a3244ddd-38bc-4800-a700-360b649d2f3a/download/serie-histrica-de-produccin-de-gas-natural-por-cuenca-y-sub-tipo-de-recurso-captulo-iv-.csv',
+  const url = 'http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/a3244ddd-38bc-4800-a700-360b649d2f3a/download/serie-histrica-de-produccin-de-gas-natural-por-cuenca-y-sub-tipo-de-recurso-captulo-iv-.csv'
     
-    date: 0,
-    items: {
-      porcentaje: 10,
-  
-    }
-  }
-  
-  const payload = await parsers.datosGobarCSV(kpidata)
 
-
-   var post = {
+   const post = {
     kpi,
   t: "Participación No Convencional",
   st: "En millones de m3",
@@ -33,8 +23,8 @@ module.exports = (async function() {
   dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
-        label: "Shale",
-        data: payload.porcentaje,
+        label: "Porcentaje",
+        data: await parsers.datosGobarCSV(0,10,url),
         color: "#2E78D2",
         
         

@@ -3,17 +3,8 @@ module.exports = (async function () {
   const parsers = require("@parsers");
 
   const kpi = "merval"
-  const kpidata = {
-    url: 'https://query1.finance.yahoo.com/v7/finance/download/M.BA?period1=0&period2=9674456596&interval=1d&events=history&includeAdjustedClose=true',
-     date: 0,
-    items: {
-      merval: 4,
  
-    }
-  }
-  
-  const payload = await parsers.datosGobarCSV(kpidata)
-
+const url = 'https://query1.finance.yahoo.com/v7/finance/download/M.BA?period1=0&period2=9674456596&interval=1d&events=history&includeAdjustedClose=true'
   const post = {
     kpi,
     t: "MERVAL",
@@ -31,11 +22,9 @@ module.exports = (async function () {
         {
           fillColor: "transparent",
           label: "Indice Merval",
-          data: payload.merval,
+          data: await parsers.datosGobarCSV(0,4,url),
           color: "#2E78D2CC",
           type: 'line',
-          
-          
         },
 
       ]

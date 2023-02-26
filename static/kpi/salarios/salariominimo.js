@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "salariominimo"
 
-  var post = {
+  const post = {
     kpi,
   t: "Salario Minimo, Vital y Movil",
   st: "Remuneración imponible promedio de los trabajadores estables",

@@ -40,7 +40,7 @@ module.exports = (async function() {
     }
 
 
-  var post = {
+  const post = {
     kpi,
     t: "Bonos USD",
     st: "Bonos Ley Argentina y NY",

@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "ripte"
 
-  var post = {
+  const post = {
     kpi,
     t: "RIPTE",
     st: "Remuneración imponible promedio de los trabajadores estables",

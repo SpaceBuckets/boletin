@@ -16,7 +16,7 @@ module.exports = (async function() {
   
   const payload = await parsers.genericXLS(kpidata)
 
-  var post = {
+  const post = {
     kpi,
   t: "ICE",
   st: "Índice de Condiciones Externas",

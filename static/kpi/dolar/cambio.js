@@ -40,7 +40,7 @@ module.exports = (async function() {
     for (let i = 0; i < payload[chosenOne].length; i++) { payload[key][i].x = payload[chosenOne][i].x }
   }
 
-  var post = {
+  const post = {
     kpi,
     t: "Tipos de Cambio",
     st: "Brecha Peso/USD",

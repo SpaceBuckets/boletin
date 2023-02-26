@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "cer"
     
-  var post = {
+  const post = {
     kpi,
     t: "CER",
     st: "Coeficiente de Estabilización de Referencia",

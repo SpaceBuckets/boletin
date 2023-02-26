@@ -7,7 +7,7 @@ module.exports = (async function() {
   const payload = await parsers.scrapeBCRA("247")
 
 
-  var post = {
+  const post = {
     kpi,
     t: "Compras BCRA",
     st: "En millones de USD",

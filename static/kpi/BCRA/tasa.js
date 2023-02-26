@@ -33,7 +33,7 @@ module.exports = (async function() {
     payload[key].map((item, i) => { item.x = payload[chosenOne][i].x; });
   }
  
-  var post = {
+  const post = {
     kpi,
     t: "Tasas de Interés",
     st: "Tasa de Política Monetaria",

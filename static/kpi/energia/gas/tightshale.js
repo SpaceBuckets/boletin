@@ -3,20 +3,10 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "tightshale"
-  const kpidata = {
-    url: 'http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/a3244ddd-38bc-4800-a700-360b649d2f3a/download/serie-histrica-de-produccin-de-gas-natural-por-cuenca-y-sub-tipo-de-recurso-captulo-iv-.csv',
-     date: 0,
-    items: {
-      shale: 8,
-      tight: 9,
+  const url = 'http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/a3244ddd-38bc-4800-a700-360b649d2f3a/download/serie-histrica-de-produccin-de-gas-natural-por-cuenca-y-sub-tipo-de-recurso-captulo-iv-.csv'
  
-    }
-  }
-  
-  const payload = await parsers.datosGobarCSV(kpidata)
 
-
-   var post = {
+   const post = {
     kpi,
   t: "Producción Tight & Shale",
   st: "En millones de m3",
@@ -32,7 +22,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Shale",
-        data: payload.shale,
+        data: await parsers.datosGobarCSV(0,8,url),
         color: "#2E78D2",
         
         
@@ -40,7 +30,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Tight",
-        data: payload.tight,
+        data: await parsers.datosGobarCSV(0,9,url),
         color: "#2E78D250",
         
         
