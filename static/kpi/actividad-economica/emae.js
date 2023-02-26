@@ -20,48 +20,39 @@ module.exports = (async function() {
       n: '11.3_HR_2004_M_24',
       o: '11.3_TAC_2004_M_60',   */
  
-  
-  
-  const estacional = await parsers.datosGobarAPI('143.3_NO_PR_2004_A_31')
-  const tendencia = await parsers.datosGobarAPI('143.3_NO_PR_2004_A_28')
-  const base = await parsers.datosGobarAPI('143.3_NO_PR_2004_A_21')
-
   var post = {
     kpi,
-    "t": "EMAE",
-    "st": "Estimador Mensual de Actividad Económica",
-    "sd": "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-    "min": 80,
-    "max": 180,
-    "c": "<p><strong>El Estimador Mensual de Actividad Económica (EMAE) es un indicador de la evolución del PIB</strong> a precios constantes de 2004 que se difunde mensualmente de acuerdo al <a href='/'>calendario de difusión del INDEC</a>. Incluye la serie original (número índice y la variación porcentual respecto al mismo mes del año anterior), la serie desestacionalizada y la tendencia–ciclo (número índice y variación respecto al mes inmediato anterior).</p><p>El EMAE se construye utilizando información de diversos sectores económicos, tales como la industria manufacturera, la construcción, el comercio, el transporte, entre otros. El indicador se basa en la producción de bienes y servicios en el país y se calcula a través de una fórmula que combina los valores de cada sector ponderados por su importancia relativa en la economía.</p><p>El EMAE se presenta en forma de índice, el cual se establece en un período de referencia o base (por ejemplo, el año 2016) y se expresa en términos porcentuales. De esta manera, se puede comparar el nivel de actividad económica en distintos momentos en el tiempo y observar su evolución.</p><p>Es importante destacar que el EMAE es una estimación mensual y se publica con un retraso de alrededor de 30 días después de finalizado el mes de referencia. Además, el INDEC realiza ajustes en el cálculo del indicador para corregir posibles distorsiones en los datos, como cambios estacionales o efectos de días hábiles.</p><p>En resumen, el EMAE es un indicador clave para entender la evolución de la actividad económica en Argentina en el corto plazo y es utilizado por diversos actores del sector público y privado para tomar decisiones y planificar estrategias.</p>",
-    fd: "API (datos.gob.ar)",
+    t: "EMAE",
+    st: "Estimador Mensual de Actividad Económica",
+    sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
+    min: 80,
+    max: 180,
+    c: "<p><strong>El Estimador Mensual de Actividad Económica (EMAE) es un indicador de la evolución del PIB</strong> a precios constantes de 2004 que se difunde mensualmente de acuerdo al <a href='/'>calendario de difusión del INDEC</a>. Incluye la serie original (número índice y la variación porcentual respecto al mismo mes del año anterior), la serie desestacionalizada y la tendencia–ciclo (número índice y variación respecto al mes inmediato anterior).</p><p>El EMAE se construye utilizando información de diversos sectores económicos, tales como la industria manufacturera, la construcción, el comercio, el transporte, entre otros. El indicador se basa en la producción de bienes y servicios en el país y se calcula a través de una fórmula que combina los valores de cada sector ponderados por su importancia relativa en la economía.</p><p>El EMAE se presenta en forma de índice, el cual se establece en un período de referencia o base (por ejemplo, el año 2016) y se expresa en términos porcentuales. De esta manera, se puede comparar el nivel de actividad económica en distintos momentos en el tiempo y observar su evolución.</p><p>Es importante destacar que el EMAE es una estimación mensual y se publica con un retraso de alrededor de 30 días después de finalizado el mes de referencia. Además, el INDEC realiza ajustes en el cálculo del indicador para corregir posibles distorsiones en los datos, como cambios estacionales o efectos de días hábiles.</p><p>En resumen, el EMAE es un indicador clave para entender la evolución de la actividad económica en Argentina en el corto plazo y es utilizado por diversos actores del sector público y privado para tomar decisiones y planificar estrategias.</p>",
+    fd: "datos.gob.ar",
     fdr: "https://datos.gob.ar/it/dataset/sspm-estimador-mensual-actividad-economica-emae-base-2004/archivo/sspm_143.3",
     fu: "INDEC",
     fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-9-48",
     frec: "Mensual", 
-    "d": "El Estimador Mensual de Actividad Económica (EMAE) refleja la <strong>evolución mensual de la actividad económica</strong> del conjunto de los sectores productivos a nivel nacional.",
-    chart: {
-    dates: estacional,
+    d: "El Estimador Mensual de Actividad Económica (EMAE) refleja la <strong>evolución mensual de la actividad económica</strong> del conjunto de los sectores productivos a nivel nacional.",
     dimensions: [
       {
         label: "Desestacionalizado",
-        data: estacional,
+        data: await parsers.datosGobarAPI('143.3_NO_PR_2004_A_31'),
         color: "#2E78D2",
       },
       {
         label: "Tendencia",
-        data: tendencia,
+        data: await parsers.datosGobarAPI('143.3_NO_PR_2004_A_28'),
         color: "#7a49a580",        
         borderWidth: 1,
       },
       {
         label: "Base",
-        data: base,
+        data: await parsers.datosGobarAPI('143.3_NO_PR_2004_A_21'),
         color: "rgba(46,120,210,0.25)",        
         borderWidth: 1,
       },
     ]
-  }
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

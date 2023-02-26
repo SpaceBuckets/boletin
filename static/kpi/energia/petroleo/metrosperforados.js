@@ -3,8 +3,6 @@ module.exports = (async function () {
   const parsers = require("@parsers");
 
   const kpi = "metrosperforados"
-  
-  const payload = await parsers.datosGobarAPI('366.3_METROS_PERRAL__31')
 
   const post = {
     kpi,
@@ -18,21 +16,16 @@ module.exports = (async function () {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-     chart: {
-      dates:payload,
-      dimensions: [
+     dimensions: [
         {
           
           label: "Pozos de Petroleo terminados",
-          data: payload,
-          color: "#2E78D2CC",
-           //type: 'bar',
-          
+          data: await parsers.datosGobarAPI('366.3_METROS_PERRAL__31'),
+          color: "#2E78D2CC",          
           
         },
 
       ]
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

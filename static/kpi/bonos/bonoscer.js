@@ -51,8 +51,6 @@ module.exports = (async function() {
     frec: "Diaria", 
     d: "El capital de los bonos CER capital se ajusta por el Índice de Precios al Consumidor y los intereses son calculados sobre saldos ajustados.",
 
-    chart: {
-    dates:payload.tx24,
     dimensions: [
       {
         label: "TX24",
@@ -80,7 +78,6 @@ module.exports = (async function() {
         color: "rgba(46,120,210,0.25)",
       },
     ],
-  }
 }
   
    parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

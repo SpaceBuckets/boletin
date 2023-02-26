@@ -4,11 +4,7 @@ module.exports = (async function() {
 
   const kpi = "ventasshopping"
   
-  const total = await parsers.datosGobarAPI('458.1_VENTAS_TOTTES_ABRI_M_33_40 ')
-  const gba = await parsers.datosGobarAPI('458.1_VENTAS_GBATES_ABRI_M_29_80')
-  const resto = await parsers.datosGobarAPI('458.1_VENTAS_RESTES_ABRI_M_31_8')
 
-    
   var post = {
     kpi,
     t: "Ventas Shopping",
@@ -20,27 +16,24 @@ module.exports = (async function() {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-    chart: {
-    dates:total,
     dimensions: [
         {
             label: "Total",
-            data: total,
+            data: await parsers.datosGobarAPI('458.1_VENTAS_TOTTES_ABRI_M_33_40'),
             color: "rgba(46,120,210,1)",
             },
         {    
             label: "GBA",
-            data: gba,
+            data: await parsers.datosGobarAPI('458.1_VENTAS_GBATES_ABRI_M_29_80'),
             color: "rgba(46,120,210,0.25)",   
             },
         {    
             label: "Resto",
-            data: resto,
+            data: await parsers.datosGobarAPI('458.1_VENTAS_RESTES_ABRI_M_31_8'),
             color: "rgba(46,120,210,0.25)",
             },
 
     ],
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

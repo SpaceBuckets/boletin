@@ -16,13 +16,10 @@
  
     <div class="scorecard">
       <div>
-        <div>Actualizado:</div>
-        <div>{{ kpi.chart.dates[kpi.chart.dates.length-1].x }}</div>
+        <div>Último Dato:</div>
+        <div>{{ kpi.dimensions[0].data.x }} ({{kpi.frec}})</div>
       </div>
-      <div>
-        <div>Frecuencia:</div>
-        <div> {{kpi.frec}}</div>
-      </div>      
+      
       <div>
         <div>Fuente:</div>
         <div><a target="_blank" :href="kpi.fur">{{kpi.fu}}</a></div>
@@ -32,8 +29,8 @@
         <div><a target="_blank" :href="kpi.fdr">{{kpi.fd}}</a></div>
       </div>
       <div>
-        <div>Datos:</div>
-        <div><a style="opacity:0.5;pointer-events:none" :href="kpi.data">Descargar</a></div>
+        <div>Descargar:</div>
+        <div><a :href="kpi.data">CSV</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a :href="kpi.data">JSON</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a :href="kpi.data">XLS</a></div>
       </div>
 
     </div>  
@@ -42,7 +39,7 @@
       <h4>Dimensiones</h4>
     </div>
       <div class="scorecard">
-        <div class="single-legend" v-for="(kpi,parent) in kpi.chart.dimensions" :key="`${kpi.label}`">
+        <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions" :key="`${kpi.label}`">
           <div><span class="circle" :style="{background: kpi.color }"></span> {{kpi.label}}</div> 
           <div>
             <div>{{kpi.data[kpi.data.length-1].y}}</div>   
@@ -95,7 +92,7 @@ export default {
   }, 
     methods: {
       getLastValue() {
-        var lastValue = this.kpi.chart.dimensions[0].data[this.kpi.chart.dimensions[0].data.length-1].y;
+        var lastValue = this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].y;
         return lastValue
       },
     getVariation(legend) {
@@ -105,12 +102,11 @@ export default {
     },    
     getLastUpdated() {
       const formatter = new Intl.DateTimeFormat("es", {month: "long", year: "numeric",});
- 
-      var date = new Date(this.kpi.chart.dates[this.kpi.chart.dates.length-1].x)
+      var date = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x)
       var day = 60 * 60 * 24 * 1000;
       date = date.setDate(date.getDate() + 1)
       const lastupdate = formatter.format(date);
-      var day = this.kpi.chart.dates[this.kpi.chart.dates.length-1].x.split('-')
+      var day = this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x.split('-')
 
        if (day[2] === "01" || day[2] === "02") {
        return lastupdate.replace("de","").replace(" ","");
@@ -125,7 +121,7 @@ export default {
 
  <style lang="scss" scoped>
  h4 {
-  font-size: 18px;
+  font-size: 16px;
    margin: 0;
    font-weight: normal;
   margin-bottom: 10px;

@@ -31,9 +31,7 @@ module.exports = (async function() {
   max: 300,
   min: 0,
 
-  chart: {
-    dates:payload.itcrm,
-    dimensions: [
+  dimensions: [
       {
         
         label: "TCRM",
@@ -67,7 +65,6 @@ module.exports = (async function() {
         
       },      
 ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

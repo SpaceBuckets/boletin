@@ -27,7 +27,7 @@ module.exports = (async function() {
 
   for (let [key, value] of Object.entries(reambito)) {
     var data = JSON.parse(await (await fetch(value)).text())
-    for (let i = 1; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: 0} }
+    for (let i = 1; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: null} }
     for (let i = 1; i < data.length; i++) {
       payload[key][i].x = new Date(data[i][0].split('-').reverse().join('-')).toISOString().substring(0, 10)
       payload[key][i].y = Number(data[i][1].replace(',','.'))
@@ -53,9 +53,7 @@ module.exports = (async function() {
     frec: "Diaria", 
     d: "El tipo de cambio es el precio de una unidad de moneda extranjera expresado en términos de la moneda local.",
     //max: 400,
-    chart: {
-      dates: payload.oficial,
-      dimensions: [
+    dimensions: [
         {
           label: "Oficial",
           data: payload.oficial,
@@ -104,7 +102,6 @@ module.exports = (async function() {
           borderWidth: 1.25,
         }, 
       ],
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

@@ -4,8 +4,6 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "ipcgba"
-   
-  const payload = await parsers.datosGobarAPI('101.1_I2NG_2016_M_22&representation_mode=percent_change')
 
   var post = {
     kpi,
@@ -21,21 +19,17 @@ module.exports = (async function() {
   d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base.",
   max: 10,
   min: 0,
-
-  chart: {
-    dates:payload,
-    dimensions: [
+  dimensions: [
       {
         fillColor: "#2E78D295",
         label: "Desestacionalizado",
-        data: payload,
+        data: await parsers.datosGobarAPI('101.1_I2NG_2016_M_22&representation_mode=percent_change'),
         type: 'bar',
         color: "#2E78D2",
         
         borderWidth: 0,
       },
 ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

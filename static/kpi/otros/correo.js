@@ -4,8 +4,6 @@ module.exports = (async function() {
 
   const kpi = "correo"
   
-
-  const payload = await parsers.datosGobarAPI('302.3_CORREOS_COS_U_0_S_29') 
     
   var post = {
     kpi,
@@ -19,19 +17,16 @@ module.exports = (async function() {
     frec: "Mensual", 
     d: "",
 
-    chart: {
-    dates:payload,
     dimensions: [
         {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Correo Postal",
-        data: payload,
+        data: await parsers.datosGobarAPI('302.3_CORREOS_COS_U_0_S_29'),
         color: "rgba(46,120,210,1)",
         
         
         },
     ],
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

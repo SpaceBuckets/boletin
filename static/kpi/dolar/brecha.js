@@ -4,30 +4,14 @@ module.exports = (async function() {
   
   const kpi = "brecha"
 
-  const resA = await fetch('https://api.bluelytics.com.ar/v2/evolution.json');
-  var emaeB = await resA.json();
-  var dateUSD = []
-  var valUSD = []
-  var valBlue = []
-  var valGap = []
-  var payload = {}
+  const data = await (await fetch('https://api.bluelytics.com.ar/v2/evolution.json')).json();
 
-  for (let i = 0; i < emaeB.length; i++) {
-    dateUSD.push(emaeB[i].date)
-    if (emaeB[i].source === 'Oficial') { valUSD.push(emaeB[i].value_buy) }
-    if (emaeB[i].source === 'Blue') { valBlue.push(emaeB[i].value_buy) }
-  }
-
-  for (let i = 0; i < valUSD.length; i++) {
-    var tempBrecha = (valBlue[i] - valUSD[i]) / valUSD[i] * 100.0;
-    valGap.push(tempBrecha)
-  }
-
-  dateUSD = [...new Set(dateUSD)]
+  const valUSD = data.filter(d => d.source === 'Oficial').map(d => d.value_buy);
+  const valBlue = data.filter(d => d.source === 'Blue').map(d => d.value_buy);
+  const valGap = valUSD.map((num, i) => ((valBlue[i] - num) / ((num + valBlue[i]) / 2)) * 100);
  
-  payload.dates = dateUSD.reverse();
-  payload.gap = valGap.reverse();
-
+  const payload = valGap.map((val, i) => ({ x: data[i].date, y: val })).reverse();
+    
   var post = {
     kpi,
     t: "Brecha USD/Peso",
@@ -40,21 +24,15 @@ module.exports = (async function() {
     fur: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",
     frec: "Diaria", 
     min: 0,
-
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-    chart: {
-      dates:payload,
-      dimensions: [
+    dimensions: [
         {
           fillColor: "rgba(178,34,34,0.05)",
           label: "Brecha USD / Peso",
-          data: payload.gap,
+          data: payload,
           color: "#b22222CC",
-          
-          
         },
       ],
-    } 
   }
 
   

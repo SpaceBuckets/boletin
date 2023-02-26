@@ -5,8 +5,6 @@ module.exports = (async function() {
 
   const kpi = "ipim"
    
-  const payload = await parsers.datosGobarAPI('448.1_NIVEL_GENERAL_0_0_13_46&representation_mode=percent_change')
-
   var post = {
     kpi,
   t: "IPIM",
@@ -19,22 +17,14 @@ module.exports = (async function() {
   fur: "https://www.indec.gob.ar/indec/web/Nivel3-Tema-3-5",
   frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-
   min: 0,
-  chart: {
-    dates:payload,
-    dimensions: [
+  dimensions: [
       {
-        fillColor: "#2E78D295",
         label: "IPIM",
-        data: payload,
-        type: 'bar',
+        data: await parsers.datosGobarAPI('448.1_NIVEL_GENERAL_0_0_13_46&representation_mode=percent_change'),
         color: "#2E78D2",
-        
-        borderWidth: 0,
       },
 ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

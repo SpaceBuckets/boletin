@@ -4,11 +4,6 @@ module.exports = (async function() {
 
   const kpi = "subsidios"
  
- 
-  
-    const subenergia = await parsers.datosGobarAPI('452.2_ENERGIAGIA_0_T_7_56')
-    const subtransporte = await parsers.datosGobarAPI('452.2_TRANSPORTERTE_0_T_10_32')
- 
   var post = {
     kpi,
   t: "Subsidios Económicos",
@@ -22,23 +17,20 @@ module.exports = (async function() {
    frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 250000,
-  chart: {
-    dates:subenergia,
-    dimensions: [
+  dimensions: [
       {
         label: "Transporte",
-        data: subtransporte,
+        data: await parsers.datosGobarAPI('452.2_TRANSPORTERTE_0_T_10_32'),
         color: "rgba(46,120,210,0.25)",
 
       },
       {
         label: "Energia",
-        data: subenergia,
+        data: await parsers.datosGobarAPI('452.2_ENERGIAGIA_0_T_7_56'),
         color: "#2E78D2",
 
       },
 ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

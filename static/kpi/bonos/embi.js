@@ -33,9 +33,7 @@ module.exports = (async function() {
   d: "Índice calculado por JP Morgan Chase que mide la diferencia entre la tasa de interés que un país debe de pagar por emitir deuda en el exterior.",
   max: 50,
 
-  chart: {
-    dates:payload.argentina,
-    dimensions: [
+  dimensions: [
       {
         fillColor: 'rgba(46,120,210,0)',
         label: "EMBI Brasil",
@@ -91,7 +89,6 @@ module.exports = (async function() {
 
       }
     ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

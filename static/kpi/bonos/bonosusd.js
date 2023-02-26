@@ -55,9 +55,7 @@ module.exports = (async function() {
 
     min: 0,
    
-    chart: {
-      dates:payload.al30d,
-      dimensions: [
+    dimensions: [
         {
           fillColor: "rgba(46,120,210,0.0)",
           label: "AL30D",
@@ -105,7 +103,6 @@ module.exports = (async function() {
           color: "rgba(46,120,210,0.25)",
         },
       ],
-    }
   }
 
   

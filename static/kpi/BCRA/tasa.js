@@ -13,31 +13,26 @@ module.exports = (async function() {
   }
  
   var payload = {}
-  var fillLength = []
+  var fillLength = Math.max(...(await Promise.all(Object.values(reambito).map(v => parsers.scrapeBCRA(v).then(d => d.length)))));
   var chosenOne = ''
-  for (let [key, value] of Object.entries(reambito)) {
-    payload[key] = []
-    var data = await parsers.scrapeBCRA(value)
-    fillLength.push(data.length)
-  }
-
+ 
   for (let [key, value] of Object.entries(reambito)) {
     var data = (await parsers.scrapeBCRA(value)).reverse()
-    for (let i = 0; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: 0} }
+    payload[key] = []
+    for (let i = 0; i < fillLength; i++) { payload[key][i] = { x: 0, y: 0} }
     for (let i = 0; i < data.length; i++) {
       payload[key][i].x = data[i].x
       payload[key][i].y = data[i].y
     }
-
     payload[key] = payload[key].filter(element => { if (Object.keys(element).length !== 0) { return true; } return false; }).reverse();
     if (payload[key][0].x !== 0) { chosenOne = key }
   }
   
 
-  for (let [key, value] of Object.entries(reambito)) {
-    for (let i = 0; i < payload[chosenOne].length; i++) { payload[key][i].x = payload[chosenOne][i].x }
+  for (let key of Object.keys(reambito)) {
+    payload[key].map((item, i) => { item.x = payload[chosenOne][i].x; });
   }
-
+ 
   var post = {
     kpi,
     t: "Tasas de Interés",
@@ -51,9 +46,7 @@ module.exports = (async function() {
     frec: "Diaria", 
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     max: 100,
-    chart: {
-      dates: payload.referencia,
-      dimensions: [
+    dimensions: [
         {
           label: "Referencia",
           data: payload.referencia,
@@ -87,7 +80,6 @@ module.exports = (async function() {
           color: "rgba(46,120,210,0.25)", 
         },                 
       ]
-    }
   }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

@@ -32,8 +32,7 @@ export default {
        chart: {
         area: "1 / 1 / 5 / 7",
         kpi: params.kpi,
-        type: "newLine",
-        //type: "Line",
+        type: "Line",
         hasChart: true,
         subtitle: "Serie de Tiempo",
         title: rekpi.t        

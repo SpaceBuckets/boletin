@@ -13,7 +13,6 @@ module.exports = (async function() {
   }
   
   const payload = await parsers.genericXLS(kpidata)
-
   var post = {
     kpi,
   t: "IPIP",
@@ -29,9 +28,7 @@ module.exports = (async function() {
   d: "El IPIP es un indicador de coyuntura que mide mensualmente la evolución de la facturación de la industria manufacturera PyME que desarrollan su actividad dentro del país y producen bienes seleccionados como representativos de la industria PyME.",
   min: 0,
   max: 140,
-  chart: {
-    dates:payload.ipip,
-    dimensions: [
+  dimensions: [
       {
         
         label: "Desestacionalizado",
@@ -41,7 +38,6 @@ module.exports = (async function() {
         
       },
 ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

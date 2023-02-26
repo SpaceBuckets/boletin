@@ -1,14 +1,11 @@
 module.exports = (async function() {
   const parsers = require("@parsers");
-  const fetch = require('@adobe/node-fetch-retry');
-  const xlsx = require('node-xlsx');
-
+ 
   const kpi = "basemonetaria"
   
   const reambito = {
     total: '250',
     leliq: '7926',
- 
   }
  
   var payload = {}
@@ -50,28 +47,20 @@ module.exports = (async function() {
     frec: "Diaria", 
     min: 0,
     d: "La Base Monetaria (BM) está constituida por todo el dinero legal en circulación (es decir, billetes y monedas), sumado a las reservas de los bancos comerciales en el banco central.",
-
-    chart: {
-      dates:payload.total,
-      dimensions: [
+    dimensions: [
         {
           fillColor: 'rgba(46,120,210,0)',
           label: "Base Monetaria",
           data: payload.total,
           color: "#2E78D2",
-          
-          
         },
         {
           fillColor: 'rgba(46,120,210,0)',
           label: "Base Monetaria + Instrumentos (LELIQ y Otros)",
           data: payload.leliq,
           color: "#2E78D280",
-          
-          
         },
       ],
-    }
   }
 
    parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

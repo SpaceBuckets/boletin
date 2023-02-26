@@ -3,9 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "ferrocargas"
-  
-  const payload = await parsers.datosGobarAPI('302.3_TRANSP_CAR_KM_0_S_36') 
-    
+      
   var post = {
     kpi,
     t: "Cargas Ferrocarril",
@@ -18,19 +16,16 @@ module.exports = (async function() {
     frec: "Mensual", 
     d: "",
 
-    chart: {
-    dates:payload,
     dimensions: [
         {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Cargas Ferrocarril",
-        data: payload,
+        data: await parsers.datosGobarAPI('302.3_TRANSP_CAR_KM_0_S_36'),
         color: "rgba(46,120,210,1)",
         
         
         },
     ],
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

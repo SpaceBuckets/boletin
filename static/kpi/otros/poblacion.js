@@ -4,8 +4,6 @@ module.exports = (async function() {
 
   const kpi = "poblacion"
    
-  const payload = await parsers.parseWorldBank('https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000')
-
   var post = {
     kpi,
   t: "Población",
@@ -21,19 +19,16 @@ module.exports = (async function() {
 
   min: 0,
   //max: 6000000,
-  chart: {
-    dates:payload,
-    dimensions: [
+  dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Poblacion Argentina",
-        data: payload,
+        data: await parsers.parseWorldBank('https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000'),
         color: "rgba(46,120,210,1)",
         
         
       },
 ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

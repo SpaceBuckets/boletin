@@ -2,9 +2,6 @@ module.exports = (async function() {
 
   const parsers = require("@parsers");
   const kpi = "ipi"
-  const estacional = await parsers.datosGobarAPI('453.1_SERIE_DESEADA_0_0_24_58')
-  const tendencia = await parsers.datosGobarAPI('453.1_SERIE_TENDCLO_0_0_21_61')
-  const base = await parsers.datosGobarAPI('453.1_SERIE_ORIGNAL_0_0_14_46')
 
   var post = {
     kpi,
@@ -22,26 +19,23 @@ module.exports = (async function() {
     max: 160,
     cat: "Actividad Económica",
     catslug: "actividad-economica",  
-    chart: {
-      dates:base,
-      dimensions: [
+    dimensions: [
         {
           label: "Desestacionalizado",
-          data: estacional,
+          data: await parsers.datosGobarAPI('453.1_SERIE_DESEADA_0_0_24_58'),
           color: "#2E78D2", 
         },
         {
           label: "Tendencia",
-          data: tendencia,
+          data: await parsers.datosGobarAPI('453.1_SERIE_TENDCLO_0_0_21_61'),
           color: "#7a49a580", 
         },
         {
           label: "Base",
-          data: base,
+          data: await parsers.datosGobarAPI('453.1_SERIE_ORIGNAL_0_0_14_46'),
           color: "rgba(46,120,210,0.25)",
         },
       ]
-    }
   }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

@@ -4,18 +4,6 @@ module.exports = (async function() {
 
   const kpi = "gastos"
  
-  
-  
- 
-
-  const energia = await parsers.datosGobarAPI('452.2_CAPITAL_ENION_0_T_22_35')
-  const transporte = await parsers.datosGobarAPI('452.3_CAPITAL_TRION_0_M_25_82')
-  const educacion = await parsers.datosGobarAPI('452.3_CAPITAL_EDION_0_M_24_92')
-  const vivienda = await parsers.datosGobarAPI('452.3_CAPITAL_VIION_0_M_23_52')
-  const agua = await parsers.datosGobarAPI('452.3_CAPITAL_AGION_0_M_41_40')
-  const otros = await parsers.datosGobarAPI('452.3_CAPITAL_OTION_0_M_20_10')
-
-
   var post = {
     kpi,
   t: "Gastos de Capital",
@@ -28,41 +16,38 @@ module.exports = (async function() {
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
   frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-  chart: {
-    dates:transporte,
-    dimensions: [
+  dimensions: [
       {
         label: "Transporte",
-        data: transporte,
+        data: await parsers.datosGobarAPI('452.3_CAPITAL_TRION_0_M_25_82'),
         color: "rgba(46,120,210,1)",
 
       },
       {
         label: "Agua",
-        data: agua,
+        data: await parsers.datosGobarAPI('452.3_CAPITAL_AGION_0_M_41_40'),
         color: "rgba(46,120,210,0.25)",
 
       },
       {
         label: "Vivienda",
-        data: vivienda,
+        data: await parsers.datosGobarAPI('452.3_CAPITAL_VIION_0_M_23_52'),
         color: "rgba(46,120,210,0.25)",
 
       },
       {
         label: "Energia",
-        data: energia,
+        data: await parsers.datosGobarAPI('452.2_CAPITAL_ENION_0_T_22_35'),
         color: "rgba(46,120,210,0.25)",
 
       },
       {
         label: "Educacion",
-        data: educacion,
+        data: await parsers.datosGobarAPI('452.3_CAPITAL_EDION_0_M_24_92'),
         color: "rgba(46,120,210,0.25)",
 
       },
 ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

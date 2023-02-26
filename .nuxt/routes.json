@@ -3,24 +3,28 @@
     "name": "mapusa",
     "path": "/mapusa",
     "component": "/Users/agustin.capeletto/fed/beo/pages/mapusa.vue",
-    "chunkName": "pages/mapusa"
+    "chunkName": "pages/mapusa",
+    "_name": "_836d7588"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/agustin.capeletto/fed/beo/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_5514d34d"
   },
   {
     "name": "cat",
     "path": "/:cat",
     "component": "/Users/agustin.capeletto/fed/beo/pages/_cat/index.vue",
-    "chunkName": "pages/_cat/index"
+    "chunkName": "pages/_cat/index",
+    "_name": "_bed56b22"
   },
   {
     "name": "cat-kpi",
     "path": "/:cat/:kpi",
     "component": "/Users/agustin.capeletto/fed/beo/pages/_cat/_kpi/index.vue",
-    "chunkName": "pages/_cat/_kpi/index"
+    "chunkName": "pages/_cat/_kpi/index",
+    "_name": "_51792edb"
   }
 ]

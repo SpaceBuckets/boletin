@@ -1,6 +1,15 @@
 <template>
   <div class="footerpepe">
-  <div>Ver Indicador al Azar</div>
+             <h2>Indicadores Similares</h2>
+ <br>
+  <div v-for="related in recommended">
+    
+         <nuxt-link :to="{ name: `cat-kpi`, params: { kpi: related } }">
+          {{ related.t }}        </nuxt-link><br>
+
+          {{ related.st }}
+          <br><br>
+  </div>
  
  
  
@@ -9,6 +18,7 @@
 
 <script>
    
+import meganav from "~/static/refolders.json";
 
 export default {
   props: {
@@ -40,9 +50,38 @@ export default {
   data() {
     return {
       chart: require(`~/static/data/${this.data}.json`),
+      renav: meganav,
+      recommended: []
     };
   },
+  mounted() {
+  var results = this.findSiblings(`${this.data}.js`,this.renav);
+    for (const item of results) {
+      this.recommended.push(require(`~/static/data/${item.replace('.js','')}.json`))
+  }
+  },
   methods: { 
+  findSiblings(str, obj) {
+  for (const key in obj) {
+    if (typeof obj[key] === 'object' && obj[key] !== null) {
+      const siblings = obj[key]._contents;
+      if (siblings && siblings.includes(str)) {
+        return siblings.filter((sibling) => sibling !== str);
+      } else {
+        const result = this.findSiblings(str, obj[key]);
+        if (result) {
+          return result;
+        }
+      }
+    }
+  }
+  return null;
+},
+
+
+
+
+
      filteredArray() {
       return this.chart.chartdata.labels
         .filter((val, index, arr) => index > arr.length - 23)
@@ -61,6 +100,6 @@ export default {
 </script>
 
  <style scoped>
- 
+
  
  </style>

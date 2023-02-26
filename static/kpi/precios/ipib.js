@@ -4,8 +4,6 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "ipib"
-   
-  const payload = await parsers.datosGobarAPI('449.1_NIVEL_GENERAL_0_0_13_97&representation_mode=percent_change')
 
   var post = {
     kpi,
@@ -21,20 +19,17 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
   min: 0,
-  chart: {
-    dates:payload,
-    dimensions: [
+  dimensions: [
       { 
         fillColor: "#2E78D295",
         label: "IPIB",
-        data: payload,
+        data: await parsers.datosGobarAPI('449.1_NIVEL_GENERAL_0_0_13_97&representation_mode=percent_change'),
         type: 'bar',
         color: "#2E78D2",
         
         borderWidth: 0,
       },
 ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

@@ -4,8 +4,6 @@ module.exports = (async function () {
 
   const kpi = "potenciamaxima"
   
-  const payload = await parsers.datosGobarAPI('367.3_POTENCIA_MIMA__15')
-
   const post = {
     kpi,
     t: "Potencia Maxima",
@@ -18,20 +16,13 @@ module.exports = (async function () {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-    chart: {
-      dates:payload,
-      dimensions: [
+    dimensions: [
         {
-          
           label: "Potencia Electrica Maxima",
-          data: payload,
+          data: await parsers.datosGobarAPI('367.3_POTENCIA_MIMA__15'),
           color: "#2E78D2CC",
-          
-          
         },
-
       ]
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

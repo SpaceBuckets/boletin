@@ -18,7 +18,6 @@ module.exports = (async function () {
   }
 
   const payload = await parsers.genericXLS(kpidata)
-
   var post = {
     kpi,
     t: "IPIF",
@@ -31,9 +30,7 @@ module.exports = (async function () {
     frec: "Mensual",   
     d: "",
     min: 80,
-    chart: {
-      dates:payload,
-      dimensions: [
+    dimensions: [
         {
           
           label: "IPI FIEL",
@@ -51,7 +48,6 @@ module.exports = (async function () {
             
             },          
       ],
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

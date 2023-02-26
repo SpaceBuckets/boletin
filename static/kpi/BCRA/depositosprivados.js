@@ -3,8 +3,6 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "depositosprivados"
-  
-  const payload = await parsers.datosGobarAPI('90.1_DET_DESAGRIV_0_0_38') 
     
   var post = {
     kpi,
@@ -17,20 +15,14 @@ module.exports = (async function() {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-
-    chart: {
-    dates:payload,
     dimensions: [
         {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Depositos privados",
-        data: payload,
+        data: await parsers.datosGobarAPI('90.1_DET_DESAGRIV_0_0_38') ,
         color: "rgba(46,120,210,1)",
-        
-        
         },
     ],
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

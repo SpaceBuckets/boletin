@@ -29,9 +29,7 @@ module.exports = (async function() {
   fu: "BCSF",
   fur: "https://www.bcsf.com.ar/",
   frec: "Mensual",   
-  chart: {
-    dates:payload.commodityenergy,
-    dimensions: [
+  dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Energy Price Index",
@@ -41,7 +39,6 @@ module.exports = (async function() {
         
       },
 ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

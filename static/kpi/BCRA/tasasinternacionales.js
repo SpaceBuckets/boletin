@@ -55,9 +55,7 @@ module.exports = (async function() {
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 30,
 
-  chart: {
-    dates:payload.fed,
-    dimensions: [
+  dimensions: [
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Tasa FED",
@@ -95,7 +93,6 @@ module.exports = (async function() {
         color: "rgba(46,120,210,0.25)",
       },      */   
 ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

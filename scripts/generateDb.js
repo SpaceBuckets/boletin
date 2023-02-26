@@ -124,5 +124,5 @@ async function processItems(arr){
 
 };
 
-processItems(glob.sync('**', { cwd: `static/kpi/` }));
-//processItems(['bcra/reservas.js']);
+//processItems(glob.sync('**', { cwd: `static/kpi/` }));
+processItems(['dolar/cambio.js']);

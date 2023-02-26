@@ -27,9 +27,7 @@ module.exports = (async function () {
     frec: "Mensual", 
     d: "",
 
-    chart: {
-      dates:payload.merval,
-      dimensions: [
+    dimensions: [
         {
           fillColor: "transparent",
           label: "Indice Merval",
@@ -41,7 +39,6 @@ module.exports = (async function () {
         },
 
       ]
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

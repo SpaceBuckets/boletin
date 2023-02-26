@@ -3,13 +3,6 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "deficit"
- 
-  
-   
-    const ingresos = await parsers.datosGobarAPI('379.9_ING_CORR_2017__13_2')
-    const gastos = await parsers.datosGobarAPI('379.9_GTOS_CORR_017__14_1')
-    const ahorro = await parsers.datosGobarAPI('379.9_RESULTADO_017__41_83')
-
 
   var post = {
     kpi,
@@ -23,31 +16,25 @@ module.exports = (async function() {
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
   frec: "Mensual", 
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-  chart: {
-    dates:ingresos,
-    dimensions: [
+  dimensions: [
       {
         label: "Ingresos",
-        data: ingresos,
+        data: await parsers.datosGobarAPI('379.9_ING_CORR_2017__13_2'),
         color: "#009966",
 
       },
       {
         label: "Gastos",
-        data: gastos,
+        data: await parsers.datosGobarAPI('379.9_GTOS_CORR_017__14_1'),
         color: "#b22222CC",
 
       },
       {
-        fillColor: "#ccc",
         label: "Saldo",
-        data: ahorro,
+        data: await parsers.datosGobarAPI('379.9_RESULTADO_017__41_83'),
         color: "#ccc",
-        borderWidth: 0,
-        type: "bar",
       },
 ]
-}
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

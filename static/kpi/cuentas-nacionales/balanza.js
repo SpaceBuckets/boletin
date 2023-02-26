@@ -3,10 +3,6 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "balanza"
-  
-  const impo = await parsers.datosGobarAPI('74.3_IIT_0_M_25')
-  const expo = await parsers.datosGobarAPI('74.3_IET_0_M_16')
-  const saldo = await parsers.datosGobarAPI('74.3_ISC_0_M_19')
 
   var post = {
     kpi,
@@ -20,18 +16,16 @@ module.exports = (async function() {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "El intercambio comercial argentino (ICA) muestra la evolución de la balanza comercial, la relación entre los ingresos en dólares provenientes de los productos que exporta el país y aquellos artículos que se compran en el exterior.",
-    chart: {
-      dates:impo,
-      dimensions: [
+    dimensions: [
       {
         label: "Importaciones",
-        data: impo,
+        data: await parsers.datosGobarAPI('74.3_IIT_0_M_25'),
         color: "#b22222CC",
 
       },
       {
         label: "Exportaciones",
-        data: expo,
+        data: await parsers.datosGobarAPI('74.3_IET_0_M_16'),
         color: "#009966",
 
       },
@@ -39,12 +33,11 @@ module.exports = (async function() {
         fillColor: "#ccc",
         label: "Saldo Comercial",
         type: "bar",
-        data: saldo,
+        data: await parsers.datosGobarAPI('74.3_ISC_0_M_19'),
         color: "#ccc",
         //borderWidth: 0,
       },
     ],
-  },
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

@@ -30,8 +30,6 @@ module.exports = (async function() {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
-    chart: {
-    dates:payload.neuquina,
     dimensions: [
       {
         fillColor: "rgba(46,120,210,0.0)",
@@ -74,7 +72,6 @@ module.exports = (async function() {
         
       },                               
     ] 
-  }
 }
 
 parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

@@ -3,8 +3,6 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "cvs"
-  
-  const payload = await parsers.datosGobarAPI('447.1_TOTALTAL_0_0_5_37') 
     
   var post = {
     kpi,
@@ -18,19 +16,16 @@ module.exports = (async function() {
     frec: "Diaria", 
     d: "",
 
-    chart: {
-    dates:payload,
     dimensions: [
         {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Coeficiente de Variacion Salarial",
-        data: payload,
+        data: await parsers.datosGobarAPI('447.1_TOTALTAL_0_0_5_37'),
         color: "rgba(46,120,210,1)",
         
         
         },
     ],
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

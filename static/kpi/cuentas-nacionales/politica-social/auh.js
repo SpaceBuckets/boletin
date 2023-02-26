@@ -4,8 +4,6 @@ module.exports = (async function () {
 
   const kpi = "auh"
 
-  const payload = await parsers.datosGobarAPI('188.1_AUH_ASIGNAADO_0_0_48')
-
   const post = {
     kpi,
     t: "Asignacion Universal",
@@ -18,19 +16,16 @@ module.exports = (async function () {
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual",    
-    chart: {
-      dates:payload,
-      dimensions: [
+    dimensions: [
         {
           label: "AUH",
-          data: payload,
+          data: await parsers.datosGobarAPI('188.1_AUH_ASIGNAADO_0_0_48'),
           color: "#2E78D2CC",
           fillColor: "#2E78D2CC",
           type: 'bar',
         },
 
       ]
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));

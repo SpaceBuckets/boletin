@@ -4,14 +4,6 @@ module.exports = (async function () {
 
   const kpi = "ocupacionhotelera"
 
-  
-  
-  		
-
-  const total = await parsers.datosGobarAPI('457.1_VIAJEROS_TLES_0_M_16_50')
-  const residentes = await parsers.datosGobarAPI('457.1_VIAJEROS_RTES_0_M_19_94')
-  const noresidentes = await parsers.datosGobarAPI('457.1_VIAJEROS_NTES_0_M_22_86')
-
   const post = {
     kpi,
     t: "Ocupacion Hotelera",
@@ -24,36 +16,23 @@ module.exports = (async function () {
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: "Mensual", 
     d: "",
-
-    chart: {
-      dates:total,
-      dimensions: [
+    dimensions: [
         {
-          
           label: "Viajeros Hospedados",
-          data: total,
+          data: await parsers.datosGobarAPI('457.1_VIAJEROS_TLES_0_M_16_50'),
           color: "#2E78D2CC",
-          
-          
         },
         {
-          
           label: "Residentes",
-          data: residentes,
+          data: await parsers.datosGobarAPI('457.1_VIAJEROS_RTES_0_M_19_94'),
           color: "#2E78D250",
-          
-          
         },
         {
-          
           label: "No Residentes",
-          data: noresidentes,
+          data: await parsers.datosGobarAPI('457.1_VIAJEROS_NTES_0_M_22_86'),
           color: "#2E78D250",
-          
-          
         },        
       ]
-    }
   }
 
   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
