@@ -121,5 +121,5 @@ async function processItems(arr){
 
 };
 
-//processItems(glob.sync('**', { cwd: `static/kpi/` }));
-processItems(['consumo/facturacion.js']);
+processItems(glob.sync('**', { cwd: `static/kpi/` }));
+//processItems(['consumo/facturacion.js']);
