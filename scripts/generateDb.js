@@ -103,19 +103,16 @@ async function processItems(arr){
  // const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
   //bar1.start(arr.length, 0);
   
-  for(const kpi of arr) { 
-    if (kpi.slice(-3) === '.js') { 
-      try {
-        await require(`../static/kpi/${kpi}`) 
-        //bar1.increment();
-        console.log('\x1b[42m',`♥ [${kpi.split("/").pop().slice(0,-3)}] updated` ,'\x1b[0m');
-      } catch (error) {
-        console.log('\x1b[41m', '\x1b[37m',`✕ [${kpi.split("/").pop().slice(0,-3)}] failed to fetch!` ,'\x1b[0m');
-        console.log(error);
-
-      }
+  const jsFiles = arr.filter(kpi => kpi.endsWith('.js'));
+  await Promise.all(jsFiles.map(async kpi => {
+    try {
+      await require(`../static/kpi/${kpi}`);
+      console.log('\x1b[42m',`♥ [${kpi}] updated`, '\x1b[0m');
+    } catch (error) {
+      console.log('\x1b[41m', '\x1b[37m', `✕ [${kpi}] failed to fetch!`, '\x1b[0m');
+      console.error(error);
     }
-  }    
+  }));
  
   //bar1.stop();
   //await processVariation("kpi");
@@ -125,4 +122,4 @@ async function processItems(arr){
 };
 
 //processItems(glob.sync('**', { cwd: `static/kpi/` }));
-processItems(['energia/petroleo/cuencaspetroleo.js']);
+processItems(['consumo/facturacion.js']);

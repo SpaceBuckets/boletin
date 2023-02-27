@@ -44,7 +44,7 @@ async function datosGobarCSV(dates,values,url) {
   const data = Papa.parse(await (await fetch(url,{rejectUnauthorized: false,})).text()).data
   return data.map((item) => !isNaN(new Date(item[dates]).getTime()) && !isNaN(Number(item[values])) && ({
     x: new Date(item[dates]).toISOString().substring(0, 10),
-    y: Number(item[values]).toFixed(2)
+    y: +Number(item[values]).toFixed(2)
   })).filter(Boolean);
 }
 

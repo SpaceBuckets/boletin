@@ -9,6 +9,7 @@
     </div>
     <div class="chartcontainer" ref="c">
       <template v-if="defaultView">
+ 
         <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': `${axisBottom.map(c => `${c.width}px`).join(' ')} 1fr`,'cursor': recursor}">
          <div  
             v-for="i in axisBottom.length+1"  :key="`${i}-col`"
@@ -33,8 +34,6 @@
           <clipPath id="clip">
             <rect :x="`${axisBottom[0].width}px`" y="0" :height="$refs.c.clientHeight" :width="$refs.c.clientWidth-50-axisBottom[0].width"></rect>
           </clipPath>  
-
- 
 
           <g class="axis xAxis">
             <g v-for="tick in axisBottom" :transform="`translate(${tick.left},${$refs.c.clientHeight-20})`">
@@ -99,11 +98,12 @@ export default {
       zoomLevel: 0
     }
   },
+  
   mounted() { 
     if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
     this.remount() 
   },
-  methods: {
+  methods: {  
     getCols(i) {
       return Math.ceil(i % (this.axisBottom.length+1)) || this.axisBottom.length+1;
     },
@@ -137,7 +137,7 @@ export default {
       const parseTime = d3.timeParse("%Y-%m-%d")
 
       const timeIntervals = [
-        {interval: d3.timeYear, format: '%Y'}, // show year at zoom level 0
+        {interval: d3.timeDay, format: '%Y'}, // show year at zoom level 0
         {interval: d3.timeMonth, format: '%b %Y'}, // show month at zoom level 1
         {interval: d3.timeDay, format: '%d %b %Y'} // show day at zoom level 2
       ];
@@ -145,10 +145,9 @@ export default {
       //get start and end dates to set selected domain
       this.dateStart = parseTime(this.allDates[this.dateIndex[0]])
       this.dateEnd = parseTime(this.allDates[this.dateIndex[1]])
-      const scaleX = d3.scaleTime().domain([this.dateStart,this.dateEnd]).range([0, this.$refs.c.clientWidth-50]).nice(d3.timeDay)
+      const scaleX = d3.scaleTime().domain([this.dateStart,this.dateEnd]).range([0, this.$refs.c.clientWidth-50]).nice(timeIntervals[this.zoomLevel].interval)
         
       //create the x axis object with value, translate and cell width
-
       this.axisBottom = scaleX.ticks().flatMap((d, i, ticks) => ([{
         value: d3.timeFormat(timeIntervals[this.zoomLevel].format)(d),
         date: d.toISOString().substring(0, 10),
@@ -165,10 +164,7 @@ export default {
  
       //draw a line for each of the chart kpi, dropping null values
       const pathGenerator = d3.line().x(d => scaleX(parseTime(d.x))).y(d => scaleY(d.y)).defined(d => d.y !== null);
-      this.kpi.dimensions = this.kpi.dimensions.map(d => ({
-        ...d,
-        path: pathGenerator(d.data)
-      }));
+      this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, path: pathGenerator(d.data) }));
 
     },    
     startDrag(e) {
@@ -198,11 +194,11 @@ export default {
       this.dateIndex.push(this.allDates.findIndex(date => date.startsWith(this.dateStart.slice(0, 7))))
       this.dateIndex.push(this.allDates.reduceRight((lastIndex, date, index) => lastIndex === -1 && date.startsWith(this.dateEnd.slice(0, 7)) ? index : lastIndex, -1))
 
- 
       this.dateIndex.sort(function(a, b) { return a - b; });
 
       if (this.dateIndex[0] !== this.dateIndex[1]) {
-        this.zoomLevel++
+        console.log(this.zoomLevel)
+        this.zoomLevel = Math.min(this.zoomLevel + 1, 2);
         this.generateChart()
       } 
       
@@ -369,5 +365,8 @@ export default {
     fill: transparent;
     stroke: transparent;
 }
+
+ 
+ 
 
  </style>
