@@ -76,18 +76,18 @@ v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== '
         </svg>   
       </template>
     </div>
+ 
+   <charts-genericLineSidebar v-if="!index" :data="data"/>
+
+    </div>
+
     <div class="legends" v-if="index" style="min-height:14px;">
       <template v-if="kpi">
         <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions" :key="`${kpi.label}`">
           <span class="circle" :style="{background: kpi.color }"></span> {{kpi.label}}
         </div>
       </template>
-    </div>  
-   <charts-genericLineSidebar :data="data"/>
-
-    </div>
-
-
+    </div> 
 </div>
 </template>
 

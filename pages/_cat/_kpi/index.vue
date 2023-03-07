@@ -13,7 +13,7 @@
     </div>
 
     
-   
+    <hr>
      <charts-kpiBoard :data="savedCells" />
   </div>
 </template>
@@ -91,7 +91,6 @@ export default {
   display: flex;
   justify-content: space-between;
   padding-right: 15px;
-  display: none;
   > * { flex: 1; }
   + hr {
     border-color: #666;

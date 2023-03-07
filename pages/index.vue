@@ -1,6 +1,6 @@
 <template>
   <div class="pepeboard">
-       <div class="rewelcome">
+<!--       <div class="rewelcome">
         <p>
            <strong>Febo asoma; ya sus rayos, iluminan el histórico contexto.</strong> Esta colección de 47 indicadores intenta develar de dónde viene y hacia dónde va la macroeconomía de la República Argentina.
 
@@ -45,7 +45,7 @@
 		<use xlink:href="#face_right" transform="scale(-1,1)"/>
 	</g>
 </svg>
-    </div>  <br>
+    </div>  --> 
     <!--     <charts-kpiBoard edit :data="savedCells"/>
  -->
 
