@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "isac"
-
+const payload = await parsers.datosGobarAPI('33.2_ISAC_SIN_EDAD_0_M_23_56')
   const post = {
     kpi,
   t: "ISAC",
@@ -14,14 +14,15 @@ module.exports = (async function() {
   fdr: "https://datos.gob.ar/dataset/sspm-indicador-sintetico-actividad-construccion-isac-base-2004/archivo/sspm_33.2",
   fu: "INDEC",
   fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-3-42",
-  frec: "Mensual", 
+  frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload), 
   d: "El indicador ISAC <em>muestra la evolución del sector de la construcción</em> tomando como referencia los consumos aparentes de insumos requeridos en la actividad. ",
   min: 0,
   max: 300,
   dimensions: [
       {
         label: "Desestacionalizado",
-        data: await parsers.datosGobarAPI('33.2_ISAC_SIN_EDAD_0_M_23_56'),
+        data: payload,
         color: "#2E78D2", 
       },
       {

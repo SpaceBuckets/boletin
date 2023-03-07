@@ -28,7 +28,8 @@ module.exports = (async function() {
   fdr: "https://www.bcsf.com.ar/ces/base-datos/bases/download-public-file/6",
   fu: "BCSF",
   fur: "https://www.bcsf.com.ar/",
-  frec: "Mensual",   
+    frec: parsers.detectDataType(payload.commodityenergy), 
+  fruc: parsers.detectAggregationFunction(payload.commodityenergy),    
   dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",

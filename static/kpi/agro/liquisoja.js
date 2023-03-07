@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "liquisoja"
-      
+      const payload = await parsers.datosGobarAPI('349.2_ACUM_MENSUAL__13')
   const post = {
     kpi,
     t: "Liquidacion Agro",
@@ -13,13 +13,14 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/ja/dataset/sspm_349/archivo/sspm_349.2",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "",
     dimensions: [
         {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Liquidacion Agro",
-        data: await parsers.datosGobarAPI('349.2_ACUM_MENSUAL__13'),
+        data: payload,
         color: "rgba(46,120,210,1)",
         },
     ],

@@ -23,7 +23,7 @@ module.exports = (async function() {
     for (let [key, value] of Object.entries(reambito)) {
       var data = (await parsers.parseBonos(value)).reverse()
 
-      for (let i = 0; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: 0} }
+      for (let i = 0; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: null} }
       for (let i = 0; i < data.length; i++) {
         payload[key][i].x = data[i].x
         payload[key][i].y = data[i].y
@@ -48,7 +48,8 @@ module.exports = (async function() {
     fdr: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",
     fu: "Intervalores",
     fur: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",
-    frec: "Diaria", 
+      frec: parsers.detectDataType(payload.tx24), 
+  fruc: parsers.detectAggregationFunction(payload.tx24),
     d: "El capital de los bonos CER capital se ajusta por el Índice de Precios al Consumidor y los intereses son calculados sobre saldos ajustados.",
 
     dimensions: [

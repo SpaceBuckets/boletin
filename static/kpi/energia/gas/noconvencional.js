@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "noconvencional"
   const url = 'http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/a3244ddd-38bc-4800-a700-360b649d2f3a/download/serie-histrica-de-produccin-de-gas-natural-por-cuenca-y-sub-tipo-de-recurso-captulo-iv-.csv'
-    
+    const payload = await parsers.datosGobarCSV(0,10,url)
 
    const post = {
     kpi,
@@ -16,7 +16,8 @@ module.exports = (async function() {
   fdr: "https://datos.gob.ar/it/dataset/sspm-produccion-ventas-petroleo-derivados/archivo/sspm_363.3",
   fu: "MECON",
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-  frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 100,
   min: 0,
@@ -24,7 +25,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Porcentaje",
-        data: await parsers.datosGobarCSV(0,10,url),
+        data: payload,
         color: "#2E78D2",
         
         

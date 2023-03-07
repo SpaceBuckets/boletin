@@ -2,24 +2,34 @@
    
   <section class="lastup">
     <div>
+    <div>
+      <h4>Dimensiones</h4>
+    </div>
+      <div class="scorecard">
+        <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions" :key="`${kpi.label}`">
+          <div><span class="circle" :style="{background: kpi.color }"></span> {{kpi.label}}</div> 
+          <div>
+            <div>{{kpi.data[kpi.data.length-1].y.toFixed(2)}}</div>   
+            <div><span class="delta" :class="{ negative: getVariation(kpi) < 0 }">{{getVariation(kpi)}}</span></div>   
+          </div>
+
+        </div>
+     </div> 
+</div>
+    <div>
+    <div>
       <h4>Metadata</h4>
     </div>
-<!--     <div>
-      <h4>{{getLastUpdated()}}</h4>
-      <h5 :class="{ negative: getVariation(0) < 0 }">{{getLastValue()}}
-        <svg viewBox="0 0 100 100" class="triangle" style="width: 0.6875em; height: 0.6875em;"><polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon></svg> {{getVariation(0)}}%
-      </h5> 
-    </div>
-    <hr> -->
- 
 
- 
     <div class="scorecard">
       <div>
         <div>Último Dato:</div>
-        <div>{{ kpi.dimensions[0].data.x }} ({{kpi.frec}})</div>
+        <div>{{ kpi.dimensions[0].data[kpi.dimensions[0].data.length-1].x }}</div>
       </div>
-      
+      <div>
+        <div>Frecuencia:</div>
+        <div>{{kpi.frec}}</div>
+      </div>
       <div>
         <div>Fuente:</div>
         <div><a target="_blank" :href="kpi.fur">{{kpi.fu}}</a></div>
@@ -34,20 +44,10 @@
       </div>
 
     </div>  
-
-    <div>
-      <h4>Dimensiones</h4>
     </div>
-      <div class="scorecard">
-        <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions" :key="`${kpi.label}`">
-          <div><span class="circle" :style="{background: kpi.color }"></span> {{kpi.label}}</div> 
-          <div>
-            <div>{{kpi.data[kpi.data.length-1].y}}</div>   
-            <div><span class="delta" :class="{ negative: getVariation(kpi) < 0 }">{{getVariation(kpi)}}</span></div>   
-          </div>
 
-        </div>
-     </div>    
+
+   
   </section>
 
 </template>
@@ -92,7 +92,7 @@ export default {
   }, 
     methods: {
       getLastValue() {
-        var lastValue = this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].y;
+        var lastValue = this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].y.toFixed(2);
         return lastValue
       },
     getVariation(legend) {
@@ -121,7 +121,7 @@ export default {
 
  <style lang="scss" scoped>
  h4 {
-  font-size: 16px;
+  font-size: 14px;
    margin: 0;
    font-weight: normal;
   margin-bottom: 10px;
@@ -161,7 +161,6 @@ h5 {
     > div {
 display: flex;
     justify-content: space-between;
-    border-bottom: 1px dotted #eee;
     padding: 6px 1px;
     &:last-child { border-bottom: 0; }
     > div { 
@@ -207,12 +206,22 @@ h2 {
  
 .lastup { 
   display: flex;
-  flex-wrap: wrap;
+  //flex-wrap: wrap;
   flex-direction: column;
+  max-width: 280px;
   overflow: hidden;
-   > * {
-    flex: 1;
- 
+ padding-left: 0px;
+ border-left: 1px solid #eee;
+ > div {
+     margin-left: 15px;
+     border-radius: 2px;
+     max-height: 40%;
+     overflow: auto;
+    margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    &:last-child {
+      border: 0;
+    }
   }
 }
 h5 + p {

@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "polingresos"
-
+const payload = await parsers.datosGobarAPI('186.1_TOTAL_POLISOS_0_0_23')
 
   const post = {
     kpi,
@@ -15,13 +15,14 @@ module.exports = (async function() {
     fdr: "https:/datos.gob.ar/sv.dataset/sspm-gasto-publico-gobierno-nacional-politica-ingresos/archivo/sspm_1186.1",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     min: 0,
     dimensions: [
       {
         label: "Total",
-        data: await parsers.datosGobarAPI('186.1_TOTAL_POLISOS_0_0_23'),
+        data: payload,
         color: "rgba(46,120,210,1)",
 
       },

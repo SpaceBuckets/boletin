@@ -1,9 +1,9 @@
 module.exports = (async function() {
 
   const parsers = require("@parsers");
-
   const kpi = "cer"
-    
+  const payload = await parsers.datosGobarAPI('94.2_CD_D_0_0_10&start_date=2012-01-01')
+  
   const post = {
     kpi,
     t: "CER",
@@ -16,12 +16,13 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/ar/dataset/sspm-cer-uva-uvi/archivo/sspm_94.2",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Diaria", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),
     dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "CER",
-        data: await parsers.datosGobarAPI('94.2_CD_D_0_0_10&start_date=2012-01-01'),
+        data: payload,
         color: "rgba(46,120,210,1)",
       },
     ],

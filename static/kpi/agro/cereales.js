@@ -4,7 +4,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "cereales"
- 
+ const payload = await parsers.datosGobarAPI('34.2_GTGIR_0_P_19')
   const post = {
     kpi,
     t: "Producción de Cereales",
@@ -15,13 +15,14 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/sq/dataset/sspm-indicadores-evolucion-sector-agropecuario/archivo/sspm_34.2",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     max: 80000000,
     dimensions: [
       { 
         label: "Girasol",
-        data: await parsers.datosGobarAPI('34.2_GTGIR_0_P_19'),
+        data: payload,
         color: "rgba(46,120,210,0.25)",
       },
       { 

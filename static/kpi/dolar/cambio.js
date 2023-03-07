@@ -27,9 +27,13 @@ module.exports = (async function() {
 
   for (let [key, value] of Object.entries(reambito)) {
     var data = JSON.parse(await (await fetch(value)).text())
-    for (let i = 1; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: null} }
+
+    for (let i = 1; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: 0} }
     for (let i = 1; i < data.length; i++) {
-      payload[key][i].x = new Date(data[i][0].split('-').reverse().join('-')).toISOString().substring(0, 10)
+
+ 
+      payload[key][i].x =  new Date(data[i][0].split('/').reverse().join('-')).toISOString().substring(0, 10),
+
       payload[key][i].y = Number(data[i][1].replace(',','.'))
     }
     payload[key] = payload[key].filter(element => { if (Object.keys(element).length !== 0) { return true; } return false; }).reverse();
@@ -39,6 +43,7 @@ module.exports = (async function() {
   for (let [key, value] of Object.entries(reambito)) {
     for (let i = 0; i < payload[chosenOne].length; i++) { payload[key][i].x = payload[chosenOne][i].x }
   }
+
 
   const post = {
     kpi,
@@ -50,7 +55,8 @@ module.exports = (async function() {
     fdr: "https://www.ambito.com/contenidos/dolar.html",
     fu: "BCRA",
     fur: "https://www.bcra.gob.ar/publicacionesestadisticas/tipos_de_cambios.asp",
-    frec: "Diaria", 
+      frec: parsers.detectDataType(payload.oficial), 
+  fruc: parsers.detectAggregationFunction(payload.oficial),
     d: "El tipo de cambio es el precio de una unidad de moneda extranjera expresado en términos de la moneda local.",
     //max: 400,
     dimensions: [

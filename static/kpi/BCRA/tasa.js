@@ -43,7 +43,8 @@ module.exports = (async function() {
     fdr: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",
     fu: "BCRA",
     fur: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",
-    frec: "Diaria", 
+      frec: parsers.detectDataType(payload.referencia), 
+  fruc: parsers.detectAggregationFunction(payload.referencia),
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     max: 100,
     dimensions: [

@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "desempleo"
-
+const payload = await parsers.datosGobarAPI('45.2_ECTDT_0_T_33')
   const post = {
     kpi,
     t: "Desempleo",
@@ -14,13 +14,14 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/dataset/sspm_45/archivo/sspm_45.2",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
     dimensions: [
       {
         label: "General",
-        data: await parsers.datosGobarAPI('45.2_ECTDT_0_T_33'),
+        data: payload,
         color: "#2E78D2",
         },
       {  

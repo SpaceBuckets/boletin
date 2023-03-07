@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "cvs"
-    
+    const payload = await parsers.datosGobarAPI('447.1_TOTALTAL_0_0_5_37')
   const post = {
     kpi,
     t: "Coeficiente de Variacion Salarial",
@@ -13,14 +13,15 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/sv/dataset/sspm-coeficiente-variacion-salarial-cvs/archivo/sspm_447.1",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Diaria", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),
     d: "",
 
     dimensions: [
         {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Coeficiente de Variacion Salarial",
-        data: await parsers.datosGobarAPI('447.1_TOTALTAL_0_0_5_37'),
+        data: payload,
         color: "rgba(46,120,210,1)",
         
         

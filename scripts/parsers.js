@@ -7,6 +7,15 @@ const Papa = require('papaparse')
 const path = require('path')
 function writeFileSyncRecursive(e,i,t){let c=e.split(path.sep).slice(0,-1);c.length&&c.reduce((e,i)=>{let t=e?e+path.sep+i:i;return fs.existsSync(t)||fs.mkdirSync(t),t}),fs.writeFileSync(e,i,t)}
 
+function detectAggregationFunction(data) {
+  const mean = data.reduce((acc, d) => acc + d.y, 0) / data.length;
+  const standardDeviation = Math.sqrt(data.reduce((acc, d) => acc + Math.pow(d.y - mean, 2), 0) / data.length);
+
+  return standardDeviation < 12 ? "sum" : "mean";
+}
+
+const detectDataType = data => Math.round((new Date(data[1].x) - new Date(data[0].x)) / (1000 * 60 * 60 * 24)) < 5 ? 'Diaria' : Math.round((new Date(data[1].x) - new Date(data[0].x)) / (1000 * 60 * 60 * 24)) < 32 ? 'Mensual' : 'Anual';
+
 
 /* -Banco Mundial------------------------------------------------------------------------- */
 
@@ -81,4 +90,4 @@ async function scrapeBCRA(serie) {
 /* -------------------------------------------------------------------------- */
 
 
-module.exports = {scrapeBCRA,genericXLS, datosGobarCSV,parseWorldBank,parseBonos,writeFileSyncRecursive, datosGobarAPI }
+module.exports = {detectDataType,detectAggregationFunction,scrapeBCRA,genericXLS, datosGobarCSV,parseWorldBank,parseBonos,writeFileSyncRecursive, datosGobarAPI }

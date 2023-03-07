@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "gasproducciondiaria"
   const url = 'http://datos.energia.gob.ar/dataset/590d1284-fd6d-4686-afd8-b3da5d90a6e9/resource/6a7866a1-723f-420c-898f-c482613646c5/download/produccin-de-gas-promedio-diaria-por-cuenca.csv'
-  
+  const payload = await parsers.datosGobarCSV(2,4,url)
   const post = {
     kpi,
   t: "Producción Promedio Diaria",
@@ -15,14 +15,15 @@ module.exports = (async function() {
   fdr: "https://datos.gob.ar/dataset/sspm_364/archivo/sspm_364.3",
   fu: "MECON",
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-  frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 6000,
   dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Produccion de Gas Diaria mm3",
-        data: await parsers.datosGobarCSV(2,4,url),
+        data: payload,
         color: "rgba(46,120,210,1)",
         
         

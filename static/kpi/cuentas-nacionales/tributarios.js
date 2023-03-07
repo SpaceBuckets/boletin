@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "tributarios"
- 
+ const payload = await parsers.datosGobarAPI('172.3_TL_RECAION_M_0_0_17')
   const post = {
     kpi,
     t: "Ingresos Tributarios",
@@ -14,12 +14,13 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/sv/dataset/sspm-principales-subgrupos-recaudacion-tributaria/archivo/sspm_172.3",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     dimensions: [
       {
         label: "Total",
-        data: await parsers.datosGobarAPI('172.3_TL_RECAION_M_0_0_17'),
+        data: payload,
         color: "#2E78D2",
 
       },

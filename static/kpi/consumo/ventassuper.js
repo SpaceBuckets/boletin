@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "ventassuper"
-    
+    const payload = await parsers.datosGobarAPI('455.1_VENTAS_TOTAGO_0_M_25_99')
   const post = {
     kpi,
     t: "Ventas Supermercados",
@@ -13,12 +13,13 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/dataset/sspm_455/archivo/sspm_455.1",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "",
     dimensions: [
         {
             label: "Totales",
-            data: await parsers.datosGobarAPI('455.1_VENTAS_TOTAGO_0_M_25_99'),
+            data: payload,
             color: "rgba(46,120,210,1)",
             },
         {    

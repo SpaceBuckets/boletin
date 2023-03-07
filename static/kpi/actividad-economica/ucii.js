@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "ucii"
- 
+ const payload = await parsers.datosGobarAPI('31.3_UNG_2004_M_18')
   const post = {
     kpi,
     t: "UCII",
@@ -14,12 +14,13 @@ module.exports = (async function() {
     fdr: "https:/.datos.gob.ar/dataset/sspm_31/archivo/sspm_31.3",
     fu: "INDEC",
     fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-6-15",
-    frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+    fruc: parsers.detectAggregationFunction(payload), 
     d: "El indicador de la utilización de la capacidad instalada en la industria manufacturera mide la proporción utilizada, en términos porcentuales, de la capacidad productiva del sector industrial.",
     dimensions: [
       {
         label: "General",
-        data: await parsers.datosGobarAPI('31.3_UNG_2004_M_18'),
+        data: payload,
         color: "#2E78D2", 
       },
       {

@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "petroleo"
-
+const payload = await parsers.datosGobarAPI('363.3_PRODUCCIONUDO__28')
   const post = {
     kpi,
     t: "Producción de Petroleo",
@@ -14,14 +14,15 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/it/dataset/sspm-produccion-ventas-petroleo-derivados/archivo/sspm_363.3",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
     dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Pozos de petroleo",
-        data: await parsers.datosGobarAPI('363.3_PRODUCCIONUDO__28'),
+        data: payload,
         color: "#2E78D2",
         
         

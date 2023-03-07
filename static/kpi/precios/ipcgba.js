@@ -4,7 +4,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "ipcgba"
-
+const payload = await parsers.datosGobarAPI('101.1_I2NG_2016_M_22&representation_mode=percent_change')
   const post = {
     kpi,
   t: "IPC-GBA",
@@ -15,7 +15,8 @@ module.exports = (async function() {
   fdr: "https://datos.gob.ar/dataset/sspm-indice-precios-al-consumidor-gba-ipc-gba-base-diciembre-2016/archivo/sspm_101.1",
   fu: "MECON",
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-  frec: "Mensual",  
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),   
   d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base.",
   max: 10,
   min: 0,
@@ -23,7 +24,7 @@ module.exports = (async function() {
       {
         fillColor: "#2E78D295",
         label: "Desestacionalizado",
-        data: await parsers.datosGobarAPI('101.1_I2NG_2016_M_22&representation_mode=percent_change'),
+        data: payload,
         type: 'bar',
         color: "#2E78D2",
         

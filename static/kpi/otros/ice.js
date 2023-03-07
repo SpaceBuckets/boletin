@@ -26,7 +26,8 @@ module.exports = (async function() {
   fdr: "https://estudioseconomicos.ec.gba.gov.ar/datos/nac/contnac-indice-de-condiciones-externas.xlsx",
   fu: "Banco Provincia",
   fur: "https://www.bancoprovincia.com.ar/estudios_economicos/informe_estudios_economicos",
-  frec: "Mensual",   
+    frec: parsers.detectDataType(payload.coyuntural), 
+  fruc: parsers.detectAggregationFunction(payload.coyuntural),    
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 10,
 

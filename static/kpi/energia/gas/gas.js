@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "gas"
-
+const payload = await parsers.datosGobarAPI('364.3_PRODUCCIoNRAL__25')
 
   const post = {
     kpi,
@@ -15,14 +15,15 @@ module.exports = (async function() {
   fdr: "https://datos.gob.ar/dataset/sspm_364/archivo/sspm_364.3",
   fu: "MECON",
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-  frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 6000,
   dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Produccion de Gas",
-        data: await parsers.datosGobarAPI('364.3_PRODUCCIoNRAL__25'),
+        data: payload,
         color: "rgba(46,120,210,1)",
         
         

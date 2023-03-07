@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "correo"
   
-    
+    const payload = await parsers.datosGobarAPI('302.3_CORREOS_COS_U_0_S_29')
   const post = {
     kpi,
     t: "Correo Postal",
@@ -14,14 +14,15 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/dataset/sspm-estadisticas-servicios-publicos/archivo/sspm_302.3",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "",
 
     dimensions: [
         {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Correo Postal",
-        data: await parsers.datosGobarAPI('302.3_CORREOS_COS_U_0_S_29'),
+        data: payload,
         color: "rgba(46,120,210,1)",
         
         

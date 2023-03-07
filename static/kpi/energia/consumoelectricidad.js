@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "consumoelectricidad"
-
+const payload = await parsers.datosGobarAPI('302.3_ELEC_GAS_AGWH_0_S_35')
   const post = {
     kpi,
   t: "Consumo Electrico",
@@ -14,13 +14,14 @@ module.exports = (async function() {
   fdr: "https://datos.gob.ar/dataset/sspm-estadisticas-servicios-publicos/archivo/sspm_302.3",
   fu: "MECON",
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-  frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Consumo de Electricidad",
-        data: await parsers.datosGobarAPI('302.3_ELEC_GAS_AGWH_0_S_35'),
+        data: payload,
         color: "rgba(46,120,210,1)",
         
         

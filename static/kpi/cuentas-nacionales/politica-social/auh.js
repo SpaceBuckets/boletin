@@ -3,7 +3,7 @@ module.exports = (async function () {
   const parsers = require("@parsers");
 
   const kpi = "auh"
-
+const payload = await parsers.datosGobarAPI('188.1_AUH_ASIGNAADO_0_0_48')
   const post = {
     kpi,
     t: "Asignacion Universal",
@@ -15,11 +15,12 @@ module.exports = (async function () {
     fdr: "https://datos.gob.ar/km/dataset/sspm-politica-ingresos-asignacion-universal-por-hijo-para-proteccion-social-por-embarazo/archivo/sspm_188.1",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual",    
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),     
     dimensions: [
         {
           label: "AUH",
-          data: await parsers.datosGobarAPI('188.1_AUH_ASIGNAADO_0_0_48'),
+          data: payload,
           color: "#2E78D2CC",
           fillColor: "#2E78D2CC",
           type: 'bar',

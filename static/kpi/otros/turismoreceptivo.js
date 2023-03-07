@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "turismoreceptivo"
-      
+      const payload = await parsers.datosGobarAPI('322.2_TURISMO_REIVO__17')
   const post = {
     kpi,
     t: "Turismo Receptivo",
@@ -13,14 +13,15 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/dataset/sspm_322/archivo/sspm_322.2",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "",
 
     dimensions: [
         {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Turismo Receptivo",
-        data: await parsers.datosGobarAPI('322.2_TURISMO_REIVO__17') ,
+        data: payload,
         color: "rgba(46,120,210,1)",
         
         

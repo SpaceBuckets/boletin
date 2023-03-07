@@ -24,7 +24,7 @@ module.exports = (async function() {
     for (let [key, value] of Object.entries(reambito)) {
       var data = (await parsers.parseBonos(value)).reverse()
 
-      for (let i = 0; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: 0} }
+      for (let i = 0; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: null} }
       for (let i = 0; i < data.length; i++) {
         payload[key][i].x = data[i].x
         payload[key][i].y = data[i].y
@@ -50,7 +50,8 @@ module.exports = (async function() {
     fdr: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",
     fu: "Intervalores",
     fur: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",
-    frec: "Diaria", 
+      frec: parsers.detectDataType(payload.al30d), 
+  fruc: parsers.detectAggregationFunction(payload.al30d),
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
     min: 0,

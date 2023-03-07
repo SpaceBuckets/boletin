@@ -4,7 +4,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "bioetanol"
- 
+ const payload = await parsers.datosGobarAPI('368.3_BIOETANOL_ION__26')
    const post = {
     kpi,
     t: "Producción de Bioetanol",
@@ -15,14 +15,15 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/sq/dataset/sspm-indicadores-evolucion-sector-agropecuario/archivo/sspm_34.2",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     max: 180000,
     dimensions: [
       {
         fillColor: "rgba(46,120,210,0.1)",
         label: "Producción de Bioetanol",
-        data: await parsers.datosGobarAPI('368.3_BIOETANOL_ION__26'),
+        data: payload,
         color: "rgba(46,120,210,0.8)",
       },
     ],

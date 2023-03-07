@@ -1,12 +1,26 @@
 <template>
-  <div class="megacontainer">
-     <div class="flexer">
-      <h2><strong>{{ kpi.t }}</strong>. Serie de Tiempo</h2>
+<div class="pepecontainer">
+    <div class="flexer">
+      <h2><strong>{{ kpi.t }}</strong>. {{kpi.st}}</h2>
       <div class="innerflexer" v-if="index === undefined">   
-          <div v-if="defaultView" class="date-display"> {{ allDates[dateIndex[0]] }}&nbsp;&#8211&nbsp;{{ allDates[dateIndex[1]] }} </div>
+         <div class="date-agg" 
+              :class="{active: dataAggFrec === item}"
+              v-for="item in aggregations" 
+v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== 'Diaria') || (staticKpi.frec === 'Anual' && item === 'Anual')"
+              @click="handleAgg(item)">
+              {{item}}
+            </div>
+      
+          <div v-if="defaultView" class="date-display"> 
+            <div>{{ allDates[dateIndex[0]] }}</div>
+            &nbsp;&nbsp;—&nbsp;&nbsp;
+            <div>{{ allDates[dateIndex[1]] }} </div>
+          </div>
           <button @click="remount()">Reset</button>
        </div>
     </div>
+    <div class="hypercontainer">
+ 
     <div class="chartcontainer" ref="c">
       <template v-if="defaultView">
  
@@ -55,8 +69,8 @@
             :d="d.path"
             :key="`${rekpi}`"
             :style="{
-              'stroke': d.color ? d.color : '#333',
-              'stroke-width': d.borderWidth ? d.borderWidth : '1.5',
+              'stroke': d.color || '#333',
+              'stroke-width': d.borderWidth || '1.5',
               }"
           />
         </svg>   
@@ -69,19 +83,24 @@
         </div>
       </template>
     </div>  
-  </div>
+   <charts-genericLineSidebar :data="data"/>
 
+    </div>
+
+
+</div>
 </template>
 
 <script>
 import * as d3 from 'd3'
+
 export default {
   name: 'newLine',
   props: ['title', 'subtitle', 'data','index'],  
   data() {
     return {
       kpi: require(`~/static/data/${this.data}.json`), 
-      dates: require(`~/static/data/${this.data}.json`).dimensions, 
+      staticKpi: JSON.parse(JSON.stringify(require(`~/static/data/${this.data}.json`))),
       startX: '',
       dateStart: '',
       dateEnd: '', 
@@ -94,16 +113,41 @@ export default {
       defaultView: false,
       animation: true,
       maxZoom: false,
+      zoomLevel: 0,
       recursor: 'crosshair',
-      zoomLevel: 0
+      dataAggFrec: require(`~/static/data/${this.data}.json`).frec,
+      dataAggFruc: require(`~/static/data/${this.data}.json`).fruc,
+      aggregations: ['Diaria','Mensual','Anual']
     }
   },
   
   mounted() { 
     if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
-    this.remount() 
+     this.remount() 
   },
   methods: {  
+    aggregateData(data) {
+      const groupBy = this.dataAggFrec === 'Anual' ? d => d.x.substring(0, 4) : this.dataAggFrec === 'Mensual' ? d => d.x.substring(0, 7) : d => d.x.substring(0, 10);
+      
+      return Array.from(d3.rollup(data, 
+        v => ({ 
+          x: v[0].x,          
+          y: this.dataAggFruc === "mean" ? d3.mean(v, d => d.y) : d3.sum(v, d => d.y)
+        }), 
+        groupBy
+      ).values()).sort((a, b) => a.x - b.x);
+    },
+    handleAgg(item) {
+      this.dataAggFrec = item
+       this.kpi.dimensions = this.staticKpi.dimensions.map(d => ({ ...d }));
+
+      if(item !== this.staticKpi.frec) {
+        this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, data: this.aggregateData(d.data) }));
+      }
+
+      this.remount()
+ 
+    },    
     getCols(i) {
       return Math.ceil(i % (this.axisBottom.length+1)) || this.axisBottom.length+1;
     },
@@ -111,7 +155,7 @@ export default {
       return this.axisBottom[i]?.date ?? this.allDates[this.allDates.length - 1];
     },    
     remount() { 
-      this.allDates = this.dates[0].data.slice().map(item => item.x).sort((a, b) => new Date(a) - new Date(b))
+      this.allDates = this.kpi.dimensions[0].data.slice().map(item => item.x).sort((a, b) => new Date(a) - new Date(b))
       //reset min and max dates for brushing
       this.dateIndex.splice(0)
       this.maxZoom = false
@@ -132,19 +176,19 @@ export default {
       this.generateChart()
       this.defaultView = true    
     },
-
     generateChart() {
       const parseTime = d3.timeParse("%Y-%m-%d")
-
+      //console.log(this.yearlyData(this.kpi.dimensions[0].data))
       const timeIntervals = [
         {interval: d3.timeDay, format: '%Y'}, // show year at zoom level 0
         {interval: d3.timeMonth, format: '%b %Y'}, // show month at zoom level 1
         {interval: d3.timeDay, format: '%d %b %Y'} // show day at zoom level 2
       ];
-
+ 
       //get start and end dates to set selected domain
       this.dateStart = parseTime(this.allDates[this.dateIndex[0]])
       this.dateEnd = parseTime(this.allDates[this.dateIndex[1]])
+ 
       const scaleX = d3.scaleTime().domain([this.dateStart,this.dateEnd]).range([0, this.$refs.c.clientWidth-50]).nice(timeIntervals[this.zoomLevel].interval)
         
       //create the x axis object with value, translate and cell width
@@ -197,7 +241,6 @@ export default {
       this.dateIndex.sort(function(a, b) { return a - b; });
 
       if (this.dateIndex[0] !== this.dateIndex[1]) {
-        console.log(this.zoomLevel)
         this.zoomLevel = Math.min(this.zoomLevel + 1, 2);
         this.generateChart()
       } 
@@ -218,6 +261,25 @@ export default {
 </script>
 
  <style lang="scss">
+
+.pepecontainer {
+  display: flex;
+  height: 100%;
+  gap: 20px;
+  flex-direction: column;
+
+}
+
+.hypercontainer {
+  display: flex;
+  height: 100%;
+  max-height:470px;
+    gap: 20px;
+   > * {
+    flex: 1;
+  }
+ 
+}
 
  .chartcontainer {
   height: 100%;
@@ -304,6 +366,8 @@ export default {
  .flexer {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
   > * { flex: 1; max-width: max-content; }
   .innerflexer {
     display: flex;
@@ -312,9 +376,37 @@ export default {
     font-size: 14px;
     > * { flex: 1; color: #aaa; border-radius: 1px; }
   }
+  .date-agg {
+    background: rgb(245,245,245);
+    padding: 5px 12px;
+    max-width: max-content;
+    user-select: none;
+    cursor: pointer;
+    &.active { background: #ddd;color:#888 }
+    i {
+      color: #aaa;
+      font-style: normal;
+      line-height: 0;
+    }
+  }
   .date-display {
     background: rgb(245,245,245);
     padding: 5px 12px;
+    max-width: max-content;
+    user-select: none;
+     text-align: center;
+    display: flex;
+    justify-content:space-between;
+    > div {
+      flex: 1;
+            color: #aaa;
+ 
+    }
+    i {
+      color: #aaa;
+      font-style: normal;
+      line-height: 0;
+    }
   }
   button {
     max-width: max-content;

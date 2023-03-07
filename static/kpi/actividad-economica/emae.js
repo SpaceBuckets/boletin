@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "emae"
- 
+ const payload = await parsers.datosGobarAPI('143.3_NO_PR_2004_A_31')
     /*   a: '11.3_ISOM_2004_M_39',
       b: '11.3_VIPAA_2004_M_5',
       c: '11.3_ISD_2004_M_26',
@@ -32,12 +32,13 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/it/dataset/sspm-estimador-mensual-actividad-economica-emae-base-2004/archivo/sspm_143.3",
     fu: "INDEC",
     fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-9-48",
-    frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+    fruc: parsers.detectAggregationFunction(payload), 
     d: "El Estimador Mensual de Actividad Económica (EMAE) refleja la <strong>evolución mensual de la actividad económica</strong> del conjunto de los sectores productivos a nivel nacional.",
     dimensions: [
       {
         label: "Desestacionalizado",
-        data: await parsers.datosGobarAPI('143.3_NO_PR_2004_A_31'),
+        data: payload,
         color: "#2E78D2",
       },
       {

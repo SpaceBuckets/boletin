@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "ipimundial"
   const url = 'https://datos.produccion.gob.ar/dataset/178d90a9-43df-408c-92f4-36ad14885f99/resource/88adb84d-622d-43d6-91fc-8f87f8bac91c/download/ipi-mundial.csv'
- 
+  const payload = await parsers.datosGobarCSV(0,1,url)
   const post = {
     kpi,
     t: "IPI Mundial",
@@ -15,7 +15,8 @@ module.exports = (async function() {
     fdr: "https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xls",
     fu: "BCRA",
     fur: "https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xls",
-    frec: "Diaria", 
+    frec: parsers.detectDataType(payload), 
+    fruc: parsers.detectAggregationFunction(payload),  
     d: "Este índice mide el precio relativo de los bienes y servicios de la economía argentina con respecto al de los de los principales 12 socios comerciales del país, en función del flujo de comercio de manufacturas.",
     max: 220,
     min: 80,
@@ -23,7 +24,7 @@ module.exports = (async function() {
       {
         
         label: "Estacionalizado",
-        data: await parsers.datosGobarCSV(0,1,url),
+        data: payload,
         color: "#2E78D250",
       },
       {

@@ -478,7 +478,7 @@ export default {
   gap: 10px;
   //column-gap: 0;
 
-  //  border-left: 1px dashed #444;
+  //border-left: 1px dashed #444;
   // border-top: 1px dashed #444;
   margin: 0px 0 0 0;
   max-width: 1366px;
@@ -520,7 +520,7 @@ export default {
     border-radius: 2px;
     //border-radius: 0;
     //border-radius: 6px;
-    //border: 1px solid #1c2126;
+    border-right: 1px solid #1c2126;
     //border: 1px solid #eee;
     position: absolute;
     left: 0;
@@ -528,8 +528,8 @@ export default {
     top: 0;
     right: 0;
     padding: 20px;
-    margin-bottom: 1px;
-    margin-right: 1px;
+    //margin-bottom: 1px;
+    //margin-right: 1px;
     overflow: hidden;
  
     @media only screen and (max-width: 980px) {

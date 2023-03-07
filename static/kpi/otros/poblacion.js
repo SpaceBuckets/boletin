@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "poblacion"
-   
+   const payload = await parsers.parseWorldBank('https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000')
   const post = {
     kpi,
   t: "Población",
@@ -14,7 +14,8 @@ module.exports = (async function() {
   fdr: "https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000",
   fu: "Banco Mundial",
   fur: "https://datos.bancomundial.org/indicator/NY.GDP.PCAP.KD?locations=AR",
-  frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
   min: 0,
@@ -23,7 +24,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Poblacion Argentina",
-        data: await parsers.parseWorldBank('https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000'),
+        data: payload,
         color: "rgba(46,120,210,1)",
         
         

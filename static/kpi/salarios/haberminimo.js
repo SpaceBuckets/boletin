@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "haberminimo"
-
+const payload = await parsers.datosGobarAPI('58.1_MP_0_M_24')
   const post = {
     kpi,
   t: "Haber Minimo Jubilatorio",
@@ -14,14 +14,15 @@ module.exports = (async function() {
   fdr: "https://datos.gob.ar/dataset/sspm-haber-minimo-jubilatorio-pesos-corrientes/archivo/sspm_58.1",
   fu: "MECON",
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-  frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 50000,
   dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Haber Minimo Jubilatorio",
-        data: await parsers.datosGobarAPI('58.1_MP_0_M_24'),
+        data: payload,
         color: "rgba(46,120,210,1)",
       },
 ]

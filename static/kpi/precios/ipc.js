@@ -4,7 +4,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "ipc"
-  
+  const payload = await parsers.scrapeBCRA("7931")
   const post = {
     kpi,
     t: "IPC",
@@ -15,14 +15,15 @@ module.exports = (async function() {
     fdr: "http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp?fecha_desde=1900-01-01&fecha_hasta=2040-04-30&primeravez=1&serie=7931",
     fu: "INDEC",
     fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-31",
-    frec: "Mensual",   
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),    
     d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base.",
     max: 10,
     min: 0,
     dimensions: [
         {
           label: "IPC General",
-          data: await parsers.scrapeBCRA("7931"),
+          data: payload,
           color: "#2E78D2",
         },
     ]

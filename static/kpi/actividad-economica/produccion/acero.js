@@ -1,6 +1,7 @@
 module.exports = (async function() {
   const parsers = require("@parsers");
   const kpi = "acero"
+  const payload = await parsers.datosGobarAPI('359.3_HIERRO_PRITAL__21');
  
   const post = {
     kpi,
@@ -12,14 +13,15 @@ module.exports = (async function() {
     fdr: "https://infra.datos.gob.ar/catalog/sspm/dataset/359/distribution/359.3/download/datos-historicos-de-la-industria-siderurgica-datos-mensulaes.csv",
     fu: "Cámara Argentina del Acero",
     fur: "https://www.acero.org.ar/estadisticas-locales/",
-    frec: "Mensual",
+    frec: parsers.detectDataType(payload), 
+    fruc: parsers.detectAggregationFunction(payload),
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     max: 500,
     dimensions: [
         {
           fillColor: "rgba(46,120,210,0.05)",
           label: "Producción de Acero",
-          data: await parsers.datosGobarAPI('359.3_HIERRO_PRITAL__21'),
+          data: payload,
           color: "rgba(46,120,210,1)",
         },
       ],

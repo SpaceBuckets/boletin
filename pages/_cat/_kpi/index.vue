@@ -13,7 +13,7 @@
     </div>
 
     
-    <hr>
+   
      <charts-kpiBoard :data="savedCells" />
   </div>
 </template>
@@ -30,21 +30,21 @@ export default {
 
  
        chart: {
-        area: "1 / 1 / 5 / 7",
+        area: "1 / 1 / 5 / 9",
         kpi: params.kpi,
         type: "Line",
         hasChart: true,
         subtitle: "Serie de Tiempo",
         title: rekpi.t        
       },
-        first: {
+/*         first: {
         area: "1 / 7 / 5 / 9",
         kpi: params.kpi,
         type: "LineSidebar",
         hasChart: true,
         subtitle: "Serie de Tiempo",
         title: rekpi.t        
-      },
+      }, */
                           
          fireet: {
         area: "5 / 7 / 9 / 9",
@@ -91,6 +91,7 @@ export default {
   display: flex;
   justify-content: space-between;
   padding-right: 15px;
+  display: none;
   > * { flex: 1; }
   + hr {
     border-color: #666;

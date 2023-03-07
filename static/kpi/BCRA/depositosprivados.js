@@ -3,7 +3,8 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "depositosprivados"
-    
+  const payload = await parsers.datosGobarAPI('90.1_DET_DESAGRIV_0_0_38')
+  
   const post = {
     kpi,
     t: "Depositos Privados",
@@ -13,13 +14,14 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/dataset/sspm_90/archivo/sspm_90.1",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "",
     dimensions: [
         {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Depositos privados",
-        data: await parsers.datosGobarAPI('90.1_DET_DESAGRIV_0_0_38') ,
+        data: payload,
         color: "rgba(46,120,210,1)",
         },
     ],

@@ -3,7 +3,10 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "gini"
-  
+  const url = 'https://infra.datos.gob.ar/catalog/sspm/dataset/65/distribution/65.1/download/indicadores-distribucion-ingreso-ocupacion-principal-e-ingreso-per-capita-familiar.csv'
+
+  const payload = await parsers.datosGobarCSV(0,2,url)
+
   const post = {
     kpi,
   t: "GINI",
@@ -14,7 +17,8 @@ module.exports = (async function() {
   fdr: "https://api.worldbank.org/v2/country/arg/indicator/SI.POV.GINI?format=json&per_page=500",
   fu: "Banco Mundial",
   fur: "https://datos.bancomundial.org/indicator/SI.POV.GINI",
-  frec: "Mensual", 
+  frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
   max: 55,
@@ -23,7 +27,7 @@ module.exports = (async function() {
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Argentina GINI",
-        data: await parsers.parseWorldBank('https://api.worldbank.org/v2/country/arg/indicator/SI.POV.GINI?format=json&per_page=500'),
+        data: payload,
         color: "#2E78D2",
         
         

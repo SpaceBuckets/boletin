@@ -3,6 +3,7 @@ module.exports = (async function () {
   const parsers = require("@parsers");
 
   const kpi = "metrosperforados"
+const payload = await parsers.datosGobarAPI('366.3_METROS_PERRAL__31')
 
   const post = {
     kpi,
@@ -14,13 +15,14 @@ module.exports = (async function () {
     fdr: "https://datos.gob.ar/ar/dataset/sspm-pozos-petroleo-metros-perforados/archivo/sspm_366.3",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "",
      dimensions: [
         {
           
           label: "Pozos de Petroleo terminados",
-          data: await parsers.datosGobarAPI('366.3_METROS_PERRAL__31'),
+          data: payload,
           color: "#2E78D2CC",          
           
         },

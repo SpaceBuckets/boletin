@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "balanza"
-
+const payload = await parsers.datosGobarAPI('74.3_IIT_0_M_25')
   const post = {
     kpi,
     t: "Intercambio Comercial",
@@ -14,12 +14,13 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/ja/dataset/sspm-intercambio-comercial-argentino/archivo/sspm_74.3",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "El intercambio comercial argentino (ICA) muestra la evolución de la balanza comercial, la relación entre los ingresos en dólares provenientes de los productos que exporta el país y aquellos artículos que se compran en el exterior.",
     dimensions: [
       {
         label: "Importaciones",
-        data: await parsers.datosGobarAPI('74.3_IIT_0_M_25'),
+        data: payload,
         color: "#b22222CC",
 
       },

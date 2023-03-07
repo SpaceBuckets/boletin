@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "ventasshopping"
-  
+  const payload = await parsers.datosGobarAPI('458.1_VENTAS_TOTTES_ABRI_M_33_40')
 
   const post = {
     kpi,
@@ -14,12 +14,13 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/ar/dataset/sspm-ventas-centros-compras-nacional/archivo/sspm_458.1",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "",
     dimensions: [
         {
             label: "Total",
-            data: await parsers.datosGobarAPI('458.1_VENTAS_TOTTES_ABRI_M_33_40'),
+            data: payload,
             color: "rgba(46,120,210,1)",
             },
         {    

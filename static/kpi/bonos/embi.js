@@ -29,7 +29,8 @@ module.exports = (async function() {
   fdr: "https://bcrdgdcprod.blob.core.windows.net/documents/entorno-internacional/documents/Serie_Historica_Spread_del_EMBI.xlsx",
   fu: "JP Morgan",
   fur: "https://am.jpmorgan.com/es/es/asset-management/per/products/jpm-emerging-markets-strategic-bond-a-acc-usd-lu1162084740",
-  frec: "Diaria", 
+    frec: parsers.detectDataType(payload.argentina), 
+  fruc: parsers.detectAggregationFunction(payload.argentina),
   d: "Índice calculado por JP Morgan Chase que mide la diferencia entre la tasa de interés que un país debe de pagar por emitir deuda en el exterior.",
   max: 50,
 

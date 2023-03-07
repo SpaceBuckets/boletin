@@ -4,7 +4,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "ipim"
-   
+   const payload = await parsers.datosGobarAPI('448.1_NIVEL_GENERAL_0_0_13_46&representation_mode=percent_change')
   const post = {
     kpi,
   t: "IPIM",
@@ -15,13 +15,14 @@ module.exports = (async function() {
   fdr: "https://datos.gob.ar/ar/dataset/sspm-indice-precios-internos-al-por-mayor-ipim-dic-2015-100/archivo/sspm_448.1",
   fu: "INDEC",
   fur: "https://www.indec.gob.ar/indec/web/Nivel3-Tema-3-5",
-  frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   min: 0,
   dimensions: [
       {
         label: "IPIM",
-        data: await parsers.datosGobarAPI('448.1_NIVEL_GENERAL_0_0_13_46&representation_mode=percent_change'),
+        data: payload,
         color: "#2E78D2",
       },
 ]

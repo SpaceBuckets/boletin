@@ -4,6 +4,7 @@ module.exports = (async function() {
 
   const kpi = "facturacion"
   const url = 'https://cdn.produccion.gob.ar/cdn-cep/datos-facturacion/fact_por_total.csv'
+  const payload = await parsers.datosGobarCSV(0,1,url)
   const post = {
     kpi,
   t: "Facturación mediana",
@@ -14,13 +15,14 @@ module.exports = (async function() {
   fdr: "http://datos.produccion.gob.ar/dataset/variacion-interanual-mediana-en-la-facturacion-de-las-empresas",
   fu: "CEP XXI",
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-  frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "Facturación Mediana",
-        data: await parsers.datosGobarCSV(0,1,url),
+        data: payload,
         color: "rgba(46,120,210,1)",
         
       },

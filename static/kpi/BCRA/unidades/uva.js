@@ -6,6 +6,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "uva"
+  const payload = await parsers.datosGobarAPI('94.2_UVAD_D_0_0_10')
 
   const post = {
     kpi,
@@ -17,13 +18,14 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/ar/dataset/sspm-cer-uva-uvi/archivo/sspm_94.2",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Diaria", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "UVA",
-        data: await parsers.datosGobarAPI('94.2_UVAD_D_0_0_10'),
+        data: payload,
         color: "rgba(46,120,210,1)",
       },
     ],

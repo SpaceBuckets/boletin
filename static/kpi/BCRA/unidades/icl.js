@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "icl"
-   
+   const payload = await parsers.scrapeBCRA("7988")
   const post = {
     kpi,
     t: "ICL",
@@ -14,13 +14,14 @@ module.exports = (async function() {
     fdr: "http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp?fecha_desde=1900-01-01&fecha_hasta=2040-04-30&primeravez=1&serie=7988",
     fu: "BCRA",
     fur: "http://www.bcra.gob.ar/pdfs/PublicacionesEstadisticas/bolmetes.pdf",
-    frec: "Diaria", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),
     d: "El Índice de Contratos de Locación (ICL) es un indicador creado por la Ley 27.551 con el fin de poder establecer parámetros de actualización a la hora de celebrar contratos de alquiler.",
     dimensions: [
         {
           fillColor: "rgba(46,120,210,0.05)",
           label: "ICL",
-          data: await parsers.scrapeBCRA("7988"),
+          data: payload,
           color: "rgba(46,120,210,1)",    
         },
       ]

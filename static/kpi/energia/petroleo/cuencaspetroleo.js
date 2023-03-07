@@ -4,7 +4,7 @@ module.exports = (async function() {
 
   const kpi = "cuencaspetroleo"
   const url = 'http://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/af8c50bb-fde0-43b7-98eb-7cd14daf586c/download/serie-histrica-de-produccin-de-petrleo-por-cuenca-y-sub-tipo-de-recurso-captulo-iv-.csv'
-    
+    const payload = await parsers.datosGobarCSV(0,3,url)
   const post = {
     kpi,
   t: "Producción por Cuenca",
@@ -15,14 +15,15 @@ module.exports = (async function() {
   fdr: "https://datos.gob.ar/it/dataset/sspm-produccion-ventas-petroleo-derivados/archivo/sspm_363.3",
   fu: "MECON",
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-  frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
   dimensions: [
       {
         fillColor: "rgba(46,120,210,0.0)",
         label: "Neuquina",
-        data:   await parsers.datosGobarCSV(0,3,url),
+        data: payload,
         color: "#2E78D2",
       },
       {

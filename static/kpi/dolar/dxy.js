@@ -4,6 +4,7 @@ module.exports = (async function() {
 
    const kpi = "dxy"
   const url = 'https://query1.finance.yahoo.com/v7/finance/download/DX-Y.NYB?period1=0&period2=9674456596&interval=1d&events=history&includeAdjustedClose=true'
+  const payload = await parsers.datosGobarCSV(0,4,url)
    const post = {
     kpi,
     t: "Indice DXY",
@@ -14,7 +15,8 @@ module.exports = (async function() {
     fdr: "https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xls",
     fu: "BCRA",
     fur: "https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xls",
-    frec: "Diaria", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),
     d: "Este índice mide el precio relativo de los bienes y servicios de la economía argentina con respecto al de los de los principales 12 socios comerciales del país, en función del flujo de comercio de manufacturas.",
     max: 200,
     min: 0,
@@ -23,7 +25,7 @@ module.exports = (async function() {
       {
         
         label: "DXY",
-        data: await parsers.datosGobarCSV(0,4,url),
+        data: payload,
         color: "#2E78D2",
         
       },

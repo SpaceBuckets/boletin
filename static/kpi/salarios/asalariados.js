@@ -2,7 +2,7 @@ module.exports = (async function() {
   
   const parsers = require("@parsers");
   const kpi = "asalariados"
-
+const payload = await parsers.datosGobarAPI('151.1_AARIADOTAC_2012_M_26')
   const post = {
     kpi,
     t: "Asalariados",
@@ -13,14 +13,15 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/dataset/sspm-trabajadores-registrados-segun-modalidad-ocupacional-principal-base-2012/archivo/sspm_151.1",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual",
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload), 
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
     dimensions: [
         {
           fillColor: 'rgba(46,120,210,0)',
           label: "Empleo Privado",
-          data: await parsers.datosGobarAPI('151.1_AARIADOTAC_2012_M_26'),
+          data: payload,
           color: "#2E78D2",
         },
         {

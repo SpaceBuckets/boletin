@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "salariominimo"
-
+const payload = await parsers.datosGobarAPI('57.1_SMVMM_0_M_34')
   const post = {
     kpi,
   t: "Salario Minimo, Vital y Movil",
@@ -14,14 +14,15 @@ module.exports = (async function() {
    fdr: "https://datos.gob.ar/no/dataset/sspm-salario-minimo-vital-movil-pesos-corrientes/archivo/sspm_57.1",
    fu: "MECON",
    fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-   frec: "Mensual", 
+     frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 80000,
   dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
         label: "RIPTE",
-        data: await parsers.datosGobarAPI('57.1_SMVMM_0_M_34'),
+        data: payload,
         color: "rgba(46,120,210,1)",
       },
 ]

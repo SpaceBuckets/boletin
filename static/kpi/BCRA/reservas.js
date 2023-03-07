@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "reservas"
-   
+   const payload = await parsers.datosGobarAPI('174.1_RRVAS_IDOS_0_0_36')
   const post = {
     kpi,
   t: "Reservas BCRA",
@@ -14,14 +14,15 @@ module.exports = (async function() {
   fdr: "https://datos.gob.ar/dataset/sspm_174/archivo/sspm_174.1",
   fu: "BCRA",
   fur: "https://www.bcra.gob.ar/",
-  frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 90000,
   dimensions: [
       {
         fillColor: 'rgba(46,120,210,0.1)',
         label: "Reservas Internacionales",
-        data: await parsers.datosGobarAPI('174.1_RRVAS_IDOS_0_0_36'),
+        data: payload,
         color: '#2E78D2',
         
       },

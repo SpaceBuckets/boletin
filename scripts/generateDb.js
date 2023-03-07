@@ -107,7 +107,7 @@ async function processItems(arr){
   await Promise.all(jsFiles.map(async kpi => {
     try {
       await require(`../static/kpi/${kpi}`);
-      console.log('\x1b[42m',`♥ [${kpi}] updated`, '\x1b[0m');
+      console.log('\x1b[42m',`♥ [${kpi.match(/\/([^/]+)\./)[1]}] updated`, '\x1b[0m');
     } catch (error) {
       console.log('\x1b[41m', '\x1b[37m', `✕ [${kpi}] failed to fetch!`, '\x1b[0m');
       console.error(error);
@@ -122,4 +122,4 @@ async function processItems(arr){
 };
 
 processItems(glob.sync('**', { cwd: `static/kpi/` }));
-//processItems(['consumo/facturacion.js']);
+//processItems(['energia/petroleo/cuencaspetroleo.js']);

@@ -4,7 +4,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "autos"
-
+  const payload = await parsers.datosGobarAPI('330.1_PRODUCCIONLES__22')
   const post = {
     kpi,
     t: "Producción de Autos",
@@ -15,13 +15,14 @@ module.exports = (async function() {
     fdr: "https://datos.gob.ar/dataset/sspm-datos-historicos-industria-automotriz/archivo/sspm_330.1",
     fu: "ADEFA",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+    fruc: parsers.detectAggregationFunction(payload),
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     dimensions: [
         {
           fillColor: "rgba(46,120,210,0.05)",
           label: "Producción de Autos",
-          data: await parsers.datosGobarAPI('330.1_PRODUCCIONLES__22'),
+          data: payload,
           color: "rgba(46,120,210,1)",
         },
       ],

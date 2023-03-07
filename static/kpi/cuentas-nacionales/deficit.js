@@ -3,7 +3,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "deficit"
-
+const payload = await parsers.datosGobarAPI('379.9_ING_CORR_2017__13_2')
   const post = {
     kpi,
   t: "Déficit Fiscal",
@@ -14,12 +14,13 @@ module.exports = (async function() {
   fdr: "https://datos.gob.ar/ar/dataset/sspm-esquema-ahorro---inversion---financimmiento-sector-publico-nacional-base-caja/archivo/sspm_379.9",
   fu: "MECON",
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-  frec: "Mensual", 
+    frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   dimensions: [
       {
         label: "Ingresos",
-        data: await parsers.datosGobarAPI('379.9_ING_CORR_2017__13_2'),
+        data: payload,
         color: "#009966",
 
       },

@@ -4,7 +4,7 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "ipcnucleo"
-
+const payload = await parsers.datosGobarAPI('148.3_INUCLEONAL_DICI_M_19&representation_mode=percent_change')
   const post = {
     kpi,
   t: "IPC Núcleo",
@@ -15,7 +15,8 @@ module.exports = (async function() {
    fdr: "https://datos.gob.ar/dataset/sspm-indice-precios-al-consumidor-nacional-ipc-base-diciembre-2016/archivo/sspm_145.9?view_id=01510e38-f508-480f-bdf7-6e045b9c04e1",
    fu: "MECON",
    fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-   frec: "Mensual", 
+     frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
      d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base.",
   max: 10,
   min: 0,
@@ -24,7 +25,7 @@ module.exports = (async function() {
     {
       fillColor: "#2E78D295",
       label: "IPC Núcleo",
-      data: await parsers.datosGobarAPI('148.3_INUCLEONAL_DICI_M_19&representation_mode=percent_change'),
+      data: payload,
       type: 'bar',
       color: "#2E78D2",
       

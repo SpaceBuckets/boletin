@@ -5,6 +5,7 @@ module.exports = (async function () {
   const kpi = "merval"
  
 const url = 'https://query1.finance.yahoo.com/v7/finance/download/M.BA?period1=0&period2=9674456596&interval=1d&events=history&includeAdjustedClose=true'
+const payload = await parsers.datosGobarCSV(0,4,url)
   const post = {
     kpi,
     t: "MERVAL",
@@ -15,14 +16,15 @@ const url = 'https://query1.finance.yahoo.com/v7/finance/download/M.BA?period1=0
     fdr: "https://datos.gob.ar/dataset/sspm-indices-bursatiles-argentina/archivo/sspm_169.1",
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
-    frec: "Mensual", 
+      frec: parsers.detectDataType(payload), 
+  fruc: parsers.detectAggregationFunction(payload),  
     d: "",
 
     dimensions: [
         {
           fillColor: "transparent",
           label: "Indice Merval",
-          data: await parsers.datosGobarCSV(0,4,url),
+          data: payload,
           color: "#2E78D2CC",
           type: 'line',
         },
