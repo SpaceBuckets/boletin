@@ -172,9 +172,13 @@ export default {
         this.dateIndex.push(this.allDates.length-1)
       }
 
+      this.$nextTick(() => {
       //create chart and enable render
       this.generateChart()
-      this.defaultView = true    
+
+      this.defaultView = true  
+      });
+  
     },
     generateChart() {
       const parseTime = d3.timeParse("%Y-%m-%d")
