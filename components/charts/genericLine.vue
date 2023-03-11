@@ -43,22 +43,22 @@ v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== '
           :class="{animation}"
           :width="chartWidth" 
           :height="chartHeight" 
-          :viewBox="`0 0 ${$refs.c.clientWidth } ${$refs.c.clientHeight}`"
+          :viewBox="`0 0 ${chartWidth } ${chartHeight}`"
         >
           <clipPath id="clip">
-            <rect :x="`${axisBottom[0].width}px`" y="0" :height="$refs.c.clientHeight" :width="$refs.c.clientWidth-50-axisBottom[0].width"></rect>
+            <rect :x="`${axisBottom[0].width}px`" y="0" :height="chartHeight" :width="chartWidth-50-axisBottom[0].width"></rect>
           </clipPath>  
 
           <g class="axis xAxis">
-            <g v-for="tick in axisBottom" :transform="`translate(${tick.left},${$refs.c.clientHeight-20})`">
-                <line :y2="`-${$refs.c.clientHeight-20}`"></line>
+            <g v-for="tick in axisBottom" :transform="`translate(${tick.left},${chartHeight-20})`">
+                <line :y2="`-${chartHeight-20}`"></line>
                 <text x="5" dy="0.71em">{{tick.value}}</text>
             </g>            
           </g>
 
           <g class="axis yAxis">
-            <g v-for="tick in axisRight" :transform="`translate(${$refs.c.clientWidth-30},${tick.top})`">
-                <line :x2="`-${$refs.c.clientWidth-30}`"></line>
+            <g v-for="tick in axisRight" :transform="`translate(${chartWidth-30},${tick.top})`">
+                <line :x2="`-${chartWidth-30}`"></line>
                 <text x="5" dy="0.32em">{{tick.value}}</text>
             </g>            
           </g>
@@ -180,7 +180,6 @@ export default {
       //create chart and enable render
       this.generateChart()
 
-      this.defaultView = true  
       });
   
     },
@@ -217,6 +216,7 @@ export default {
       //draw a line for each of the chart kpi, dropping null values
       const pathGenerator = d3.line().x(d => scaleX(parseTime(d.x))).y(d => scaleY(d.y)).defined(d => d.y !== null);
       this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, path: pathGenerator(d.data) }));
+      this.defaultView = true  
 
     },    
     startDrag(e) {
