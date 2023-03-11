@@ -77,7 +77,7 @@ v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== '
       </template>
     </div>
  
-   <charts-genericLineSidebar v-if="!index" :data="data"/>
+   <charts-genericLineSidebar v-if="!index && defaultView" :data="data"/>
 
     </div>
 
