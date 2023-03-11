@@ -41,8 +41,8 @@ v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== '
         <svg 
           id="chart" 
           :class="{animation}"
-          :width="$refs.c.clientWidth" 
-          :height="$refs.c.clientHeight" 
+          :width="chartWidth" 
+          :height="chartHeight" 
           :viewBox="`0 0 ${$refs.c.clientWidth } ${$refs.c.clientHeight}`"
         >
           <clipPath id="clip">
@@ -77,7 +77,7 @@ v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== '
       </template>
     </div>
  
-   <charts-genericLineSidebar v-if="!index && defaultView" :data="data"/>
+   <charts-genericLineSidebar v-if="!index" :data="data"/>
 
     </div>
 
@@ -114,6 +114,8 @@ export default {
       animation: true,
       maxZoom: false,
       zoomLevel: 0,
+      chartHeight: 0,
+      chartWidth: 0,
       recursor: 'crosshair',
       dataAggFrec: require(`~/static/data/${this.data}.json`).frec,
       dataAggFruc: require(`~/static/data/${this.data}.json`).fruc,
@@ -123,6 +125,8 @@ export default {
   
   mounted() { 
     if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
+    this.chartHeight = this.$refs.c.clientHeight
+    this.chartWidth = this.$refs.c.clientWidth
      this.remount() 
   },
   methods: {  
