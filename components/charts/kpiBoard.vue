@@ -491,7 +491,7 @@ export default {
   > i {
     //  border-right: 1px dashed #444;
     //  border-bottom: 1px dashed #444;
-    height: 135px;
+    height: 130px;
     pointer-events: none;
     cursor: pointer;
     @media only screen and (max-width: 980px) {
@@ -528,8 +528,9 @@ export default {
     top: 0;
     right: 0;
     padding: 20px;
-    margin-bottom: 1px;
-    margin-right: 1px;
+    padding-bottom: 15px;
+    //margin-bottom: 1px;
+    //margin-right: 1px;
     overflow: hidden;
  
     @media only screen and (max-width: 980px) {

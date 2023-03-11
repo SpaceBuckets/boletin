@@ -2,15 +2,28 @@
 <div class="pepecontainer" :class="{index}">
     <div class="flexer">
       <h2><strong>{{ kpi.t }}</strong>. {{kpi.st}}</h2>
-      <div class="innerflexer" v-if="index === undefined">   
+      <div class="innerflexer" v-if="index === undefined">  
+
+        <div class="subinnerflexer">
+          <div class="date-agg" 
+            :class="{active: selectedRange === item}"
+            v-for="item in ranges" 
+            @click="handleRange(item)"> 
+            {{item}} 
+          </div>
+ 
+        </div>
+        <div class="subinnerflexer">
+
          <div class="date-agg" 
               :class="{active: dataAggFrec === item}"
               v-for="item in aggregations" 
-v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== 'Diaria') || (staticKpi.frec === 'Anual' && item === 'Anual')"
+              v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== 'Diaria') || (staticKpi.frec === 'Anual' && item === 'Anual')"
               @click="handleAgg(item)">
               {{item}}
             </div>
-      
+              </div>
+
           <div v-if="defaultView" class="date-display"> 
             <div>{{ allDates[dateIndex[0]] }}</div>
             &nbsp;&nbsp;—&nbsp;&nbsp;
@@ -117,6 +130,8 @@ export default {
       chartHeight: 0,
       chartWidth: 0,
       recursor: 'crosshair',
+      ranges: ['Max','8A','4A','12M','6M'],
+      selectedRange: 'Max',
       dataAggFrec: require(`~/static/data/${this.data}.json`).frec,
       dataAggFruc: require(`~/static/data/${this.data}.json`).fruc,
       aggregations: ['Diaria','Mensual','Anual']
@@ -129,6 +144,20 @@ export default {
     this.chartWidth = this.$refs.c.clientWidth
      this.remount() 
   },
+  computed: {
+    startDates() {
+      const lastDate = new Date(this.staticKpi.dimensions[0].data.slice(-1)[0].x);
+      const formatDate = (date) => date.toISOString().slice(0, 10);
+
+      return {
+        '6M': formatDate(new Date(lastDate.getFullYear(), lastDate.getMonth() - 5, 1)),
+        '12M': formatDate(new Date(lastDate.getFullYear() - 1, lastDate.getMonth(), 1)),
+        '4A': formatDate(new Date(lastDate.getFullYear() - 3, lastDate.getMonth(), 1)),
+        '8A': formatDate(new Date(lastDate.getFullYear() - 7, lastDate.getMonth(), 1)),
+        'Max': formatDate(new Date(1970, 0, 1)),
+      };
+    },
+  },  
   methods: {  
     aggregateData(data) {
       const groupBy = this.dataAggFrec === 'Anual' ? d => d.x.substring(0, 4) : this.dataAggFrec === 'Mensual' ? d => d.x.substring(0, 7) : d => d.x.substring(0, 10);
@@ -143,7 +172,7 @@ export default {
     },
     handleAgg(item) {
       this.dataAggFrec = item
-       this.kpi.dimensions = this.staticKpi.dimensions.map(d => ({ ...d }));
+      this.kpi.dimensions = this.staticKpi.dimensions.map(d => ({ ...d }));
 
       if(item !== this.staticKpi.frec) {
         this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, data: this.aggregateData(d.data) }));
@@ -152,6 +181,26 @@ export default {
       this.remount()
  
     },    
+    filterDateData(data,startDate) {
+      const filteredData = data.filter(({ x }) => new Date(x) >= new Date(startDate));
+      return Array.from(
+        d3.rollup(
+          filteredData,
+          (v) => ({ x: v[0].x, y: v[0].y }),
+          (d) => d.x
+        ).values()
+      ).sort((a, b) => new Date(a.x) - new Date(b.x));
+    },
+    handleRange(item) {
+      this.selectedRange = item
+      this.kpi.dimensions = this.staticKpi.dimensions.map(d => ({ ...d }));
+
+      this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, data: this.filterDateData(d.data,this.startDates[item]) }));
+
+      this.remount()
+
+
+    },
     getCols(i) {
       return Math.ceil(i % (this.axisBottom.length+1)) || this.axisBottom.length+1;
     },
@@ -176,11 +225,10 @@ export default {
         this.dateIndex.push(this.allDates.length-1)
       }
 
-      this.$nextTick(() => {
-      //create chart and enable render
+       //create chart and enable render
       this.generateChart()
 
-      });
+    
   
     },
     generateChart() {
@@ -297,7 +345,7 @@ export default {
   height: 100%;
   position: relative;
   float: left;
-  width: calc(100% - 300px);
+  width: calc(100% - 320px);
   margin-right:20px;
       @media only screen and (max-width: 980px) {
       min-height: 300px;
@@ -390,6 +438,13 @@ export default {
     gap: 10px;
     font-size: 14px;
     > * { flex: 1; color: #aaa; border-radius: 1px; }
+    .subinnerflexer {
+      display: flex;
+      align-items: center;
+      gap: 0px;
+      font-size: 14px;
+      > * { flex: 1; color: #aaa; border-radius: 1px; }      
+    }
   }
   .date-agg {
     background: rgb(245,245,245);
@@ -415,7 +470,8 @@ export default {
     > div {
       flex: 1;
             color: #aaa;
- 
+     min-width: max-content;
+
     }
     i {
       color: #aaa;

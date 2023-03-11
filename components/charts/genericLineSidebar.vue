@@ -208,7 +208,7 @@ h2 {
   float: left;
   width: 100%;
  
-  max-width: 280px;
+  max-width: 300px;
   overflow: hidden;
  padding-left: 0px;
  border-left: 1px solid #eee;
