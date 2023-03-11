@@ -1,5 +1,5 @@
 <template>
-<div class="pepecontainer">
+<div class="pepecontainer" :class="{index}">
     <div class="flexer">
       <h2><strong>{{ kpi.t }}</strong>. {{kpi.st}}</h2>
       <div class="innerflexer" v-if="index === undefined">   
@@ -275,9 +275,6 @@ export default {
   height: 100%;
   gap: 20px;
   flex-direction: column;
-
-}
-
 .hypercontainer {
   //display: flex;
   height: 100%;
@@ -288,6 +285,13 @@ export default {
   }
  
 }
+&.index .chartcontainer {
+  width: calc(100% - 0px);
+
+}
+}
+
+
 
  .chartcontainer {
   height: 100%;
