@@ -279,7 +279,7 @@ export default {
 }
 
 .hypercontainer {
-  display: flex;
+  //display: flex;
   height: 100%;
   max-height:470px;
     gap: 20px;
@@ -292,9 +292,12 @@ export default {
  .chartcontainer {
   height: 100%;
   position: relative;
-
+  float: left;
+  width: calc(100% - 300px);
+  margin-right:20px;
       @media only screen and (max-width: 980px) {
       min-height: 300px;
+  width: calc(100% - 0px);
 
     }   
  }

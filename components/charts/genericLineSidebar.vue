@@ -205,13 +205,17 @@ h2 {
 
  
 .lastup { 
-  display: flex;
-  //flex-wrap: wrap;
-  flex-direction: column;
+  float: left;
+  width: 100%;
+ 
   max-width: 280px;
   overflow: hidden;
  padding-left: 0px;
  border-left: 1px solid #eee;
+    @media only screen and (max-width: 980px) {
+   width: calc(100% - 0px);
+
+    }   
  > div {
      margin-left: 15px;
      border-radius: 2px;
