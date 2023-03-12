@@ -2,6 +2,9 @@
 <div class="pepecontainer" :class="{index}">
     <div class="flexer">
       <h2><strong>{{ kpi.t }}</strong>. {{kpi.st}}</h2>
+      <i v-if="index">
+        {{new Date(kpi.dimensions[0].data[kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'short', year: 'numeric' })}}
+      </i>
       <div class="innerflexer" v-if="index === undefined">  
 
         <div class="subinnerflexer">
@@ -328,6 +331,7 @@ export default {
   height: 100%;
   max-height:470px;
     gap: 20px;
+    overflow: hidden;
    > * {
     flex: 1;
   }
@@ -429,9 +433,15 @@ export default {
  .flexer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
   > * { flex: 1; max-width: max-content; }
+  i {
+    font-style: normal;
+    font-size: 14px;
+    color: #aaa;
+  }
   .innerflexer {
     display: flex;
     align-items: center;

@@ -218,6 +218,7 @@ export default {
   margin-bottom: 15px;
   text-decoration: none;
 display: block;
+overflow: hidden;
   @media only screen and (max-width: 980px) {
     width: 100%;
     display: flex;
