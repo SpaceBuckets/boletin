@@ -141,5 +141,5 @@ async function processItems(arr){
   //magicDistribution()
 };
 
-//processItems(glob.sync('**', { cwd: `static/kpi/` }));
-processItems(['energia/petroleo/crudoprocesado.js']);
+processItems(glob.sync('**', { cwd: `static/kpi/` }));
+//processItems(['energia/petroleo/crudoprocesado.js']);
