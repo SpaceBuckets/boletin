@@ -3,7 +3,11 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "poblacion"
-   const payload = await parsers.parseWorldBank('https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000')
+  const url = 'https://www.eia.gov/international/api/series_data/csv?location32=08&products32=000000000000000000000000000000000000000000000000000000001&frequency=A&unit=0&start=0&generated=03-15-2023_21-18-10'
+  const payload = await parsers.datosGobarCSV(0,1,url)
+  //const url = 'https://infra.datos.gob.ar/catalog/sspm/dataset/9/distribution/9.2/download/producto-interno-bruto-precios-corrientes-valores-trimestrales-base-2004.csv'
+
+ 
   const post = {
     kpi,
   t: "Población",

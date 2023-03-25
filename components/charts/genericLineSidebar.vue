@@ -159,7 +159,7 @@ h5 {
 .scorecard {
    margin-bottom: 15px;
     > div {
-display: flex;
+    display: flex;
     justify-content: space-between;
     padding: 6px 1px;
     &:last-child { border-bottom: 0; }
@@ -169,12 +169,12 @@ display: flex;
       max-width: max-content;
       display: flex;
       align-items: center;
-       font-size: 14px;
+      font-size: 14px;
       > div { 
         display: flex;
         margin-right: 10px;
         &:last-of-type { margin-right: 0; }
-         }
+      }
       svg {
         fill: #888;
         width: 18px;
@@ -246,8 +246,8 @@ h5 + p {
     .circle {
       display: inline-block;
       vertical-align: middle;
-      width: 12px;
-      height: 12px;
+      min-width: 12px;
+      min-height: 12px;
       background:#0074D9;
       border-radius: 50px;
       margin-right: 6px;

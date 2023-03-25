@@ -324,7 +324,7 @@ export default {
 .pepecontainer {
   display: flex;
   height: 100%;
-  gap: 20px;
+  gap: 15px;
   flex-direction: column;
 .hypercontainer {
   //display: flex;

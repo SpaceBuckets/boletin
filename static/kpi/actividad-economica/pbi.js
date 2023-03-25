@@ -3,8 +3,11 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "pbi"
-const payload = await parsers.parseWorldBank('https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000')
-  const post = {
+//const payload = await parsers.parseWorldBank('https://api.worldbank.org/v2/country/arg/indicator/NY.GDP.PCAP.KD?format=json&per_page=5000')
+
+const url = 'https://infra.datos.gob.ar/catalog/sspm/dataset/6/distribution/6.2/download/producto-interno-bruto-valores-trimestrales-base-2004.csv'
+const payload = await parsers.datosGobarCSV(0,23,url)
+const post = {
     kpi,
   t: "PBI",
   st: "Producto Bruto Interno (per Capita)",

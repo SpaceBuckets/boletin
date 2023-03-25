@@ -1,4 +1,3 @@
-//const colours = cambio.map((value) => value < 0 ? '#b22222CC' : '#009966');
 module.exports = (async function() {
 
   const parsers = require("@parsers");

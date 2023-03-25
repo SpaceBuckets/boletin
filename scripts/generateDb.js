@@ -3,6 +3,8 @@ const glob = require('glob');
 const path = require('path')
 const fs = require('fs');
 var parsertree = require('tree-parser');
+ 
+var xlsx = require('node-xlsx');
 
 function writeFileSyncRecursive(filename, content, charset) {
   const folders = filename.split(path.sep).slice(0, -1)
@@ -84,7 +86,7 @@ async function processFolders( ){
     'bonos': tree['bonos'],
     'energia': tree['energia'],
     'cuentas-nacionales': tree['cuentas-nacionales'],
-    'politica-social': tree['politica-social'],
+    'comercio-exterior': tree['comercio-exterior'],
     'precios': tree['precios'],
     'salarios': tree['salarios'],
     'consumo': tree['consumo'],
@@ -97,13 +99,31 @@ async function processFolders( ){
   console.log('\x1b[46m',`✓ Folders generated` ,'\x1b[0m');
 }
 
+async function magicDistribution( ){
+ 
+  const pepe = await require('../static/redistrifiltered.json')
+  const transformedPepe = pepe.map(item => {
+    let [start, end] = item.range.split('-');
+    if (start > end) {
+      [start, end] = [end, start];
+    }
+    return { title: item.title, url: item.url, start, end };
+  });
+console.log(transformedPepe);
+writeFileSyncRecursive(`./static/megapepe.json`, JSON.stringify(transformedPepe)); 
+
+}
+
+
+
+
 async function processItems(arr){
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
   console.log('\x1b[46m',`☺ Have a nice day` ,'\x1b[0m');
  // const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
   //bar1.start(arr.length, 0);
   
-  const jsFiles = arr.filter(kpi => kpi.endsWith('.js'));
+    const jsFiles = arr.filter(kpi => kpi.endsWith('.js'));
   await Promise.all(jsFiles.map(async kpi => {
     try {
       await require(`../static/kpi/${kpi}`);
@@ -112,14 +132,14 @@ async function processItems(arr){
       console.log('\x1b[41m', '\x1b[37m', `✕ [${kpi}] failed to fetch!`, '\x1b[0m');
       console.error(error);
     }
-  }));
+  })); 
  
   //bar1.stop();
   //await processVariation("kpi");
-  processFolders(); 
-  processNamers()  
-
+   processFolders(); 
+  processNamers()   
+  //magicDistribution()
 };
 
 //processItems(glob.sync('**', { cwd: `static/kpi/` }));
-processItems(['dolar/cambio.js']);
+processItems(['energia/petroleo/crudoprocesado.js']);

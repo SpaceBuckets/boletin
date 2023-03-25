@@ -1,12 +1,5 @@
 [
   {
-    "name": "mapusa",
-    "path": "/mapusa",
-    "component": "/Users/agustin.capeletto/fed/beo/pages/mapusa.vue",
-    "chunkName": "pages/mapusa",
-    "_name": "_836d7588"
-  },
-  {
     "name": "index",
     "path": "/",
     "component": "/Users/agustin.capeletto/fed/beo/pages/index.vue",

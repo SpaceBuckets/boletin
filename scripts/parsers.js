@@ -1,5 +1,6 @@
 const fs = require('fs');
 const fetch = require('@adobe/node-fetch-retry');
+//const fetch = require('node-fetch');
 var xlsx = require('node-xlsx');
 const parse5 = require('parse5');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
@@ -49,8 +50,9 @@ async function datosGobarAPI(value) {
 
 /* -CSV datos.gob.ar------------------------------------------------------------------------- */
 
+  
 async function datosGobarCSV(dates,values,url) {
-  const data = Papa.parse(await (await fetch(url,{rejectUnauthorized: false,})).text()).data
+  const data = Papa.parse(await (await fetch(url,{retryOptions: false})).text()).data
   return data.map((item) => !isNaN(new Date(item[dates]).getTime()) && !isNaN(Number(item[values])) && ({
     x: new Date(item[dates]).toISOString().substring(0, 10),
     y: +Number(item[values]).toFixed(2)

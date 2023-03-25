@@ -4,7 +4,8 @@ module.exports = (async function() {
   const parsers = require("@parsers");
 
   const kpi = "bioetanol"
- const payload = await parsers.datosGobarAPI('368.3_BIOETANOL_ION__26')
+  const url = 'https://infra.datos.gob.ar/catalog/sspm/dataset/368/distribution/368.3/download/produccion-ventas-biocombustibles-anual-mensual.csv'
+  const payload = await parsers.datosGobarCSV(0,5,url)
    const post = {
     kpi,
     t: "Producción de Bioetanol",
@@ -26,6 +27,12 @@ module.exports = (async function() {
         data: payload,
         color: "rgba(46,120,210,0.8)",
       },
+      {
+        fillColor: "rgba(46,120,210,0.1)",
+        label: "Ventas de Bioetanol",
+        data: await parsers.datosGobarCSV(0,6,url),
+        color: "rgba(46,120,210,0.2)",
+      },      
     ],
 }
 
