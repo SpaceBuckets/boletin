@@ -198,7 +198,7 @@ h5 {
     > div {
     display: flex;
     justify-content: space-between;
-    padding: 6px 1px;
+    padding: 5px 1px;
     &:last-child { border-bottom: 0; }
     > div { 
       flex: 1; 
