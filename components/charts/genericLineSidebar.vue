@@ -1,16 +1,25 @@
 <template>
    
   <section class="lastup">
-    <div>
-    <div>
-      <h4>Dimensiones</h4>
+       <div>
+    <div class="scorecard">
+      <h2 class="mainpdate"> {{ processedDate() }}</h2>
+     <div style="justify-content:center"><div>Último Dato</div></div>
     </div>
-      <div class="scorecard">
+      </div>
+    <div>
+
+
+      <div class="scorecard highlight">
         <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions" :key="`${kpi.label}`">
           <div><span class="circle" :style="{background: kpi.color }"></span> {{kpi.label}}</div> 
           <div>
-            <div>{{kpi.data[kpi.data.length-1].y.toFixed(2)}}</div>   
-            <div><span class="delta" :class="{ negative: getVariation(kpi) < 0 }">{{getVariation(kpi)}}</span></div>   
+            <div>{{kpi.sym}}{{kpi.data[kpi.data.length-1].y.toFixed(2)}}{{kpi.unit}}</div>   
+            <div class="deltacontainer" :class="{ negative: getVariation(kpi) < 0 }">
+              <i v-if="getVariation(kpi) > 0">▲</i>
+              <i v-if="getVariation(kpi) < 0">▼</i>
+              <span class="delta">{{getVariation(kpi).replace('-','')}}</span>
+            </div>   
           </div>
 
         </div>
@@ -90,7 +99,21 @@ export default {
       updated: 0,
     };
   }, 
+    mounted() {
+      console.log(this.kpi)
+    },
     methods: {
+      processedDate() {
+          var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
+
+        if(this.kpi.frec === 'Mensual') {
+          var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {month: 'long', year: 'numeric' }).replaceAll("de",'')
+        } 
+        if(this.kpi.frec === 'Anual') {
+          var pepe = `Año ${new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {year: 'numeric' }).replaceAll("de",'')}`
+        }         
+        return pepe
+      },
       getLastValue() {
         var lastValue = this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].y.toFixed(2);
         return lastValue
@@ -120,6 +143,12 @@ export default {
 </script>
 
  <style lang="scss" scoped>
+ .mainpdate {
+  text-align:center;
+  margin-bottom: 0px;
+  margin-top: 5px;
+  text-transform: capitalize;
+ }
  h4 {
   font-size: 14px;
    margin: 0;
@@ -147,17 +176,25 @@ h5 {
 
   }
 }
+.deltacontainer {
+  align-items: center;
+  gap: 2px;
+ * {
+    color: #009966;
 
-.delta {
-     color: #009966;
-&.negative {
+ }
+  i {
+    font-style: normal;
+    font-size: 10px;
+  }
+ 
+    &.negative * {
       color: #b22222;
+    }  
 }
-}
-
 
 .scorecard {
-   margin-bottom: 15px;
+   margin-bottom: 10px;
     > div {
     display: flex;
     justify-content: space-between;
@@ -182,6 +219,23 @@ h5 {
       }
     }
   }
+/*   &.highlight > div {
+        &:first-child {
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
+      padding-top: 0;
+      gap: 5px;
+      padding-bottom: 15px;
+      margin-bottom: 13px;
+      border-bottom: 1px solid #eee;
+    }
+    &:only-child {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 5px;
+    }
+  } */
 }
 
 hr {
@@ -196,7 +250,7 @@ h2 {
     padding-bottom: 0 !important;
   margin-top: 0;
   margin-bottom: 10px;
- font-size: 20px;
+ font-size: 18px;
  font-weight: normal;
  strong {
   font-weight: bold;
@@ -207,7 +261,7 @@ h2 {
 .lastup { 
   float: left;
   width: 100%;
- 
+  height:100%;
   max-width: 300px;
   overflow: hidden;
  padding-left: 0px;
@@ -223,6 +277,9 @@ h2 {
      overflow: auto;
     margin-bottom: 20px;
       border-bottom: 1px solid #eee;
+      &:first-child {
+        margin-bottom: 10px;
+      }
     &:last-child {
       border: 0;
     }
@@ -242,6 +299,7 @@ h5 + p {
 .scorecard {
  
   .single-legend {
+
     div { color: #676c6f; }
     .circle {
       display: inline-block;

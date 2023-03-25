@@ -11,8 +11,8 @@ module.exports = (async function() {
     sheet: 0,
     date: 0,
     items: [
-      {name: "estacional", id: 1},
-      {name: "desestacional", id: 3},
+      {name: "estacionalizado", id: 1},
+      {name: "desestacionalizado", id: 3},
     ]
   }
   
@@ -28,22 +28,23 @@ module.exports = (async function() {
     fdr: "https://www.utdt.edu/download.php?fname=_167726983915481000.xls",
     fu: "UTDT",
     fur: "https://itegaweb.org/indicadores/",
-      frec: parsers.detectDataType(payload.estacional), 
-  fruc: parsers.detectAggregationFunction(payload.estacional),    
+      frec: parsers.detectDataType(payload.estacionalizado), 
+  fruc: parsers.detectAggregationFunction(payload.estacionalizado),    
     d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base.",
     max: 10,
     min: 0,
     dimensions: [
+      {
+        label: "Desestacionalizado",
+        data: payload.desestacionalizado,
+        color: "#2E78D2",
+      },       
         {
-          label: "Estacional",
-          data: payload.estacional,
+          label: "Estacionalizado",
+          data: payload.estacionalizado,
           color: "rgba(46,120,210,0.3)",
         },  
-        {
-          label: "Desestacional",
-          data: payload.desestacional,
-          color: "#2E78D2",
-        },               
+              
     ]
   }
 

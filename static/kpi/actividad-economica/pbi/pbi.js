@@ -20,6 +20,8 @@ const post = {
   frec: parsers.detectDataType(payload), 
   fruc: parsers.detectAggregationFunction(payload), 
   d: "El producto bruto interno (PBI)​ es una magnitud macroeconómica que expresa el valor monetario de la producción de bienes y servicios de demanda final de un país o región durante un período determinado.",
+  unit: "M",
+  sym: "$",
   dimensions: [
       {
         fillColor: 'rgba(46,120,210,0)',

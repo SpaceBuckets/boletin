@@ -142,4 +142,4 @@ async function processItems(arr){
 };
 
 processItems(glob.sync('**', { cwd: `static/kpi/` }));
-//processItems(['energia/petroleo/crudoprocesado.js']);
+//processItems(['actividad-economica/ima.js']);

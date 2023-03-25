@@ -28,9 +28,16 @@
               </div>
 
           <div v-if="defaultView" class="date-display"> 
-            <div>{{ allDates[dateIndex[0]] }}</div>
-            &nbsp;&nbsp;—&nbsp;&nbsp;
-            <div>{{ allDates[dateIndex[1]] }} </div>
+            <template v-if="kpi.frec === 'Mensual'">
+              <div>{{ allDates[dateIndex[0]].slice(0, 7)  }}</div>
+              &nbsp;&nbsp;—&nbsp;&nbsp;
+              <div>{{ allDates[dateIndex[1]].slice(0, 7) }} </div>
+            </template>
+            <template v-else>
+              <div>{{ allDates[dateIndex[0]]}}</div>
+              &nbsp;&nbsp;—&nbsp;&nbsp;
+              <div>{{ allDates[dateIndex[1]] }} </div>
+            </template>            
           </div>
           <button @click="remount()">Reset</button>
        </div>
@@ -435,7 +442,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   > * { flex: 1; max-width: max-content; }
   i {
     font-style: normal;
