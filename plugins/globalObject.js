@@ -7,7 +7,7 @@ var state = {
     balanza: "2004-06-01",
     deficit: "2018-12-01",
     //ipc: "2004-12-01",
-    cambio: "2019-06-01",
+    cambio: "2018-12-01",
     //salariominimo: "2004-12-01",
     haberminimo: "2004-12-01",
     tasa: "2016-06-01",

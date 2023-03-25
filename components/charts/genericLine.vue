@@ -73,7 +73,7 @@
           </clipPath>  
 
           <g class="axis xAxis">
-            <g v-for="tick in axisBottom" :transform="`translate(${tick.left},${chartHeight-20})`">
+            <g v-for="tick in axisBottom" :transform="`translate(${tick.left},${chartHeight-20})`" :data-date="tick.value">
                 <line :y2="`-${chartHeight-20}`"></line>
                 <text x="5" dy="0.71em">{{tick.value}}</text>
             </g>            
@@ -546,7 +546,40 @@ export default {
     stroke: transparent;
 }
 
- 
- 
+g[data-date='1996'] ~ g[data-date='1996'],
+g[data-date='1997'] ~ g[data-date='1997'],
+g[data-date='1998'] ~ g[data-date='1998'],
+g[data-date='1999'] ~ g[data-date='1999'],
+g[data-date='2000'] ~ g[data-date='2000'],
+g[data-date='2001'] ~ g[data-date='2001'],
+g[data-date='2002'] ~ g[data-date='2002'],
+g[data-date='2003'] ~ g[data-date='2003'],
+g[data-date='2004'] ~ g[data-date='2004'],
+g[data-date='2005'] ~ g[data-date='2005'],
+g[data-date='2006'] ~ g[data-date='2006'],
+g[data-date='2007'] ~ g[data-date='2007'],
+g[data-date='2008'] ~ g[data-date='2008'],
+g[data-date='2009'] ~ g[data-date='2009'],
+g[data-date='2010'] ~ g[data-date='2010'],
+g[data-date='2011'] ~ g[data-date='2011'],
+g[data-date='2012'] ~ g[data-date='2012'],
+g[data-date='2013'] ~ g[data-date='2013'],
+g[data-date='2014'] ~ g[data-date='2014'],
+g[data-date='2015'] ~ g[data-date='2015'],
+g[data-date='2016'] ~ g[data-date='2016'],
+g[data-date='2017'] ~ g[data-date='2017'],
+g[data-date='2018'] ~ g[data-date='2018'],
+g[data-date='2019'] ~ g[data-date='2019'],
+g[data-date='2020'] ~ g[data-date='2020'],
+g[data-date='2021'] ~ g[data-date='2021'],
+g[data-date='2022'] ~ g[data-date='2022'],
+g[data-date='2023'] ~ g[data-date='2023'],
+g[data-date='2024'] ~ g[data-date='2024'],
+g[data-date='2025'] ~ g[data-date='2025'],
+g[data-date='2026'] ~ g[data-date='2026'],
+g[data-date='2027'] ~ g[data-date='2027'] {
+  opacity: 0;
+}
+
 
  </style>
