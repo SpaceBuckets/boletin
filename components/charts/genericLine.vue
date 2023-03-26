@@ -541,11 +541,11 @@ export default {
   }
   &.dragging > div:hover { background: transparent; } 
 }
-#chart .xAxis g:nth-child(even) line,
+/* #chart .xAxis g:nth-child(even) line,
 #chart .xAxis g:nth-child(even) text {
     fill: transparent;
     stroke: transparent;
-}
+} */
 #chart g[data-date="1990"] line,
 #chart g[data-date="2000"] line,
 #chart g[data-date="2004"] line,
