@@ -141,5 +141,5 @@ async function processItems(arr){
   //magicDistribution()
 };
 
-//processItems(glob.sync('**', { cwd: `static/kpi/` }));
-processItems(['dolar/cambio.js']);
+processItems(glob.sync('**', { cwd: `static/kpi/` }));
+//processItems(['dolar/cambio.js']);
