@@ -3,8 +3,17 @@
   <section class="lastup">
        <div>
     <div class="scorecard">
+      <div style="align-items:baseline">
+ <div style="justify-content:center;padding-top:0"><div style="color:#676c6f;padding-top:0">Último Dato</div></div>
+ 
       <h2 class="mainpdate"> {{ processedDate() }}</h2>
-     <div style="justify-content:center"><div>Último Dato</div></div>
+      </div>
+             
+     <div class="sliceheatmap">
+      <div v-for="slice in 12" :style="{background: getVariationHeatmap(slice)}">
+
+      </div>
+     </div>
     </div>
       </div>
     <div>
@@ -75,14 +84,28 @@ export default {
     };
   }, 
     mounted() {
-      console.log(this.kpi)
     },
     methods: {
+      getVariationHeatmap(slice) {
+
+        const currDate = this.kpi.dimensions[0].data.slice(-1)[0].x;
+        const monthNumber = new Date(currDate).getUTCMonth() + 1;
+
+        if (slice > monthNumber) return;
+
+        const data = this.kpi.dimensions[0].data;
+        const A = data[data.length - 1 - slice].y;
+        const B = data[data.length - slice].y;
+
+        return ((A - B) / A) * 100 > 0 ? '#b22222' : '#009966';
+      },
       processedDate() {
-          var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
+        var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
 
         if(this.kpi.frec === 'Mensual') {
-          var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {month: 'long', year: 'numeric' }).replaceAll("de",'')
+var lastDate = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x);
+lastDate.setMonth(lastDate.getMonth() + 1);
+var pepe = lastDate.toLocaleString('es', {month: 'long', year: 'numeric' }).replaceAll("de",'');
         } 
         if(this.kpi.frec === 'Anual') {
           var pepe = `Año ${new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {year: 'numeric' }).replaceAll("de",'')}`
@@ -121,7 +144,7 @@ export default {
  .mainpdate {
   text-align:center;
   margin-bottom: 0px;
-  margin-top: 5px;
+  margin-top: 0px;
   text-transform: capitalize;
  }
  h4 {
@@ -173,7 +196,7 @@ h5 {
     > div {
     display: flex;
     justify-content: space-between;
-    padding: 5px 1px;
+    padding: 5px 0;
     &:last-child { border-bottom: 0; }
     > div { 
       flex: 1; 
@@ -254,6 +277,10 @@ h2 {
       border-bottom: 1px solid #eee;
       &:first-child {
         margin-bottom: 10px;
+        padding-bottom: 5px;
+        div {
+          padding-top: 2px;
+        }
       }
     &:last-child {
       border: 0;
@@ -288,5 +315,26 @@ h5 + p {
   }
 
 }
-  
+
+
+.sliceheatmap {
+  height: 8px;
+  display: flex;
+  border: 0px solid #eee !important;
+  padding: 0 !important;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #ddd;
+  gap: 0.5px;
+  > * {
+    flex: 1;
+    //border-right: 1px solid #eee;
+    opacity:0.9;
+    max-width: 100% !important;
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}
+
  </style>

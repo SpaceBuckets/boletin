@@ -182,7 +182,7 @@ export default {
   overflow: auto;
   padding-bottom: 100px;
   color: #ddd;
-  width: 220px;
+  width: 225px;
   z-index: 999;
 
   @media only screen and (max-width: 980px) {

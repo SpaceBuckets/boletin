@@ -254,7 +254,7 @@ body {
   background: #070b0d;
   margin: 0;
   font-size: 15px;
-    padding-left: 220px;
+    padding-left: 225px;
     padding-right: 0px;
 
   padding-top: 20px;
