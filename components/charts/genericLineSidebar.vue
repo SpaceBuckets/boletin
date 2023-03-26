@@ -64,32 +64,7 @@
 <script>
    
 export default {
-  props: {  
-    altTitle: {
-      type: String,
-      required: false
-    },       
-    edit: {
-      type: Boolean,
-      required: false
-    },
-    title: {
-      type: String,
-      required: false,
-    },
-    subtitle: {
-      type: String,
-      required: false,
-    },    
-    data: {
-      type: String,
-      required: false,
-    },
-    chartHeight: {
-      type: Number,
-      required: false,
-    },
-  },
+  props: ['title', 'subtitle', 'data','index'],  
   data() {
     return {
       kpi: require(`~/static/data/${this.data}.json`),
@@ -185,7 +160,7 @@ h5 {
  }
   i {
     font-style: normal;
-    font-size: 10px;
+    font-size: 8px;
   }
  
     &.negative * {

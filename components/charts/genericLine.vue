@@ -30,12 +30,12 @@
           <div v-if="defaultView" class="date-display"> 
             <template v-if="kpi.frec === 'Mensual'">
               <div>{{ allDates[dateIndex[0]].slice(0, 7)  }}</div>
-              &nbsp;&nbsp;—&nbsp;&nbsp;
+              <div>↔</div>
               <div>{{ allDates[dateIndex[1]].slice(0, 7) }} </div>
             </template>
             <template v-else>
               <div>{{ allDates[dateIndex[0]]}}</div>
-              &nbsp;&nbsp;—&nbsp;&nbsp;
+              <div>↔</div>
               <div>{{ allDates[dateIndex[1]] }} </div>
             </template>            
           </div>
@@ -152,7 +152,7 @@ export default {
     if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
     this.chartHeight = this.$refs.c.clientHeight
     this.chartWidth = this.$refs.c.clientWidth
-     this.remount() 
+     this.remount(false) 
   },
   computed: {
     startDates() {
@@ -188,7 +188,7 @@ export default {
         this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, data: this.aggregateData(d.data) }));
       }
 
-      this.remount()
+      this.remount(true)
  
     },    
     filterDateData(data,startDate) {
@@ -204,12 +204,9 @@ export default {
     handleRange(item) {
       this.selectedRange = item
       this.kpi.dimensions = this.staticKpi.dimensions.map(d => ({ ...d }));
-
       this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, data: this.filterDateData(d.data,this.startDates[item]) }));
 
-      this.remount()
-
-
+      this.remount(true)
     },
     getCols(i) {
       return Math.ceil(i % (this.axisBottom.length+1)) || this.axisBottom.length+1;
@@ -217,15 +214,17 @@ export default {
     getColDate(i) {
       return this.axisBottom[i]?.date ?? this.allDates[this.allDates.length - 1];
     },    
-    remount() { 
+    remount(ranged) { 
       this.allDates = this.kpi.dimensions[0].data.slice().map(item => item.x).sort((a, b) => new Date(a) - new Date(b))
+
       //reset min and max dates for brushing
       this.dateIndex.splice(0)
       this.maxZoom = false
       this.zoomLevel = 0
 
       //get global min start date 
-      if(this.$state.kpidates[this.data]) { 
+      if(this.$state.kpidates[this.data] && !ranged) { 
+
         this.dateStart = this.$state.kpidates[this.data]
         this.dateIndex.push(this.allDates.findIndex(date => date.startsWith(this.dateStart.slice(0, 7))))
         this.dateIndex.push(this.allDates.length-1)
@@ -478,11 +477,13 @@ export default {
   }
   .date-display {
     background: rgb(245,245,245);
-    padding: 5px 12px;
+    padding: 5px 15px;
     max-width: max-content;
     user-select: none;
      text-align: center;
     display: flex;
+    gap: 10px;
+    align-items: center;
     justify-content:space-between;
     > div {
       flex: 1;
@@ -545,41 +546,19 @@ export default {
     fill: transparent;
     stroke: transparent;
 }
-
-g[data-date='1996'] ~ g[data-date='1996'],
-g[data-date='1997'] ~ g[data-date='1997'],
-g[data-date='1998'] ~ g[data-date='1998'],
-g[data-date='1999'] ~ g[data-date='1999'],
-g[data-date='2000'] ~ g[data-date='2000'],
-g[data-date='2001'] ~ g[data-date='2001'],
-g[data-date='2002'] ~ g[data-date='2002'],
-g[data-date='2003'] ~ g[data-date='2003'],
-g[data-date='2004'] ~ g[data-date='2004'],
-g[data-date='2005'] ~ g[data-date='2005'],
-g[data-date='2006'] ~ g[data-date='2006'],
-g[data-date='2007'] ~ g[data-date='2007'],
-g[data-date='2008'] ~ g[data-date='2008'],
-g[data-date='2009'] ~ g[data-date='2009'],
-g[data-date='2010'] ~ g[data-date='2010'],
-g[data-date='2011'] ~ g[data-date='2011'],
-g[data-date='2012'] ~ g[data-date='2012'],
-g[data-date='2013'] ~ g[data-date='2013'],
-g[data-date='2014'] ~ g[data-date='2014'],
-g[data-date='2015'] ~ g[data-date='2015'],
-g[data-date='2016'] ~ g[data-date='2016'],
-g[data-date='2017'] ~ g[data-date='2017'],
-g[data-date='2018'] ~ g[data-date='2018'],
-g[data-date='2019'] ~ g[data-date='2019'],
-g[data-date='2020'] ~ g[data-date='2020'],
-g[data-date='2021'] ~ g[data-date='2021'],
-g[data-date='2022'] ~ g[data-date='2022'],
-g[data-date='2023'] ~ g[data-date='2023'],
-g[data-date='2024'] ~ g[data-date='2024'],
-g[data-date='2025'] ~ g[data-date='2025'],
-g[data-date='2026'] ~ g[data-date='2026'],
-g[data-date='2027'] ~ g[data-date='2027'] {
-  opacity: 0;
+#chart g[data-date="1990"] line,
+#chart g[data-date="2000"] line,
+#chart g[data-date="2004"] line,
+#chart g[data-date="2016"] line,
+#chart g[data-date="2020"] line,
+#chart g[data-date="2024"] line{
+    stroke-dasharray: 0px;
 }
 
+@for $year from 1980 through 2030 {
+  g[data-date="#{$year}"] ~ g[data-date="#{$year}"] {
+    opacity: 0;
+  }
+}
 
  </style>
