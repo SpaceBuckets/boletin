@@ -10,7 +10,7 @@
       </div>
              
      <div class="sliceheatmap">
-      <div v-for="slice in 12" :style="{background: getVariationHeatmap(slice)}">
+      <div v-for="slice in 12" v-if="kpi.frec === 'Mensual'" :style="{background: getVariationHeatmap(slice)}">
 
       </div>
      </div>
@@ -103,9 +103,11 @@ export default {
         var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
 
         if(this.kpi.frec === 'Mensual') {
-var lastDate = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x);
-lastDate.setMonth(lastDate.getMonth() + 1);
-var pepe = lastDate.toLocaleString('es', {month: 'long', year: 'numeric' }).replaceAll("de",'');
+          const lastDate = new Date(this.kpi.dimensions[0].data.slice(-1)[0].x + "T00:00:00");
+
+          //lastDate.setMonth(lastDate.getUTCMonth());
+          var pepe = lastDate.toLocaleString('es', {month: 'long', year: 'numeric' }).replaceAll("de",'');
+
         } 
         if(this.kpi.frec === 'Anual') {
           var pepe = `Año ${new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {year: 'numeric' }).replaceAll("de",'')}`
@@ -329,7 +331,7 @@ h5 + p {
   > * {
     flex: 1;
     //border-right: 1px solid #eee;
-    opacity:0.9;
+    opacity:0.8;
     max-width: 100% !important;
     &:last-child {
       border-right: 0;

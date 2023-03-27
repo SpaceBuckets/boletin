@@ -118,6 +118,7 @@ writeFileSyncRecursive(`./static/megapepe.json`, JSON.stringify(transformedPepe)
 
 
 async function processItems(arr){
+  console.log(arr.length)
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
   console.log('\x1b[46m',`☺ Have a nice day` ,'\x1b[0m');
  // const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);

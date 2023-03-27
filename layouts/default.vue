@@ -3,7 +3,7 @@
     <header>
       <h1 class="nav-logo">
         <nuxt-link to="/"><span>BOLETÍN</span>EXTRAOFICIAL</nuxt-link>
-<!--    <svg width="126" height="110" viewBox="0 0 126 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+     <svg width="126" height="110" viewBox="0 0 126 110" fill="none" xmlns="http://www.w3.org/2000/svg">
  <g clip-path="url(#clip0_1017_42)">
 <path d="M125.364 17.66C107.8 2.38727 85.6545 0.0963621 73.4363 11.5509C64.5684 23.4072 65.3586 37.3675 75.7273 52.0236C74.9636 52.0236 73.4363 52.7873 72.6727 53.5509C64.9714 38.8848 63.6466 23.7827 68.8545 10.0236C85.6545 -3.72182 108.564 -5.2491 125.364 17.66V17.66Z" fill="#843511"/>
 <path d="M97.8727 13.0781C87.9454 13.0781 85.6545 15.369 81.0727 19.1872C76.4909 23.0054 74.2 22.2418 73.4364 23.0054C72.6727 23.769 73.4364 26.0599 74.9636 25.2963C76.4909 24.5327 79.5454 23.0054 84.1273 19.1872C88.7091 15.369 93.2909 15.369 97.8727 15.369C111.618 15.369 119.255 26.8236 120.782 26.0599C122.309 25.2963 113.145 13.0781 97.8727 13.0781V13.0781Z" fill="#843511"/>
@@ -24,11 +24,13 @@
 <rect width="126" height="110" fill="white"/>
 </clipPath>
 </defs>
-</svg> -->
+</svg> 
       </h1>
-      <div class="renav" style="display:none">
-        Esta colección de indicadores intenta develar de donde viene y hacia
-        donde va la macroeconomía Argentina.
+      <div class="renav">
+        <div>
+        <strong>Febo asoma; ya sus rayos, iluminan el histórico contexto.</strong> Esta colección de 118 indicadores intenta develar de dónde viene y hacia dónde va la macroeconomía de la República Argentina.
+
+        </div>
       </div>
           <div :class="{menued: $state.isOpen}" class="backdropper" @click="$state.isOpen = false">
       </div>
@@ -64,6 +66,11 @@
       </button>
        <!--   <input type="text" placeholder="Search...">
  -->
+       <div class="toolbar">
+<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M280 776h400v-60H280v60Zm197-126 158-157-42-42-85 84V336h-60v199l-85-84-42 42 156 157Zm3 326q-82 0-155-31.5t-127.5-86Q143 804 111.5 731T80 576q0-83 31.5-156t86-127Q252 239 325 207.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 82-31.5 155T763 858.5q-54 54.5-127 86T480 976Zm0-60q142 0 241-99.5T820 576q0-142-99-241t-241-99q-141 0-240.5 99T140 576q0 141 99.5 240.5T480 916Zm0-340Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600V276H180v600Zm56-97h489L578 583 446 754l-93-127-117 152Zm-56 97V276v600Z"/></svg>        
+        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M727 976q-47.5 0-80.75-33.346Q613 909.307 613 861.669q0-6.669 1.5-16.312T619 828L316 652q-15 17-37 27.5T234 690q-47.5 0-80.75-33.25T120 576q0-47.5 33.25-80.75T234 462q23 0 44 9t38 26l303-174q-3-7.071-4.5-15.911Q613 298.25 613 290q0-47.5 33.25-80.75T727 176q47.5 0 80.75 33.25T841 290q0 47.5-33.25 80.75T727 404q-23.354 0-44.677-7.5T646 372L343 540q2 8 3.5 18.5t1.5 17.741q0 7.242-1.5 15Q345 599 343 607l303 172q15-14 35-22.5t46-8.5q47.5 0 80.75 33.25T841 862q0 47.5-33.25 80.75T727 976Zm.035-632Q750 344 765.5 328.465q15.5-15.535 15.5-38.5T765.465 251.5q-15.535-15.5-38.5-15.5T688.5 251.535q-15.5 15.535-15.5 38.5t15.535 38.465q15.535 15.5 38.5 15.5Zm-493 286Q257 630 272.5 614.465q15.5-15.535 15.5-38.5T272.465 537.5q-15.535-15.5-38.5-15.5T195.5 537.535q-15.5 15.535-15.5 38.5t15.535 38.465q15.535 15.5 38.5 15.5Zm493 286Q750 916 765.5 900.465q15.5-15.535 15.5-38.5T765.465 823.5q-15.535-15.5-38.5-15.5T688.5 823.535q-15.5 15.535-15.5 38.5t15.535 38.465q15.535 15.5 38.5 15.5ZM727 290ZM234 576Zm493 286Z"/></svg>
+      </div>
     </header>
     <div class="content-container" :class="{menued: $state.isOpen}">
       <charts-kpinav v-if="$route.name !== 'mapusa'"/>
@@ -171,8 +178,14 @@ html {
   right: 0;
   align-items: center;
   bottom: 0;
-  color: #666;
   //background: #1f2325;
+  > div {
+   color: #888;
+  strong {
+    color: #888;
+    display:none;
+  }
+  }
       @media only screen and (max-width: 980px) {
   display: none;
 
@@ -181,7 +194,7 @@ html {
 header {
   //background: rgba(55, 53, 47, 0.08);
   //background: #000;
-  //background: #1f1f1f;
+  background: #1f1f1f;
   position: fixed;
   top: 0;
   height: 60px;
@@ -189,7 +202,7 @@ header {
   //width: 300px;
    // border-right: 2px solid #333;
 
-  //right: 0;
+  right: 0;
   backface-visibility: hidden;
   display: flex;
   align-items: center;
@@ -214,16 +227,16 @@ header {
     margin: 0;
     display: flex;
     align-items: center;
-    padding: 0px 15px 0;
+    padding: 0px 60px 0;
     position: relative;
     z-index: 99;
     //flex-direction: row-reverse;
     min-width: 100%;
     justify-content: space-between;
     svg {
-      position: relative;
-      right: -15px;
-        @media only screen and (max-width: 980px) {
+      position: absolute;
+      left: -10px;
+         @media only screen and (max-width: 980px) {
         display: none;
         }
     }
@@ -257,7 +270,7 @@ body {
     padding-left: 225px;
     padding-right: 0px;
 
-  padding-top: 20px;
+  padding-top: 80px;
 
         @media only screen and (max-width: 980px) {
   padding-top: 60px;
@@ -345,5 +358,13 @@ canvas {
 }
 
 
- 
+ .toolbar {
+  position: absolute;
+  right: 0;
+  svg {
+    padding: 5px;
+    width: 36px;
+    margin: 0 10px;
+  }
+ }
 </style>

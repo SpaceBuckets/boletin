@@ -13,8 +13,7 @@
     </div>
 
     
-    <hr>
-     <charts-kpiBoard :data="savedCells" />
+      <charts-kpiBoard :data="savedCells" />
   </div>
 </template>
 
@@ -89,6 +88,7 @@ export default {
 
 .new-header {
   display: flex;
+  display: none;
   justify-content: space-between;
   padding-right: 15px;
   > * { flex: 1; }

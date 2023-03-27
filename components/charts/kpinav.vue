@@ -1,8 +1,6 @@
 <template>
   <div class="meganav">
-                     <div class="meganavsection nochild" style="padding:0">
-         <input class="searcher" type="text" placeholder="Buscar Indicadores...">  
-      </div>    
+     
     <div
       class="meganavsection"
       v-for="(parent, i) in nav"
@@ -179,6 +177,7 @@ export default {
   top: 60px;
   bottom: 0;
   padding: 0;
+  padding-top:20px;
   overflow: auto;
   padding-bottom: 100px;
   color: #ddd;
