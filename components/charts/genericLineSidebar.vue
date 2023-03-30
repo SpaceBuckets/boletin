@@ -268,7 +268,10 @@ h2 {
  border-left: 1px solid #eee;
     @media only screen and (max-width: 980px) {
    width: calc(100% - 0px);
-
+max-width: 100%;
+border: 0;
+padding-right: 20px;
+margin-top: 10px;
     }   
  > div {
      margin-left: 15px;

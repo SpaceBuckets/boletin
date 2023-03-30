@@ -152,7 +152,7 @@ export default {
     if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
     this.chartHeight = this.$refs.c.clientHeight
     this.chartWidth = this.$refs.c.clientWidth
-     this.remount(false) 
+    this.remount(false) 
   },
   computed: {
     startDates() {
@@ -263,12 +263,17 @@ export default {
         width: i > 0 ? scaleX(d) - scaleX(ticks[i-1]) : scaleX(d),
       }]));
 
-      //get min and max values from all dimensions to set selected domain
-      const [minValue, maxValue] = d3.extent(this.kpi.dimensions.flatMap(d => d.data.slice(this.dateIndex[0], this.dateIndex[1] + 1).map(i => i.y)));
-      const scaleY = d3.scaleLinear().domain([minValue*0.9, maxValue*1.05]).range([this.$refs.c.clientHeight-30, 10]).nice();
+const [minValue, maxValue] = d3.extent(this.kpi.dimensions.flatMap(d => d.data.slice(this.dateIndex[0], this.dateIndex[1] + 1).map(i => i.y)));
 
-      //create the y axis object with value and translate
-      this.axisRight = scaleY.ticks().map(d => ({ value: d, top: scaleY(d) }));      
+const tickCount = 6; // the number of ticks you want to display
+const padding = (maxValue - minValue) / (2 * tickCount); // the padding for the top and bottom ticks
+
+const domain = [minValue - padding, maxValue + padding]; // set the domain of your y-axis scaling function
+const scaleY = d3.scaleLinear().domain(domain).range([this.$refs.c.clientHeight - 30, 10]).nice();
+
+//create the y axis object with value and translate
+const ticks = d3.ticks(domain[0], domain[1], tickCount); // generate approximately tickCount representative values from the domain
+this.axisRight = ticks.map(d => ({ value: d, top: scaleY(d) }));
  
       //draw a line for each of the chart kpi, dropping null values
       const pathGenerator = d3.line().x(d => scaleX(parseTime(d.x))).y(d => scaleY(d.y)).defined(d => d.y !== null);
@@ -443,6 +448,14 @@ export default {
   border-bottom: 1px solid #eee;
   padding-bottom: 15px;
   > * { flex: 1; max-width: max-content; }
+  @media only screen and (max-width: 980px) {
+    flex-wrap: wrap;
+    gap: 10px;
+    > * {
+      max-width: 100%;
+      min-width: 100%;
+    };
+  }      
   i {
     font-style: normal;
     font-size: 14px;
@@ -450,6 +463,7 @@ export default {
   }
   .innerflexer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 10px;
     font-size: 14px;

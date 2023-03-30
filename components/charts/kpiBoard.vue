@@ -486,7 +486,8 @@ export default {
   @media only screen and (max-width: 980px) {
     display: block;
     border: 0;
-    margin-top: 5px;
+    margin-top: 0;
+
   }  
   > i {
     //  border-right: 1px dashed #444;
@@ -536,7 +537,8 @@ export default {
     @media only screen and (max-width: 980px) {
       position: relative;
       float: left;
-      width: calc(100% - 12px);
+      width: calc(100% - 0px);
+      border-radius: 0;
     }      
     a {
       //text-decoration: none;
