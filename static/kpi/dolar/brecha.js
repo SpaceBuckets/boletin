@@ -4,13 +4,57 @@ module.exports = (async function() {
   
   const kpi = "brecha"
 
-  const data = await (await fetch('https://api.bluelytics.com.ar/v2/evolution.json')).json();
+/*   const data = await (await fetch('https://api.bluelytics.com.ar/v2/evolution.json')).json();
 
   const valUSD = data.filter(d => d.source === 'Oficial').map(d => d.value_buy);
   const valBlue = data.filter(d => d.source === 'Blue').map(d => d.value_buy);
-  const valGap = valUSD.map((num, i) => ((valBlue[i] - num) / ((num + valBlue[i]) / 2)) * 100);
+  const valGap = valUSD.map((num, i) => ((valBlue[i] - num) / ((num + valBlue[i]) / 2)) * 100); */
  
-  const payload = valGap.map((val, i) => ({ x: data[i].date, y: val })).reverse();
+  const reambito = {
+    oficial: 'https://mercados.ambito.com//dolar/oficial/historico-general/01-01-1900/01-01-2100',
+    blue: 'https://mercados.ambito.com//dolar/informal/historico-general/01-01-1900/01-01-2100',
+  }   
+
+  var payload = {}
+  var fillLength = []
+  var chosenOne = ''
+  for (let [key, value] of Object.entries(reambito)) {
+    payload[key] = []
+    var data = JSON.parse(await (await fetch(value)).text())
+    for (let i = 1; i < data.length; i++) { fillLength.push(data.length) }
+  } 
+
+  for (let [key, value] of Object.entries(reambito)) {
+    var data = JSON.parse(await (await fetch(value)).text())
+
+    for (let i = 1; i < Math.max(...fillLength); i++) { payload[key][i] = { x: 0, y: 0} }
+    for (let i = 1; i < data.length; i++) {
+
+      payload[key][i].x =  new Date(data[i][0].split('/').reverse().join('-')).toISOString().substring(0, 10)
+      if (key === 'oficial') {
+        payload[key][i].y = Number(data[i][2].replace(',','.'))
+      } else {
+        payload[key][i].y = Number(data[i][1].replace(',','.'))
+      }
+    }
+    payload[key] = payload[key].filter(element => { if (Object.keys(element).length !== 0) { return true; } return false; }).reverse();
+    if (payload[key][0].x !== 0) { chosenOne = key }
+  }
+
+  for (let [key, value] of Object.entries(reambito)) {
+    for (let i = 0; i < payload[chosenOne].length; i++) { payload[key][i].x = payload[chosenOne][i].x }
+  }
+  
+  payload['gap'] = payload.blue.map(({ x, y }, i) => {
+    const oficialValue = payload.oficial[i].y;
+    if (oficialValue === 0) {
+      return { x, y: 0 };
+    } else {
+      return { x, y: ((y - oficialValue) / oficialValue) * 100 };
+    }
+  }); 
+ 
+  //const payload = valGap.map((val, i) => ({ x: data[i].date, y: val })).reverse();
     
   const post = {
     kpi,
@@ -22,15 +66,15 @@ module.exports = (async function() {
     fdr: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",
     fu: "BCRA",
     fur: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",
-      frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload),
+      frec: parsers.detectDataType(payload.gap), 
+  fruc: parsers.detectAggregationFunction(payload.gap),
     min: 0,
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     dimensions: [
         {
           fillColor: "rgba(178,34,34,0.05)",
           label: "Brecha USD / Peso",
-          data: payload,
+          data: payload.gap,
           color: "#b22222CC",
         },
       ],

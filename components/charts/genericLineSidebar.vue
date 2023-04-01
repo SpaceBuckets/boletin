@@ -23,7 +23,7 @@
         <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions" :key="`${kpi.label}`">
           <div><span class="circle" :style="{background: kpi.color }"></span> {{kpi.label}}</div> 
           <div>
-            <div>{{kpi.sym}}{{kpi.data[kpi.data.length-1].y.toFixed(2)}}{{kpi.unit}}</div>   
+            <div>{{kpi.sym}}{{kpi.data[kpi.data.length-1].y}}{{kpi.unit}}</div>   
             <div class="deltacontainer" :class="{ negative: getVariation(kpi) < 0 }">
               <i v-if="getVariation(kpi) > 0">▲</i>
               <i v-if="getVariation(kpi) < 0">▼</i>

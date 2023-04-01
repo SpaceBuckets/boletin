@@ -2,12 +2,16 @@
   <div class="footerpepe">
     <h2>Indicadores Similares</h2>
     <br>
-      <div v-for="related in recommended">
-         <nuxt-link :to="{ name: `cat-kpi`, params: { kpi: related } }">
-          {{ related.t }}        </nuxt-link><br>
-          <p>{{ related.st }}</p>
-      </div>
-  </div>
+  
+        <nuxt-link v-for="(kpi, i) in recommended" :key="`${i}-${kpi}`" :to="{ name: `cat-kpi`, params: { kpi: kpi.kpi, cat: parent } }">
+          {{ kpi.t }}
+           <br>
+          <p>{{ kpi.st }}</p>
+        </nuxt-link>
+          
+          
+         
+   </div>
 </template>
 
 <script>
@@ -27,27 +31,29 @@ export default {
     return {
       chart: require(`~/static/data/${this.data}.json`),
       renav: meganav,
-      recommended: []
+      recommended: [],
+      parent: ''
     };
   },
   mounted() {
-    var results = this.findSiblings(`${this.data}.js`,this.renav);
-    for (const item of results) {
+
+    var results = this.findSiblingsAndParent(`${this.data}.js`,this.renav);
+    this.parent = results.parent
+    for (const item of results.siblings) {
       this.recommended.push(require(`~/static/data/${item.replace('.js','')}.json`))
     }
+
   },
-  methods: { 
-    findSiblings(str, obj) {
-      return Object.values(obj).reduce((acc, val) => {
-        if (val && typeof val === 'object') {
-          if (val._contents && val._contents.includes(str)) {
-            return val._contents.filter((sibling) => sibling !== str);
-          }
-          return this.findSiblings(str, val) || acc;
-        }
-        return acc;
-      }, null);
-    },
+  methods: {  
+findSiblingsAndParent(str, obj) {
+  let result = null;
+  Object.entries(obj).flatMap(([key, value]) =>
+    (value._contents && value._contents.includes(str))
+      ? (result = { parent: key, siblings: value._contents.filter(sibling => sibling !== str) }, [])
+      : (typeof value === 'object' && value !== null) ? this.findSiblingsAndParent(str, value) : []
+  );
+  return result;
+}
   },
 };
 </script>

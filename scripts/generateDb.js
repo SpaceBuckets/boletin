@@ -118,14 +118,12 @@ writeFileSyncRecursive(`./static/megapepe.json`, JSON.stringify(transformedPepe)
 
 
 async function processItems(arr){
-  console.log(arr.length)
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
   console.log('\x1b[46m',`☺ Have a nice day` ,'\x1b[0m');
  // const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
   //bar1.start(arr.length, 0);
   
-    const jsFiles = arr.filter(kpi => kpi.endsWith('.js'));
-  await Promise.all(jsFiles.map(async kpi => {
+  await Promise.all(arr.filter(kpi => kpi.endsWith('.js')).map(async kpi => {
     try {
       await require(`../static/kpi/${kpi}`);
       console.log('\x1b[42m',`♥ [${kpi.match(/\/([^/]+)\./)[1]}] updated`, '\x1b[0m');
@@ -137,10 +135,10 @@ async function processItems(arr){
  
   //bar1.stop();
   //await processVariation("kpi");
-   processFolders(); 
+  processFolders(); 
   processNamers()   
   //magicDistribution()
 };
 
-processItems(glob.sync('**', { cwd: `static/kpi/` }));
-//processItems(['dolar/cambio.js']);
+//processItems(glob.sync('**', { cwd: `static/kpi/` }));
+processItems(['dolar/brecha.js']);
