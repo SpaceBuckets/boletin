@@ -1,7 +1,7 @@
 <template>
 <div class="pepecontainer" :class="{index}">
     <div class="flexer">
-      <h2><strong>{{ kpi.t }}</strong>. {{kpi.st}}</h2>
+      <h2><strong>{{ kpi.t }}</strong>. Serie de Tiempo</h2>
       <i v-if="index && staticKpi.frec === 'Mensual'">
         {{new Date(kpi.dimensions[0].data[kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {month: 'short', year: 'numeric' })}}
       </i>
@@ -42,7 +42,7 @@
               <div>{{ allDates[dateIndex[1]] }} </div>
             </template>            
           </div>
-          <button @click="remount()">Reset</button>
+         <!--  <button @click="remount()">Reset</button> -->
        </div>
     </div>
     <div class="hypercontainer">

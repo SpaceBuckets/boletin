@@ -1,13 +1,10 @@
 <template>
-  <section class="chart">
-    <h1>
-       <strong>{{chart.t}}</strong>
-    </h1>
-    <div class="numcontain" style="position: absolute;top: 55px;bottom: 15px;left: 20px;right:15px; padding-right:50px;">
-       
-      <div v-html="chart.c"></div>
-    </div>
-  </section>
+  <section class="newheader">
+      <h1><strong>{{ kpi.t }}</strong>. {{kpi.st}}</h1>
+
+        
+      <p v-html="kpi.sd"> </p>
+   </section>
 </template>
 
 <script>
@@ -22,7 +19,7 @@ export default {
   },
   data() {
     return {
-      chart: require(`~/static/data/${this.data}.json`),
+      kpi: require(`~/static/data/${this.data}.json`),
     };
   },
   created() {},
@@ -33,40 +30,16 @@ export default {
 </script>
 
  <style lang="scss" scoped>
-a { 
-  text-align: center;
-}
- .numcontain {
-   display: flex;
- 
- }
- h2 {
-   margin-bottom: 0 !important;
-   max-height: 20px;
-   overflow: hidden;
- }
-h4 {
-  font-size: 20px;
-  text-align: center;
-  margin: 0;
-  margin-bottom: 20px;
-  text-transform: capitalize;
- }
-h5 {
-  font-size: 18px;
-  margin: 0;
-  text-align: center;
-  color: #009966;
-    svg { 
-      fill: #009966; 
-       }
-  &.negative {
-    color: #b22222;
-    svg { 
-      fill: #b22222; 
-      transform: rotate(180deg)
-      }
 
+
+.newheader h1 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  padding-right: 100px;
+  font-weight: normal;
+  strong {
+    font-weight: bold;
   }
 }
 </style>
