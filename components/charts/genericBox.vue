@@ -3,10 +3,11 @@
     <h2>Indicadores Similares</h2>
     <br>
   
-        <nuxt-link v-for="(kpi, i) in recommended" :key="`${i}-${kpi}`" :to="{ name: `cat-kpi`, params: { kpi: kpi.kpi, cat: parent } }">
-          {{ kpi.t }}
+        <nuxt-link v-for="(item, i) in recommended" :key="`${i}-${item.kpi}`" :to="{ name: `cat-kpi`, params: { kpi: item.kpi, cat: $route.params.cat } }">
+          {{ item.t }}
            <br>
-          <p>{{ kpi.st }}</p>
+          <p>{{ item.st }}</p>
+    
         </nuxt-link>
           
           
@@ -38,22 +39,30 @@ export default {
   mounted() {
 
     var results = this.findSiblingsAndParent(`${this.data}.js`,this.renav);
-    this.parent = results.parent
-    for (const item of results.siblings) {
+ 
+     for (const item of results.siblings) {
       this.recommended.push(require(`~/static/data/${item.replace('.js','')}.json`))
     }
-
+ 
   },
   methods: {  
-findSiblingsAndParent(str, obj) {
-  let result = null;
-  Object.entries(obj).flatMap(([key, value]) =>
-    (value._contents && value._contents.includes(str))
-      ? (result = { parent: key, siblings: value._contents.filter(sibling => sibling !== str) }, [])
-      : (typeof value === 'object' && value !== null) ? this.findSiblingsAndParent(str, value) : []
-  );
-  return result;
+  findSiblingsAndParent(str, obj, parent = null) {
+  for (const [key, value] of Object.entries(obj)) {
+    if (value._contents && value._contents.includes(str)) {
+      return {
+        siblings: value._contents.filter(sibling => sibling !== str),
+      };
+    } else if (typeof value === 'object' && value !== null) {
+      const result = this.findSiblingsAndParent(str, value, key);
+      if (result) {
+        return result;
+      }
+    }
+  }
+
+  return null;
 }
+
   },
 };
 </script>

@@ -105,10 +105,7 @@ var state = {
   
 }
 
- 
 
- 
- 
 
 export default async ({ app }, inject) => {
   inject('state', Vue.observable(state))

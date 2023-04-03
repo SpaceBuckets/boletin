@@ -2,9 +2,12 @@
 <div class="pepecontainer" :class="{index}">
     <div class="flexer">
       <h2><strong>{{ kpi.t }}</strong>. {{kpi.st}}</h2>
-      <i v-if="index">
-        {{new Date(kpi.dimensions[0].data[kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'short', year: 'numeric' })}}
+      <i v-if="index && staticKpi.frec === 'Mensual'">
+        {{new Date(kpi.dimensions[0].data[kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {month: 'short', year: 'numeric' })}}
       </i>
+      <i v-if="index && staticKpi.frec === 'Diaria'">
+        {{new Date(kpi.dimensions[0].data[kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'short', year: 'numeric' })}}
+      </i>      
       <div class="innerflexer" v-if="index === undefined">  
 
         <div class="subinnerflexer">
@@ -446,6 +449,7 @@ export default {
   i {
     font-style: normal;
     font-size: 14px;
+    text-transform: capitalize;
     color: #aaa;
   }
   .innerflexer {
@@ -457,26 +461,27 @@ export default {
     .subinnerflexer {
       display: flex;
       align-items: center;
+      outline: 1px solid #eee;
       gap: 0px;
       font-size: 14px;
-      > * { flex: 1; color: #aaa; border-radius: 1px; }      
+      > * { flex: 1; color: #bbb; border-radius: 1px; }      
     }
   }
   .date-agg {
-    background: rgb(245,245,245);
+    //background: rgb(245,245,245);
     padding: 5px 12px;
     max-width: max-content;
     user-select: none;
     cursor: pointer;
-    &.active { background: #ddd;color:#888 }
+    &.active { background: #eee;color:#888 }
     i {
-      color: #aaa;
+      color: #bbb;
       font-style: normal;
       line-height: 0;
     }
   }
   .date-display {
-    background: rgb(245,245,245);
+      outline: 1px solid #eee;
     padding: 5px 15px;
     max-width: max-content;
     user-select: none;
@@ -487,7 +492,7 @@ export default {
     justify-content:space-between;
     > div {
       flex: 1;
-            color: #aaa;
+            color: #bbb;
      min-width: max-content;
 
     }
@@ -499,7 +504,8 @@ export default {
   }
   button {
     max-width: max-content;
-    background: rgb(245,245,245);
+      outline: 1px solid #eee;
+      background: #fff;
     border: none;
     cursor: pointer;
     padding: 5px 12px;

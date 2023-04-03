@@ -34,16 +34,17 @@
         </div>
      </div> 
 </div>
+ 
     <div>
     <div>
       <h4>Metadata</h4>
     </div>
 
     <div class="scorecard">
-      <div>
+     <div>
         <div>Último Dato:</div>
         <div>{{ kpi.dimensions[0].data[kpi.dimensions[0].data.length-1].x }}</div>
-      </div>
+      </div>  
       <div>
         <div>Frecuencia:</div>
         <div>{{kpi.frec}}</div>
@@ -86,19 +87,18 @@ export default {
     mounted() {
     },
     methods: {
-      getVariationHeatmap(slice) {
+getVariationHeatmap(slice) {
+  const currDate = this.kpi.dimensions[0].data.slice(-1)[0].x;
+  const monthNumber = new Date(currDate).getUTCMonth() + 1;
 
-        const currDate = this.kpi.dimensions[0].data.slice(-1)[0].x;
-        const monthNumber = new Date(currDate).getUTCMonth() + 1;
+  if (slice > monthNumber) return;
 
-        if (slice > monthNumber) return;
+  const data = this.kpi.dimensions[0].data;
+  const A = data[data.length - 1 - slice]?.y;
+  const B = data[data.length - slice]?.y;
 
-        const data = this.kpi.dimensions[0].data;
-        const A = data[data.length - 1 - slice].y;
-        const B = data[data.length - slice].y;
-
-        return ((A - B) / A) * 100 > 0 ? '#b22222' : '#009966';
-      },
+  return (A && B) ? ((A - B) / A) * 100 > 0 ? '#b22222' : '#009966' : null;
+},
       processedDate() {
         var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
 
@@ -219,23 +219,6 @@ h5 {
       }
     }
   }
-/*   &.highlight > div {
-        &:first-child {
-      flex-direction: column-reverse;
-      justify-content: center;
-      align-items: center;
-      padding-top: 0;
-      gap: 5px;
-      padding-bottom: 15px;
-      margin-bottom: 13px;
-      border-bottom: 1px solid #eee;
-    }
-    &:only-child {
-      border-bottom: 0;
-      margin-bottom: 0;
-      padding-bottom: 5px;
-    }
-  } */
 }
 
 hr {
@@ -250,7 +233,7 @@ h2 {
     padding-bottom: 0 !important;
   margin-top: 0;
   margin-bottom: 10px;
- font-size: 18px;
+ font-size: 16px;
  font-weight: normal;
  strong {
   font-weight: bold;

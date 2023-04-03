@@ -13,7 +13,8 @@
     </div>
 
     
-      <charts-kpiBoard :data="savedCells" />
+    <hr>
+     <charts-kpiBoard :data="savedCells" />
   </div>
 </template>
 
