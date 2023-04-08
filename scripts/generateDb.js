@@ -167,5 +167,5 @@ async function processItems(arr){
   processTable()
 };
 
-//processItems(glob.sync('**', { cwd: `static/kpi/` }));
-processItems(['actividad-economica/emae.js']);
+processItems(glob.sync('**', { cwd: `static/kpi/` }));
+//processItems(['actividad-economica/emae.js']);
