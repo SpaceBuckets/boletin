@@ -56,9 +56,9 @@ export default {
                  
  
          random: {
-        area: "6 / 7 / 9 / 1",
+        area: "6 / 7 / 10 / 1",
         kpi: params.kpi,
-        type: "Comment",
+        type: "Table",
         hasChart: true,
         subtitle: "Serie de Tiempo",
         title: rekpi.t        

@@ -27,7 +27,7 @@
             <div class="deltacontainer" :class="{ negative: getVariation(kpi) < 0 }">
               <i v-if="getVariation(kpi) > 0">▲</i>
               <i v-if="getVariation(kpi) < 0">▼</i>
-              <span class="delta">{{getVariation(kpi).replace('-','')}}</span>
+              <span class="delta">{{getVariation(kpi).replace('-','')}}%</span>
             </div>   
           </div>
 

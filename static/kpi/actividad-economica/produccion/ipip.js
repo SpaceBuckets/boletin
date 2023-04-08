@@ -26,6 +26,7 @@ module.exports = (async function() {
   fur: "https://www.redcame.org.ar/estadisticas-pyme/79/ndice-de-actividad-economica-pyme--ipip",
   frec: parsers.detectDataType(payload.ipip), 
   fruc: parsers.detectAggregationFunction(payload.ipip), 
+  u: new Date().toLocaleDateString('en-CA').split('/').join('-'),
   d: "El IPIP es un indicador de coyuntura que mide mensualmente la evolución de la facturación de la industria manufacturera PyME que desarrollan su actividad dentro del país y producen bienes seleccionados como representativos de la industria PyME.",
   min: 0,
   max: 140,
@@ -41,7 +42,7 @@ module.exports = (async function() {
 ]
 }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

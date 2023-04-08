@@ -15,7 +15,8 @@ const payload = await parsers.datosGobarAPI('33.2_ISAC_SIN_EDAD_0_M_23_56')
   fu: "INDEC",
   fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-3-42",
   frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload), 
+      fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'), 
   d: "El indicador ISAC <em>muestra la evolución del sector de la construcción</em> tomando como referencia los consumos aparentes de insumos requeridos en la actividad. ",
   min: 0,
   max: 300,
@@ -38,7 +39,7 @@ const payload = await parsers.datosGobarAPI('33.2_ISAC_SIN_EDAD_0_M_23_56')
     ] 
 }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

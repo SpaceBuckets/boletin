@@ -42,7 +42,7 @@
               <div>{{ allDates[dateIndex[1]] }} </div>
             </template>            
           </div>
-         <!--  <button @click="remount()">Reset</button> -->
+          <button @click="remount()">Reset</button>
        </div>
     </div>
     <div class="hypercontainer">
@@ -82,7 +82,7 @@
             </g>            
           </g>
 
-          <g class="axis yAxis">
+          <g class="axis yAxis" :class="{even: axisRight.length % 2 === 0, odd: axisRight.length % 2 !== 0}">
             <g v-for="tick in axisRight" :transform="`translate(${chartWidth-30},${tick.top})`">
                 <line :x2="`-${chartWidth-30}`"></line>
                 <text x="5" dy="0.32em">{{tick.value}}</text>
@@ -565,6 +565,10 @@ export default {
   g[data-date="#{$year}"] ~ g[data-date="#{$year}"] {
     opacity: 0;
   }
+}
+.axis.yAxis.even g:nth-child(2n+1),
+.axis.yAxis.odd g:nth-child(2n+2) {
+  opacity: 0;
 }
 
  </style>

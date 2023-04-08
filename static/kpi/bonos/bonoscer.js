@@ -50,6 +50,8 @@ module.exports = (async function() {
     fur: "https://www.intervaloresgroup.com/Financial/GetTablaCotizacionesHistoricas",
       frec: parsers.detectDataType(payload.tx24), 
   fruc: parsers.detectAggregationFunction(payload.tx24),
+  u: new Date().toLocaleDateString('en-CA').split('/').join('-'),
+
     d: "El capital de los bonos CER capital se ajusta por el Índice de Precios al Consumidor y los intereses son calculados sobre saldos ajustados.",
 
     dimensions: [
@@ -81,7 +83,7 @@ module.exports = (async function() {
     ],
 }
   
-   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

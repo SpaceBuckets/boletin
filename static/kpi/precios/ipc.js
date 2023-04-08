@@ -16,7 +16,8 @@ module.exports = (async function() {
     fu: "INDEC",
     fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-31",
       frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload),    
+      fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'),    
     d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base.",
     max: 10,
     min: 0,
@@ -29,7 +30,7 @@ module.exports = (async function() {
     ]
   }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

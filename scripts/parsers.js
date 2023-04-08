@@ -6,7 +6,16 @@ const parse5 = require('parse5');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const Papa = require('papaparse')
 const path = require('path')
-function writeFileSyncRecursive(e,i,t){let c=e.split(path.sep).slice(0,-1);c.length&&c.reduce((e,i)=>{let t=e?e+path.sep+i:i;return fs.existsSync(t)||fs.mkdirSync(t),t}),fs.writeFileSync(e,i,t)}
+function writeFileSyncMaster(e,i,t){let c=e.split(path.sep).slice(0,-1);c.length&&c.reduce((e,i)=>{let t=e?e+path.sep+i:i;return fs.existsSync(t)||fs.mkdirSync(t),t}),fs.writeFileSync(e,i,t)}
+
+function writeFileSyncRecursive(e, i) {
+  let existingData;
+  try { existingData = JSON.parse(fs.readFileSync(e)); } catch (err) { existingData = null; }
+  const allKeysEqual = Object.keys(i).filter(key => key !== "u").every(key => existingData?.hasOwnProperty(key) && JSON.stringify(existingData[key]) === JSON.stringify(i[key]));
+  console.log(allKeysEqual ? '\x1b[43m' : '\x1b[42m', allKeysEqual ? `¤ [${i.kpi}] skipped` : `♥ [${i.kpi}] updated`, '\x1b[0m');
+  if (!allKeysEqual) writeFileSyncMaster(e, JSON.stringify(i));
+}
+
 
 function detectAggregationFunction(data) {
   const mean = data.reduce((acc, d) => acc + d.y, 0) / data.length;

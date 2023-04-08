@@ -16,7 +16,8 @@ module.exports = (async function() {
     fu: "BCRA",
     fur: "https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xls",
     frec: parsers.detectDataType(payload), 
-    fruc: parsers.detectAggregationFunction(payload),  
+        fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'),  
     d: "Este índice mide el precio relativo de los bienes y servicios de la economía argentina con respecto al de los de los principales 12 socios comerciales del país, en función del flujo de comercio de manufacturas.",
     max: 220,
     min: 80,
@@ -36,7 +37,7 @@ module.exports = (async function() {
 ]
 }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

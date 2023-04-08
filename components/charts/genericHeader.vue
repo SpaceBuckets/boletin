@@ -42,4 +42,8 @@ export default {
     font-weight: bold;
   }
 }
+p {
+    padding-right: 100px;
+
+}
 </style>

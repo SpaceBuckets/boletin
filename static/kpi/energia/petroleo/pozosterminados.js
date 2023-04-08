@@ -15,7 +15,8 @@ const payload = await parsers.datosGobarAPI('366.3_POZOS_TERMRAL__30')
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
       frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload),  
+      fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'),  
     d: "",
     cat: "Hidrocarburos",
     catslug: "hidrocarburos",
@@ -31,7 +32,7 @@ const payload = await parsers.datosGobarAPI('366.3_POZOS_TERMRAL__30')
       ]
   }
 
-  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

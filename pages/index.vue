@@ -57,40 +57,64 @@
             </nuxt-link> 
         </div>
     </template>
+    <br>
+    <br>
+            <div class="mastertable">
 
-<!-- <div class="retabler">
-  <h2><strong>Indicadores macroeconomicos de Argentina</strong> ({{items.length}})
-    </h2>
-    <table>
-  <tr>
-    <th>Indicador</th>
-    <th>Descripcion</th>
-    <th>Categoria</th>
-    <th>Fuente</th>
-    <th>Ultima Actualizacion</th>
-  </tr>
-  <tr v-for="(parent, i) in items">
-    <td>{{parent.kpi}}</td>
-    <td>{{parent.desc}}</td>
-    <td>{{parent.cat}}</td>
-    <td>INDEC</td>
-    <td>Mayo 2022</td>
-  </tr>
-</table>
-</div> -->
+<section>
+  <h2>Indicadores Económicos y Sociales de Argentina</h2>
+  <div>
 
-           
+  <table>
+    <thead>
+      <tr>
+        <th v-for="(column, index) in tableColumns"
+          :key="index"
+          :class="{'sort-asc': column.field === currentSort && currentSortDir === 'asc', 'sort-desc': column.field === currentSort && currentSortDir === 'desc'}"
+          @click="sortTable(column.field)"
+        >
+          {{ column.label }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(value, key) in getSortedItems()" :key="key">
+        <td><strong>{{ value.t }}</strong>. {{ value.st }}</td>
+        <td>{{ value.fu }}</td>
+        <td>{{ value.fd }}</td>
+        <td>{{ value.frec }}</td>
+        <td>{{ value.ul }}</td>
+        <td>
+          {{ value.u ? Math.round((Date.now() - Date.parse(value.u)) / (24 * 60 * 60 * 1000)) + ' ' + (Math.round((Date.now() - Date.parse(value.u)) / (24 * 60 * 60 * 1000)) === 1 ? 'día' : 'días') : '-' }}
+        </td>  
+      </tr>
+    </tbody>
+  </table>
+    </div>
+
+</section>
+           </div>
   </div>
 </template>
 
 <script>
-//import megatable from '~/static/tableObject.json'
+import megatable from '~/static/kpitable.json'
 
 export default {
   name: "IndexPage",
   data() {
     return {
-      //items: megatable,      
+      items: megatable,   
+    currentSort: 'u', // By default, sort by the 'ul' property
+    currentSortDir: 'desc', // By default, sort in descending order    
+          tableColumns: [
+        { label: 'Indicador', field: 't' },
+        { label: 'Fuente', field: 'fu' },
+        { label: 'Método', field: 'fd' },
+        { label: 'Frecuencia', field: 'frec' },
+        { label: 'Último Dato', field: 'ul' },
+        { label: 'Actualizado', field: 'u' },
+      ],     
       savedIndex: [
         {
           title: "Dólar vs. Peso",
@@ -177,6 +201,33 @@ export default {
       },
     };
   },
+  methods: {
+    getSortedItems() {
+      // Convert the items object to an array
+      const itemsArray = Object.values(this.items);
+
+      // Sort the array based on the currentSort and currentSortDir
+      return itemsArray.sort((a, b) => {
+        const aValue = a[this.currentSort];
+        const bValue = b[this.currentSort];
+
+        if (this.currentSortDir === 'asc') {
+          return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
+        } else {
+          return aValue < bValue ? 1 : aValue > bValue ? -1 : 0;
+        }
+      });
+    },
+    sortTable(column) {
+      if (column === this.currentSort) {
+        this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        this.currentSortDir = 'asc';
+        this.currentSort = column;
+      }
+    },
+  },
+ 
 };
 </script>
 
@@ -263,40 +314,87 @@ overflow: hidden;
   }
 }
 
-.retabler {
+.mastertable {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 20px;
   h2 {
-        margin: 0;
-    font-size: 18px;
-    min-width: 300px;
-    font-weight: 400;
-    font-family: Helvetica, Arial, sans-serif;
-    color: #888;
-    padding-right: 90px;
-    margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    //margin-bottom: 15px;
+    padding-bottom: 15px !important;
   }
   table {
     width: 100%;
     border-spacing: 0; border-collapse: collapse;
+
+  
   }
   th,td {
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
     text-align: left;
      &:nth-child(2) {
       max-width: 200px;
     }
-    &:first-child {
-      max-width: max-content;
-    }
+
   }
-  tr {
+  tr:not(:only-child) {
     cursor: pointer;
     &:hover {
-      background: #eee;
+      background: #fafafa;
     }
   }
+}
+
+.mastertable thead th {
+  position: sticky;
+  top: 0;
+  background-color: #fff; /* To ensure the header covers the content when scrolling */
+  z-index: 10;
+  cursor: pointer;
+  &:hover {
+    background-color: #fafafa;
+  }
+}
+
+.mastertable tbody {
+  display: block;
+  max-height: 500px; /* Adjust this value to control the height of the tbody */
+  overflow-y: auto;
+}
+
+.mastertable thead,
+.mastertable tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.mastertable th:first-child,
+.mastertable td:first-child {
+  width: 420px;
+  padding-left: 0;
+  word-wrap: break-word;
+}
+
+.mastertable thead th.sort-asc::after,
+.mastertable thead th.sort-desc::after {
+  content: "";
+  display: inline-block;
+  margin-left: 3px;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.mastertable thead th.sort-asc::after {
+  border-width: 4px 4px 0 4px;
+  border-color: #888 transparent transparent transparent;
+}
+
+.mastertable thead th.sort-desc::after {
+  border-width: 0 4px 4px 4px;
+  border-color: transparent transparent #888 transparent;
 }
 </style>

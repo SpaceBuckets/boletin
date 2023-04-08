@@ -16,7 +16,8 @@ const payload = await parsers.datosGobarAPI('188.1_AUH_ASIGNAADO_0_0_48')
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
       frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload),     
+      fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'),     
     dimensions: [
         {
           label: "AUH",
@@ -29,7 +30,7 @@ const payload = await parsers.datosGobarAPI('188.1_AUH_ASIGNAADO_0_0_48')
       ]
   }
 
-  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

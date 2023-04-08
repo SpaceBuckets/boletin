@@ -26,6 +26,7 @@ module.exports = (async function() {
   fur: "https://www.redcame.org.ar/estadisticas-pyme/78/ndice-de-ventas-minoristas",
     frec: parsers.detectDataType(payload.ivm), 
   fruc: parsers.detectAggregationFunction(payload.ivm),  
+  u: new Date().toLocaleDateString('en-CA').split('/').join('-'),
   d: "El Índice de Ventas Minoristas (IVM) es un indicador de coyuntura que mide mensualmente la evolución de la facturación de los comercios minoristas PyMEs que desarrollan sus actividades dentro del país. Los establecimientos fueron seleccionados como representativos dadas nuestras estimaciones.",
   max: 200,
   min: 0,
@@ -41,7 +42,7 @@ module.exports = (async function() {
     ] 
 }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

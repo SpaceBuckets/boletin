@@ -1,10 +1,8 @@
 require('module-alias/register')
 const glob = require('glob');
 const path = require('path')
-const fs = require('fs');
 var parsertree = require('tree-parser');
- 
-var xlsx = require('node-xlsx');
+global.fs = require('fs');
 
 function writeFileSyncRecursive(filename, content, charset) {
   const folders = filename.split(path.sep).slice(0, -1)
@@ -76,6 +74,39 @@ async function processNamers() {
 
 }
 
+async function processTable() {
+
+  var folders = await require(`../static/refolders.json`)
+  var files = []
+  var kpeis = {}
+
+  for (let [key, type] of Object.entries(folders)) {
+    if (folders[key]['_contents']) { files.push(folders[key]['_contents']) }
+    for (let [rekey, retype] of Object.entries(folders[key])) {
+      if (folders[key][rekey]['_contents']) { files.push(folders[key][rekey]['_contents']) }
+    }
+  }
+  files = [...new Set(files.flat(1))]
+  for (let e = 0; e < files.length; e++) { 
+    var singleKpi = await require(`../static/data/${files[e].slice(0,-3)}.json`)
+    kpeis[singleKpi.kpi] = {
+      t: singleKpi.t,
+      st: singleKpi.st,
+      fd: singleKpi.fd,
+      fu: singleKpi.fu,
+      frec: singleKpi.frec,
+      u: singleKpi.u,
+      ul: singleKpi.dimensions[0].data.slice(-1)[0].x
+    }
+   }
+
+ 
+ 
+   writeFileSyncRecursive(`./static/kpitable.json`, JSON.stringify(kpeis)); 
+   console.log('\x1b[46m',`✓ KPI-table generated` ,'\x1b[0m');  
+
+}
+
 async function processFolders( ){
   const tree = parsertree('static/kpi');
 
@@ -120,25 +151,21 @@ writeFileSyncRecursive(`./static/megapepe.json`, JSON.stringify(transformedPepe)
 async function processItems(arr){
   console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
   console.log('\x1b[46m',`☺ Have a nice day` ,'\x1b[0m');
- // const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
-  //bar1.start(arr.length, 0);
   
-  await Promise.all(arr.filter(kpi => kpi.endsWith('.js')).map(async kpi => {
+   await Promise.all(arr.filter(kpi => kpi.endsWith('.js')).map(async kpi => {
     try {
       await require(`../static/kpi/${kpi}`);
-      console.log('\x1b[42m',`♥ [${kpi.match(/\/([^/]+)\./)[1]}] updated`, '\x1b[0m');
     } catch (error) {
       console.log('\x1b[41m', '\x1b[37m', `✕ [${kpi}] failed to fetch!`, '\x1b[0m');
       console.error(error);
     }
   })); 
  
-  //bar1.stop();
-  //await processVariation("kpi");
+
   processFolders(); 
   processNamers()   
-  //magicDistribution()
+  processTable()
 };
 
-processItems(glob.sync('**', { cwd: `static/kpi/` }));
-//processItems(['dolar/brecha.js']);
+//processItems(glob.sync('**', { cwd: `static/kpi/` }));
+processItems(['actividad-economica/emae.js']);

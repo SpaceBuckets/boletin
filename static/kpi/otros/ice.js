@@ -28,6 +28,8 @@ module.exports = (async function() {
   fur: "https://www.bancoprovincia.com.ar/estudios_economicos/informe_estudios_economicos",
     frec: parsers.detectDataType(payload.coyuntural), 
   fruc: parsers.detectAggregationFunction(payload.coyuntural),    
+  u: new Date().toLocaleDateString('en-CA').split('/').join('-'),
+
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   max: 10,
 
@@ -53,7 +55,7 @@ module.exports = (async function() {
     ]
 }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

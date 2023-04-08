@@ -3,12 +3,6 @@ module.exports = (async function() {
   const parsers = require("@parsers");
   
   const kpi = "brecha"
-
-/*   const data = await (await fetch('https://api.bluelytics.com.ar/v2/evolution.json')).json();
-
-  const valUSD = data.filter(d => d.source === 'Oficial').map(d => d.value_buy);
-  const valBlue = data.filter(d => d.source === 'Blue').map(d => d.value_buy);
-  const valGap = valUSD.map((num, i) => ((valBlue[i] - num) / ((num + valBlue[i]) / 2)) * 100); */
  
   const reambito = {
     oficial: 'https://mercados.ambito.com//dolar/oficial/historico-general/01-01-1900/01-01-2100',
@@ -54,7 +48,6 @@ module.exports = (async function() {
     }
   }); 
  
-  //const payload = valGap.map((val, i) => ({ x: data[i].date, y: val })).reverse();
     
   const post = {
     kpi,
@@ -66,9 +59,9 @@ module.exports = (async function() {
     fdr: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",
     fu: "BCRA",
     fur: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",
-      frec: parsers.detectDataType(payload.gap), 
-  fruc: parsers.detectAggregationFunction(payload.gap),
-    min: 0,
+    frec: parsers.detectDataType(payload.gap), 
+    fruc: parsers.detectAggregationFunction(payload.gap),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'),    min: 0,
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     dimensions: [
         {
@@ -80,8 +73,7 @@ module.exports = (async function() {
       ],
   }
 
-  
-  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

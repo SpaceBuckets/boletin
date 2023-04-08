@@ -16,7 +16,8 @@ const payload = await parsers.datosGobarAPI('101.1_I2NG_2016_M_22&representation
   fu: "MECON",
   fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
     frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload),   
+      fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'),   
   d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base.",
   max: 10,
   min: 0,
@@ -33,7 +34,7 @@ const payload = await parsers.datosGobarAPI('101.1_I2NG_2016_M_22&representation
 ]
 }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

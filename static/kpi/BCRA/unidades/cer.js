@@ -17,7 +17,8 @@ module.exports = (async function() {
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
       frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload),
+      fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'),
     dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
@@ -29,7 +30,7 @@ module.exports = (async function() {
   }
 
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

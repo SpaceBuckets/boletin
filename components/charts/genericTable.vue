@@ -4,27 +4,38 @@
         <strong>{{ chart.t }}</strong>. {{chart.st}}
       </h2>
     <h2 v-if="title">
-        <strong>{{ title }}</strong>. {{subtitle}}
+        <strong>{{ title }}</strong>. Datos y Tendencias
     </h2>
 
-    <div class="flexedcontent">
-          <div>
-         <div>Fecha</div>
-        <div>Valor</div>
-        <div>Variacion</div>
-     </div>
-       <div v-for="(date, i) in kpi.chart.dates.slice(0,24).reverse()" :key="`aa${i}`">
-        <div>{{ date.x }}</div>
-        <div>
-          {{
-            date.y
-             
-          }}
-        </div>
-        <div class="green" :class="{ red: getVariation(i) < 0 }">
-          {{ getVariation(i) + "%" }}
-        </div> 
-      </div>  
+  <table class="retable">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th v-for="dimension in kpi.dimensions" :key="dimension.label">{{ dimension.label }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(item, index) in kpi.dimensions[0].data" :key="index">
+        <td v-if="index < 12"><strong>{{ formatDate(item.x) }}</strong></td>
+        <td v-for="dimension in kpi.dimensions" :key="dimension.label" v-if="index < 12">
+          {{ dimension.data[index].y.toFixed(2) }}
+          <span :class="getVariationClass(dimension, index)">
+            <i v-if="calculateVariation(dimension, index) > 0">▲</i>
+            <i v-if="calculateVariation(dimension, index) < 0">▼</i>            
+            {{ Math.abs(calculateVariation(dimension, index).toFixed(1)) }}%
+
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+
+
     </div>
   </section>
 </template>
@@ -61,10 +72,40 @@ export default {
   },
   data() {
     return {
-      kpi: require(`~/static/data/${this.data}.json`),
+      kpi: JSON.parse(JSON.stringify(require(`~/static/data/${this.data}.json`))),
+      filteredKpi: {}
     };
   },
+  created() {
+      const filteredDimensions = this.kpi.dimensions.map((dimension) => {
+        const last20Items = dimension.data.reverse().slice(12);
+        return {
+          ...dimension,
+          data: last20Items,
+        };
+      });
+
+      this.filteredKpi = {
+        ...this.kpi,
+        dimensions: filteredDimensions,
+      };   
+      console.log(this.filteredKpi)
+  },
   methods: {
+    formatDate(dateString) {
+      return new Date(dateString).toLocaleDateString('es', { month: 'long', year: 'numeric' }).replace(' de', '');
+    },
+    calculateVariation(dimension, index) {
+      if (index < 12) {
+        return ((dimension.data[index].y - dimension.data[index + 1].y) / dimension.data[index + 1].y * 100);
+      } else {
+        return ((dimension.data[index].y - dimension.data[index - 1].y) / dimension.data[index - 1].y * 100);
+      }
+    },
+    getVariationClass(dimension, index) {
+      const variation = this.calculateVariation(dimension, index);
+      return variation >= 0 ? 'positive' : 'negative';
+    },
     getVariation(i) {
       var A = this.kpi.chart.dimensions[0].data[this.kpi.chart.dimensions[0].data.length-1].y;
       var B = this.kpi.chart.dimensions[0].data[this.kpi.chart.dimensions[0].data.length-2].y;
@@ -79,7 +120,7 @@ export default {
   flex: 1;
   padding: 0;
   padding-right: 0px;
-
+  overflow: auto;
   @media only screen and (max-width: 600px) {
     max-width: 100%;
     border: 0;
@@ -90,6 +131,8 @@ export default {
     display: flex;
     &.flexedcontent {
       flex-direction: column;
+        overflow: auto;
+
       .green {
         background: #00996620;
       }
@@ -114,11 +157,51 @@ export default {
         }
         &:first-child {
           text-align: left;
-          max-width: 80px;
+          max-width: 100px;
         }
       }
     }
   }
 }
+
+table.retable {
+  text-align: left;
+  //border: 1px solid #eee;
+  border-collapse: collapse;
+  th {
+    padding: 10px 5px;
+    border-bottom: 1px solid #eee;
+
+  }
+  td {
+    padding: 10px 5px;
+    text-transform: capitalize;
+    border-bottom: 1px solid #eee;
+  }
+}
+
+td span {
+  font-size: 12px;
+   &.positive {
+   color: #009966;
+       i { 
+          font-size: 10px;
+
+      color: #009966; 
+       }
+ }
+
+ &.negative {
+    color: #b22222;
+    i { 
+                font-size: 10px;
+
+      color: #b22222; 
+      transform: rotate(180deg)
+      }
+  }
+}
+
+
 </style>
  

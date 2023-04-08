@@ -16,7 +16,8 @@ const payload = await parsers.datosGobarAPI('449.1_NIVEL_GENERAL_0_0_13_97&repre
   fu: "INDEC",
   fur: "https://www.indec.gob.ar/indec/web/Nivel3-Tema-3-5",
     frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload),  
+      fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'),  
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
 
   min: 0,
@@ -33,7 +34,7 @@ const payload = await parsers.datosGobarAPI('449.1_NIVEL_GENERAL_0_0_13_97&repre
 ]
 }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

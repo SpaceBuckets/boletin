@@ -18,7 +18,8 @@ const post = {
   fu: "Banco Mundial",
   fur: "https://datos.bancomundial.org/indicator/NY.GDP.PCAP.KD?locations=AR",
   frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload), 
+      fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'), 
   d: "El producto bruto interno (PBI)​ es una magnitud macroeconómica que expresa el valor monetario de la producción de bienes y servicios de demanda final de un país o región durante un período determinado.",
   unit: "M",
   sym: "$",
@@ -32,7 +33,7 @@ const post = {
   ]
 }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

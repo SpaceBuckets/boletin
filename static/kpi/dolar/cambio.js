@@ -58,6 +58,8 @@ module.exports = (async function() {
     fur: "https://www.bcra.gob.ar/publicacionesestadisticas/tipos_de_cambios.asp",
       frec: parsers.detectDataType(payload.oficial), 
   fruc: parsers.detectAggregationFunction(payload.oficial),
+  u: new Date().toLocaleDateString('en-CA').split('/').join('-'),
+
     d: "El tipo de cambio es el precio de una unidad de moneda extranjera expresado en términos de la moneda local.",
     //max: 400,
     dimensions: [
@@ -106,6 +108,6 @@ module.exports = (async function() {
       ],
   }
 
-  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 })()

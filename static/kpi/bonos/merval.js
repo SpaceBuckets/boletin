@@ -17,7 +17,8 @@ const payload = await parsers.datosGobarCSV(0,4,url)
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
       frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload),  
+      fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'),  
     d: "",
 
     dimensions: [
@@ -32,7 +33,7 @@ const payload = await parsers.datosGobarCSV(0,4,url)
       ]
   }
 
-  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

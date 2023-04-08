@@ -30,6 +30,8 @@ module.exports = (async function() {
   fur: "https://www.eia.gov/dnav/pet/hist/RBRTED.htm",
     frec: parsers.detectDataType(payload.brent), 
   fruc: parsers.detectAggregationFunction(payload.brent),    
+  u: new Date().toLocaleDateString('en-CA').split('/').join('-'),
+
   dimensions: [
       {
         fillColor: "rgba(46,120,210,0.05)",
@@ -42,7 +44,7 @@ module.exports = (async function() {
 ]
 }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

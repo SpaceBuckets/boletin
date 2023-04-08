@@ -15,7 +15,8 @@ const payload = await parsers.datosGobarAPI('457.1_VIAJEROS_TLES_0_M_16_50')
     fu: "MECON",
     fur: "https://www.argentina.gob.ar/economia/politicaeconomica/macroeconomica",
       frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload),  
+      fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'),  
     d: "",
     dimensions: [
         {
@@ -36,7 +37,7 @@ const payload = await parsers.datosGobarAPI('457.1_VIAJEROS_TLES_0_M_16_50')
       ]
   }
 
-  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+  parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

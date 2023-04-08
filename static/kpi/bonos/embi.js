@@ -31,6 +31,8 @@ module.exports = (async function() {
   fur: "https://am.jpmorgan.com/es/es/asset-management/per/products/jpm-emerging-markets-strategic-bond-a-acc-usd-lu1162084740",
     frec: parsers.detectDataType(payload.argentina), 
   fruc: parsers.detectAggregationFunction(payload.argentina),
+  u: new Date().toLocaleDateString('en-CA').split('/').join('-'),
+
   d: "Índice calculado por JP Morgan Chase que mide la diferencia entre la tasa de interés que un país debe de pagar por emitir deuda en el exterior.",
   max: 50,
 
@@ -92,7 +94,7 @@ module.exports = (async function() {
     ]
 }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

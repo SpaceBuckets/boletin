@@ -15,7 +15,8 @@ module.exports = (async function() {
     fu: "BCRA",
     fur: "http://www.bcra.gob.ar/pdfs/PublicacionesEstadisticas/bolmetes.pdf",
       frec: parsers.detectDataType(payload), 
-  fruc: parsers.detectAggregationFunction(payload),
+      fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'),
     d: "El Índice de Contratos de Locación (ICL) es un indicador creado por la Ley 27.551 con el fin de poder establecer parámetros de actualización a la hora de celebrar contratos de alquiler.",
     dimensions: [
         {
@@ -27,7 +28,7 @@ module.exports = (async function() {
       ]
   }
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

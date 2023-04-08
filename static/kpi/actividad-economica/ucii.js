@@ -15,7 +15,8 @@ module.exports = (async function() {
     fu: "INDEC",
     fur: "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-6-15",
     frec: parsers.detectDataType(payload), 
-    fruc: parsers.detectAggregationFunction(payload), 
+        fruc: parsers.detectAggregationFunction(payload),
+    u: new Date().toLocaleDateString('en-CA').split('/').join('-'), 
     d: "El indicador de la utilización de la capacidad instalada en la industria manufacturera mide la proporción utilizada, en términos porcentuales, de la capacidad productiva del sector industrial.",
     dimensions: [
       {
@@ -99,7 +100,7 @@ module.exports = (async function() {
 }
 
 
-parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 
 })()

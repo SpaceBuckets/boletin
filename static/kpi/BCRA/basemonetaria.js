@@ -46,6 +46,8 @@ module.exports = (async function() {
     fur: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",
       frec: parsers.detectDataType(payload.total), 
   fruc: parsers.detectAggregationFunction(payload.total),
+  u: new Date().toLocaleDateString('en-CA').split('/').join('-'),
+
     min: 0,
     d: "La Base Monetaria (BM) está constituida por todo el dinero legal en circulación (es decir, billetes y monedas), sumado a las reservas de los bancos comerciales en el banco central.",
     dimensions: [
@@ -64,6 +66,6 @@ module.exports = (async function() {
       ],
   }
 
-   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, JSON.stringify(post));
+   parsers.writeFileSyncRecursive(`./static/data/${kpi}.json`, post);
 
 })()
