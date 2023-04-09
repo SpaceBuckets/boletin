@@ -2,12 +2,9 @@
 <div class="pepecontainer" :class="{index}">
     <div class="flexer">
       <h2><strong>{{ kpi.t }}</strong>. Serie de Tiempo</h2>
-      <i v-if="index && staticKpi.frec === 'Mensual'">
-        {{new Date(kpi.dimensions[0].data[kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {month: 'short', year: 'numeric' })}}
-      </i>
-      <i v-if="index && staticKpi.frec === 'Diaria'">
-        {{new Date(kpi.dimensions[0].data[kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'short', year: 'numeric' })}}
-      </i>      
+      <i v-if="index">
+{{ processedDate() }}      </i>
+   
       <div class="innerflexer" v-if="index === undefined">  
 
         <div class="subinnerflexer">
@@ -172,6 +169,21 @@ export default {
     },
   },  
   methods: {  
+      processedDate() {
+        var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
+
+        if(this.kpi.frec === 'Mensual') {
+          const lastDate = new Date(this.kpi.dimensions[0].data.slice(-1)[0].x + "T00:00:00");
+
+          //lastDate.setMonth(lastDate.getUTCMonth());
+          var pepe = lastDate.toLocaleString('es', {month: 'long', year: 'numeric' }).replaceAll("de",'');
+
+        } 
+        if(this.kpi.frec === 'Anual') {
+          var pepe = `Año ${new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {year: 'numeric' }).replaceAll("de",'')}`
+        }         
+        return pepe
+      },    
     aggregateData(data) {
       const groupBy = this.dataAggFrec === 'Anual' ? d => d.x.substring(0, 4) : this.dataAggFrec === 'Mensual' ? d => d.x.substring(0, 7) : d => d.x.substring(0, 10);
       

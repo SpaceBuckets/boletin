@@ -16,7 +16,7 @@
     </thead>
     <tbody>
       <tr v-for="(item, index) in kpi.dimensions[0].data" :key="index">
-        <td v-if="index < 12"><strong>{{ formatDate(item.x) }}</strong></td>
+        <td v-if="index < 12"><strong>{{ processedDate(item.x) }}</strong></td>
         <td v-for="dimension in kpi.dimensions" :key="dimension.label" v-if="index < 12">
           {{ dimension.data[index].y.toFixed(2) }}
           <span :class="getVariationClass(dimension, index)">
@@ -95,6 +95,20 @@ export default {
     formatDate(dateString) {
       return new Date(dateString).toLocaleDateString('es', { month: 'long', year: 'numeric' }).replace(' de', '');
     },
+      processedDate(date) {
+        var pepe = new Date(date).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
+
+        if(this.kpi.frec === 'Mensual') {
+          const lastDate = new Date(date + "T00:00:00");
+
+          var pepe = lastDate.toLocaleString('es', {month: 'long', year: 'numeric' }).replaceAll("de",'');
+
+        } 
+        if(this.kpi.frec === 'Anual') {
+          var pepe = `Año ${new Date(date).toLocaleDateString('es', {year: 'numeric' }).replaceAll("de",'')}`
+        }         
+        return pepe
+      },      
     calculateVariation(dimension, index) {
       if (index < 12) {
         return ((dimension.data[index].y - dimension.data[index + 1].y) / dimension.data[index + 1].y * 100);

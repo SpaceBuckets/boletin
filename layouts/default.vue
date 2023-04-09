@@ -28,7 +28,7 @@
       </h1>
       <div class="renav">
         <div>
-        <strong>Febo asoma; ya sus rayos, iluminan el histórico contexto.</strong> Esta colección de 118 indicadores intenta develar de dónde viene y hacia dónde va la macroeconomía de la República Argentina.
+        <strong>Febo asoma; ya sus rayos, iluminan el histórico contexto.</strong> Estos 118 indicadores intentan develar de dónde viene y hacia dónde va la macroeconomía Argentina.
 
         </div>
       </div>
