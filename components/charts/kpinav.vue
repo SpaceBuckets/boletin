@@ -177,7 +177,7 @@ export default {
   top: 60px;
   bottom: 0;
   padding: 0;
-  padding-top:20px;
+  padding-top:10px;
   overflow: auto;
   padding-bottom: 100px;
   color: #ddd;

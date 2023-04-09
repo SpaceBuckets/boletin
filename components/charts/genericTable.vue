@@ -18,13 +18,15 @@
       <tr v-for="(item, index) in kpi.dimensions[0].data" :key="index">
         <td v-if="index < 12"><strong>{{ processedDate(item.x) }}</strong></td>
         <td v-for="dimension in kpi.dimensions" :key="dimension.label" v-if="index < 12">
-          {{ dimension.data[index].y.toFixed(2) }}
-          <span :class="getVariationClass(dimension, index)">
-            <i v-if="calculateVariation(dimension, index) > 0">▲</i>
-            <i v-if="calculateVariation(dimension, index) < 0">▼</i>            
-            {{ Math.abs(calculateVariation(dimension, index).toFixed(1)) }}%
+          {{ dimension.data[index].y ? dimension.data[index].y.toFixed(2) : '-' }}
+<span :class="getVariationClass(dimension, index)">
+  <template v-if="isFinite(calculateVariation(dimension, index)) && Math.abs(calculateVariation(dimension, index).toFixed(1)) !== 0">
+    <i v-if="calculateVariation(dimension, index) > 0">▲</i>
+    <i v-if="calculateVariation(dimension, index) < 0">▼</i>
+    {{ Math.abs(calculateVariation(dimension, index).toFixed(1)) }}%
+  </template>
+</span>
 
-          </span>
         </td>
       </tr>
     </tbody>
@@ -89,7 +91,6 @@ export default {
         ...this.kpi,
         dimensions: filteredDimensions,
       };   
-      console.log(this.filteredKpi)
   },
   methods: {
     formatDate(dateString) {

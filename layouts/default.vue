@@ -175,6 +175,7 @@ html {
   align-items: center;
   bottom: 0;
   //background: #1f2325;
+  display: none;
   > div {
    color: #888;
   strong {
@@ -190,12 +191,12 @@ html {
 header {
   //background: rgba(55, 53, 47, 0.08);
   //background: #000;
-  background: #1f1f1f;
+  //background: #1f1f1f;
   position: fixed;
   top: 0;
   height: 60px;
   left: 0;
-  //width: 300px;
+  width: 225px;
    // border-right: 2px solid #333;
 
   right: 0;
@@ -261,12 +262,13 @@ body {
   background: rgb(247, 246, 243);
   background: #000;
   background: #070b0d;
+  background: #181818;
   margin: 0;
   font-size: 15px;
-    padding-left: 225px;
+    padding-left: 230px;
     padding-right: 0px;
 
-  padding-top: 80px;
+  padding-top: 20px;
 
         @media only screen and (max-width: 980px) {
   padding-top: 60px;

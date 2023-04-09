@@ -56,7 +56,7 @@ export default {
                  
  
          random: {
-        area: "6 / 7 / 10 / 1",
+        area: "6 / 9 / 10 / 1",
         kpi: params.kpi,
         type: "Table",
         hasChart: true,
