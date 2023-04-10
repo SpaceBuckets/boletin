@@ -1,7 +1,8 @@
 <template>
 <div class="pepecontainer" :class="{index}">
     <div class="flexer">
-      <h2><strong>{{ kpi.t }}</strong>. Serie de Tiempo</h2>
+      <h2 v-if="!index"><strong>{{ kpi.t }}</strong>. Serie de Tiempo</h2>
+      <h2 v-if="index"><strong>{{ kpi.t }}</strong>. {{ kpi.st }}</h2>
       <i v-if="index">
 {{ processedDate() }}      </i>
    
