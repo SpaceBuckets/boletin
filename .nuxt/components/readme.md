@@ -23,6 +23,7 @@ You can directly use them in pages and other components without the need to impo
 - `<ChartsGenericLineSidebar>` | `<charts-generic-line-sidebar>` (components/charts/genericLineSidebar.vue)
 - `<ChartsGenericPostHeader>` | `<charts-generic-post-header>` (components/charts/genericPostHeader.vue)
 - `<ChartsGenericSol>` | `<charts-generic-sol>` (components/charts/genericSol.vue)
+- `<ChartsGenericSparkLine>` | `<charts-generic-spark-line>` (components/charts/genericSparkLine.vue)
 - `<ChartsGenericTable>` | `<charts-generic-table>` (components/charts/genericTable.vue)
 - `<ChartsKpiBoard>` | `<charts-kpi-board>` (components/charts/kpiBoard.vue)
 - `<ChartsKpinav>` | `<charts-kpinav>` (components/charts/kpinav.vue)

@@ -50,6 +50,9 @@
   "ChartsGenericSol": {
     "description": "Auto imported from components/charts/genericSol.vue"
   },
+  "ChartsGenericSparkLine": {
+    "description": "Auto imported from components/charts/genericSparkLine.vue"
+  },
   "ChartsGenericTable": {
     "description": "Auto imported from components/charts/genericTable.vue"
   },

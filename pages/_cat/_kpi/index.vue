@@ -46,7 +46,7 @@ export default {
       }, 
                           
          fireet: {
-        area: "6 / 7 / 9 / 9",
+        area: "6 / 7 / 10 / 9",
         kpi: params.kpi,
         type: "Box",
         hasChart: true,

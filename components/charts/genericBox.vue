@@ -2,14 +2,15 @@
   <div class="footerpepe">
     <h2>Indicadores Similares</h2>
     <br>
-  
-        <nuxt-link v-for="(item, i) in recommended" :key="`${i}-${item.kpi}`" :to="{ name: `cat-kpi`, params: { kpi: item.kpi, cat: $route.params.cat } }">
-          {{ item.t }}
-           <br>
-          <p>{{ item.st }}</p>
-    
-        </nuxt-link>
+  <div class="sparkcontainer" v-for="(item, i) in recommended" :key="`${i}-${item.kpi}`">
+        <nuxt-link  :to="{ name: `cat-kpi`, params: { kpi: item.kpi, cat: $route.params.cat } }">
+          {{ item.t }} 
           
+        </nuxt-link>
+      <charts-genericSparkLine :data="item.kpi"/>
+  </div>
+
+
           
          
    </div>
@@ -67,7 +68,16 @@ export default {
 };
 </script>
 
- <style scoped>
+ <style scoped lang="scss">
 
- 
+.sparkcontainer {
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    margin-bottom: 12px;
+    padding: 10px 10px 15px;
+    a {
+      display: block;
+      margin-bottom: 10px;
+    }
+}
  </style>
