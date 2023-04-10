@@ -19,8 +19,7 @@ const payload = await parsers.datosGobarAPI('148.3_INUCLEONAL_DICI_M_19&represen
       fruc: parsers.detectAggregationFunction(payload),
     u: new Date().toLocaleDateString('en-CA').split('/').join('-'),  
      d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base.",
-  max: 10,
-  min: 0,
+ 
 
   dimensions: [
     {

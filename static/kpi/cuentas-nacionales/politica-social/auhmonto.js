@@ -23,8 +23,8 @@ module.exports = (async function () {
         {
           label: "AUH",
           data: payload,
-          color: "#2E78D2CC",
-          fillColor: "#2E78D2CC",
+          color: "#2E78D2",
+          fillColor: "#2E78D2",
           type: 'bar',
         },
 

@@ -63,7 +63,7 @@
         </div>
         <svg 
           id="chart" 
-          :class="{animation}"
+          :class="{animation, [kpi.type]: true }"
           :width="chartWidth" 
           :height="chartHeight" 
           :viewBox="`0 0 ${chartWidth } ${chartHeight}`"
@@ -277,16 +277,32 @@ export default {
         left: scaleX(d),
         width: i > 0 ? scaleX(d) - scaleX(ticks[i-1]) : scaleX(d),
       }]));
-
       //get min and max values from all dimensions to set selected domain
-      const [minValue, maxValue] = d3.extent(this.kpi.dimensions.flatMap(d => d.data.slice(this.dateIndex[0], this.dateIndex[1] + 1).map(i => i.y)));
-      const scaleY = d3.scaleLinear().domain([minValue*0.9, maxValue*1.05]).range([this.$refs.c.clientHeight-30, 10]).nice();
+      const valuesData = this.kpi.dimensions.flatMap(d => d.data.slice(this.dateIndex[0], this.dateIndex[1] + 1).map(i => i.y));
+      const [minValue, maxValue] = [this.kpi.min ?? d3.min(valuesData)*0.9, this.kpi.max ?? d3.max(valuesData)*1.05];
+
+      const scaleY = d3.scaleLinear().domain([minValue, maxValue]).range([this.$refs.c.clientHeight-30, 10]).nice();
 
       //create the y axis object with value and translate
-      this.axisRight = scaleY.ticks().map(d => ({ value: d, top: scaleY(d) }));      
+      this.axisRight = scaleY.ticks().map(d => ({ value: d, top: scaleY(d) }));       
+
+      // create a path generator based on chart type
+
+      let pathGenerator = d3.line().x(d => scaleX(parseTime(d.x))).y(d => scaleY(d.y)).defined(d => d.y !== null);
+
+      if (this.kpi.type === 'bar') {
+        pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(0)).y1(d => scaleY(d.y));
+      } 
+      if (this.kpi.type === 'area') {
+        //pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(0)).y1(d => scaleY(d.y)).curve(d3.curveBasis);
+        //pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(Math.min(0, minValue))).y1(d => scaleY(d.y)).curve(d3.curveBasis);
+          //pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(0)).y1(d => scaleY(d.y)).curve(d3.curveBasis).defined(d => d.y !== null);
+            pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(minValue)).y1(d => scaleY(d.y)).curve(d3.curveBasis);
+
+      }
+  
+
  
-      //draw a line for each of the chart kpi, dropping null values
-      const pathGenerator = d3.line().x(d => scaleX(parseTime(d.x))).y(d => scaleY(d.y)).defined(d => d.y !== null);
       this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, path: pathGenerator(d.data) }));
       this.defaultView = true  
 
@@ -403,6 +419,9 @@ export default {
   path { 
     fill: none;
     stroke-linejoin: round;    
+  }
+  &.area path {
+    fill: rgba(46,120,210,0.05);
   }
   text { 
     color: #aaa;   
@@ -582,5 +601,5 @@ export default {
 .axis.yAxis.odd g:nth-child(2n+2) {
   opacity: 0;
 }
-
+ 
  </style>

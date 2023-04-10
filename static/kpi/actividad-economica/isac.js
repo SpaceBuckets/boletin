@@ -19,7 +19,7 @@ const payload = await parsers.datosGobarAPI('33.2_ISAC_SIN_EDAD_0_M_23_56')
     u: new Date().toLocaleDateString('en-CA').split('/').join('-'), 
   d: "El indicador ISAC <em>muestra la evolución del sector de la construcción</em> tomando como referencia los consumos aparentes de insumos requeridos en la actividad. ",
   min: 0,
-  max: 300,
+  max: 250,
   dimensions: [
       {
         label: "Desestacionalizado",

@@ -19,8 +19,6 @@ const payload = await parsers.datosGobarAPI('101.1_I2NG_2016_M_22&representation
       fruc: parsers.detectAggregationFunction(payload),
     u: new Date().toLocaleDateString('en-CA').split('/').join('-'),   
   d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base.",
-  max: 10,
-  min: 0,
   dimensions: [
       {
         fillColor: "#2E78D295",

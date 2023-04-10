@@ -17,6 +17,8 @@ module.exports = (async function() {
     frec: parsers.detectDataType(payload), 
         fruc: parsers.detectAggregationFunction(payload),
     u: new Date().toLocaleDateString('en-CA').split('/').join('-'), 
+    min: 0,
+    max: 100,
     d: "El indicador de la utilización de la capacidad instalada en la industria manufacturera mide la proporción utilizada, en términos porcentuales, de la capacidad productiva del sector industrial.",
     dimensions: [
       {

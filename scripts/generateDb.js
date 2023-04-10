@@ -168,4 +168,4 @@ async function processItems(arr){
 };
 
 processItems(glob.sync('**', { cwd: `static/kpi/` }));
-//processItems(['actividad-economica/emae.js']);
+//processItems(['energia/petroleo/barriles.js']);

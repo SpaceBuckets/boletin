@@ -9,13 +9,13 @@ const path = require('path')
 function writeFileSyncMaster(e,i,t){let c=e.split(path.sep).slice(0,-1);c.length&&c.reduce((e,i)=>{let t=e?e+path.sep+i:i;return fs.existsSync(t)||fs.mkdirSync(t),t}),fs.writeFileSync(e,i,t)}
 
 function writeFileSyncRecursive(e, i) {
-  let existingData;
-  try { existingData = JSON.parse(fs.readFileSync(e)); } catch (err) { existingData = null; }
-  const allKeysEqual = Object.keys(i).filter(key => key !== "u").every(key => existingData?.hasOwnProperty(key) && JSON.stringify(existingData[key]) === JSON.stringify(i[key]));
+  const existingData = (() => { try { return JSON.parse(fs.readFileSync(e)); } catch (err) { return null; } })();
+  const eK = existingData ? Object.keys(existingData).filter(k => k !== "u") : []
+  const iK = Object.keys(i).filter(k => k !== "u");
+  const allKeysEqual = eK.length === iK.length && eK.every(k => iK.includes(k) && JSON.stringify(existingData[k]) === JSON.stringify(i[k]));
   console.log(allKeysEqual ? '\x1b[43m' : '\x1b[42m', allKeysEqual ? `¤ [${i.kpi}] skipped` : `♥ [${i.kpi}] updated`, '\x1b[0m');
   if (!allKeysEqual) writeFileSyncMaster(e, JSON.stringify(i));
 }
-
 
 function detectAggregationFunction(data) {
   const mean = data.reduce((acc, d) => acc + d.y, 0) / data.length;
