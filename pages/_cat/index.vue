@@ -110,13 +110,14 @@ div {
 }
 h1 {
   color: #eee;
-  font-size: 28px;
+  font-size: 24px;
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  font-weight: normal;
 }
 p {
   color: #eee;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .minflex {
   display: flex;

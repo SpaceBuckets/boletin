@@ -1,7 +1,7 @@
 <template>
   <div class="pepeboard">
-      <h1>🇦🇷 Indicadores Económicos y Sociales de Argentina</h1>
-   <p> <strong>Febo asoma; ya sus rayos, iluminan el histórico contexto.</strong> Esta colección de 118 indicadores intenta develar de dónde viene y hacia dónde va la macroeconomía de la República Argentina. </p>
+      <h1>🌞 Indicadores Económicos y Sociales de la República Argentina</h1>
+   <p> <strong>Febo asoma; ya sus rayos, iluminan el histórico contexto.</strong> Esta colección de 118 indicadores intenta develar de dónde viene y hacia dónde va la macroeconomía de la República Argentina. Actualizado a diario con la última información de fuentes oficiales (y otras no tanto).</p>
   <hr>
   <br>
 <!--       <div class="rewelcome">
@@ -54,7 +54,9 @@
  -->
 
     <template v-for="(indexItem, i) in savedIndex">
-        <h2>{{ indexItem.title }}</h2>
+        <nuxt-link :key="`${i}-${indexItem}`" :to="{ name: `cat`, params: { cat: indexItem.cat } }">
+          {{ indexItem.title }} »
+        </nuxt-link> 
         <div class="mastersection">
            <nuxt-link class="mincharto" v-for="indexChart in savedIndex[i].items" :to="`kpi/${indexChart}`" :key="`a-${indexChart}`">
                 <charts-genericLine :index="true" :data="indexChart" />
@@ -121,23 +123,28 @@ export default {
       ],     
       savedIndex: [
         {
-          title: "Dólar vs. Peso",
+          title: "Dólar",
+          cat: "dolar", 
           items: ["cambio", "tcrm"],
         },
         {
           title: "Actividad Económica",
+          cat: "actividad-economica",
           items: ["emae", "ucii"],
         },
         {
           title: "Política Monetaria",
+          cat: "politica-monetaria",
           items: ["tasa", "basemonetaria"],
         },
         {
           title: "Cuentas Nacionales",
+          cat: "cuentas-nacionales",
           items: ["deficit", "balanza"],
         },
         {
           title: "Precios y Salarios",
+          cat: "precios",
           items: ["ipc", "desempleo"],
         },
       ],
@@ -239,14 +246,16 @@ export default {
 
 .pepeboard {
  h1 {
-  color: #eee;
-  font-size: 28px;
-  margin-top: 0;
-  margin-bottom: 15px;
+    color: #eee;
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: normal;
+    //font-family: "montserrat"
 }
 h1 + p {
     color: #eee;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     strong {
           color: #eee;
 
@@ -270,12 +279,13 @@ h1 + p {
   margin: 0;
   
 }
-.pepeboard > h2 {
+.pepeboard > a {
   color: #eee;
   margin-top: 0;
   padding-top: 20px;
   font-weight: normal;
   margin-bottom: 15px;
+  display: block;
   &:first-of-type { padding-top: 0; }
 }
 .mincharto {

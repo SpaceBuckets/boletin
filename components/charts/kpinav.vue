@@ -143,7 +143,7 @@ export default {
   width: 250px;
   z-index: 999;
   background: #181818;
-  border-right: 1px solid #333;
+  border-right: 1px solid #262626;
   @media only screen and (max-width: 980px) { transform: translateX(-100%); }
 }
 
@@ -152,7 +152,7 @@ export default {
   padding-left: 15px;
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid #2D2D2D;
+  border-bottom: 1px solid #262626;
   user-select: none;
   &.open a:last-of-type { padding-bottom: 10px; }
  
@@ -188,7 +188,7 @@ export default {
 }
 
 .searcher {
-  background: #2D2D2D;
+  background: #262626;
   input {
     width: 100%;
     border: 0;
@@ -209,6 +209,7 @@ export default {
   opacity: 0.8;
 }
 
+.meganavsection .separmaster:hover i,
 .meganavsection.open .separmaster i {
   filter: grayscale(0)
 }

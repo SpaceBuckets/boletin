@@ -94,7 +94,8 @@ export default {
 <style lang="scss">
 
 hr {
-  border-color: #333;
+  border: 0;
+  border-bottom: 1px solid #333;
 }
  .floatmaster {
   display: none;
@@ -193,8 +194,8 @@ header {
   //background: rgba(55, 53, 47, 0.08);
   //background: #000;
   background: #181818;
-  border-right: 1px solid #333;
-  border-bottom: 1px solid #333;
+  border-right: 1px solid #262626;
+  border-bottom: 1px solid #262626;
   position: fixed;
   top: 0;
   height: 60px;
@@ -275,7 +276,7 @@ body {
     padding-left: 250px;
     padding-right: 0px;
 
-  padding-top: 20px;
+  padding-top: 15px;
 
         @media only screen and (max-width: 980px) {
   padding-top: 60px;
@@ -292,7 +293,7 @@ p {
 }
 
 em {
-  background: rgba(253, 216, 53, 0.7);
+  background: rgba(253, 216, 53, 0.9);
   font-style: normal;
   font-weight: bold;
   color: #111;
