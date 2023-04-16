@@ -75,14 +75,14 @@
 
           <g class="axis xAxis">
             <g v-for="tick in axisBottom" :transform="`translate(${tick.left},${chartHeight-20})`" :data-date="tick.value">
-                <line :y2="`-${chartHeight-20}`"></line>
+                <line :y2="-(chartHeight - 20)"></line>
                 <text x="5" dy="0.71em">{{tick.value}}</text>
             </g>            
           </g>
 
           <g class="axis yAxis" :class="{even: axisRight.length % 2 === 0, odd: axisRight.length % 2 !== 0}">
             <g v-for="tick in axisRight" :transform="`translate(${chartWidth-30},${tick.top})`">
-                <line :x2="`-${chartWidth-30}`"></line>
+                <line :x2="-(chartWidth - 30)"></line>
                 <text x="5" dy="0.32em">{{tick.value}}</text>
             </g>            
           </g>
@@ -150,10 +150,15 @@ export default {
   },
   
   mounted() { 
+ 
     if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
-    this.chartHeight = this.$refs.c.clientHeight
-    this.chartWidth = this.$refs.c.clientWidth
-    this.remount(false) 
+
+ 
+      this.chartHeight = this.$refs.c.clientHeight
+      this.chartWidth = this.$refs.c.clientWidth
+      this.remount(false) 
+    
+ 
   },
   computed: {
     startDates() {
@@ -170,6 +175,7 @@ export default {
     },
   },  
   methods: {  
+    
       processedDate() {
         var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
 

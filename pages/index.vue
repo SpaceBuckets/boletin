@@ -1,8 +1,12 @@
 <template>
   <div class="pepeboard">
+      <h1>🇦🇷 Indicadores Económicos y Sociales de Argentina</h1>
+   <p> <strong>Febo asoma; ya sus rayos, iluminan el histórico contexto.</strong> Esta colección de 118 indicadores intenta develar de dónde viene y hacia dónde va la macroeconomía de la República Argentina. </p>
+  <hr>
+  <br>
 <!--       <div class="rewelcome">
         <p>
-           <strong>Febo asoma; ya sus rayos, iluminan el histórico contexto.</strong> Esta colección de 47 indicadores intenta develar de dónde viene y hacia dónde va la macroeconomía de la República Argentina.
+           
 
         </p>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="504px" height="504px" viewBox="-165 -165 330 330">
@@ -232,7 +236,23 @@ export default {
 </script>
 
 <style lang="scss">
- 
+
+.pepeboard {
+ h1 {
+  color: #eee;
+  font-size: 28px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+h1 + p {
+    color: #eee;
+    margin-bottom: 20px;
+    strong {
+          color: #eee;
+
+    }
+}
+}
 .mastersection {
   display: flex;
   gap: 15px;

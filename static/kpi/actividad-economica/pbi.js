@@ -2,7 +2,7 @@ module.exports = (async function() {
 
   const parsers = require("@parsers");
 
-  const kpi = "pbippp"
+  const kpi = "pbi"
  
 const url = 'https://www.eia.gov/international/api/series_data/csv?location32=08&products32=000000000000000000000000000000000000000000000000000000004&frequency=A&unit=0&start=0&generated=03-15-2023_21-02-59'
 const payload = await parsers.datosGobarCSV(0,1,url)

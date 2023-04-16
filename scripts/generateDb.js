@@ -107,28 +107,27 @@ async function processTable() {
 
 }
 
-async function processFolders( ){
+async function processFolders() {
   const tree = parsertree('static/kpi');
 
-   const orderedtree = {
-    'actividad-economica': tree['actividad-economica'],
-    'dolar': tree['dolar'],
-    'BCRA': tree['BCRA'],
-    'bonos': tree['bonos'],
-    'energia': tree['energia'],
-    'cuentas-nacionales': tree['cuentas-nacionales'],
-    'comercio-exterior': tree['comercio-exterior'],
-    'precios': tree['precios'],
-    'salarios': tree['salarios'],
-    'consumo': tree['consumo'],
-    'turismo': tree['turismo'],
-    'agro': tree['agro'],
-    'otros': tree['otros'],
+  const orderedtree = {
+    'actividad-economica': {'_emoji': '🚀', ...tree['actividad-economica']},
+    'dolar': {'_emoji': '💸', ...tree['dolar']},
+    'finanzas': {'_emoji': '🏦', ...tree['finanzas']},
+    'energia': {'_emoji': '⚡', ...tree['energia']},
+    'cuentas-nacionales': {'_emoji': '📚', ...tree['cuentas-nacionales']},
+    'comercio-exterior': {'_emoji': '🌎', ...tree['comercio-exterior']},
+    'precios': {'_emoji': '🔥', ...tree['precios']},
+    'salarios': {'_emoji': '💰', ...tree['salarios']},
+    'consumo': {'_emoji': '🎁', ...tree['consumo']},
+    'agroindustria': {'_emoji': '🌽', ...tree['agroindustria']},
+    'otros': {'_emoji': '🌀', ...tree['otros']},
   }
- 
-   writeFileSyncRecursive(`./static/refolders.json`, JSON.stringify(orderedtree)); 
+
+  writeFileSyncRecursive(`./static/refolders.json`, JSON.stringify(orderedtree)); 
   console.log('\x1b[46m',`✓ Folders generated` ,'\x1b[0m');
 }
+
 
 async function magicDistribution( ){
  

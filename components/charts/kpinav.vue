@@ -1,15 +1,32 @@
 <template>
   <div class="meganav">
-     
+<div class="meganavsection"
+      :class="{ open: $route.path === '/dashboard' }"
+>
+  <div class="separmaster">
+    <i>📊</i><nuxt-link to="/" @click="navigateToHome('home')"> Dashboard</nuxt-link>
+  </div>
+</div>
+<div class="meganavsection searcher">
+<div class="separmaster">
+  <i>🔎</i> <input type="text" placeholder="Buscar Indicadores...">
+
+</div>
+</div>
+
+
     <div
       class="meganavsection"
       v-for="(parent, i) in nav"
       :class="{ open: sectionOpen.includes(i) }"
       :key=""
     >
-      <div class="separmaster" @click="handleOpen(i)">
-        <span v-if="sectionOpen.includes(i)">-</span><span v-else>+</span>
+      <div class="separmaster" @click="sectionOpen = i">
+          <i>{{parent._emoji}}</i> 
+        <nuxt-link :key="`${i}-${parent}`" :to="{ name: `cat`, params: { cat: i } }">
         {{i.split("-").join(" ").replace(/\w\S*/g, function (txt) {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})}}
+        </nuxt-link>       
+
       </div>
          <nuxt-link v-for="kpi in parent._contents" :key="`${i}-${kpi}`" :to="{ name: `cat-kpi`, params: { kpi: kpi.slice(0, -3), cat: i } }">
           {{ repenav[kpi.slice(0, -3)] }}
@@ -21,8 +38,7 @@
 
           v-for="(rekpi, u) in parent" v-if="rekpi._contents">
           <div class="separmaster" @click="handleOpen(u)">
-            <span v-if="sectionOpen.includes(u)">-</span><span v-else>+</span>
-            {{u.split("-").join(" ").replace(/\w\S*/g, function (txt) {return (txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());})}}
+             {{u.split("-").join(" ").replace(/\w\S*/g, function (txt) {return (txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());})}}
           </div>
           <nuxt-link v-for="deepkpi in rekpi._contents" :key="`${u}-${deepkpi}`" :to="{name: `cat-kpi`,params: { kpi: deepkpi.slice(0, -3), cat: i },}" >
             {{ repenav[deepkpi.slice(0, -3)] }}
@@ -41,7 +57,7 @@ export default {
   name: "Details",
   data() {
     return {
-      sectionOpen: ["actividad-economica",'dolar'],
+      sectionOpen: [''],
       nav: meganav,
       repenav: meganaver,
       variete: megavariations,
@@ -63,9 +79,14 @@ export default {
       if (this.sectionOpen.includes(i)) {
         this.sectionOpen = this.sectionOpen.filter(item => item !== i)
       } else {
-        this.sectionOpen.push(i)
+        this.sectionOpen = i
       }
      },
+    navigateToHome(section) {
+      this.sectionOpen = section || '';
+
+      this.$router.push({ path: '/', query: { sectionOpen: section } });
+    },     
     getVariation(i) {
       var currentNum = this.chart.chartdata.datasets[0].data
         .filter((val, index, arr) => index > arr.length - 24)
@@ -79,156 +100,129 @@ export default {
 </script>
 
 <style lang="scss">
-.meganav a {
+.meganav .separmaster > a {
   display: block;
   text-decoration: none;
   color: #ddd;
-  //background: #000;
-     padding-bottom: 5px;
-     position: relative;
-     &:hover {
-            color: rgba(253,216,53,1);
-
-     }
-
-&:before {
-  content: "";
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border: 1px solid #555;
-    border-radius: 50px;
-    margin-right: 3px;
-    position: relative;
-    top: 1px;
-}     
-    &:after {
-      content: "";
-      display: block;
-      left: 7px;
-      width: 17px;
-      top: 8px;
-      border-top: 1px dotted #555;
-      position: absolute;
-    }
-         &.nuxt-link-exact-active.nuxt-link-active {
-      color: rgba(253,216,53,1);
-      font-weight:bold;
-      &:before {
-              background: #444;
-
-      }
-     }
+  padding: 10px;
+  position: relative;
+  width: 100%;
+  &:hover { color: rgba(253,216,53,1); }
 }
 
-.meganav span {
-  color: #aaa;
-  display: inline-block;
-  border: 1px solid #888;
-    width: 12px;
-    height: 12px;
-    font-size: 10px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 2px;
-    border-radius: 2px;
-    &:after {
-      content: "";
-    display: block;
-    width: 1px;
-    top: 15px;
-    bottom: 0;
-    border-right: 1px dotted #555;
-    position: absolute;
-    }
+.meganav .meganavsection > a {
+  display: block;
+  text-decoration: none;
+  color: #ddd;
+  padding-bottom: 5px;
+  position: relative;
+  &:hover { color: rgba(253,216,53,1); }
+  &.nuxt-link-exact-active.nuxt-link-active {
+    color: rgba(253,216,53,1);
+    font-weight:bold;
+    &:before { background: #444; }
+  }
 }
+
 .separmaster {
-    color: #ddd;
-    padding-bottom: 10px;
-    
-        display: flex;
-    align-items: center;
-    gap: 5px;
-
- }
-  .meganavsection:last-of-type span:after {
-    bottom: 18px;
-  }
-.separmaster ~ .meganavsection > .separmaster {
-      &:after {
-      content: "";
-      display: block;
-      left: 7px;
-      width: 17px;
-      top: 8px;
-      border-top: 1px dotted #555;
-      position: absolute;
-    }
+  color: #ddd;   
+  display: flex;
+  align-items: center;
 }
-
-.separmaster ~ .meganavsection > .separmaster span:after { 
-  bottom: 18px;
-  }
-
+ 
 .meganav {
   position: fixed;
   left: 0;
-  top: 60px;
+  top: 0;
   bottom: 0;
   padding: 0;
-  padding-top:10px;
+  padding-top:60px;
   overflow: auto;
   padding-bottom: 100px;
   color: #ddd;
-  width: 225px;
+  width: 250px;
   z-index: 999;
-
-  @media only screen and (max-width: 980px) {
-    transform: translateX(-100%);
-  }
+  background: #181818;
+  border-right: 1px solid #333;
+  @media only screen and (max-width: 980px) { transform: translateX(-100%); }
 }
 
 .meganavsection {
   cursor: pointer;
   padding-left: 15px;
-  //padding-bottom: 15px;
   position: relative;
   overflow: hidden;
-  user-select:none;
- &.open a:last-of-type {
-    padding-bottom: 10px;
-}  
+  border-bottom: 1px solid #2D2D2D;
+  user-select: none;
+  &.open a:last-of-type { padding-bottom: 10px; }
+ 
   div:first-child ~ * {
-    padding-left: 25px;
+    padding-left: 30px;
     position: relative;
     overflow: hidden;  
     display: none;  
   }
   &.open > div:first-child ~ * {
     display: block;
+    &:after {
+      content: "";
+      width: 18px;
+      position: absolute;
+      border-bottom: 1px dotted #444;
+      left: 5px;
+      top: 7.5px;
+    }    
+    &:before {
+      content: "";
+      height: 5px;
+      position: absolute;
+      border-right: 1px dotted #444;
+      left: 24px;
+      top: 5px;      
+    }
   }
-
   .separmaster:hover,
-  &.open > .separmaster {
-    font-weight: bold;
-    span { font-weight: normal; }
-   }
-  &.open > .separmaster span {
-    background: #444;
-    color: #ddd;
-    padding-bottom: 1px;
-    font-weight: normal;    
-  }
-  .searcher {
-    background: transparent;
-    width: 100%;
-    border: 0;
-    padding: 10px 15px;
-    font-size: 15px;
-    margin-bottom: 10px;
+  &.open > .separmaster { 
+    font-weight: bold; 
   }
 }
+
+.searcher {
+  background: #2D2D2D;
+  input {
+    width: 100%;
+    border: 0;
+    padding: 10px;
+    font-size: 15px;
+    color: #eee;
+    background: transparent;
+    &:focus {
+      outline: 0;
+    }
+  }
+
+}
+
+.meganavsection .separmaster i {
+  filter: grayscale(100%);
+  font-style:normal;
+  opacity: 0.8;
+}
+
+.meganavsection.open .separmaster i {
+  filter: grayscale(0)
+}
+
+.meganavsection.open .separmaster:after {
+  content: "";
+  border-right: 1px dotted #444;
+  position: absolute;
+  left: 20px;
+  bottom: 19px;
+  top: 32px;
+}
+
+ 
 </style>
 
  
