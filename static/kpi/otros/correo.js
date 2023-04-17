@@ -21,7 +21,7 @@ module.exports = (async function() {
 
     dimensions: [
         {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "Correo Postal",
         data: payload,
         color: "rgba(46,120,210,1)",

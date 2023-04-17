@@ -36,7 +36,7 @@ module.exports = (async function() {
         {
           label: "ILCIF",
           data: payload.ilcif,
-          color: "#2E78D2",
+          
         },     
     ]
   }

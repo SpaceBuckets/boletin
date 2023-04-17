@@ -22,7 +22,7 @@ module.exports = (async function() {
       {
         label: "Total",
         data: payload,
-        color: "#2E78D2",
+        
 
       },
       {

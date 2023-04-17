@@ -60,38 +60,33 @@ module.exports = (async function() {
 
   dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.0)",
-        label: "Tasa FED",
+label: "Tasa FED",
         data: payload.fed,
         color: "rgba(46,120,210,1)",
         
         
       },
       {
-        fillColor: "rgba(46,120,210,0.0)",
-        label: "Tasa Euro",
+label: "Tasa Euro",
         data: payload.euro,
         color: "rgba(46,120,210,0.25)",
         
         
       },
        {
-        fillColor: "rgba(46,120,210,0.0)",
-        label: "Tasa Inglaterra",
+label: "Tasa Inglaterra",
         data: payload.inglaterra,
         color: "rgba(46,120,210,0.25)",
         
         
       },
       {
-        fillColor: "rgba(46,120,210,0.0)",
-        label: "Tasa Brasil",
+label: "Tasa Brasil",
         data: payload.brasil,
         color: "rgba(46,120,210,0.25)",
       },  
 /*       {
-        fillColor: "rgba(46,120,210,0.0)",
-        label: "Tasa Japon",
+label: "Tasa Japon",
         data: payload.japon,
         color: "rgba(46,120,210,0.25)",
       },      */   

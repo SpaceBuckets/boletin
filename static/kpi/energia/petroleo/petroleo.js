@@ -21,10 +21,10 @@ const payload = await parsers.datosGobarAPI('363.3_PRODUCCIONUDO__28')
 
     dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "Pozos de petroleo",
         data: payload,
-        color: "#2E78D2",
+        
         
         
       },

@@ -24,7 +24,7 @@ const payload = await parsers.datosGobarAPI('366.3_METROS_PERRAL__31')
           
           label: "Pozos de Petroleo terminados",
           data: payload,
-          color: "#2E78D2",          
+                    
           
         },
 

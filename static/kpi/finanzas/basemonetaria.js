@@ -52,14 +52,12 @@ module.exports = (async function() {
     d: "La Base Monetaria (BM) está constituida por todo el dinero legal en circulación (es decir, billetes y monedas), sumado a las reservas de los bancos comerciales en el banco central.",
     dimensions: [
         {
-          fillColor: 'rgba(46,120,210,0)',
-          label: "Base Monetaria",
+    label: "Base Monetaria",
           data: payload.total,
-          color: "#2E78D2",
+          
         },
         {
-          fillColor: 'rgba(46,120,210,0)',
-          label: "Base Monetaria + Instrumentos (LELIQ y Otros)",
+    label: "Base Monetaria + Instrumentos (LELIQ y Otros)",
           data: payload.leliq,
           color: "#2E78D280",
         },

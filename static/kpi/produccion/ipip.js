@@ -35,7 +35,7 @@ module.exports = (async function() {
         
         label: "Desestacionalizado",
         data: payload.ipip,
-        color: "#2E78D2",
+        
         
         
       },

@@ -24,7 +24,7 @@ const payload = await parsers.datosGobarAPI('33.2_ISAC_SIN_EDAD_0_M_23_56')
       {
         label: "Desestacionalizado",
         data: payload,
-        color: "#2E78D2", 
+         
       },
       {
         label: "Tendencia",

@@ -32,7 +32,7 @@ module.exports = (async function() {
         
         label: "Desestacionalizado",
         data: await parsers.datosGobarCSV(0,2,url),
-        color: "#2E78D2",
+        
       },
 ]
 }

@@ -29,7 +29,7 @@ module.exports = (async function() {
       {
         label: "Energia",
         data: await parsers.datosGobarAPI('452.2_ENERGIAGIA_0_T_7_56'),
-        color: "#2E78D2",
+        
 
       },
 ]

@@ -35,8 +35,7 @@ module.exports = (async function() {
 
   dimensions: [
       {
-        fillColor: 'rgba(46,120,210,0)',
-        label: "ICE Coyuntural",
+label: "ICE Coyuntural",
         data: payload.coyuntural,
         color: "rgba(46,120,210,0.3)",
 
@@ -44,10 +43,9 @@ module.exports = (async function() {
         
       },
       {
-        fillColor: 'rgba(146,220,210,0)',
         label: "ICE Estructural",
         data: payload.estructural,
-        color: "#2E78D2",
+        
         
         
 

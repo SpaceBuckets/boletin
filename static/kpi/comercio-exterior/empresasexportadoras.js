@@ -22,7 +22,7 @@ module.exports = (async function() {
     d: "",
     dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.1)",
+        
         label: "Empresas Exportadoras",
         data: payload,
         color: "rgba(46,120,210,0.8)",

@@ -24,7 +24,7 @@ module.exports = (async function() {
       {
         label: "YPF",
         data: payload,
-        color: "#2E78D2",
+        
       },
       {
         label: "AXXION",

@@ -24,7 +24,7 @@ module.exports = (async function() {
       {
         label: "Crudo",
         data: payload,
-        color: "#2E78D2",
+        
       },
       {
         label: "Procesado",

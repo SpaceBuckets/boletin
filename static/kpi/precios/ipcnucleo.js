@@ -23,13 +23,9 @@ const payload = await parsers.datosGobarAPI('148.3_INUCLEONAL_DICI_M_19&represen
 
   dimensions: [
     {
-      fillColor: "#2E78D295",
       label: "IPC Núcleo",
       data: payload,
-      type: 'bar',
-      color: "#2E78D2",
       
-      borderWidth: 0,
     },
   ],
 }

@@ -22,7 +22,7 @@ const payload = await parsers.datosGobarAPI('364.3_PRODUCCIoNRAL__25')
   max: 6000,
   dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "Produccion de Gas",
         data: payload,
         color: "rgba(46,120,210,1)",

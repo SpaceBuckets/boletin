@@ -20,7 +20,7 @@ module.exports = (async function() {
     max: 500,
     dimensions: [
         {
-          fillColor: "rgba(46,120,210,0.05)",
+          
           label: "Producción de Acero",
           data: payload,
           color: "rgba(46,120,210,1)",

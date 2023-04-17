@@ -22,7 +22,7 @@ module.exports = (async function () {
         {
           label: "Potencia Electrica Maxima",
           data: payload,
-          color: "#2E78D2",
+          
         },
       ]
   }

@@ -25,10 +25,9 @@ const post = {
   sym: "$",
   dimensions: [
       {
-        fillColor: 'rgba(46,120,210,0)',
-        label: "PBI per capita",
+label: "PBI per capita",
         data: payload,
-        color: "#2E78D2",
+        
       },
   ]
 }

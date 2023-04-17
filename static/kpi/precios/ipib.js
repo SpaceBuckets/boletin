@@ -22,13 +22,9 @@ const payload = await parsers.datosGobarAPI('449.1_NIVEL_GENERAL_0_0_13_97&repre
  
   dimensions: [
       { 
-        fillColor: "#2E78D295",
         label: "IPIB",
         data: payload,
-        type: 'bar',
-        color: "#2E78D2",
         
-        borderWidth: 0,
       },
 ]
 }

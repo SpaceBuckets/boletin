@@ -24,10 +24,8 @@ module.exports = (async function() {
     min: -300,
     dimensions: [
     {
-      fillColor: "",
       label: "Compras Divisas USD",
       data: payload,
-      barThickness: 1,
       
     },
   ],

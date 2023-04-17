@@ -23,7 +23,7 @@ module.exports = (async function() {
 
    dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "Salario Promedio",
         data: payload,
         color: "rgba(46,120,210,1)",

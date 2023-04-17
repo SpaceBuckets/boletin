@@ -21,13 +21,9 @@ const payload = await parsers.datosGobarAPI('101.1_I2NG_2016_M_22&representation
   d: "El IPC mide la variación de precios de los bienes y servicios representativos del gasto de consumo de los hogares residentes en la zona seleccionada en comparación con los precios vigentes en el año base.",
   dimensions: [
       {
-        fillColor: "#2E78D295",
         label: "Desestacionalizado",
         data: payload,
-        type: 'bar',
-        color: "#2E78D2",
         
-        borderWidth: 0,
       },
 ]
 }

@@ -27,7 +27,7 @@ module.exports = (async function() {
   //max: 6000000,
   dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "Poblacion Argentina",
         data: payload,
         color: "rgba(46,120,210,1)",

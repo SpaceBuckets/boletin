@@ -23,11 +23,9 @@ const payload = await parsers.datosGobarCSV(0,4,url)
 
     dimensions: [
         {
-          fillColor: "transparent",
           label: "Indice Merval",
           data: payload,
-          color: "#2E78D2",
-          type: 'line',
+          
         },
 
       ]

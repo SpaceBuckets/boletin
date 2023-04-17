@@ -24,10 +24,10 @@ module.exports = (async function() {
   min: 0,
   dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "Porcentaje",
         data: payload,
-        color: "#2E78D2",
+        
         
         
       },

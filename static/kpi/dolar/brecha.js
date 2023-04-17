@@ -65,7 +65,6 @@ module.exports = (async function() {
     d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
     dimensions: [
         {
-          fillColor: "rgba(178,34,34,0.05)",
           label: "Brecha USD / Peso",
           data: payload.gap,
           color: "#b22222CC",

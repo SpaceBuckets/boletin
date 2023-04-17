@@ -22,7 +22,7 @@ const payload = await parsers.datosGobarAPI('457.1_VIAJEROS_TLES_0_M_16_50')
         {
           label: "Viajeros Hospedados",
           data: payload,
-          color: "#2E78D2",
+          
         },
         {
           label: "Residentes",

@@ -22,7 +22,7 @@ module.exports = (async function() {
   max: 6000,
   dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "Produccion de Gas Diaria mm3",
         data: payload,
         color: "rgba(46,120,210,1)",

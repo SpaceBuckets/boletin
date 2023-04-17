@@ -26,7 +26,7 @@ module.exports = (async function() {
         
         label: "DXY",
         data: payload,
-        color: "#2E78D2",
+        
         
       },
   

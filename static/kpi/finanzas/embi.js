@@ -38,8 +38,7 @@ module.exports = (async function() {
 
   dimensions: [
       {
-        fillColor: 'rgba(46,120,210,0)',
-        label: "EMBI Brasil",
+label: "EMBI Brasil",
         data: payload.brasil,
         color: "rgba(46,120,210,0.3)",
 
@@ -47,8 +46,7 @@ module.exports = (async function() {
         borderWidth: 1,
       },
       {
-        fillColor: 'rgba(46,120,210,0)',
-        label: "EMBI Chile",
+label: "EMBI Chile",
         data: payload.chile,
         color: "rgba(46,120,210,0.3)",
 
@@ -56,8 +54,7 @@ module.exports = (async function() {
         borderWidth: 1,
       },
       {
-        fillColor: 'rgba(46,120,210,0)',
-        label: "EMBI Colombia",
+label: "EMBI Colombia",
         data: payload.colombia,
         color: "rgba(46,120,210,0.3)",
 
@@ -65,8 +62,7 @@ module.exports = (async function() {
         borderWidth: 1,
       },
       {
-        fillColor: 'rgba(46,120,210,0)',
-        label: "EMBI Mexico",
+label: "EMBI Mexico",
         data: payload.mexico,
         color: "rgba(46,120,210,0.3)",
 
@@ -74,8 +70,7 @@ module.exports = (async function() {
         borderWidth: 1,
       },
       {
-        fillColor: 'rgba(46,120,210,0)',
-        label: "EMBI Latino",
+label: "EMBI Latino",
         data: payload.latino,
         color: "#7a49a580",
 
@@ -83,10 +78,9 @@ module.exports = (async function() {
         borderWidth: 1,
       },
       {
-        fillColor: 'rgba(146,220,210,0)',
         label: "EMBI Argentina",
         data: payload.argentina,
-        color: "#2E78D2",
+        
         
         
 

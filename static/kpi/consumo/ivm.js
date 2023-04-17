@@ -35,7 +35,7 @@ module.exports = (async function() {
         
         label: "IVM",
         data: payload.ivm,
-        color: "#2E78D2",
+        
         
         
       },

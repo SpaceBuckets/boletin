@@ -21,7 +21,7 @@ const payload = await parsers.datosGobarAPI('380.3_ICC_NACIONNAL_0_T_12')
 
   dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "ICC",
         data: payload,
         color: "rgba(46,120,210,1)",

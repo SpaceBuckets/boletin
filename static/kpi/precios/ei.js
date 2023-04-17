@@ -42,7 +42,7 @@ module.exports = (async function() {
         {
           label: "EI Promedio",
           data: payload.promedio,
-          color: "#2E78D2",
+          
         },        
     ]
   }

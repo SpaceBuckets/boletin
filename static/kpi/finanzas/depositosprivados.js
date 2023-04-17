@@ -20,7 +20,7 @@ module.exports = (async function() {
     d: "",
     dimensions: [
         {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "Depositos privados",
         data: payload,
         color: "rgba(46,120,210,1)",

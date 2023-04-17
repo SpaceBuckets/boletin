@@ -32,12 +32,10 @@ const payload = await parsers.datosGobarAPI('74.3_IIT_0_M_25')
 
       },
       {
-        fillColor: "#ccc",
         label: "Saldo Comercial",
         type: "bar",
         data: await parsers.datosGobarAPI('74.3_ISC_0_M_19'),
         color: "#ccc",
-        //borderWidth: 0,
       },
     ],
   }

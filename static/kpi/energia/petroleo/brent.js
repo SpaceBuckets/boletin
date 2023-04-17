@@ -34,7 +34,7 @@ module.exports = (async function() {
 
   dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "Brent Oil Price",
         data: payload.brent,
         color: "rgba(46,120,210,1)",

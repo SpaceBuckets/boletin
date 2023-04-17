@@ -53,7 +53,7 @@ module.exports = (async function() {
         {
           label: "Referencia",
           data: payload.referencia,
-          color: "#2E78D2", 
+           
         },
        {
           label: "Badlar",

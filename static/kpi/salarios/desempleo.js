@@ -23,7 +23,7 @@ const payload = await parsers.datosGobarAPI('45.2_ECTDT_0_T_33')
       {
         label: "General",
         data: payload,
-        color: "#2E78D2",
+        
         },
       {  
         label: "CABA",

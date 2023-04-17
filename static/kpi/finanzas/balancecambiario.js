@@ -23,7 +23,7 @@ module.exports = (async function() {
  
     dimensions: [
     {
-      color: "#2E78D2",
+      
       label: "Cuenta Cambiaria USD",
       data: payload,
       barThickness: 1,

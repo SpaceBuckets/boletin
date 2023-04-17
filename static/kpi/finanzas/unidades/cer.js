@@ -21,7 +21,7 @@ module.exports = (async function() {
     u: new Date().toLocaleDateString('en-CA').split('/').join('-'),
     dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "CER",
         data: payload,
         color: "rgba(46,120,210,1)",

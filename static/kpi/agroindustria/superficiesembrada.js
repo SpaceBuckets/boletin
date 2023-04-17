@@ -24,7 +24,7 @@ module.exports = (async function() {
       {
         label: "Soja",
         data: payload,
-        color: "#2E78D2",
+        
       },
       {
         label: "Algodon",

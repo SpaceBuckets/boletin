@@ -24,10 +24,10 @@ module.exports = (async function() {
   max: 800,
   dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "kbbl (miles de barriles)",
         data: payload,
-        color: "#2E78D2",
+        
         
         
       },

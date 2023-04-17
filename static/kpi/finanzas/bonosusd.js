@@ -60,48 +60,42 @@ module.exports = (async function() {
    
     dimensions: [
         {
-          fillColor: "rgba(46,120,210,0.0)",
-          label: "AL30D",
+    label: "AL30D",
           data: payload.al30d,
           color: "rgba(46,120,210,1)",
           
           
         },
         {
-          fillColor: "rgba(46,120,210,0.0)",
-          label: "AL29D",
+    label: "AL29D",
           data: payload.al29d,
           color: "rgba(46,120,210,0.25)",
           
           
         },
         {
-          fillColor: "rgba(46,120,210,0.0)",
-          label: "AL41D",
+    label: "AL41D",
           data: payload.al41d,
           color: "rgba(46,120,210,0.25)",
           
           
         },
         {
-          fillColor: "rgba(46,120,210,0.0)",
-          label: "GD30D",
+    label: "GD30D",
           data: payload.gd30d,
           color: "rgba(46,120,210,0.25)",
           
           
         },
         {
-          fillColor: "rgba(46,120,210,0.0)",
-          label: "GD35D",
+    label: "GD35D",
           data: payload.gd35d,
           color: "rgba(46,120,210,0.25)",
           
           
         },
         {
-          fillColor: "rgba(46,120,210,0.0)",
-          label: "GD41D",
+    label: "GD41D",
           data: payload.gd41d,
           color: "rgba(46,120,210,0.25)",
         },

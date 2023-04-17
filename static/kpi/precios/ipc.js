@@ -23,7 +23,7 @@ module.exports = (async function() {
         {
           label: "IPC General",
           data: payload,
-          color: "#2E78D2",
+          
         },
     ]
   }

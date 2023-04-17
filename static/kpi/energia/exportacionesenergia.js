@@ -29,7 +29,7 @@ module.exports = (async function() {
       {
         label: "Total",
         data: await parsers.datosGobarCSV(0,47,url),
-        color: "#2E78D2",
+        
       },      
        {
         label: "Aceites y Lubricantes",

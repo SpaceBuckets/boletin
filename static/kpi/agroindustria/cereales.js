@@ -39,7 +39,7 @@ module.exports = (async function() {
       {
         label: "Soja",
         data: await parsers.datosGobarAPI('34.2_STSOJ_0_P_16'),
-        color: "#2E78D2",
+        
       },
     ],
 }

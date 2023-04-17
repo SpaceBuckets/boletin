@@ -24,10 +24,9 @@ const payload = await parsers.datosGobarCSV(0,1,url)
   d: "El producto bruto interno (PBI)​ es una magnitud macroeconómica que expresa el valor monetario de la producción de bienes y servicios de demanda final de un país o región durante un período determinado.",
   dimensions: [
       {
-        fillColor: 'rgba(46,120,210,0)',
-        label: "PBI PPP",
+label: "PBI PPP",
         data: payload,
-        color: "#2E78D2",
+        
       },
   ]
 }

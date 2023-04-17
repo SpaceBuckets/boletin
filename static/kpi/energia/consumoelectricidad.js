@@ -20,7 +20,7 @@ const payload = await parsers.datosGobarAPI('302.3_ELEC_GAS_AGWH_0_S_35')
   d: "El Estimador mensual de actividad económica (EMAE) refleja la evolución mensual de la actividad económica del conjunto de los sectores productivos a nivel nacional. Este indicador permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
   dimensions: [
       {
-        fillColor: "rgba(46,120,210,0.05)",
+        
         label: "Consumo de Electricidad",
         data: payload,
         color: "rgba(46,120,210,1)",

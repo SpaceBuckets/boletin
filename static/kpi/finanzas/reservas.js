@@ -21,7 +21,6 @@ module.exports = (async function() {
   min: 0,
   dimensions: [
       {
-        fillColor: 'rgba(46,120,210,0.1)',
         label: "Reservas Internacionales",
         data: payload,
         color: '#2E78D2',

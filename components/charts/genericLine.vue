@@ -93,7 +93,7 @@
             :d="d.path"
             :key="`${rekpi}`"
             :style="{
-              'stroke': d.color || '#333',
+              'stroke': d.color || '#2E78D2',
               'stroke-width': d.borderWidth || '1.5',
               }"
           />

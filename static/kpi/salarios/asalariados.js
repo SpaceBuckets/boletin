@@ -20,14 +20,12 @@ const payload = await parsers.datosGobarAPI('151.1_AARIADOTAC_2012_M_26')
 
     dimensions: [
         {
-          fillColor: 'rgba(46,120,210,0)',
-          label: "Empleo Privado",
+    label: "Empleo Privado",
           data: payload,
-          color: "#2E78D2",
+          
         },
         {
-          fillColor: 'rgba(46,120,210,0)',
-          label: "Empleo Publico",
+    label: "Empleo Publico",
           data: await parsers.datosGobarAPI('151.1_AARIADODAD_2012_M_31'),
           color: "rgba(46,120,210,0.25)",
         },

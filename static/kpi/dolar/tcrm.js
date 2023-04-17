@@ -38,12 +38,11 @@ module.exports = (async function() {
         
         label: "TCRM",
         data: payload.itcrm,
-        color: "#2E78D2",
+        
         
         
       },
       {
-        fillColor: "rgba(122, 73, 165,0)",
         label: "TCRUS",
         data: payload.itcrus,
         color: "rgba(122, 73, 165,0.25)",
