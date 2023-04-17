@@ -8,7 +8,7 @@ const payload = await parsers.datosGobarAPI('45.2_ECTDT_0_T_33')
     kpi,
     t: "Desempleo",
     st: "Porcentaje Sobre el Total de la Población",
-    sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
+    sd: "",
     c: "<p>El indicador de desempleo en Argentina mide el porcentaje de la población económicamente activa (PEA) que se encuentra desocupada, es decir, que no tiene empleo y está buscando trabajo de manera activa. Este indicador se calcula trimestralmente por el Instituto Nacional de Estadística y Censos (INDEC) a través de la Encuesta Permanente de Hogares (EPH), que se realiza en todo el país y abarca a las principales ciudades.</p><p>La PEA está compuesta por todas las personas mayores de 14 años que están trabajando o buscando trabajo activamente. Por lo tanto, el indicador de desempleo no incluye a quienes no están buscando trabajo o a quienes no están disponibles para trabajar, como estudiantes, jubilados, amas de casa, entre otros.</p><p>El indicador de desempleo es considerado una medida clave del estado de la economía de un país, ya que refleja el grado de utilización de los recursos productivos y el nivel de bienestar de la población. Un alto nivel de desempleo puede indicar una economía en recesión o estancamiento, mientras que un bajo nivel de desempleo puede ser indicativo de una economía en crecimiento y expansión. Por esta razón, el indicador de desempleo es seguido de cerca por analistas económicos, inversionistas y responsables de política económica.</p>",
     fd: "datos.gob.ar",
     fdr: "https://datos.gob.ar/dataset/sspm_45/archivo/sspm_45.2",

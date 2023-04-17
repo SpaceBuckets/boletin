@@ -43,14 +43,7 @@ export default {
       },
 
                           
-         fireet: {
-        area: "5 / 7 / 9 / 9",
-        kpi: params.kpi,
-        type: "Box",
-        hasChart: true,
-        subtitle: "Serie de Tiempo",
-        title: rekpi.t        
-      },
+
                  
  
          random: {
@@ -61,7 +54,14 @@ export default {
         subtitle: "Serie de Tiempo",
         title: rekpi.t        
       },
-                 
+                        fireet: {
+        area: "5 / 7 / 9 / 9",
+        kpi: params.kpi,
+        type: "Box",
+        hasChart: true,
+        subtitle: "Serie de Tiempo",
+        title: rekpi.t        
+      },  
        
     };
 
@@ -86,7 +86,10 @@ export default {
 
 .new-header {
    //display: none;
-
+  @media only screen and (max-width: 980px) {
+    padding: 15px;
+    br { display: none; }
+  }
   > * { flex: 1; }
   + hr {
     border-color: #666;
@@ -94,14 +97,14 @@ export default {
     margin: 15px 0 20px;
   }  
   p {
-    color: #eee;
+    color: #D3D3D3;
     margin-bottom: 15px;
   }
     strong {
-      color: #eee !important;
+      color: #D3D3D3 !important;
     }  
   h1 {
-    color: #eee;
+    color: #D3D3D3;
     font-size: 24px;
     font-weight: normal;
     margin-top: 0;

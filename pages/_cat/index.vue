@@ -109,14 +109,14 @@ div {
   color: white;
 }
 h1 {
-  color: #eee;
+  color: #D3D3D3;
   font-size: 24px;
   margin-top: 0;
   margin-bottom: 10px;
   font-weight: normal;
 }
 p {
-  color: #eee;
+  color: #D3D3D3;
   margin-bottom: 15px;
 }
 .minflex {

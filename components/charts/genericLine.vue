@@ -483,6 +483,11 @@ export default {
   align-items: center;
   border-bottom: 1px solid #eee;
   padding-bottom: 15px;
+  @media only screen and (max-width: 980px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }     
   > * { flex: 1; max-width: max-content; }
   i {
     font-style: normal;
@@ -495,6 +500,9 @@ export default {
     align-items: center;
     gap: 10px;
     font-size: 14px;
+    @media only screen and (max-width: 980px) {
+      flex-wrap: wrap;
+    }       
     > * { flex: 1; color: #aaa; border-radius: 1px; }
     .subinnerflexer {
       display: flex;
@@ -502,6 +510,9 @@ export default {
       outline: 1px solid #eee;
       gap: 0px;
       font-size: 14px;
+      @media only screen and (max-width: 980px) {
+        & + .subinnerflexer { display: none; }
+      }       
       > * { flex: 1; color: #bbb; border-radius: 1px; }      
     }
   }
@@ -512,6 +523,10 @@ export default {
     user-select: none;
     cursor: pointer;
     &.active { background: #eee;color:#888 }
+    @media only screen and (max-width: 980px) {
+      max-width: 100%;
+      text-align: center;
+    }
     i {
       color: #bbb;
       font-style: normal;
@@ -528,6 +543,10 @@ export default {
     gap: 10px;
     align-items: center;
     justify-content:space-between;
+    @media only screen and (max-width: 980px) {
+      max-width: 100%;
+      text-align: center;
+    }    
     > div {
       flex: 1;
             color: #bbb;

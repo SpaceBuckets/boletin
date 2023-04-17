@@ -539,6 +539,8 @@ export default {
       float: left;
       width: calc(100% - 0px);
       border-radius: 0;
+      margin-bottom: 10px;
+      padding: 20px 15px;
     }      
     a {
       //text-decoration: none;

@@ -75,6 +75,7 @@ export default {
     border-radius: 2px;
     margin-bottom: 12px;
     padding: 10px 10px 15px;
+    max-height: 105px;
     a {
       display: block;
       margin-bottom: 10px;

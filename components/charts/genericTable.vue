@@ -192,6 +192,8 @@ table.retable {
     padding: 10px 5px;
     text-transform: capitalize;
     border-bottom: 1px solid #eee;
+       min-width: 120px;
+  
   }
 }
 

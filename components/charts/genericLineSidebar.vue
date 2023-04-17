@@ -23,7 +23,7 @@
         <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions" :key="`${kpi.label}`">
           <div><span class="circle" :style="{background: kpi.color }"></span> {{kpi.label}}</div> 
           <div>
-            <div>{{kpi.sym}}{{kpi.data[kpi.data.length-1].y}}{{kpi.unit}}</div>   
+            <div>{{kpi.sym}}{{kpi.data[kpi.data.length-1].y.toFixed(2)}}{{kpi.unit}}</div>   
             <div class="deltacontainer" :class="{ negative: getVariation(kpi) < 0 }">
               <i v-if="getVariation(kpi) > 0">▲</i>
               <i v-if="getVariation(kpi) < 0">▼</i>
@@ -247,14 +247,14 @@ h2 {
   height:100%;
   max-width: 300px;
   overflow: hidden;
- padding-left: 0px;
- border-left: 1px solid #eee;
+  padding-left: 0px;
+  border-left: 1px solid #eee;
     @media only screen and (max-width: 980px) {
-   width: calc(100% - 0px);
-max-width: 100%;
-border: 0;
-padding-right: 20px;
-margin-top: 10px;
+    width: calc(100% - 0px);
+    max-width: 100%;
+    border: 0;
+    padding-right: 5px;
+    margin-top: 10px;
     }   
  > div {
      margin-left: 15px;
@@ -263,6 +263,9 @@ margin-top: 10px;
      overflow: auto;
     margin-bottom: 20px;
       border-bottom: 1px solid #eee;
+        @media only screen and (max-width: 980px) {
+    margin-left: 0;
+  }
       &:first-child {
         margin-bottom: 10px;
         padding-bottom: 5px;

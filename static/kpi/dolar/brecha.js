@@ -53,7 +53,7 @@ module.exports = (async function() {
     kpi,
     t: "Brecha USD/Peso",
     st: "Gap",
-    sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
+    sd: "La brecha entre cotizaciones en Argentina se refiere a la diferencia entre el tipo de cambio oficial y el tipo de cambio paralelo (también conocido como 'dólar blue' o 'dólar informal'). La brecha entre cotizaciones tiene implicaciones significativas para la economía argentina.",
     c: "<p>La brecha entre cotizaciones en Argentina se refiere a la diferencia entre el tipo de cambio oficial y el tipo de cambio paralelo (también conocido como 'dólar blue' o 'dólar informal'). El tipo de cambio oficial es el valor que el gobierno argentino fija para la compra y venta de divisas en el mercado cambiario, mientras que el tipo de cambio paralelo es el valor que se establece en transacciones no reguladas por el gobierno, como el mercado negro.</p><p>La brecha entre cotizaciones puede tener implicaciones significativas para la economía argentina, incluyendo el aumento de los precios de los bienes importados y la caída de las reservas internacionales del país. El gobierno argentino ha implementado diversas medidas para tratar de reducir la brecha, como la eliminación de ciertos impuestos a las exportaciones y la implementación de restricciones al acceso al mercado paralelo. Sin embargo, la brecha sigue siendo un desafío importante para la economía argentina.</p>",
     fd: "API",
     fdr: "http://www.bcra.gov.ar/Pdfs/PublicacionesEstadisticas/series.xlsm",

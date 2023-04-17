@@ -194,7 +194,7 @@ export default {
     border: 0;
     padding: 10px;
     font-size: 15px;
-    color: #eee;
+    color: #D3D3D3;
     background: transparent;
     &:focus {
       outline: 0;

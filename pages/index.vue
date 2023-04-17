@@ -246,7 +246,7 @@ export default {
 
 .pepeboard {
  h1 {
-    color: #eee;
+    color: #D3D3D3;
     font-size: 24px;
     margin-top: 0;
     margin-bottom: 10px;
@@ -254,10 +254,10 @@ export default {
     //font-family: "montserrat"
 }
 h1 + p {
-    color: #eee;
+    color: #D3D3D3;
     margin-bottom: 15px;
     strong {
-          color: #eee;
+          color: #D3D3D3;
 
     }
 }
@@ -280,13 +280,17 @@ h1 + p {
   
 }
 .pepeboard > a {
-  color: #eee;
+  color: #D3D3D3;
   margin-top: 0;
   padding-top: 20px;
   font-weight: normal;
   margin-bottom: 15px;
+  font-size: 18px;
   display: block;
   &:first-of-type { padding-top: 0; }
+  &:hover {
+    text-decoration: underline;
+  }
 }
 .mincharto {
   position: relative;
@@ -298,8 +302,8 @@ h1 + p {
   border-radius: 4px;
   margin-bottom: 15px;
   text-decoration: none;
-display: block;
-overflow: hidden;
+  display: block;
+  overflow: hidden;
   @media only screen and (max-width: 980px) {
     width: 100%;
     display: flex;
@@ -315,7 +319,7 @@ overflow: hidden;
 .rewelcome {
   border: 1px solid #333;
   border-radius: 2px;
-  color: #eee;
+  color: #D3D3D3;
   padding: 15px;
   font-size: 16px;
   position: relative;
@@ -324,11 +328,11 @@ overflow: hidden;
   background: #000;
   strong,
   p {
-    color: #eee;
+    color: #D3D3D3;
     margin: 0;
   }
   h1 {
-    color: #eee;
+    color: #D3D3D3;
     margin: 0;
     margin-bottom: 10px;
     font-weight: normal;

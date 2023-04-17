@@ -104,6 +104,7 @@ hr {
   position: absolute;
   right: 0;
   z-index: 99999;
+  padding: 0;
       @media only screen and (max-width: 980px) {
   display: block;
 
@@ -215,7 +216,7 @@ header {
 
     }   
   svg {
-    width: 80px;
+    width: 60px;
     padding: 15px;
     height: 60px;
     //display: none;
@@ -234,6 +235,11 @@ header {
     //flex-direction: row-reverse;
     min-width: 100%;
     justify-content: space-between;
+         @media only screen and (max-width: 980px) {
+        min-width: max-content;
+        gap: 15px;
+        flex-direction: row-reverse;
+        }    
     i {
       font-style:normal;
     }
@@ -254,7 +260,7 @@ header {
       //line-height: 60px;
       span {
         font-weight: 600;
-        color: #eee;
+        color: #D3D3D3;
         display: block;
         padding-right: 2px;
         font-size: 16px;
@@ -342,7 +348,7 @@ a {
 .__nuxt-error-page {
   background: #000;
   .title {
-    color: #eee;
+    color: #D3D3D3;
   }
 }
 

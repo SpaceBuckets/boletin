@@ -9,7 +9,7 @@ module.exports = (async function() {
     kpi,
     t: "Producción de Cereales",
     st: "En Toneladas",
-    sd: "Este indicador <em>refleja la evolución mensual de la actividad económica</em> de 16 sectores productivos. Permite anticipar las tasas de variación del producto interno bruto (PIB) trimestral.",
+    sd: "",
     c: "<p>El indicador de Producción de Cereales de Argentina se refiere a la cantidad de cereales producidos en el país en un período determinado de tiempo, generalmente expresado en toneladas métricas. Los cereales incluyen soja, trigo, maíz, arroz, sorgo, avena y cebada, entre otros.</p><p>Argentina es uno de los principales productores de cereales del mundo, con una larga tradición en la producción de trigo y maíz. La producción de cereales es una parte importante de la economía del país, y es una fuente importante de divisas a través de las exportaciones.</p><p>La producción de cereales en Argentina está influenciada por varios factores, como las condiciones climáticas, los precios internacionales de los cereales, la tecnología agrícola y las políticas gubernamentales. La producción de cereales puede tener un impacto significativo en la economía del país, ya que puede influir en los precios de los alimentos, en la balanza comercial y en la rentabilidad del sector agrícola.</p>",
     fd: "datos.gob.ar",
     fdr: "https://datos.gob.ar/sq/dataset/sspm-indicadores-evolucion-sector-agropecuario/archivo/sspm_34.2",
