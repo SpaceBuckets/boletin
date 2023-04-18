@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h1>{{ repepenav[$route.params.cat]._emoji }} Indicadores de {{$route.params.cat.split("-").join(" ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})}}</h1>
+  <h1>{{ repepenav[$route.params.cat]._emoji }} Indicadores sobre {{$route.params.cat.split("-").join(" ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})}}</h1>
    <p> {{descCats[$route.params.cat]}} </p>
   <hr>
   <br>

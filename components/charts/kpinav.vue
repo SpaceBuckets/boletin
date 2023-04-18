@@ -138,7 +138,7 @@ export default {
   padding: 0;
   padding-top:60px;
   overflow: auto;
-  padding-bottom: 100px;
+  //padding-bottom: 100px;
   color: #ddd;
   width: 250px;
   z-index: 999;

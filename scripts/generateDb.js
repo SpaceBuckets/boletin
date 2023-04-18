@@ -112,11 +112,16 @@ async function processFolders() {
 
   const orderedtree = {
     'actividad-economica': {'_emoji': '🚀', ...tree['actividad-economica']},
+    'produccion-industrial': {'_emoji': '🛠️', ...tree['produccion-industrial']},
     'dolar': {'_emoji': '💸', ...tree['dolar']},
     'finanzas': {'_emoji': '🏦', ...tree['finanzas']},
+    'BCRA': {'_emoji': '🏛️', ...tree['BCRA']},
     'energia': {'_emoji': '⚡', ...tree['energia']},
-    'cuentas-nacionales': {'_emoji': '📚', ...tree['cuentas-nacionales']},
+    'gas': {'_emoji': '💨', ...tree['gas']},
+    'petroleo': {'_emoji': '🛢️', ...tree['petroleo']},
     'comercio-exterior': {'_emoji': '🌎', ...tree['comercio-exterior']},
+    'cuentas-nacionales': {'_emoji': '📚', ...tree['cuentas-nacionales']},
+    'politica-social': {'_emoji': '🤲', ...tree['politica-social']},
     'precios': {'_emoji': '🔥', ...tree['precios']},
     'salarios': {'_emoji': '💰', ...tree['salarios']},
     'consumo': {'_emoji': '🎁', ...tree['consumo']},
