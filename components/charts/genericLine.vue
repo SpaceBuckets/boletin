@@ -108,7 +108,7 @@
     <div class="legends" v-if="index" style="min-height:14px;">
       <template v-if="kpi">
         <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions" :key="`${kpi.label}`">
-          <span class="circle" :style="{background: kpi.color }"></span> {{kpi.label}}
+          <span class="circle" :style="{background: kpi.color }"></span> <span>{{kpi.label}}</span> 
         </div>
       </template>
     </div> 
@@ -395,11 +395,10 @@ export default {
   float: left;
   width: calc(100% - 320px);
   margin-right:20px;
-      @media only screen and (max-width: 980px) {
-      min-height: 300px;
-  width: calc(100% - 0px);
-
-    }   
+  @media only screen and (max-width: 980px) {
+    min-height: 300px;
+    width: calc(100% - 0px);
+  }   
  }
  
  h2 {
@@ -450,6 +449,12 @@ export default {
   display: flex;
   justify-content: flex-end;
   gap: 15px;
+  @media only screen and (max-width: 980px) {
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+    span + span { min-width: max-content; }
+  }     
   .single-legend {
     flex: 1;
     display: flex;
@@ -457,10 +462,13 @@ export default {
     max-width: max-content;
     font-size: 12px;
     color: #888;
+    span {
+          color: #888;
+    }
     .circle {
       display: inline-block;
-      width: 12px;
-      height: 12px;
+      min-width: 12px;
+      min-height: 12px;
       background:#0074D9;
       border-radius: 50px;
       margin-right: 5px;
@@ -476,7 +484,13 @@ export default {
   gap: 15px;
  
 }
+  @media only screen and (max-width: 980px) {
 
+.index .flexer {
+  > * { flex: 1; max-width: 100%; }
+
+}
+ } 
  .flexer {
   display: flex;
   justify-content: space-between;
@@ -485,8 +499,10 @@ export default {
   padding-bottom: 15px;
   @media only screen and (max-width: 980px) {
     flex-direction: column;
+    flex-wrap: wrap;
     align-items: flex-start;
-    gap: 10px;
+    gap: 5px;
+    padding-bottom: 10px;
   }     
   > * { flex: 1; max-width: max-content; }
   i {
@@ -502,6 +518,7 @@ export default {
     font-size: 14px;
     @media only screen and (max-width: 980px) {
       flex-wrap: wrap;
+      margin-top: 5px;
     }       
     > * { flex: 1; color: #aaa; border-radius: 1px; }
     .subinnerflexer {

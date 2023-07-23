@@ -144,5 +144,21 @@ p {
     text-decoration: none;
     display: block;
     overflow: hidden;
+  @media only screen and (max-width: 980px) {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    padding: 15px !important;
+  }    
+}
+.pepecell {
+  padding: 20px;
+  background: #1C1C1C;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  p {
+    margin-bottom: 0 !important;
+  }
 }
 </style>

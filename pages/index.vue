@@ -218,7 +218,7 @@ h1 + p {
   //padding-bottom: 20px;
   flex-wrap: wrap;
   @media only screen and (max-width: 980px) {
-    display: block;
+    //display: block;
   }
   > * {
     flex: 1;
@@ -264,8 +264,11 @@ h1 + p {
   max-height: 465px;    
   }
   @media only screen and (max-width: 980px) {
-    width: 100%;
-    display: flex;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    padding: 15px !important;
   }
   .updatedPill {
     display: block !important;

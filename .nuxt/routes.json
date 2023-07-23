@@ -1,17 +1,17 @@
 [
   {
-    "name": "search-all",
-    "path": "/search/*",
-    "component": "/Users/agustin.capeletto/fed/beo/pages/search/_.vue",
-    "chunkName": "pages/search/_",
-    "_name": "_8b8f8ee6"
-  },
-  {
     "name": "index",
     "path": "/",
     "component": "/Users/agustin.capeletto/fed/beo/pages/index.vue",
     "chunkName": "pages/index",
     "_name": "_5514d34d"
+  },
+  {
+    "name": "search-all",
+    "path": "/search/*",
+    "component": "/Users/agustin.capeletto/fed/beo/pages/search/_.vue",
+    "chunkName": "pages/search/_",
+    "_name": "_8b8f8ee6"
   },
   {
     "name": "cat",

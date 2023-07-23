@@ -84,12 +84,13 @@ export default {
 
 .new-header {
    //display: none;
-    padding: 20px;
-    background: #fff;
-    border-radius: 6px;
-    margin-bottom: 10px;   
+  padding: 20px;
+  background: #fff;
+  border-radius: 6px;
+  margin-bottom: 10px;   
   @media only screen and (max-width: 980px) {
     padding: 15px;
+    border-radius: 0;
     br { display: none; }
   }
   > * { flex: 1; }
@@ -112,6 +113,9 @@ export default {
     font-weight: normal;
     margin-top: 0;
     margin-bottom: 10px;
+    @media only screen and (max-width: 980px) {
+      font-size: 20px;
+    }
     strong {
       color: #333 !important;
     }  

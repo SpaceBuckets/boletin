@@ -146,7 +146,7 @@ export default {
   z-index: 999999;
   background: #1C1C1C;
   //border-right: 1px solid #262626;
-  @media only screen and (max-width: 980px) { transform: translateX(-100%); }
+  @media only screen and (max-width: 980px) { transform: translateX(-100%);left: 0; top: 59px; border-radius: 0; }
 }
 
 .meganavsection {
