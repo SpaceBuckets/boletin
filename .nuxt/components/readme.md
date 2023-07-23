@@ -20,6 +20,7 @@ You can directly use them in pages and other components without the need to impo
 - `<ChartsGenericLine>` | `<charts-generic-line>` (components/charts/genericLine.vue)
 - `<ChartsGenericLineHeader>` | `<charts-generic-line-header>` (components/charts/genericLineHeader.vue)
 - `<ChartsGenericLineMaster>` | `<charts-generic-line-master>` (components/charts/genericLineMaster.vue)
+- `<ChartsGenericLineResult>` | `<charts-generic-line-result>` (components/charts/genericLineResult.vue)
 - `<ChartsGenericLineSidebar>` | `<charts-generic-line-sidebar>` (components/charts/genericLineSidebar.vue)
 - `<ChartsGenericPostHeader>` | `<charts-generic-post-header>` (components/charts/genericPostHeader.vue)
 - `<ChartsGenericSol>` | `<charts-generic-sol>` (components/charts/genericSol.vue)

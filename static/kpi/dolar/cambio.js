@@ -48,6 +48,7 @@ module.exports = (async function() {
  
   const post = {
     kpi,
+    feat: true,
     t: "Tipos de Cambio",
     st: "Peso vs. Dólar",
     sd: "En Argentina, el tipo de cambio oficial lo establece el Banco Central y se utiliza para operaciones gubernamentales, <strong>mientras que el mercado establece el tipo de cambio libre.</strong> Además, los tipos de cambio turista, CCL y MEP se utilizan para diferentes propósitos y están sujetos a regulaciones y restricciones.",

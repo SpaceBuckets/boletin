@@ -35,7 +35,7 @@
      </div> 
 </div>
  
-    <div>
+    <div v-if="metadata !== false">
     <div>
       <h4>Metadata</h4>
     </div>
@@ -74,7 +74,7 @@
 <script>
    
 export default {
-  props: ['title', 'subtitle', 'data','index'],  
+  props: ['title', 'subtitle', 'data','index','metadata'],  
   data() {
     return {
       kpi: require(`~/static/data/${this.data}.json`),
@@ -313,7 +313,7 @@ h5 + p {
   display: flex;
   border: 0px solid #eee !important;
   padding: 0 !important;
-  border-radius: 4px;
+  border-radius: 6px;
   overflow: hidden;
   background: #ddd;
   gap: 0.5px;

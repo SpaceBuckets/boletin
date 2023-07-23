@@ -41,6 +41,9 @@
   "ChartsGenericLineMaster": {
     "description": "Auto imported from components/charts/genericLineMaster.vue"
   },
+  "ChartsGenericLineResult": {
+    "description": "Auto imported from components/charts/genericLineResult.vue"
+  },
   "ChartsGenericLineSidebar": {
     "description": "Auto imported from components/charts/genericLineSidebar.vue"
   },

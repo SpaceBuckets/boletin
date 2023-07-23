@@ -12,6 +12,7 @@ export { default as ChartsGenericKpiUpdatedPepe } from '../../components/charts/
 export { default as ChartsGenericLine } from '../../components/charts/genericLine.vue'
 export { default as ChartsGenericLineHeader } from '../../components/charts/genericLineHeader.vue'
 export { default as ChartsGenericLineMaster } from '../../components/charts/genericLineMaster.vue'
+export { default as ChartsGenericLineResult } from '../../components/charts/genericLineResult.vue'
 export { default as ChartsGenericLineSidebar } from '../../components/charts/genericLineSidebar.vue'
 export { default as ChartsGenericPostHeader } from '../../components/charts/genericPostHeader.vue'
 export { default as ChartsGenericSol } from '../../components/charts/genericSol.vue'

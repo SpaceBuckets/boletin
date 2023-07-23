@@ -226,18 +226,18 @@
         <!--         <nuxt-link :to="{ name: `kpi-kpi`, params: { kpi: item.kpi } }">        </nuxt-link>
  -->
         <component
-          v-if="item.hasChart && !edit"
           :is="`charts-generic${item.type}`"
           :data="item.kpi"
           :title="item.title"
           :subtitle="item.subtitle"
+          :key="`chart-${item.kpi}`"
         />
-        <component
+<!--         <component
           v-if="item.hasChart && edit"
           edit
           :is="`charts-generic${item.type}`"
           :data="item.kpi"
-        />
+        /> -->
       </section>
     </div>
  
@@ -518,7 +518,7 @@ export default {
     background: #fff;
     background: #151a1e;
     background: #fff;
-    border-radius: 2px;
+    border-radius: 6px;
     //border-radius: 0;
     //border-radius: 6px;
     //border: 1px solid #1c2126;

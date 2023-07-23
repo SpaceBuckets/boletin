@@ -1,18 +1,19 @@
 <template>
   <div class="meganav">
-<div class="meganavsection"
+<!-- <div class="meganavsection"
       :class="{ open: $route.path === '/dashboard' }"
 >
   <div class="separmaster">
     <i>📊</i><nuxt-link to="/" @click="navigateToHome('home')"> Dashboard</nuxt-link>
   </div>
-</div>
-<div class="meganavsection searcher">
+</div> -->
+<!-- <div class="meganavsection searcher">
 <div class="separmaster">
   <i>🔎</i> <input type="text" placeholder="Buscar Indicadores...">
 
 </div>
 </div>
+ -->
 
 
     <div
@@ -132,18 +133,19 @@ export default {
  
 .meganav {
   position: fixed;
-  left: 0;
-  top: 0;
+  left: 10px;
+  top: 160px;
   bottom: 0;
   padding: 0;
-  padding-top:60px;
+  padding-top:5px;
   overflow: auto;
   //padding-bottom: 100px;
+  border-radius: 6px;
   color: #ddd;
   width: 250px;
-  z-index: 999;
-  background: #181818;
-  border-right: 1px solid #262626;
+  z-index: 999999;
+  background: #1C1C1C;
+  //border-right: 1px solid #262626;
   @media only screen and (max-width: 980px) { transform: translateX(-100%); }
 }
 
@@ -154,6 +156,17 @@ export default {
   overflow: hidden;
   border-bottom: 1px solid #262626;
   user-select: none;
+  &.descripted {
+    border-bottom: 0;
+    pointer-events: none;
+    p {
+      color: #ccc;
+      padding-right: 20px;
+      line-height: 1.3;
+      //padding-top: 15px;
+    }    
+  }
+
   &.open a:last-of-type { padding-bottom: 10px; }
  
   div:first-child ~ * {
@@ -188,7 +201,7 @@ export default {
 }
 
 .searcher {
-  background: #262626;
+  background: #1C1C1C;
   input {
     width: 100%;
     border: 0;

@@ -7,7 +7,7 @@
           {{ item.t }} 
           
         </nuxt-link>
-      <charts-genericSparkLine :data="item.kpi"/>
+      <charts-genericSparkLine :key="`chart-${item.kpi}`" :data="item.kpi"/>
   </div>
 
 

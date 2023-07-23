@@ -3,6 +3,7 @@ const glob = require('glob');
 const path = require('path')
 var parsertree = require('tree-parser');
 global.fs = require('fs');
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 function writeFileSyncRecursive(filename, content, charset) {
   const folders = filename.split(path.sep).slice(0, -1)
@@ -79,6 +80,7 @@ async function processTable() {
   var folders = await require(`../static/refolders.json`)
   var files = []
   var kpeis = {}
+  var searchkpeis = {}
 
   for (let [key, type] of Object.entries(folders)) {
     if (folders[key]['_contents']) { files.push(folders[key]['_contents']) }
@@ -96,13 +98,24 @@ async function processTable() {
       fu: singleKpi.fu,
       frec: singleKpi.frec,
       u: singleKpi.u,
-      ul: singleKpi.dimensions[0].data.slice(-1)[0].x
+      ul: singleKpi.dimensions[0].data.slice(-1)[0].x,
+      feat: singleKpi.feat
     }
    }
 
- 
+   for (let e = 0; e < files.length; e++) { 
+    var singleKpi = await require(`../static/data/${files[e].slice(0,-3)}.json`)
+    searchkpeis[singleKpi.kpi] = {
+      t: singleKpi.t,
+      st: singleKpi.st,
+      sd: singleKpi.sd,
+      fu: singleKpi.fu,
+      feat: singleKpi.feat
+     }
+   }
  
    writeFileSyncRecursive(`./static/kpitable.json`, JSON.stringify(kpeis)); 
+   writeFileSyncRecursive(`./static/kpisearchable.json`, JSON.stringify(searchkpeis)); 
    console.log('\x1b[46m',`✓ KPI-table generated` ,'\x1b[0m');  
 
 }
@@ -150,26 +163,61 @@ writeFileSyncRecursive(`./static/megapepe.json`, JSON.stringify(transformedPepe)
 }
 
 
-
-
-async function processItems(arr){
-  console.log('\x1b[46m',`◷ Starting API` ,'\x1b[0m');
-  console.log('\x1b[46m',`☺ Have a nice day` ,'\x1b[0m');
-  
-   await Promise.all(arr.filter(kpi => kpi.endsWith('.js')).map(async kpi => {
-    try {
-      await require(`../static/kpi/${kpi}`);
-    } catch (error) {
-      console.log('\x1b[41m', '\x1b[37m', `✕ [${kpi}] failed to fetch!`, '\x1b[0m');
-      console.error(error);
-    }
-  })); 
  
+ 
+ 
+const ProgressBar = require('progress');
 
-  processFolders(); 
-  processNamers()   
-  processTable()
-};
+async function processItems(arr) {
+  console.log('\x1b[46m', `◷ Starting API`, '\x1b[0m');
 
-processItems(glob.sync('**', { cwd: `static/kpi/` }));
+  const limit = 1000, delay = 16;
+ 
+  // Initialize the progress bar
+  const progressBar = new ProgressBar(`\x1b[1m☺ Fetching data (:current/:total) \x1b[0m \x1b[32m|\x1b[0m:bar\x1b[32m|\x1b[0m :percent :file`, {
+    complete: '\x1b[32m█\x1b[0m',
+    incomplete: '\x1b[32m-\x1b[0m',
+    width: 30,
+    total: arr.length,
+  });
+
+  const errors = [];
+
+  for (let i = 0; i < arr.length; i += limit) {
+    await Promise.all(arr.slice(i, i + limit).map(async (kpi) => {
+      try {
+        await require(`../static/kpi/${kpi}`);
+      } catch (error) {
+        errors.push({ kpi, error });
+      }
+
+      // Update the progress bar with the current file name
+      progressBar.tick({ file: kpi });
+    }));
+    await new Promise((t) => setTimeout(t, delay));
+  }
+
+  // Output errors at the end of the function
+  if (errors.length > 0) {
+    console.log('\x1b[43m', '\x1b[37m', `✕ ${errors.length} KPIs failed!`, '\x1b[0m');
+    errors.forEach(({ kpi, error }) => {
+      console.log('\x1b[41m', '\x1b[37m', `✕ [${kpi}] ${error.code}`, '\x1b[0m');
+
+    });
+  } else {
+    console.log('\x1b[42m', '\x1b[37m', `✓ All KPIs fetched successfully!`, '\x1b[0m');
+  }
+
+  processFolders();
+  processNamers();
+  processTable();
+}
+
+
+
+
+
+
+processItems(glob.sync('**', { cwd: `static/kpi/` }).filter(kpi => kpi.endsWith('.js')));
+
 //processItems(['energia/petroleo/barriles.js']);

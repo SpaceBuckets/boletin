@@ -1,9 +1,10 @@
 <template>
 <div>
+
+<div class="pepecell">
   <h1>{{ repepenav[$route.params.cat]._emoji }} Indicadores sobre {{$route.params.cat.split("-").join(" ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})}}</h1>
    <p> {{descCats[$route.params.cat]}} </p>
-  <hr>
-  <br>
+   </div>
 
  
    
@@ -17,7 +18,8 @@
      
 
  </div>
-
+  
+</div>
 </template>
 
 <script>
@@ -110,13 +112,13 @@ div {
 }
 h1 {
   color: #D3D3D3;
-  font-size: 24px;
+  font-size: 22px;
   margin-top: 0;
   margin-bottom: 10px;
   font-weight: normal;
 }
 p {
-  color: #D3D3D3;
+  color: #999;
   margin-bottom: 15px;
 }
 .minflex {
@@ -137,7 +139,7 @@ p {
     max-height: 420px;
     background: #fff;
     padding: 20px;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-bottom: 15px;
     text-decoration: none;
     display: block;

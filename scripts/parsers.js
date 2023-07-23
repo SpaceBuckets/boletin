@@ -3,7 +3,6 @@ const fetch = require('@adobe/node-fetch-retry');
 //const fetch = require('node-fetch');
 var xlsx = require('node-xlsx');
 const parse5 = require('parse5');
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const Papa = require('papaparse')
 const path = require('path')
 function writeFileSyncMaster(e,i,t){let c=e.split(path.sep).slice(0,-1);c.length&&c.reduce((e,i)=>{let t=e?e+path.sep+i:i;return fs.existsSync(t)||fs.mkdirSync(t),t}),fs.writeFileSync(e,i,t)}
@@ -13,7 +12,7 @@ function writeFileSyncRecursive(e, i) {
   const eK = existingData ? Object.keys(existingData).filter(k => k !== "u") : []
   const iK = Object.keys(i).filter(k => k !== "u");
   const allKeysEqual = eK.length === iK.length && eK.every(k => iK.includes(k) && JSON.stringify(existingData[k]) === JSON.stringify(i[k]));
-  console.log(allKeysEqual ? '\x1b[43m' : '\x1b[42m', allKeysEqual ? `¤ [${i.kpi}] skipped` : `♥ [${i.kpi}] updated`, '\x1b[0m');
+  //console.log(allKeysEqual ? '\x1b[43m' : '\x1b[42m', allKeysEqual ? `¤ [${i.kpi}] skipped` : `♥ [${i.kpi}] updated`, '\x1b[0m');
   if (!allKeysEqual) writeFileSyncMaster(e, JSON.stringify(i));
 }
 

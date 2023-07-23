@@ -5,9 +5,7 @@
           <strong>{{ kpi.t }}</strong>. {{kpi.st}}
       </h1>
           <p v-html="kpi.sd"></p>
-      <hr>
-      <br>
-
+ 
     </div>
 
     
@@ -86,30 +84,37 @@ export default {
 
 .new-header {
    //display: none;
+    padding: 20px;
+    background: #fff;
+    border-radius: 6px;
+    margin-bottom: 10px;   
   @media only screen and (max-width: 980px) {
     padding: 15px;
     br { display: none; }
   }
   > * { flex: 1; }
   + hr {
-    border-color: #666;
+    border-color: #333;
     border-top: 0;
     margin: 15px 0 20px;
   }  
   p {
-    color: #D3D3D3;
-    margin-bottom: 15px;
-  }
-    strong {
-      color: #D3D3D3 !important;
+    color: #333;
+    margin-bottom: 0;
+        strong {
+      color: #333 !important;
     }  
+  }
+
   h1 {
-    color: #D3D3D3;
-    font-size: 24px;
+    color: #333;
+    font-size: 22px;
     font-weight: normal;
     margin-top: 0;
     margin-bottom: 10px;
-
+    strong {
+      color: #333 !important;
+    }  
   }
   .toolbar {
     max-width: max-content;

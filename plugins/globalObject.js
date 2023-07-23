@@ -1,8 +1,11 @@
 import Vue from 'vue'
+ 
 
 var state = {
   updated: 0,
-  isOpen: false,
+   isOpen: false,
+  isSearching: false,
+  activeMode: 'grid',
   kpidates: {
     balanza: "2004-06-01",
     deficit: "2018-12-01",
@@ -12,8 +15,10 @@ var state = {
     haberminimo: "2004-12-01",
     tasa: "2016-06-01",
     basemonetaria: "2016-06-01"
-
   },
+  originalIndex: JSON.parse(JSON.stringify(require(`~/static/kpitable.json`))),
+ savedIndex: require(`~/static/kpitable.json`),
+ searchedResults: {},
   chartOptions: {
     responsive: true,
     maintainAspectRatio: false,

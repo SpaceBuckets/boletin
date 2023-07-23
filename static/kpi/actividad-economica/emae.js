@@ -36,6 +36,8 @@ module.exports = (async function() {
     fruc: parsers.detectAggregationFunction(payload),
     u: new Date().toLocaleDateString('en-CA').split('/').join('-'), 
     d: "El Estimador Mensual de Actividad Económica (EMAE) refleja la <strong>evolución mensual de la actividad económica</strong> del conjunto de los sectores productivos a nivel nacional.",
+    feat: true,
+
     dimensions: [
       {
         label: "Desestacionalizado",
