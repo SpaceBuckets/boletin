@@ -132,13 +132,13 @@ handleSearch(event) {
       //this.$state.isSearching = false
 
      } else {
-      this.$state.activeMode = 'table'
+      //this.$state.activeMode = 'table'
       this.$router.push({ path: `/search/${searchTerm}` })
 
       this.$state.searchedResults = results;
     }
   } else {
-      this.$state.activeMode = 'table'
+      //this.$state.activeMode = 'table'
       this.$router.push({ path: '/' })
   }
   
