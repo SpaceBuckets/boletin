@@ -1,19 +1,20 @@
-const fs = require('fs');
-const path = require('path');
-const url = require('url');
-
 exports.handler = async (event, context) => {
   try {
-    const { queryStringParameters } = event; // Retrieve query parameters
+    const { queryStringParameters } = event;
     const { kpi: kpiName, dimension, startDate, endDate, frec } = queryStringParameters;
 
-    if (!kpiName) return { statusCode: 400, body: JSON.stringify({ error: 'KPI name is missing' }) };
+    if (!kpiName) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'KPI name is missing' }) };
+    }
 
-    const filePath = `https://boletinextraoficial.com/data/${kpiName}.json`;
+    const filePath = `${process.env.URL}/data/${kpiName}.json`;
 
-    if (!fs.existsSync(filePath)) return { statusCode: 404, body: JSON.stringify({ error: 'KPI not found' }) };
+    const fetchResponse = await fetch(filePath);
+    if (!fetchResponse.ok) {
+      return { statusCode: 404, body: JSON.stringify({ error: 'KPI not found' }) };
+    }
 
-    const fileData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const fileData = await fetchResponse.json();
     const dimensionData = fileData?.dimensions?.[dimension]?.data || [];
     let outputData = [...dimensionData];
 
