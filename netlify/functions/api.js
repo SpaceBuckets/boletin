@@ -4,13 +4,15 @@ const url = require('url');
 
 exports.handler = async (event, context) => {
   try {
-    const { pathname, query } = url.parse(event.path, true);
-    const [_, kpiName] = pathname.match(/^\/kpi\/(.*?)\/api$/) || [];
+    const { queryStringParameters } = event; // Retrieve query parameters
+    const { kpi: kpiName, dimension, startDate, endDate, frec } = queryStringParameters;
+
+    if (!kpiName) return { statusCode: 400, body: JSON.stringify({ error: 'KPI name is missing' }) };
+
     const filePath = kpiName && path.join(process.cwd(), 'data', `${kpiName}.json`);
 
     if (!fs.existsSync(filePath)) return { statusCode: 404, body: JSON.stringify({ error: 'KPI not found' }) };
 
-    const { dimension, startDate, endDate, frec } = query;
     const fileData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
     const dimensionData = fileData?.dimensions?.[dimension]?.data || [];
     let outputData = [...dimensionData];
