@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
 
     if (!kpiName) return { statusCode: 400, body: JSON.stringify({ error: 'KPI name is missing' }) };
 
-    const filePath = kpiName && path.join(process.cwd(), 'data', `${kpiName}.json`);
+    const filePath = `https://boletinextraoficial.com/data/${kpiName}.json`;
 
     if (!fs.existsSync(filePath)) return { statusCode: 404, body: JSON.stringify({ error: 'KPI not found' }) };
 
