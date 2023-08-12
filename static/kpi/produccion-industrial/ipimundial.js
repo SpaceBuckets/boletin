@@ -19,8 +19,7 @@ module.exports = (async function() {
         fruc: parsers.detectAggregationFunction(payload),
     u: new Date().toLocaleDateString('en-CA').split('/').join('-'),  
     d: "Este índice mide el precio relativo de los bienes y servicios de la economía argentina con respecto al de los de los principales 12 socios comerciales del país, en función del flujo de comercio de manufacturas.",
-    max: 220,
-    min: 80,
+
     dimensions: [
       {
         
