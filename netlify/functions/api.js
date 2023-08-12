@@ -6,7 +6,7 @@ exports.handler = async (event, context) => {
   try {
     const { pathname, query } = url.parse(event.path, true);
     const [_, kpiName] = pathname.match(/^\/kpi\/(.*?)\/api$/) || [];
-    const filePath = kpiName && path.resolve(__dirname, '..', 'static', 'data', `${kpiName}.json`);
+    const filePath = kpiName && path.join(process.cwd(), 'data', `${kpiName}.json`);
 
     if (!fs.existsSync(filePath)) return { statusCode: 404, body: JSON.stringify({ error: 'KPI not found' }) };
 
