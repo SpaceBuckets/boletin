@@ -19,7 +19,7 @@ exports.handler = async event => {
     if (!kpi) return { statusCode: 400, body: JSON.stringify({ error: 'KPI name is missing' }) };
 
     const fileData = await fetchData(kpi);
-    const outputData = [];
+    const outputData = { kpi: `${fileData.t}. ${fileData.st}`, dimensions: [] };
 
     for (const { label, data } of Object.values(fileData.dimensions)) {
       let filteredData = start || end ? filter(data, start, end) : data;
@@ -29,7 +29,7 @@ exports.handler = async event => {
         filteredData = aggregate(filteredData, period, fileData.fruc);
       }
 
-      outputData.push({ label, data: filteredData });
+      outputData.data.push({ label, data: filteredData });
     }
 
     const headers = {

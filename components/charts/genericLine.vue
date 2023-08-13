@@ -1,8 +1,8 @@
 <template>
-<div class="pepecontainer" :class="{index}">
-    <div class="flexer">
-      <h2 v-if="!index"><strong>{{ kpi.t }}</strong>. Serie de Tiempo</h2>
-      <h2 v-if="index"><strong>{{ kpi.t }}</strong>. {{ kpi.st }}</h2>
+<div class="pepecontainer" :class="{index}" v-if="isDataLoaded">
+    <div class="flexer" v-if="isDataLoaded">
+<!--       <h2 v-if="!index"><strong>{{ kpi.t }}</strong>. Serie de Tiempo</h2>
+      <h2 v-if="index"><strong>{{ kpi.t }}</strong>. {{ kpi.st }}</h2> -->
       <i v-if="index">{{ processedDate() }}      </i>
    
       <div class="innerflexer" v-if="index === undefined">  
@@ -147,7 +147,7 @@ async asyncData({ params }) {
 },  
   data() {
     return {
-      kpi: require(`~/static/data/${this.data}.json`), 
+      //kpi: require(`~/static/data/${this.data}.json`), 
       staticKpi: JSON.parse(JSON.stringify(require(`~/static/data/${this.data}.json`))),
       startX: '',
       dateStart: '',
@@ -171,29 +171,30 @@ async asyncData({ params }) {
       dataAggFruc: require(`~/static/data/${this.data}.json`).fruc,
       aggregations: ['Diaria','Mensual','Anual'],
       apiUrl: `https://boletinextraoficial.com/api?kpi=${this.data}`, // Default URL
-      rekpi: null
+      kpi: null
     }
   },
   
-  mounted() { 
+  created() { 
 
-    if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
+/*     if (this.kpi[0].data.length > 2000) { this.animation = false }
 
  
       this.chartHeight = this.$refs.c.clientHeight
       this.chartWidth = this.$refs.c.clientWidth
-      this.remount(false) 
+      this.remount(false)  */
   
   },
-  created() {
- 
-  },
+  
   watch: {
     apiUrl: {
       immediate: true,
       async handler(newUrl) {
         try {
           this.rekpi = await (await fetch(newUrl)).json();
+          this.chartHeight = this.$refs.c.clientHeight
+          this.chartWidth = this.$refs.c.clientWidth
+          this.remount(false)          
         } catch (error) {
           console.error('Error fetching data:', error);
           this.rekpi = null;
