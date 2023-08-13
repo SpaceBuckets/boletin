@@ -29,7 +29,7 @@ exports.handler = async event => {
         filteredData = aggregate(filteredData, period, fileData.fruc);
       }
 
-      outputData.push({ label, color, data: filteredData });
+      outputData.push({ label, data: filteredData });
     }
     megaData = {title: `${fileData.t}. ${fileData.st}`, dimensions: outputData}
     const headers = {
