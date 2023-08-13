@@ -26,9 +26,9 @@ exports.handler = async event => {
 
       if (agg && ['Diaria', 'Mensual'].includes(fileData.frec)) {
         const aggregatedData = aggregate(filteredData, agg.toLowerCase() === 'anual' ? 4 : 7, fileData.fruc);
-        outputData.push({ label: label.toLowerCase(), data: aggregatedData });
+        outputData.push({ label, data: aggregatedData });
       } else {
-        outputData.push({ label: label.toLowerCase(), data: filteredData });
+        outputData.push({ label, data: filteredData });
       }
     }
 

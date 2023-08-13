@@ -194,7 +194,6 @@ async asyncData({ params }) {
       async handler(newUrl) {
         try {
           this.rekpi = await (await fetch(newUrl)).json();
-          console.log(this.rekpi)
         } catch (error) {
           console.error('Error fetching data:', error);
           this.rekpi = null;
