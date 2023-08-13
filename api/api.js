@@ -31,7 +31,7 @@ exports.handler = async event => {
 
       outputData.push({ label, color, data: filteredData });
     }
-    megaData = {title: `${fileData.t}. ${fileData.st}`, dimensions: outputData}
+    megaData = {title: fileData.t, dimensions: outputData}
     const headers = {
       'Access-Control-Allow-Origin': '*', // Allow requests from any origin
       'Access-Control-Allow-Headers': 'Content-Type', // Allow the Content-Type header

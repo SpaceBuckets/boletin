@@ -1,7 +1,7 @@
 <template>
 <div class="pepecontainer" :class="{index}">
     <div class="flexer" v-if="hasData">
-      <h2 v-if="!index"><strong>{{ kpi.title }}</strong>. Serie de Tiempo</h2>
+      <h2><strong>{{ kpi.title }}</strong>. Serie de Tiempo</h2>
        <i v-if="index">{{ processedDate() }}      </i>
    
       <div class="innerflexer" v-if="index === undefined">  
