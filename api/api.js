@@ -21,7 +21,7 @@ exports.handler = async event => {
     const fileData = await fetchData(kpi);
     let outputData = [];
     let megaData = {}
-    for (const { label, data } of Object.values(fileData.dimensions)) {
+    for (const { label, color, data } of Object.values(fileData.dimensions)) {
       let filteredData = start || end ? filter(data, start, end) : data;
 
       if (agg && ['Diaria', 'Mensual'].includes(fileData.frec)) {
@@ -29,7 +29,7 @@ exports.handler = async event => {
         filteredData = aggregate(filteredData, period, fileData.fruc);
       }
 
-      outputData.push({ label, data: filteredData });
+      outputData.push({ label, color, data: filteredData });
     }
     megaData = {title: `${fileData.t}. ${fileData.st}`, dimensions: outputData}
     const headers = {
