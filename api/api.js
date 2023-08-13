@@ -1,39 +1,34 @@
-const fetchData = async kpi => await (await fetch(`${process.env.URL}/data/${kpi}.json`)).json();
+const fetchData = kpi => fetch(`${process.env.URL}/data/${kpi}.json`).then(res => res.json());
 
 const filter = (data, start, end) => data.filter(item => (!start || item.x >= start) && (!end || item.x <= end));
 
-const mean = (data, fruc) => {
-  const sum = data.reduce((acc, item) => acc + item.y, 0);
-  return parseFloat((fruc === 'mean' ? sum / data.length : sum).toFixed(2));
-};
-
-const aggregate = (data, period, fruc) => {
-  const groups = data.reduce((groups, item) => {
-    const key = item.x.substr(0, period);
-    groups[key] = groups[key] || [];
-    groups[key].push(item);
-    return groups;
-  }, {});
-
-  return Object.entries(groups).map(([key, value]) => ({
-    x: key,
-    y: mean(value, fruc)
-  }));
-};
-
+const aggregate = (data, period, fruc) => Object.entries(data.reduce((groups, { x, y }) => {
+  const key = x.substr(0, period);
+  groups[key] = groups[key] || { sum: 0, count: 0 };
+  groups[key].sum += y;
+  groups[key].count++;
+  return groups;
+}, {})).map(([k, { sum, count }]) => ({
+  x: k,
+  y: parseFloat((fruc === 'mean' ? sum / count : sum).toFixed(2))
+}));
 
 exports.handler = async event => {
   try {
-    const { kpi, start, end, agg } = event.queryStringParameters; 
+    const { kpi, start, end, agg } = event.queryStringParameters;
     if (!kpi) return { statusCode: 400, body: JSON.stringify({ error: 'KPI name is missing' }) };
+
     const fileData = await fetchData(kpi);
     let outputData = {};
 
-    for (const dimension in fileData.dimensions) {
-      let data = fileData.dimensions[dimension].data;
-      if (start || end) data = filter(data, start, end);
-      if (agg && ['Diaria', 'Mensual'].includes(fileData.frec)) data = aggregate(data, agg.toLowerCase() === 'anual' ? 4 : 7, fileData.fruc);
-      outputData[fileData.dimensions[dimension].label.toLowerCase()] = data;
+    for (const { label, data } of Object.values(fileData.dimensions)) {
+      let filteredData = start || end ? filter(data, start, end) : data;
+    
+      if (agg && ['Diaria', 'Mensual'].includes(fileData.frec)) {
+        filteredData = aggregate(filteredData, agg.toLowerCase() === 'anual' ? 4 : 7, fileData.fruc);
+      }
+    
+      outputData[label.toLowerCase()] = filteredData;
     }
 
     return { statusCode: 200, body: JSON.stringify(outputData) };
