@@ -118,9 +118,27 @@
 <script>
 import * as d3 from 'd3'
 
+async function fetchData(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    return response.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
 export default {
   name: 'newLine',
   props: ['title', 'subtitle', 'data','index'],  
+async asyncData({ params }) {
+  console.log('aaaa')
+   
+  //return { kpi: data }
+},  
   data() {
     return {
       kpi: require(`~/static/data/${this.data}.json`), 
@@ -145,21 +163,36 @@ export default {
       selectedRange: 'Max',
       dataAggFrec: require(`~/static/data/${this.data}.json`).frec,
       dataAggFruc: require(`~/static/data/${this.data}.json`).fruc,
-      aggregations: ['Diaria','Mensual','Anual']
+      aggregations: ['Diaria','Mensual','Anual'],
+      apiUrl: 'https://boletinextraoficial.com/api?kpi=gini', // Default URL
+      rekpi: null
     }
   },
   
   mounted() { 
- 
+   console.log(this.rekpi)
+
     if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
 
  
       this.chartHeight = this.$refs.c.clientHeight
       this.chartWidth = this.$refs.c.clientWidth
       this.remount(false) 
-    
- 
+  
   },
+  watch: {
+    apiUrl: {
+      immediate: true,
+      async handler(newUrl) {
+        try {
+          this.rekpi = await (await fetch(newUrl)).json();
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          this.rekpi = null;
+        }
+      },
+    },
+  },  
   computed: {
     startDates() {
       const lastDate = new Date(this.staticKpi.dimensions[0].data.slice(-1)[0].x);

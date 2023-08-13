@@ -31,7 +31,16 @@ exports.handler = async event => {
       outputData[label.toLowerCase()] = filteredData;
     }
 
-    return { statusCode: 200, body: JSON.stringify(outputData) };
+    const headers = {
+      'Access-Control-Allow-Origin': '*', // Allow requests from any origin
+      'Access-Control-Allow-Headers': 'Content-Type', // Allow the Content-Type header
+    };
+
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify(outputData),
+    };
   } catch {
     return { statusCode: 404, body: JSON.stringify({ error: 'KPI not found' }) };
   }
