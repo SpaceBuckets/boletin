@@ -19,8 +19,8 @@ exports.handler = async event => {
     if (!kpi) return { statusCode: 400, body: JSON.stringify({ error: 'KPI name is missing' }) };
 
     const fileData = await fetchData(kpi);
-    const outputData = { kpi: `${fileData.t}. ${fileData.st}`, dimensions: [] };
-
+    let outputData = [];
+    let megaData = {}
     for (const { label, data } of Object.values(fileData.dimensions)) {
       let filteredData = start || end ? filter(data, start, end) : data;
 
@@ -29,9 +29,9 @@ exports.handler = async event => {
         filteredData = aggregate(filteredData, period, fileData.fruc);
       }
 
-      outputData.data.push({ label, data: filteredData });
+      outputData.push({ label, data: filteredData });
     }
-
+    megaData = {title: fileData.t, outputData}
     const headers = {
       'Access-Control-Allow-Origin': '*', // Allow requests from any origin
       'Access-Control-Allow-Headers': 'Content-Type', // Allow the Content-Type header
@@ -40,7 +40,7 @@ exports.handler = async event => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(outputData),
+      body: JSON.stringify(megaData),
     };
   } catch {
     return { statusCode: 404, body: JSON.stringify({ error: 'KPI not found' }) };
