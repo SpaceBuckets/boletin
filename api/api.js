@@ -2,13 +2,24 @@ const fetchData = async kpi => await (await fetch(`${process.env.URL}/data/${kpi
 
 const filter = (data, start, end) => data.filter(item => (!start || item.x >= start) && (!end || item.x <= end));
 
-const aggregate = (data, period, fruc) => Object.entries(data.reduce((groups, { x, y }) => {
-  const key = x.substr(0, period);
-  const group = groups[key] || (groups[key] = { sum: 0, count: 0 });
-  group.sum += y;
-  group.count++;
-  return groups;
-}, {})).map(([k, { sum, count }]) => ({ x: k, y: (fruc === 'mean' ? sum / count : sum).toFixed(2) }));
+const mean = (data, fruc) => {
+  const sum = data.reduce((acc, item) => acc + item.y, 0);
+  return parseFloat((fruc === 'mean' ? sum / data.length : sum).toFixed(2));
+};
+
+const aggregate = (data, period, fruc) => {
+  const groups = data.reduce((groups, item) => {
+    const key = item.x.substr(0, period);
+    groups[key] = groups[key] || [];
+    groups[key].push(item);
+    return groups;
+  }, {});
+
+  return Object.entries(groups).map(([key, value]) => ({
+    x: key,
+    y: mean(value, fruc)
+  }));
+};
 
 
 exports.handler = async event => {
