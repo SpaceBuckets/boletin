@@ -1,9 +1,8 @@
 <template>
-<div class="pepecontainer" :class="{index}" v-if="isDataLoaded">
-    <div class="flexer" v-if="isDataLoaded">
-<!--       <h2 v-if="!index"><strong>{{ kpi.t }}</strong>. Serie de Tiempo</h2>
-      <h2 v-if="index"><strong>{{ kpi.t }}</strong>. {{ kpi.st }}</h2> -->
-      <i v-if="index">{{ processedDate() }}      </i>
+<div class="pepecontainer" :class="{index}">
+    <div class="flexer" v-if="hasData">
+      <h2 v-if="!index"><strong>{{ kpi.title }}</strong>. Serie de Tiempo</h2>
+       <i v-if="index">{{ processedDate() }}      </i>
    
       <div class="innerflexer" v-if="index === undefined">  
 
@@ -42,17 +41,17 @@
           <button @click="remount()">Reset</button>
        </div>
     </div>
-
+ 
 
 
     <div class="hypercontainer">
  
     <div class="chartcontainer" ref="c">
-          <div class="new-data" v-if="!isDataLoaded">
+          <div class="new-data" v-if="!hasData">
       Loading...
       
     </div>
-      <template v-if="defaultView">
+      <template v-if="hasData">
  
         <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': `${axisBottom.map(c => `${c.width}px`).join(' ')} 1fr`,'cursor': recursor}">
          <div  
@@ -124,18 +123,7 @@
 <script>
 import * as d3 from 'd3'
 
-async function fetchData(url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Failed to fetch data');
-    }
-    return response.json();
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-}
+ 
 
 export default {
   name: 'newLine',
@@ -171,18 +159,19 @@ async asyncData({ params }) {
       dataAggFruc: require(`~/static/data/${this.data}.json`).fruc,
       aggregations: ['Diaria','Mensual','Anual'],
       apiUrl: `https://boletinextraoficial.com/api?kpi=${this.data}`, // Default URL
-      kpi: null
+      kpi: null,
+      hasData: false
     }
   },
   
-  created() { 
+  mounted() { 
 
-/*     if (this.kpi[0].data.length > 2000) { this.animation = false }
+    if (this.hasData && this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
 
  
       this.chartHeight = this.$refs.c.clientHeight
       this.chartWidth = this.$refs.c.clientWidth
-      this.remount(false)  */
+      console.log(this.hasData)
   
   },
   
@@ -191,21 +180,19 @@ async asyncData({ params }) {
       immediate: true,
       async handler(newUrl) {
         try {
-          this.rekpi = await (await fetch(newUrl)).json();
-          this.chartHeight = this.$refs.c.clientHeight
-          this.chartWidth = this.$refs.c.clientWidth
-          this.remount(false)          
+          this.kpi = await (await fetch(newUrl)).json();
+          this.hasData = true
+                     this.remount(false)   
+
         } catch (error) {
           console.error('Error fetching data:', error);
-          this.rekpi = null;
+          this.kpi = null;
         }
       },
     },
   },  
   computed: {
-    isDataLoaded() {
-      return this.rekpi !== null;
-    },
+ 
     startDates() {
       const lastDate = new Date(this.staticKpi.dimensions[0].data.slice(-1)[0].x);
       const formatDate = (date) => date.toISOString().slice(0, 10);
