@@ -19,16 +19,17 @@ exports.handler = async event => {
     if (!kpi) return { statusCode: 400, body: JSON.stringify({ error: 'KPI name is missing' }) };
 
     const fileData = await fetchData(kpi);
-    let outputData = {};
+    const outputData = [];
 
     for (const { label, data } of Object.values(fileData.dimensions)) {
-      let filteredData = start || end ? filter(data, start, end) : data;
-    
+      const filteredData = start || end ? filter(data, start, end) : data;
+
       if (agg && ['Diaria', 'Mensual'].includes(fileData.frec)) {
-        filteredData = aggregate(filteredData, agg.toLowerCase() === 'anual' ? 4 : 7, fileData.fruc);
+        const aggregatedData = aggregate(filteredData, agg.toLowerCase() === 'anual' ? 4 : 7, fileData.fruc);
+        outputData.push({ label: label.toLowerCase(), data: aggregatedData });
+      } else {
+        outputData.push({ label: label.toLowerCase(), data: filteredData });
       }
-    
-      outputData[label.toLowerCase()] = filteredData;
     }
 
     const headers = {

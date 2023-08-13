@@ -3,8 +3,7 @@
     <div class="flexer">
       <h2 v-if="!index"><strong>{{ kpi.t }}</strong>. Serie de Tiempo</h2>
       <h2 v-if="index"><strong>{{ kpi.t }}</strong>. {{ kpi.st }}</h2>
-      <i v-if="index">
-{{ processedDate() }}      </i>
+      <i v-if="index">{{ processedDate() }}      </i>
    
       <div class="innerflexer" v-if="index === undefined">  
 
@@ -43,9 +42,16 @@
           <button @click="remount()">Reset</button>
        </div>
     </div>
+
+
+
     <div class="hypercontainer">
  
     <div class="chartcontainer" ref="c">
+          <div class="new-data" v-if="!isDataLoaded">
+      Loading...
+      
+    </div>
       <template v-if="defaultView">
  
         <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': `${axisBottom.map(c => `${c.width}px`).join(' ')} 1fr`,'cursor': recursor}">
@@ -164,13 +170,12 @@ async asyncData({ params }) {
       dataAggFrec: require(`~/static/data/${this.data}.json`).frec,
       dataAggFruc: require(`~/static/data/${this.data}.json`).fruc,
       aggregations: ['Diaria','Mensual','Anual'],
-      apiUrl: 'https://boletinextraoficial.com/api?kpi=gini', // Default URL
+      apiUrl: `https://boletinextraoficial.com/api?kpi=${this.data}`, // Default URL
       rekpi: null
     }
   },
   
   mounted() { 
-   console.log(this.rekpi)
 
     if (this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
 
@@ -180,12 +185,16 @@ async asyncData({ params }) {
       this.remount(false) 
   
   },
+  created() {
+ 
+  },
   watch: {
     apiUrl: {
       immediate: true,
       async handler(newUrl) {
         try {
           this.rekpi = await (await fetch(newUrl)).json();
+          console.log(this.rekpi)
         } catch (error) {
           console.error('Error fetching data:', error);
           this.rekpi = null;
@@ -194,6 +203,9 @@ async asyncData({ params }) {
     },
   },  
   computed: {
+    isDataLoaded() {
+      return this.rekpi !== null;
+    },
     startDates() {
       const lastDate = new Date(this.staticKpi.dimensions[0].data.slice(-1)[0].x);
       const formatDate = (date) => date.toISOString().slice(0, 10);
@@ -678,4 +690,14 @@ async asyncData({ params }) {
   opacity: 0;
 }
  
+
+ .new-data {
+  position: absolute;
+  background: #fff;
+  inset: 0;
+  display: flex;
+  color: #888;
+  justify-content: center;
+  align-items: center;
+ }
  </style>
