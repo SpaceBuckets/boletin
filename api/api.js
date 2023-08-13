@@ -22,14 +22,14 @@ exports.handler = async event => {
     const outputData = [];
 
     for (const { label, data } of Object.values(fileData.dimensions)) {
-      const filteredData = start || end ? filter(data, start, end) : data;
+      let filteredData = start || end ? filter(data, start, end) : data;
 
       if (agg && ['Diaria', 'Mensual'].includes(fileData.frec)) {
-        const aggregatedData = aggregate(filteredData, agg.toLowerCase() === 'anual' ? 4 : 7, fileData.fruc);
-        outputData.push({ label, data: aggregatedData });
-      } else {
-        outputData.push({ label, data: filteredData });
+        const period = agg.toLowerCase() === 'anual' ? 4 : 7;
+        filteredData = aggregate(filteredData, period, fileData.fruc);
       }
+
+      outputData.push({ label, data: filteredData });
     }
 
     const headers = {
