@@ -1,7 +1,7 @@
 exports.handler = async (event, context) => {
   try {
     const { queryStringParameters } = event;
-    const { kpi: kpiName, dimension, startDate, endDate, frec } = queryStringParameters;
+    const { kpi: kpiName, startDate, endDate, frec } = queryStringParameters;
 
     if (!kpiName) {
       return { statusCode: 400, body: JSON.stringify({ error: 'KPI name is missing' }) };
@@ -15,8 +15,7 @@ exports.handler = async (event, context) => {
     }
 
     const fileData = await fetchResponse.json();
-    const dimensionData = fileData?.dimensions?.[dimension]?.data || [];
-    let outputData = [...dimensionData];
+    let outputData = fileData?.dimensions || {};
 
     const aggregate = (arr, period) => arr.reduce((groups, item) => {
       const key = item.x.substr(0, period);
@@ -26,16 +25,18 @@ exports.handler = async (event, context) => {
       return groups;
     }, {});
 
-    if ((startDate || endDate) && outputData.length > 0) {
-      outputData = outputData.filter(item => (!startDate || item.x >= startDate) && (!endDate || item.x <= endDate));
-    }
+    for (const dim in outputData) {
+      if ((startDate || endDate) && outputData[dim].data.length > 0) {
+        outputData[dim].data = outputData[dim].data.filter(item => (!startDate || item.x >= startDate) && (!endDate || item.x <= endDate));
+      }
 
-    if (frec && ['Diaria', 'Mensual'].includes(fileData.frec)) {
-      const period = frec.toLowerCase() === 'anual' ? 4 : 7;
-      outputData = Object.entries(aggregate(outputData, period)).map(([key, value]) => ({
-        x: key,
-        y: fileData.fruc === 'mean' ? (value.sum / value.count).toFixed(2) : value.sum.toFixed(2)
-      }));
+      if (frec && ['Diaria', 'Mensual'].includes(fileData.frec)) {
+        const period = frec.toLowerCase() === 'anual' ? 4 : 7;
+        outputData[dim].data = Object.entries(aggregate(outputData[dim].data, period)).map(([key, value]) => ({
+          x: key,
+          y: fileData.frec === 'mean' ? (value.sum / value.count).toFixed(2) : value.sum.toFixed(2)
+        }));
+      }
     }
 
     return {
