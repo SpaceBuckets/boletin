@@ -12,7 +12,7 @@ const aggregate = (data, period, fruc) => Object.entries(data.reduce((groups, it
 
 exports.handler = async event => {
   try {
-    const { kpi, startDate: start, endDate: end, frec } = event.queryStringParameters;
+    const { kpi, start, end, agg } = event.queryStringParameters; 
     if (!kpi) return { statusCode: 400, body: JSON.stringify({ error: 'KPI name is missing' }) };
     const fileData = await fetchData(kpi);
     let outputData = {};
@@ -20,8 +20,8 @@ exports.handler = async event => {
     for (const dimension in fileData.dimensions) {
       let data = fileData.dimensions[dimension].data;
       if (start || end) data = filter(data, start, end);
-      if (frec && ['Diaria', 'Mensual'].includes(fileData.frec)) data = aggregate(data, frec.toLowerCase() === 'anual' ? 4 : 7, fileData.fruc);
-      outputData[dimension] = data;
+      if (agg && ['Diaria', 'Mensual'].includes(fileData.frec)) data = aggregate(data, agg.toLowerCase() === 'anual' ? 4 : 7, fileData.fruc);
+      outputData[fileData.dimensions[dimension].label] = data;
     }
 
     return { statusCode: 200, body: JSON.stringify(outputData) };
