@@ -2,13 +2,14 @@ const fetchData = async kpi => await (await fetch(`${process.env.URL}/data/${kpi
 
 const filter = (data, start, end) => data.filter(item => (!start || item.x >= start) && (!end || item.x <= end));
 
-const aggregate = (data, period, fruc) => Object.entries(data.reduce((groups, item) => {
-  const key = item.x.substr(0, period);
-  groups[key] = groups[key] || { sum: 0, count: 0 };
-  groups[key].sum += item.y;
-  groups[key].count++;
+const aggregate = (data, period, fruc) => Object.entries(data.reduce((groups, { x, y }) => {
+  const key = x.substr(0, period);
+  const group = groups[key] || (groups[key] = { sum: 0, count: 0 });
+  group.sum += y;
+  group.count++;
   return groups;
-}, {})).map(([k, v]) => ({ x: k, y: fruc === 'mean' ? (v.sum / v.count).toFixed(2) : v.sum.toFixed(2) }));
+}, {})).map(([k, { sum, count }]) => ({ x: k, y: (fruc === 'mean' ? sum / count : sum).toFixed(2) }));
+
 
 exports.handler = async event => {
   try {
@@ -21,7 +22,7 @@ exports.handler = async event => {
       let data = fileData.dimensions[dimension].data;
       if (start || end) data = filter(data, start, end);
       if (agg && ['Diaria', 'Mensual'].includes(fileData.frec)) data = aggregate(data, agg.toLowerCase() === 'anual' ? 4 : 7, fileData.fruc);
-      outputData[fileData.dimensions[dimension].label] = data;
+      outputData[fileData.dimensions[dimension].label.toLowerCase()] = data;
     }
 
     return { statusCode: 200, body: JSON.stringify(outputData) };
