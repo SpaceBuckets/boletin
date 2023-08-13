@@ -218,6 +218,6 @@ async function processItems(arr) {
 
 
 
-//processItems(glob.sync('**', { cwd: `static/kpi/` }).filter(kpi => kpi.endsWith('.js')));
+processItems(glob.sync('**', { cwd: `static/kpi/` }).filter(kpi => kpi.endsWith('.js')));
 
 //processItems(['energia/petroleo/barriles.js']);
