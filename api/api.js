@@ -9,7 +9,7 @@ const aggregate = (data, period, fruc) => Object.entries(data.reduce((groups, { 
   groups[key].count++;
   return groups;
 }, {})).map(([k, { sum, count }]) => ({
-  x: k,
+  x: period === 4 ? k + '-01-01' : (period === 7 ? k + '-01' : k),
   y: parseFloat((fruc === 'mean' ? sum / count : sum).toFixed(2))
 }));
 

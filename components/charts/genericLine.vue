@@ -10,7 +10,7 @@
           <div class="date-agg" 
             :class="{active: selectedRange === item}"
             v-for="item in ranges" 
-            @click="handleRange(item)"> 
+            @click="handleURL(item,'date')"> 
             {{item}} 
           </div>
  
@@ -21,13 +21,13 @@
               :class="{active: dataAggFrec === item}"
               v-for="item in aggregations" 
               v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== 'Diaria') || (staticKpi.frec === 'Anual' && item === 'Anual')"
-              @click="handleAgg(item)">
+              @click="handleURL(item,'agg')">
               {{item}}
             </div>
               </div>
 
           <div v-if="defaultView" class="date-display"> 
-            <template v-if="kpi.frec === 'Mensual'">
+            <template v-if="staticKpi.frec === 'Mensual'">
               <div>{{ allDates[dateIndex[0]].slice(0, 7)  }}</div>
               <div>↔</div>
               <div>{{ allDates[dateIndex[1]].slice(0, 7) }} </div>
@@ -129,13 +129,11 @@ export default {
   name: 'newLine',
   props: ['title', 'subtitle', 'data','index'],  
 async asyncData({ params }) {
-  console.log('aaaa')
    
   //return { kpi: data }
 },  
   data() {
     return {
-      //kpi: require(`~/static/data/${this.data}.json`), 
       staticKpi: JSON.parse(JSON.stringify(require(`~/static/data/${this.data}.json`))),
       startX: '',
       dateStart: '',
@@ -158,7 +156,9 @@ async asyncData({ params }) {
       dataAggFrec: require(`~/static/data/${this.data}.json`).frec,
       dataAggFruc: require(`~/static/data/${this.data}.json`).fruc,
       aggregations: ['Diaria','Mensual','Anual'],
-      apiUrl: `https://boletinextraoficial.com/api?kpi=${this.data}`, // Default URL
+      apiUrl: `https://boletinextraoficial.com/api?kpi=${this.data}`,
+      startUrl: '',
+      aggUrl: '',
       kpi: null,
       hasData: false
     }
@@ -167,12 +167,8 @@ async asyncData({ params }) {
   mounted() { 
 
     if (this.hasData && this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
-
- 
       this.chartHeight = this.$refs.c.clientHeight
-      this.chartWidth = this.$refs.c.clientWidth
-      console.log(this.hasData)
-  
+      this.chartWidth = this.$refs.c.clientWidth  
   },
   
   watch: {
@@ -182,7 +178,7 @@ async asyncData({ params }) {
         try {
           this.kpi = await (await fetch(newUrl)).json();
           this.hasData = true
-                     this.remount(false)   
+          this.remount(false)   
 
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -194,7 +190,7 @@ async asyncData({ params }) {
   computed: {
  
     startDates() {
-      const lastDate = new Date(this.staticKpi.dimensions[0].data.slice(-1)[0].x);
+      const lastDate = new Date(this.kpi.dimensions[0].data.slice(-1)[0].x);
       const formatDate = (date) => date.toISOString().slice(0, 10);
 
       return {
@@ -211,56 +207,33 @@ async asyncData({ params }) {
       processedDate() {
         var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
 
-        if(this.kpi.frec === 'Mensual') {
+        if(this.staticKpi.frec === 'Mensual') {
           const lastDate = new Date(this.kpi.dimensions[0].data.slice(-1)[0].x + "T00:00:00");
 
           //lastDate.setMonth(lastDate.getUTCMonth());
           var pepe = lastDate.toLocaleString('es', {month: 'long', year: 'numeric' }).replaceAll("de",'');
 
         } 
-        if(this.kpi.frec === 'Anual') {
+        if(this.staticKpi.frec === 'Anual') {
           var pepe = `Año ${new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {year: 'numeric' }).replaceAll("de",'')}`
         }         
         return pepe
       },    
-    aggregateData(data) {
-      const groupBy = this.dataAggFrec === 'Anual' ? d => d.x.substring(0, 4) : this.dataAggFrec === 'Mensual' ? d => d.x.substring(0, 7) : d => d.x.substring(0, 10);
-      
-      return Array.from(d3.rollup(data, 
-        v => ({ 
-          x: v[0].x,          
-          y: this.dataAggFruc === "mean" ? d3.mean(v, d => d.y) : d3.sum(v, d => d.y)
-        }), 
-        groupBy
-      ).values()).sort((a, b) => a.x - b.x);
-    },
-    handleAgg(item) {
-      this.dataAggFrec = item
-      this.kpi.dimensions = this.staticKpi.dimensions.map(d => ({ ...d }));
-
-      if(item !== this.staticKpi.frec) {
-        this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, data: this.aggregateData(d.data) }));
+    handleURL(item,type) {
+      if (type === 'date') {
+        this.selectedRange = item
+        this.startUrl = this.startDates[item]
+        
       }
-
-      this.remount(true)
+      if (type === 'agg') {
+        this.aggUrl = item.toLowerCase()
+      }      
+      this.apiUrl = `https://boletinextraoficial.com/api?kpi=${this.data}&start=${this.startUrl}&agg=${this.aggUrl}`
+ 
  
     },    
-    filterDateData(data,startDate) {
-      const filteredData = data.filter(({ x }) => new Date(x) >= new Date(startDate));
-      return Array.from(
-        d3.rollup(
-          filteredData,
-          (v) => ({ x: v[0].x, y: v[0].y }),
-          (d) => d.x
-        ).values()
-      ).sort((a, b) => new Date(a.x) - new Date(b.x));
-    },
     handleRange(item) {
       this.selectedRange = item
-      this.kpi.dimensions = this.staticKpi.dimensions.map(d => ({ ...d }));
-      this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, data: this.filterDateData(d.data,this.startDates[item]) }));
-
-      this.remount(true)
     },
     getCols(i) {
       return Math.ceil(i % (this.axisBottom.length+1)) || this.axisBottom.length+1;
@@ -272,21 +245,10 @@ async asyncData({ params }) {
       this.allDates = this.kpi.dimensions[0].data.slice().map(item => item.x).sort((a, b) => new Date(a) - new Date(b))
 
       //reset min and max dates for brushing
-      this.dateIndex.splice(0)
-      this.maxZoom = false
+       this.maxZoom = false
       this.zoomLevel = 0
-
-      //get global min start date 
-      if(this.$state.kpidates[this.data] && !ranged) { 
-
-        this.dateStart = this.$state.kpidates[this.data]
-        this.dateIndex.push(this.allDates.findIndex(date => date.startsWith(this.dateStart.slice(0, 7))))
-        this.dateIndex.push(this.allDates.length-1)
-        this.dateIndex.sort(function(a, b) { return a - b; });
-      } else {
-        this.dateIndex.push(0)
-        this.dateIndex.push(this.allDates.length-1)
-      }
+ 
+  
 
        //create chart and enable render
       this.generateChart()
@@ -296,7 +258,6 @@ async asyncData({ params }) {
     },
     generateChart() {
       const parseTime = d3.timeParse("%Y-%m-%d")
-      //console.log(this.yearlyData(this.kpi.dimensions[0].data))
       const timeIntervals = [
         {interval: d3.timeDay, format: '%Y'}, // show year at zoom level 0
         {interval: d3.timeMonth, format: '%b %Y'}, // show month at zoom level 1
@@ -304,8 +265,10 @@ async asyncData({ params }) {
       ];
  
       //get start and end dates to set selected domain
-      this.dateStart = parseTime(this.allDates[this.dateIndex[0]])
-      this.dateEnd = parseTime(this.allDates[this.dateIndex[1]])
+
+      this.dateStart = parseTime(this.kpi.dimensions[0].data[0].x)
+
+      this.dateEnd = parseTime(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x)
  
       const scaleX = d3.scaleTime().domain([this.dateStart,this.dateEnd]).range([0, this.$refs.c.clientWidth-50]).nice(timeIntervals[this.zoomLevel].interval)
         
@@ -317,7 +280,7 @@ async asyncData({ params }) {
         width: i > 0 ? scaleX(d) - scaleX(ticks[i-1]) : scaleX(d),
       }]));
       //get min and max values from all dimensions to set selected domain
-      const valuesData = this.kpi.dimensions.flatMap(d => d.data.slice(this.dateIndex[0], this.dateIndex[1] + 1).map(i => i.y));
+      const valuesData = this.kpi.dimensions.flatMap(d => d.data.slice(0, this.kpi.dimensions[0].data.length-1 + 1).map(i => i.y));
       const [minValue, maxValue] = [this.kpi.min ?? d3.min(valuesData)*0.9, this.kpi.max ?? d3.max(valuesData)*1.05];
 
       const scaleY = d3.scaleLinear().domain([minValue, maxValue]).range([this.$refs.c.clientHeight-30, 10]).nice();
