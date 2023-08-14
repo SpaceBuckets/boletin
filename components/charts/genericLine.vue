@@ -27,16 +27,10 @@
               </div>
 
           <div v-if="defaultView" class="date-display"> 
-            <template v-if="staticKpi.frec === 'Mensual'">
-              <div>{{ allDates[dateIndex[0]].slice(0, 7)  }}</div>
+               <div>{{ dateStart.toISOString().slice(0, 10).split('-').reverse().join('-')  }}</div>
               <div>↔</div>
-              <div>{{ allDates[dateIndex[1]].slice(0, 7) }} </div>
-            </template>
-            <template v-else>
-              <div>{{ allDates[dateIndex[0]]}}</div>
-              <div>↔</div>
-              <div>{{ allDates[dateIndex[1]] }} </div>
-            </template>            
+              <div>{{ dateEnd.toISOString().slice(0, 10).split('-').reverse().join('-') }} </div>
+            
           </div>
           <button @click="remount()">Reset</button>
        </div>
@@ -178,7 +172,7 @@ async asyncData({ params }) {
         try {
           this.kpi = await (await fetch(newUrl)).json();
           this.hasData = true
-          this.remount(false)   
+          this.remount()   
 
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -223,13 +217,12 @@ async asyncData({ params }) {
       if (type === 'date') {
         this.selectedRange = item
         this.startUrl = this.startDates[item]
-        
       }
       if (type === 'agg') {
+        this.dataAggFrec = item
         this.aggUrl = item.toLowerCase()
       }      
       this.apiUrl = `https://boletinextraoficial.com/api?kpi=${this.data}&start=${this.startUrl}&agg=${this.aggUrl}`
- 
  
     },    
     handleRange(item) {
@@ -241,7 +234,7 @@ async asyncData({ params }) {
     getColDate(i) {
       return this.axisBottom[i]?.date ?? this.allDates[this.allDates.length - 1];
     },    
-    remount(ranged) { 
+    remount() { 
       this.allDates = this.kpi.dimensions[0].data.slice().map(item => item.x).sort((a, b) => new Date(a) - new Date(b))
 
       //reset min and max dates for brushing
@@ -280,7 +273,7 @@ async asyncData({ params }) {
         width: i > 0 ? scaleX(d) - scaleX(ticks[i-1]) : scaleX(d),
       }]));
       //get min and max values from all dimensions to set selected domain
-      const valuesData = this.kpi.dimensions.flatMap(d => d.data.slice(0, this.kpi.dimensions[0].data.length-1 + 1).map(i => i.y));
+      const valuesData = this.kpi.dimensions.flatMap(d => d.data.map(i => i.y));
       const [minValue, maxValue] = [this.kpi.min ?? d3.min(valuesData)*0.9, this.kpi.max ?? d3.max(valuesData)*1.05];
 
       const scaleY = d3.scaleLinear().domain([minValue, maxValue]).range([this.$refs.c.clientHeight-30, 10]).nice();
