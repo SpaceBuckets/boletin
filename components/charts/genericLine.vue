@@ -1,6 +1,6 @@
 <template>
 <div class="pepecontainer" :class="{index}">
-    <div class="flexer" v-if="hasData">
+    <div class="flexer">
       <h2><strong>{{ kpi.title }}</strong>. Serie de Tiempo</h2>
        <i v-if="index">{{ processedDate() }}      </i>
    
@@ -32,7 +32,7 @@
               <div>{{ dateEnd.toISOString().slice(0, 10).split('-').reverse().join('-') }} </div>
             
           </div>
-          <button @click="remount()">Reset</button>
+          <button @click="reset()">Reset</button>
        </div>
     </div>
  
@@ -41,11 +41,8 @@
     <div class="hypercontainer">
  
     <div class="chartcontainer" ref="c">
-          <div class="new-data" v-if="!hasData">
-      Loading...
-      
-    </div>
-      <template v-if="hasData">
+  
+      <template v-if="defaultView">
  
         <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': `${axisBottom.map(c => `${c.width}px`).join(' ')} 1fr`,'cursor': recursor}">
          <div  
@@ -63,7 +60,7 @@
         </div>
         <svg 
           id="chart" 
-          :class="{animation, [kpi.type]: true }"
+          :class="{'loading':loadingLine }"
           :width="chartWidth" 
           :height="chartHeight" 
           :viewBox="`0 0 ${chartWidth } ${chartHeight}`"
@@ -122,23 +119,20 @@ import * as d3 from 'd3'
 export default {
   name: 'newLine',
   props: ['title', 'subtitle', 'data','index'],  
-async asyncData({ params }) {
-   
-  //return { kpi: data }
-},  
   data() {
     return {
       staticKpi: JSON.parse(JSON.stringify(require(`~/static/data/${this.data}.json`))),
       startX: '',
       dateStart: '',
       dateEnd: '', 
-      dateIndex: [],
+      dragDates: [],
       allDates: [],
       axisBottom: [],
       axisRight: [],      
       dragging: false,
       inverseSelection: false,
       defaultView: false,
+      loadingLine: false,
       animation: true,
       maxZoom: false,
       zoomLevel: 0,
@@ -153,26 +147,26 @@ async asyncData({ params }) {
       apiUrl: `https://boletinextraoficial.com/api?kpi=${this.data}`,
       startUrl: '',
       aggUrl: '',
-      kpi: null,
-      hasData: false
-    }
+      kpi: { title:require(`~/static/data/${this.data}.json`).t, dimensions: require(`~/static/data/${this.data}.json`).dimensions}, 
+     }
   },
   
   mounted() { 
-
-    if (this.hasData && this.kpi.dimensions[0].data.length > 2000) { this.animation = false }
-      this.chartHeight = this.$refs.c.clientHeight
-      this.chartWidth = this.$refs.c.clientWidth  
+      console.log(this.kpi)
+          this.chartHeight = this.$refs.c.clientHeight
+      this.chartWidth = this.$refs.c.clientWidth
+      this.remount()
   },
   
   watch: {
     apiUrl: {
-      immediate: true,
+      immediate: false,
       async handler(newUrl) {
         try {
           this.kpi = await (await fetch(newUrl)).json();
-          this.hasData = true
-          this.remount()   
+          this.loadingLine = false
+
+           this.remount()   
 
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -197,23 +191,19 @@ async asyncData({ params }) {
     },
   },  
   methods: {  
-    
-      processedDate() {
-        var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
-
-        if(this.staticKpi.frec === 'Mensual') {
-          const lastDate = new Date(this.kpi.dimensions[0].data.slice(-1)[0].x + "T00:00:00");
-
-          //lastDate.setMonth(lastDate.getUTCMonth());
-          var pepe = lastDate.toLocaleString('es', {month: 'long', year: 'numeric' }).replaceAll("de",'');
-
-        } 
-        if(this.staticKpi.frec === 'Anual') {
-          var pepe = `Año ${new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {year: 'numeric' }).replaceAll("de",'')}`
-        }         
-        return pepe
-      },    
+    processedDate() {
+      var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
+      if(this.staticKpi.frec === 'Mensual') {
+        const lastDate = new Date(this.kpi.dimensions[0].data.slice(-1)[0].x + "T00:00:00");
+        var pepe = lastDate.toLocaleString('es', {month: 'long', year: 'numeric' }).replaceAll("de",'');
+      } 
+      if(this.staticKpi.frec === 'Anual') {
+        var pepe = `Año ${new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {year: 'numeric' }).replaceAll("de",'')}`
+      }         
+      return pepe
+    },    
     handleURL(item,type) {
+      this.loadingLine = true
       if (type === 'date') {
         this.selectedRange = item
         this.startUrl = this.startDates[item]
@@ -225,28 +215,24 @@ async asyncData({ params }) {
       this.apiUrl = `https://boletinextraoficial.com/api?kpi=${this.data}&start=${this.startUrl}&agg=${this.aggUrl}`
  
     },    
-    handleRange(item) {
-      this.selectedRange = item
-    },
     getCols(i) {
       return Math.ceil(i % (this.axisBottom.length+1)) || this.axisBottom.length+1;
     },
     getColDate(i) {
       return this.axisBottom[i]?.date ?? this.allDates[this.allDates.length - 1];
     },    
+    reset() {
+      this.apiUrl = `https://boletinextraoficial.com/api?kpi=${this.data}`
+    },
     remount() { 
       this.allDates = this.kpi.dimensions[0].data.slice().map(item => item.x).sort((a, b) => new Date(a) - new Date(b))
 
       //reset min and max dates for brushing
-       this.maxZoom = false
+      this.maxZoom = false
       this.zoomLevel = 0
- 
-  
 
-       //create chart and enable render
+      //create chart and enable render
       this.generateChart()
-
-    
   
     },
     generateChart() {
@@ -289,56 +275,37 @@ async asyncData({ params }) {
         pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(0)).y1(d => scaleY(d.y));
       } 
       if (this.kpi.type === 'area') {
-        //pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(0)).y1(d => scaleY(d.y)).curve(d3.curveBasis);
-        //pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(Math.min(0, minValue))).y1(d => scaleY(d.y)).curve(d3.curveBasis);
-          //pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(0)).y1(d => scaleY(d.y)).curve(d3.curveBasis).defined(d => d.y !== null);
-            pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(minValue)).y1(d => scaleY(d.y)).curve(d3.curveBasis);
-
+        pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(minValue)).y1(d => scaleY(d.y)).curve(d3.curveBasis);
       }
   
-
- 
       this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, path: pathGenerator(d.data) }));
       this.defaultView = true  
 
     },    
     startDrag(e) {
+ 
       this.dragging = true;
       this.startX = e.clientX;
       this.$refs.reselecter.style.gridColumnStart = e.target.dataset.colStart;
       this.$refs.reselecter.style.gridColumnEnd = e.target.dataset.colEnd;
       this.$refs.reselecter.style.display = "block";
       this.recursor = 'col-resize'
-      this.dateStart = e.target.dataset.dateStart
-      this.dateStartInverted = e.target.dataset.dateEnd
-     },
+
+      this.dragDates[0] = e.target.dataset.dateStart
+
+      },
     endDrag(e) {
-      this.defaultView = false;
       this.dragging = false;
       this.startX = '';
       this.$refs.reselecter.style.display = "none";
-      this.dateEnd = e.target.dataset.dateEnd
+      this.dragDates[1] = e.target.dataset.dateEnd
 
-      if (this.inverseSelection) { 
-        this.dateEnd = e.target.dataset.dateStart
-        this.dateStart = this.dateStartInverted
-      }  
+        console.log(this.dragDates.sort())
  
-      //Reset dateIndex and try to find exact dates
-      this.dateIndex.splice(0)
-      this.dateIndex.push(this.allDates.findIndex(date => date.startsWith(this.dateStart.slice(0, 7))))
-      this.dateIndex.push(this.allDates.reduceRight((lastIndex, date, index) => lastIndex === -1 && date.startsWith(this.dateEnd.slice(0, 7)) ? index : lastIndex, -1))
-
-      this.dateIndex.sort(function(a, b) { return a - b; });
-
-      if (this.dateIndex[0] !== this.dateIndex[1]) {
         this.zoomLevel = Math.min(this.zoomLevel + 1, 2);
-        this.generateChart()
-      } 
-      
+       
       this.recursor = 'crosshair'
-      this.defaultView = true;
-    },
+     },
     hoverling(e) {
       if (this.dragging) {
         var xDir = this.startX - e.clientX;
