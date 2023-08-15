@@ -1,11 +1,13 @@
 <template>
-<div class="pepecontainer" :class="{index}">
+  <div class="pepecontainer" :class="{index}">
+  
+
+  <!--  Header and filters -->    
     <div class="flexer">
       <h2><strong>{{ kpi.title }}</strong>. Serie de Tiempo</h2>
-       <i v-if="index">{{ processedDate() }}      </i>
+      <i v-if="index">{{ processedDate() }}</i>
    
       <div class="innerflexer" v-if="index === undefined">  
-
         <div class="subinnerflexer">
           <div class="date-agg" 
             :class="{active: selectedRange === item}"
@@ -13,37 +15,34 @@
             @click="handleURL(item,'date')"> 
             {{item}} 
           </div>
- 
         </div>
         <div class="subinnerflexer">
-
-         <div class="date-agg" 
+          <div class="date-agg" 
               :class="{active: dataAggFrec === item}"
               v-for="item in aggregations" 
               v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== 'Diaria') || (staticKpi.frec === 'Anual' && item === 'Anual')"
               @click="handleURL(item,'agg')">
               {{item}}
             </div>
-              </div>
+        </div>
 
-          <div v-if="defaultView" class="date-display"> 
-               <div>{{ dateStart.toISOString().slice(0, 10).split('-').reverse().join('-')  }}</div>
-              <div>↔</div>
-              <div>{{ dateEnd.toISOString().slice(0, 10).split('-').reverse().join('-') }} </div>
-            
-          </div>
-          <button @click="reset()">Reset</button>
-       </div>
+        <div v-if="defaultView" class="date-display"> 
+          <div>{{ dateStart.toISOString().slice(0, 10).split('-').reverse().join('-')  }}</div>
+          <div>↔</div>
+          <div>{{ dateEnd.toISOString().slice(0, 10).split('-').reverse().join('-') }} </div>
+        </div>
+        <button @click="resetFilters()">Reset</button>
+      </div>
     </div>
  
 
-
-    <div class="hypercontainer">
+  <!--  Chart Container -->    
+  <div class="hypercontainer">
  
     <div class="chartcontainer" ref="c">
   
       <template v-if="defaultView">
- 
+       <!--  Dragging filter -->    
         <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': `${axisBottom.map(c => `${c.width}px`).join(' ')} 1fr`,'cursor': recursor}">
          <div  
             v-for="i in axisBottom.length+1"  :key="`${i}-col`"
@@ -58,6 +57,8 @@
           </div>
           <div ref="reselecter" class="reselecter-cell"></div>
         </div>
+
+        <!--  Chart -->    
         <svg 
           id="chart" 
           :class="{'loading':loadingLine }"
@@ -108,11 +109,12 @@
         </div>
       </template>
     </div> 
-</div>
+  </div>
 </template>
 
 <script>
 import * as d3 from 'd3'
+import { handleRequest } from '~/scripts/api';
 
  
 
@@ -126,7 +128,6 @@ export default {
       dateStart: '',
       dateEnd: '', 
       dragDates: [],
-      allDates: [],
       axisBottom: [],
       axisRight: [],      
       dragging: false,
@@ -143,6 +144,11 @@ export default {
       selectedRange: 'Max',
       dataAggFrec: require(`~/static/data/${this.data}.json`).frec,
       dataAggFruc: require(`~/static/data/${this.data}.json`).fruc,
+      query: {
+        start: null,
+        end: null,
+        agg: null,
+      },
       aggregations: ['Diaria','Mensual','Anual'],
       apiUrl: `https://boletinextraoficial.com/api?kpi=${this.data}`,
       startUrl: '',
@@ -152,31 +158,17 @@ export default {
   },
   
   mounted() { 
-      console.log(this.kpi)
-          this.chartHeight = this.$refs.c.clientHeight
-      this.chartWidth = this.$refs.c.clientWidth
-      this.remount()
+    this.chartHeight = this.$refs.c.clientHeight
+    this.chartWidth = this.$refs.c.clientWidth
+    this.generateChart()
   },
-  
   watch: {
-    apiUrl: {
-      immediate: false,
-      async handler(newUrl) {
-        try {
-          this.kpi = await (await fetch(newUrl)).json();
-          this.loadingLine = false
-
-           this.remount()   
-
-        } catch (error) {
-          console.error('Error fetching data:', error);
-          this.kpi = null;
-        }
-      },
-    },
+    query: {
+      handler: 'fetchData',
+      deep: true,
+    },    
   },  
   computed: {
- 
     startDates() {
       const lastDate = new Date(this.kpi.dimensions[0].data.slice(-1)[0].x);
       const formatDate = (date) => date.toISOString().slice(0, 10);
@@ -191,6 +183,16 @@ export default {
     },
   },  
   methods: {  
+    getCols(i) {
+      return Math.ceil(i % (this.axisBottom.length+1)) || this.axisBottom.length+1;
+    },
+    getColDate(i) {
+      return this.axisBottom[i]?.date ?? this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length - 1].x;
+    },        
+    async fetchData() {
+      this.kpi = await handleRequest(this.data,this.query.start,this.query.end,this.query.agg)
+      this.generateChart()
+    },    
     processedDate() {
       var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
       if(this.staticKpi.frec === 'Mensual') {
@@ -206,36 +208,23 @@ export default {
       this.loadingLine = true
       if (type === 'date') {
         this.selectedRange = item
-        this.startUrl = this.startDates[item]
+        this.query.start = this.startDates[item]
       }
       if (type === 'agg') {
         this.dataAggFrec = item
-        this.aggUrl = item.toLowerCase()
-      }      
-      this.apiUrl = `https://boletinextraoficial.com/api?kpi=${this.data}&start=${this.startUrl}&agg=${this.aggUrl}`
- 
-    },    
-    getCols(i) {
-      return Math.ceil(i % (this.axisBottom.length+1)) || this.axisBottom.length+1;
-    },
-    getColDate(i) {
-      return this.axisBottom[i]?.date ?? this.allDates[this.allDates.length - 1];
-    },    
-    reset() {
-      this.apiUrl = `https://boletinextraoficial.com/api?kpi=${this.data}`
-    },
-    remount() { 
-      this.allDates = this.kpi.dimensions[0].data.slice().map(item => item.x).sort((a, b) => new Date(a) - new Date(b))
+        this.query.agg = item.toLowerCase()
 
-      //reset min and max dates for brushing
+      }       
+    },    
+    resetFilters(){
+      this.query.start = null
+      this.query.end = null
+      this.query.agg = null
+    },
+    generateChart() {
       this.maxZoom = false
       this.zoomLevel = 0
 
-      //create chart and enable render
-      this.generateChart()
-  
-    },
-    generateChart() {
       const parseTime = d3.timeParse("%Y-%m-%d")
       const timeIntervals = [
         {interval: d3.timeDay, format: '%Y'}, // show year at zoom level 0
@@ -258,6 +247,7 @@ export default {
         left: scaleX(d),
         width: i > 0 ? scaleX(d) - scaleX(ticks[i-1]) : scaleX(d),
       }]));
+
       //get min and max values from all dimensions to set selected domain
       const valuesData = this.kpi.dimensions.flatMap(d => d.data.map(i => i.y));
       const [minValue, maxValue] = [this.kpi.min ?? d3.min(valuesData)*0.9, this.kpi.max ?? d3.max(valuesData)*1.05];
@@ -300,10 +290,15 @@ export default {
       this.$refs.reselecter.style.display = "none";
       this.dragDates[1] = e.target.dataset.dateEnd
 
-        console.log(this.dragDates.sort())
- 
+      this.dragDates = this.dragDates.sort()
+
+      if (this.dragDates[0] !== this.dragDates[1]) {
         this.zoomLevel = Math.min(this.zoomLevel + 1, 2);
-       
+        this.apiUrl = `https://boletinextraoficial.com/api?kpi=${this.data}&start=${this.dragDates[0]}&end=${this.dragDates[1]}&agg=${this.aggUrl}`
+        this.query.start = this.dragDates[0]
+        this.query.end = this.dragDates[1]
+
+      }        
       this.recursor = 'crosshair'
      },
     hoverling(e) {
