@@ -12,16 +12,16 @@
           <div class="date-agg" 
             :class="{active: selectedRange === item}"
             v-for="item in ranges" 
-            @click="handleURL(item,'date')"> 
+            @click="query.start = startDates[item];selectedRange = item">
             {{item}} 
           </div>
         </div>
         <div class="subinnerflexer">
           <div class="date-agg" 
-              :class="{active: dataAggFrec === item}"
+              :class="{active: query.agg === item}"
               v-for="item in aggregations" 
               v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== 'Diaria') || (staticKpi.frec === 'Anual' && item === 'Anual')"
-              @click="handleURL(item,'agg')">
+              @click="query.agg = item">
               {{item}}
             </div>
         </div>
@@ -114,9 +114,6 @@
 
 <script>
 import * as d3 from 'd3'
-import { handleRequest } from '~/scripts/api';
-
- 
 
 export default {
   name: 'newLine',
@@ -141,15 +138,15 @@ export default {
       chartWidth: 0,
       recursor: 'crosshair',
       ranges: ['Max','8A','4A','12M','6M'],
+      aggregations: ['Diaria','Mensual','Anual'],
       selectedRange: 'Max',
       dataAggFrec: require(`~/static/data/${this.data}.json`).frec,
       dataAggFruc: require(`~/static/data/${this.data}.json`).fruc,
       query: {
         start: null,
         end: null,
-        agg: null,
+        agg: require(`~/static/data/${this.data}.json`).frec,
       },
-      aggregations: ['Diaria','Mensual','Anual'],
       apiUrl: `https://boletinextraoficial.com/api?kpi=${this.data}`,
       startUrl: '',
       aggUrl: '',
@@ -164,7 +161,7 @@ export default {
   },
   watch: {
     query: {
-      handler: 'fetchData',
+      handler: 'refreshData',
       deep: true,
     },    
   },  
@@ -189,10 +186,6 @@ export default {
     getColDate(i) {
       return this.axisBottom[i]?.date ?? this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length - 1].x;
     },        
-    async fetchData() {
-      this.kpi = await handleRequest(this.data,this.query.start,this.query.end,this.query.agg)
-      this.generateChart()
-    },    
     processedDate() {
       var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
       if(this.staticKpi.frec === 'Mensual') {
@@ -203,23 +196,42 @@ export default {
         var pepe = `Año ${new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {year: 'numeric' }).replaceAll("de",'')}`
       }         
       return pepe
-    },    
-    handleURL(item,type) {
-      this.loadingLine = true
-      if (type === 'date') {
-        this.selectedRange = item
-        this.query.start = this.startDates[item]
-      }
-      if (type === 'agg') {
-        this.dataAggFrec = item
-        this.query.agg = item.toLowerCase()
+    },      
+    refreshData() {
+      const { start, end, agg } = this.query;
 
-      }       
-    },    
+      const filter = (data, start, end) => data.filter(item => (!start || item.x >= start) && (!end || item.x <= end));
+
+      const aggregate = (data, period, fruc) =>
+        Object.entries(data.reduce((groups, { x, y }) => {
+          const key = x.substr(0, period);
+          groups[key] = groups[key] || { sum: 0, count: 0 };
+          groups[key].sum += y;
+          groups[key].count++;
+          return groups;
+        }, {})).map(([k, { sum, count }]) => ({
+          x: period === 4 ? k + '-01-01' : period === 7 ? k + '-01' : k,
+          y: parseFloat((fruc === 'mean' ? sum / count : sum).toFixed(2))
+        }));
+
+
+        const outputData = Object.values(this.staticKpi.dimensions).map(({ label, color, data }) => {
+            let filteredData = start || end ? filter(data, start, end) : data;
+            if (agg && ['Diaria', 'Mensual'].includes(this.staticKpi.frec)) {
+            const period = agg.toLowerCase() === 'anual' ? 4 : 7;
+            filteredData = aggregate(filteredData, period, this.staticKpi.fruc);
+            }
+            return { label, color, data: filteredData };
+        });
+
+      this.kpi = { title: this.staticKpi.t, dimensions: outputData };
+      this.generateChart();
+    },
+
     resetFilters(){
       this.query.start = null
       this.query.end = null
-      this.query.agg = null
+      this.query.agg = this.staticKpi.frec
     },
     generateChart() {
       this.maxZoom = false
@@ -233,7 +245,6 @@ export default {
       ];
  
       //get start and end dates to set selected domain
-
       this.dateStart = parseTime(this.kpi.dimensions[0].data[0].x)
 
       this.dateEnd = parseTime(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x)
@@ -489,6 +500,7 @@ export default {
     max-width: max-content;
     user-select: none;
     cursor: pointer;
+    text-transform: capitalize;
     &.active { background: #eee;color:#888 }
     @media only screen and (max-width: 980px) {
       max-width: 100%;
