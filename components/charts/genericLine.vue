@@ -1,113 +1,114 @@
 <template>
   <div class="pepecontainer" :class="{index}">
   
-
-  <!--  Header and filters -->    
+    <!-- Header and filters -->    
     <div class="flexer">
-      <h2><strong>{{ kpi.title }}</strong>. Serie de Tiempo</h2>
+      <h2 v-if="!index"><strong>{{ staticKpi.t }}</strong>. Serie de Tiempo</h2>
+      <h2 v-if="index"><strong>{{ staticKpi.t }}</strong>. {{ staticKpi.st }}</h2>
       <i v-if="index">{{ processedDate() }}</i>
    
+      <!-- Aggregation -->    
       <div class="innerflexer" v-if="index === undefined">  
         <div class="subinnerflexer">
           <div class="date-agg" 
             :class="{active: selectedRange === item}"
             v-for="item in ranges" 
-            @click="query.start = startDates[item];selectedRange = item">
+            @click="filters.start = startDates[item];selectedRange = item">
             {{item}} 
           </div>
         </div>
+
+        <!-- Start & End Dates -->    
         <div class="subinnerflexer">
           <div class="date-agg" 
-              :class="{active: query.agg === item}"
+              :class="{active: filters.agg === item}"
               v-for="item in aggregations" 
               v-if="staticKpi.frec === 'Diaria' || (staticKpi.frec === 'Mensual' && item !== 'Diaria') || (staticKpi.frec === 'Anual' && item === 'Anual')"
-              @click="query.agg = item">
+              @click="filters.agg = item">
               {{item}}
             </div>
         </div>
 
+      <!-- Selected Dates Display -->    
         <div v-if="defaultView" class="date-display"> 
-          <div>{{ dateStart.toISOString().slice(0, 10).split('-').reverse().join('-')  }}</div>
+          <div>{{ kpi[0].data[0].x  }}</div>
           <div>↔</div>
-          <div>{{ dateEnd.toISOString().slice(0, 10).split('-').reverse().join('-') }} </div>
+          <div>{{ kpi[0].data.slice(-1)[0].x }} </div>
         </div>
         <button @click="resetFilters()">Reset</button>
       </div>
     </div>
  
+    <!--  Chart Containers -->    
+    <div class="hypercontainer">
+      <div class="chartcontainer" ref="c">
+        <template v-if="defaultView">
 
-  <!--  Chart Container -->    
-  <div class="hypercontainer">
- 
-    <div class="chartcontainer" ref="c">
-  
-      <template v-if="defaultView">
-       <!--  Dragging filter -->    
-        <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': `${axisBottom.map(c => `${c.width}px`).join(' ')} 1fr`,'cursor': recursor}">
-         <div  
-            v-for="i in axisBottom.length+1"  :key="`${i}-col`"
-            @pointerdown="startDrag($event)"
-            @pointerup="endDrag($event)"
-            @mousemove="hoverling($event)"          
-            :data-col-start="getCols(i)"
-            :data-col-end="getCols(i) + 1"         
-            :data-date-start="getColDate(getCols(i)-2)"          
-            :data-date-end="getColDate(getCols(i)-1)"      
-          >  
+          <!--  Dragging filter -->    
+          <div v-if="index === undefined" class="ranger" :class="{dragging}" :style="{'grid-template-columns': `${axisBottom.map(c => `${c.width}px`).join(' ')} 1fr`,'cursor': recursor}">
+            <div  
+              v-for="i in axisBottom.length+1"  :key="`${i}-col`"
+              @pointerdown="startDrag($event)"
+              @pointerup="endDrag($event)"
+              @mousemove="hoverling($event)"          
+              :data-col-start="getCols(i)"
+              :data-col-end="getCols(i) + 1"         
+              :data-date-start="getColDate(getCols(i)-2)"          
+              :data-date-end="getColDate(getCols(i)-1)"      
+            >  
+            </div>
+            <div ref="reselecter" class="reselecter-cell"></div>
           </div>
-          <div ref="reselecter" class="reselecter-cell"></div>
-        </div>
 
-        <!--  Chart -->    
-        <svg 
-          id="chart" 
-          :class="{'loading':loadingLine }"
-          :width="chartWidth" 
-          :height="chartHeight" 
-          :viewBox="`0 0 ${chartWidth } ${chartHeight}`"
-        >
-          <clipPath id="clip">
-            <rect :x="`${axisBottom[0].width}px`" y="0" :height="chartHeight" :width="chartWidth-50-axisBottom[0].width"></rect>
-          </clipPath>  
+          <!-- Main SVG Chart -->    
+          <svg 
+            id="chart" 
+            :width="chartWidth" 
+            :height="chartHeight" 
+            :viewBox="`0 0 ${chartWidth } ${chartHeight}`"
+          >
+            <clipPath id="clip">
+              <rect :x="`${axisBottom[0].width}px`" y="0" :height="chartHeight" :width="chartWidth-50-axisBottom[0].width"></rect>
+            </clipPath>  
 
-          <g class="axis xAxis">
-            <g v-for="tick in axisBottom" :transform="`translate(${tick.left},${chartHeight-20})`" :data-date="tick.value">
-                <line :y2="-(chartHeight - 20)"></line>
-                <text x="5" dy="0.71em">{{tick.value}}</text>
-            </g>            
-          </g>
+            <!-- Axis -->    
+            <g class="axis xAxis">
+              <g v-for="tick in axisBottom" :transform="`translate(${tick.left},${chartHeight-20})`" :data-date="tick.value">
+                  <line :y2="-(chartHeight - 20)"></line>
+                  <text x="5" dy="0.71em">{{tick.value}}</text>
+              </g>            
+            </g>
+            <g class="axis yAxis" :class="{even: axisRight.length % 2 === 0, odd: axisRight.length % 2 !== 0}">
+              <g v-for="tick in axisRight" :transform="`translate(${chartWidth-30},${tick.top})`">
+                  <line :x2="-(chartWidth - 30)"></line>
+                  <text x="5" dy="0.32em">{{tick.value}}</text>
+              </g>            
+            </g>
 
-          <g class="axis yAxis" :class="{even: axisRight.length % 2 === 0, odd: axisRight.length % 2 !== 0}">
-            <g v-for="tick in axisRight" :transform="`translate(${chartWidth-30},${tick.top})`">
-                <line :x2="-(chartWidth - 30)"></line>
-                <text x="5" dy="0.32em">{{tick.value}}</text>
-            </g>            
-          </g>
-
-          <path 
-            v-for="(d, rekpi) in kpi.dimensions" 
-            clip-path="url(#clip)"               
-            :d="d.path"
-            :key="`${rekpi}`"
-            :style="{
-              'stroke': d.color || '#2E78D2',
-              'stroke-width': d.borderWidth || '1.5',
-              }"
-          />
-        </svg>   
-      </template>
-    </div>
+            <!-- KPI Dimensions -->    
+            <path 
+              v-for="(d, rekpi) in kpi" 
+              clip-path="url(#clip)"               
+              :d="d.path"
+              :key="`${rekpi}`"
+              :style="{
+                'stroke': d.color || '#2E78D2',
+                'stroke-width': d.borderWidth || '1.5',
+                }"
+            />
+          </svg>   
+        </template>
+      </div>
  
-   <charts-genericLineSidebar v-if="!index" :data="data"/>
-
+      <!-- Chart Sidebar -->    
+      <charts-genericLineSidebar v-if="!index" :data="data"/>
     </div>
 
+    <!-- Index Legends -->    
     <div class="legends" v-if="index" style="min-height:14px;">
-      <template v-if="kpi">
-        <div class="single-legend" v-for="(kpi,parent) in kpi.dimensions" :key="`${kpi.label}`">
-          <span class="circle" :style="{background: kpi.color }"></span> <span>{{kpi.label}}</span> 
-        </div>
-      </template>
+      <div class="single-legend" v-for="(kpi,parent) in kpi" :key="`${kpi.label}`">
+        <span class="circle" :style="{background: kpi.color }"></span> <span>{{kpi.label}}</span> 
+      </div>
     </div> 
   </div>
 </template>
@@ -120,62 +121,51 @@ export default {
   props: ['title', 'subtitle', 'data','index'],  
   data() {
     return {
+      kpi: require(`~/static/data/${this.data}.json`).dimensions, 
       staticKpi: JSON.parse(JSON.stringify(require(`~/static/data/${this.data}.json`))),
       startX: '',
-      dateStart: '',
-      dateEnd: '', 
       dragDates: [],
       axisBottom: [],
       axisRight: [],      
       dragging: false,
-      inverseSelection: false,
       defaultView: false,
-      loadingLine: false,
       animation: true,
       maxZoom: false,
       zoomLevel: 0,
-      chartHeight: 0,
-      chartWidth: 0,
+      chartHeight: null,
+      chartWidth: null,
       recursor: 'crosshair',
       ranges: ['Max','8A','4A','12M','6M'],
       aggregations: ['Diaria','Mensual','Anual'],
       selectedRange: 'Max',
-      dataAggFrec: require(`~/static/data/${this.data}.json`).frec,
-      dataAggFruc: require(`~/static/data/${this.data}.json`).fruc,
-      query: {
+      filters: {
         start: null,
         end: null,
-        agg: require(`~/static/data/${this.data}.json`).frec,
+        agg: null,
       },
-      apiUrl: `https://boletinextraoficial.com/api?kpi=${this.data}`,
-      startUrl: '',
-      aggUrl: '',
-      kpi: { title:require(`~/static/data/${this.data}.json`).t, dimensions: require(`~/static/data/${this.data}.json`).dimensions}, 
      }
   },
-  
   mounted() { 
     this.chartHeight = this.$refs.c.clientHeight
     this.chartWidth = this.$refs.c.clientWidth
     this.generateChart()
   },
   watch: {
-    query: {
+    filters: {
       handler: 'refreshData',
       deep: true,
     },    
   },  
   computed: {
     startDates() {
-      const lastDate = new Date(this.kpi.dimensions[0].data.slice(-1)[0].x);
-      const formatDate = (date) => date.toISOString().slice(0, 10);
-
+      const date = new Date(this.kpi[0].data.slice(-1)[0].x);
+      const subtractDate = (years, months) => (date.setFullYear(date.getFullYear() - years, date.getMonth() - months), date.toISOString().slice(0, 10));
       return {
-        '6M': formatDate(new Date(lastDate.getFullYear(), lastDate.getMonth() - 5, 1)),
-        '12M': formatDate(new Date(lastDate.getFullYear() - 1, lastDate.getMonth(), 1)),
-        '4A': formatDate(new Date(lastDate.getFullYear() - 3, lastDate.getMonth(), 1)),
-        '8A': formatDate(new Date(lastDate.getFullYear() - 7, lastDate.getMonth(), 1)),
-        'Max': formatDate(new Date(1970, 0, 1)),
+        '6M': subtractDate(0, 5),
+        '12M': subtractDate(1, 0),
+        '4A': subtractDate(3, 0),
+        '8A': subtractDate(7, 0),
+        'Max': '1970-01-01',
       };
     },
   },  
@@ -184,21 +174,16 @@ export default {
       return Math.ceil(i % (this.axisBottom.length+1)) || this.axisBottom.length+1;
     },
     getColDate(i) {
-      return this.axisBottom[i]?.date ?? this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length - 1].x;
+      return this.axisBottom[i]?.date ?? this.kpi[0].data[this.kpi[0].data.length - 1].x;
     },        
     processedDate() {
-      var pepe = new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de",'')
-      if(this.staticKpi.frec === 'Mensual') {
-        const lastDate = new Date(this.kpi.dimensions[0].data.slice(-1)[0].x + "T00:00:00");
-        var pepe = lastDate.toLocaleString('es', {month: 'long', year: 'numeric' }).replaceAll("de",'');
-      } 
-      if(this.staticKpi.frec === 'Anual') {
-        var pepe = `Año ${new Date(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x).toLocaleDateString('es', {year: 'numeric' }).replaceAll("de",'')}`
-      }         
-      return pepe
-    },      
+      const date = new Date(this.kpi[0].data.slice(-1)[0].x);
+      return this.staticKpi.frec === 'Mensual' ? date.toLocaleString('es', {month: 'long', year: 'numeric' }).replaceAll("de", '') :
+            this.staticKpi.frec === 'Anual' ? `Año ${date.toLocaleDateString('es', {year: 'numeric' }).replaceAll("de", '')}` :
+            date.toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de", '');
+    },
     refreshData() {
-      const { start, end, agg } = this.query;
+      const { start, end, agg } = this.filters;
 
       const filter = (data, start, end) => data.filter(item => (!start || item.x >= start) && (!end || item.x <= end));
 
@@ -214,8 +199,7 @@ export default {
           y: parseFloat((fruc === 'mean' ? sum / count : sum).toFixed(2))
         }));
 
-
-        const outputData = Object.values(this.staticKpi.dimensions).map(({ label, color, data }) => {
+      this.kpi = Object.values(this.staticKpi.dimensions).map(({ label, color, data }) => {
             let filteredData = start || end ? filter(data, start, end) : data;
             if (agg && ['Diaria', 'Mensual'].includes(this.staticKpi.frec)) {
             const period = agg.toLowerCase() === 'anual' ? 4 : 7;
@@ -224,19 +208,16 @@ export default {
             return { label, color, data: filteredData };
         });
 
-      this.kpi = { title: this.staticKpi.t, dimensions: outputData };
       this.generateChart();
     },
-
     resetFilters(){
-      this.query.start = null
-      this.query.end = null
-      this.query.agg = this.staticKpi.frec
+      this.filters.start = null
+      this.filters.end = null
+      this.filters.agg = this.staticKpi.frec
     },
     generateChart() {
       this.maxZoom = false
       this.zoomLevel = 0
-
       const parseTime = d3.timeParse("%Y-%m-%d")
       const timeIntervals = [
         {interval: d3.timeDay, format: '%Y'}, // show year at zoom level 0
@@ -244,12 +225,8 @@ export default {
         {interval: d3.timeDay, format: '%d %b %Y'} // show day at zoom level 2
       ];
  
-      //get start and end dates to set selected domain
-      this.dateStart = parseTime(this.kpi.dimensions[0].data[0].x)
-
-      this.dateEnd = parseTime(this.kpi.dimensions[0].data[this.kpi.dimensions[0].data.length-1].x)
- 
-      const scaleX = d3.scaleTime().domain([this.dateStart,this.dateEnd]).range([0, this.$refs.c.clientWidth-50]).nice(timeIntervals[this.zoomLevel].interval)
+      //Use start and end dates to set selected domain 
+      const scaleX = d3.scaleTime().domain([parseTime(this.kpi[0].data[0].x),parseTime(this.kpi[0].data[this.kpi[0].data.length-1].x)]).range([0, this.$refs.c.clientWidth-50]).nice(timeIntervals[this.zoomLevel].interval)
         
       //create the x axis object with value, translate and cell width
       this.axisBottom = scaleX.ticks().flatMap((d, i, ticks) => ([{
@@ -259,8 +236,8 @@ export default {
         width: i > 0 ? scaleX(d) - scaleX(ticks[i-1]) : scaleX(d),
       }]));
 
-      //get min and max values from all dimensions to set selected domain
-      const valuesData = this.kpi.dimensions.flatMap(d => d.data.map(i => i.y));
+      //get min and max values to set selected domain
+      const valuesData = this.kpi.flatMap(d => d.data.map(i => i.y));
       const [minValue, maxValue] = [this.kpi.min ?? d3.min(valuesData)*0.9, this.kpi.max ?? d3.max(valuesData)*1.05];
 
       const scaleY = d3.scaleLinear().domain([minValue, maxValue]).range([this.$refs.c.clientHeight-30, 10]).nice();
@@ -279,7 +256,7 @@ export default {
         pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(minValue)).y1(d => scaleY(d.y)).curve(d3.curveBasis);
       }
   
-      this.kpi.dimensions = this.kpi.dimensions.map(d => ({ ...d, path: pathGenerator(d.data) }));
+      this.kpi = this.kpi.map(d => ({ ...d, path: pathGenerator(d.data) }));
       this.defaultView = true  
 
     },    
@@ -294,21 +271,17 @@ export default {
 
       this.dragDates[0] = e.target.dataset.dateStart
 
-      },
+    },
     endDrag(e) {
       this.dragging = false;
       this.startX = '';
       this.$refs.reselecter.style.display = "none";
       this.dragDates[1] = e.target.dataset.dateEnd
-
       this.dragDates = this.dragDates.sort()
-
       if (this.dragDates[0] !== this.dragDates[1]) {
         this.zoomLevel = Math.min(this.zoomLevel + 1, 2);
-        this.apiUrl = `https://boletinextraoficial.com/api?kpi=${this.data}&start=${this.dragDates[0]}&end=${this.dragDates[1]}&agg=${this.aggUrl}`
-        this.query.start = this.dragDates[0]
-        this.query.end = this.dragDates[1]
-
+        this.filters.start = this.dragDates[0]
+        this.filters.end = this.dragDates[1]
       }        
       this.recursor = 'crosshair'
      },
@@ -317,7 +290,6 @@ export default {
         var xDir = this.startX - e.clientX;
         this.$refs.reselecter.style.gridColumnStart = xDir > 0 ? e.target.dataset.colStart : this.$refs.reselecter.style.gridColumnStart;
         this.$refs.reselecter.style.gridColumnEnd = xDir < 0 ? e.target.dataset.colEnd : this.$refs.reselecter.style.gridColumnEnd;
-        this.inverseSelection = xDir > 0;
        }
     },
   }
@@ -607,14 +579,4 @@ export default {
   opacity: 0;
 }
  
-
- .new-data {
-  position: absolute;
-  background: #fff;
-  inset: 0;
-  display: flex;
-  color: #888;
-  justify-content: center;
-  align-items: center;
- }
- </style>
+</style>
