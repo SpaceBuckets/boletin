@@ -29,12 +29,14 @@
             </div>
         </div>
 
-      <!-- Selected Dates Display -->    
-        <div v-if="defaultView" class="date-display"> 
+        <!-- Selected Dates Display -->    
+        <div class="date-display"> 
           <div>{{ kpi[0].data[0].x  }}</div>
           <div>↔</div>
-          <div>{{ kpi[0].data.slice(-1)[0].x }} </div>
+          <div>{{ kpi[0].data[kpi[0].data.length - 1].x }} </div>
         </div>
+
+        <!-- Reset Filters -->    
         <button @click="resetFilters()">Reset</button>
       </div>
     </div>
@@ -71,7 +73,7 @@
               <rect :x="`${axisBottom[0].width}px`" y="0" :height="chartHeight" :width="chartWidth-50-axisBottom[0].width"></rect>
             </clipPath>  
 
-            <!-- Axis -->    
+            <!-- Chart Axis -->    
             <g class="axis xAxis">
               <g v-for="tick in axisBottom" :transform="`translate(${tick.left},${chartHeight-20})`" :data-date="tick.value">
                   <line :y2="-(chartHeight - 20)"></line>
@@ -85,7 +87,7 @@
               </g>            
             </g>
 
-            <!-- KPI Dimensions -->    
+            <!-- Chart Dimensions -->    
             <path 
               v-for="(d, rekpi) in kpi" 
               clip-path="url(#clip)"               
@@ -148,7 +150,11 @@ export default {
   mounted() { 
     this.chartHeight = this.$refs.c.clientHeight
     this.chartWidth = this.$refs.c.clientWidth
-    this.generateChart()
+    this.filters.start = this.$state.kpidates[this.data]
+    this.filters.agg = this.staticKpi.frec
+  },
+  updated() {
+    console.log(this.axisBottom)
   },
   watch: {
     filters: {
@@ -158,14 +164,14 @@ export default {
   },  
   computed: {
     startDates() {
-      const date = new Date(this.kpi[0].data.slice(-1)[0].x);
+      const date = new Date(this.kpi[0].data[this.kpi[0].data.length - 1].x);
       const subtractDate = (years, months) => (date.setFullYear(date.getFullYear() - years, date.getMonth() - months), date.toISOString().slice(0, 10));
       return {
         '6M': subtractDate(0, 5),
         '12M': subtractDate(1, 0),
         '4A': subtractDate(3, 0),
         '8A': subtractDate(7, 0),
-        'Max': '1970-01-01',
+        'Max': null,
       };
     },
   },  
@@ -177,11 +183,16 @@ export default {
       return this.axisBottom[i]?.date ?? this.kpi[0].data[this.kpi[0].data.length - 1].x;
     },        
     processedDate() {
-      const date = new Date(this.kpi[0].data.slice(-1)[0].x);
+      const date = new Date(this.kpi[0].data[this.kpi[0].data.length - 1].x);
       return this.staticKpi.frec === 'Mensual' ? date.toLocaleString('es', {month: 'long', year: 'numeric' }).replaceAll("de", '') :
             this.staticKpi.frec === 'Anual' ? `Año ${date.toLocaleDateString('es', {year: 'numeric' }).replaceAll("de", '')}` :
             date.toLocaleDateString('es', {day: 'numeric', month: 'long', year: 'numeric' }).replaceAll("de", '');
     },
+    resetFilters(){
+      this.filters.start = null
+      this.filters.end = null
+      this.filters.agg = this.staticKpi.frec
+    },    
     refreshData() {
       const { start, end, agg } = this.filters;
 
@@ -201,24 +212,18 @@ export default {
 
       this.kpi = Object.values(this.staticKpi.dimensions).map(({ label, color, data }) => {
             let filteredData = start || end ? filter(data, start, end) : data;
-            if (agg && ['Diaria', 'Mensual'].includes(this.staticKpi.frec)) {
-            const period = agg.toLowerCase() === 'anual' ? 4 : 7;
-            filteredData = aggregate(filteredData, period, this.staticKpi.fruc);
+            if (agg) {
+              const period = agg.toLowerCase() === 'anual' ? 4 : agg.toLowerCase() === 'mensual' ? 7 : this.staticKpi.frec === 'Diaria' ? 10 : 7;
+              filteredData = aggregate(filteredData, period, this.staticKpi.fruc);
             }
             return { label, color, data: filteredData };
         });
 
       this.generateChart();
     },
-    resetFilters(){
-      this.filters.start = null
-      this.filters.end = null
-      this.filters.agg = this.staticKpi.frec
-    },
     generateChart() {
       this.maxZoom = false
       this.zoomLevel = 0
-      const parseTime = d3.timeParse("%Y-%m-%d")
       const timeIntervals = [
         {interval: d3.timeDay, format: '%Y'}, // show year at zoom level 0
         {interval: d3.timeMonth, format: '%b %Y'}, // show month at zoom level 1
@@ -226,8 +231,9 @@ export default {
       ];
  
       //Use start and end dates to set selected domain 
-      const scaleX = d3.scaleTime().domain([parseTime(this.kpi[0].data[0].x),parseTime(this.kpi[0].data[this.kpi[0].data.length-1].x)]).range([0, this.$refs.c.clientWidth-50]).nice(timeIntervals[this.zoomLevel].interval)
-        
+      const parseTime = d3.timeParse("%Y-%m-%d")
+      const scaleX = d3.scaleTime().domain([parseTime(this.kpi[0].data[0].x),parseTime(this.kpi[0].data[this.kpi[0].data.length - 1].x)]).range([0, this.$refs.c.clientWidth-50]).nice(timeIntervals[this.zoomLevel].interval)
+      console.log(scaleX)
       //create the x axis object with value, translate and cell width
       this.axisBottom = scaleX.ticks().flatMap((d, i, ticks) => ([{
         value: d3.timeFormat(timeIntervals[this.zoomLevel].format)(d),
@@ -261,16 +267,13 @@ export default {
 
     },    
     startDrag(e) {
- 
       this.dragging = true;
       this.startX = e.clientX;
       this.$refs.reselecter.style.gridColumnStart = e.target.dataset.colStart;
       this.$refs.reselecter.style.gridColumnEnd = e.target.dataset.colEnd;
       this.$refs.reselecter.style.display = "block";
       this.recursor = 'col-resize'
-
       this.dragDates[0] = e.target.dataset.dateStart
-
     },
     endDrag(e) {
       this.dragging = false;
@@ -303,26 +306,19 @@ export default {
   height: 100%;
   gap: 15px;
   flex-direction: column;
-.hypercontainer {
-  //display: flex;
-  height: 100%;
-  max-height:470px;
+  .hypercontainer {
+    height: 100%;
+    max-height:470px;
     gap: 20px;
     overflow: hidden;
-   > * {
-    flex: 1;
+    > * { flex: 1; }
   }
- 
-}
-&.index .chartcontainer {
-  width: calc(100% - 0px);
-
-}
+  &.index .chartcontainer {
+    width: calc(100% - 0px);
+  }
 }
 
-
-
- .chartcontainer {
+.chartcontainer {
   height: 100%;
   position: relative;
   float: left;
@@ -351,17 +347,12 @@ export default {
   bottom: 0;
   right: 0;
   user-select:none;  
-  //overflow: visible;
-  &.animation path {
-        transition: all .4s linear; 
-  }
+  &.animation path { transition: all .4s linear;  }
   path { 
     fill: none;
     stroke-linejoin: round;    
   }
-  &.area path {
-    fill: rgba(46,120,210,0.05);
-  }
+  &.area path { fill: rgba(46,120,210,0.05); }
   text { 
     color: #aaa;   
     fill: #aaa; 
@@ -371,10 +362,6 @@ export default {
     stroke: #ddd;
     stroke-width: 0.5px;
     stroke-dasharray: 2px;
-  }
-  .yAxis line {
-        //stroke-dasharray: 2px;
-
   }
 }
 
@@ -395,9 +382,7 @@ export default {
     max-width: max-content;
     font-size: 12px;
     color: #888;
-    span {
-          color: #888;
-    }
+    span { color: #888; }
     .circle {
       display: inline-block;
       min-width: 12px;
@@ -417,14 +402,14 @@ export default {
   gap: 15px;
  
 }
-  @media only screen and (max-width: 980px) {
 
-.index .flexer {
-  > * { flex: 1; max-width: 100%; }
+@media only screen and (max-width: 980px) {
 
-}
- } 
- .flexer {
+  .index .flexer  > * { flex: 1; max-width: 100%; }
+  
+} 
+
+.flexer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -467,7 +452,6 @@ export default {
     }
   }
   .date-agg {
-    //background: rgb(245,245,245);
     padding: 5px 12px;
     max-width: max-content;
     user-select: none;
@@ -485,11 +469,11 @@ export default {
     }
   }
   .date-display {
-      outline: 1px solid #eee;
+    outline: 1px solid #eee;
     padding: 5px 15px;
     max-width: max-content;
     user-select: none;
-     text-align: center;
+    text-align: center;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -500,9 +484,8 @@ export default {
     }    
     > div {
       flex: 1;
-            color: #bbb;
-     min-width: max-content;
-
+      color: #bbb;
+      min-width: max-content;
     }
     i {
       color: #aaa;
@@ -512,8 +495,8 @@ export default {
   }
   button {
     max-width: max-content;
-      outline: 1px solid #eee;
-      background: #fff;
+    outline: 1px solid #eee;
+    background: #fff;
     border: none;
     cursor: pointer;
     padding: 5px 12px;
@@ -522,14 +505,10 @@ export default {
       pointer-events: none;
       color: #aaa;
     }
-    &:hover {
-      background: #f5f5f5;
-    }
+    &:hover { background: #f5f5f5; }
   }
 }
  
- 
-
 .ranger {
   display: grid;
   position: absolute;
@@ -555,25 +534,20 @@ export default {
   }
   &.dragging > div:hover { background: transparent; } 
 }
-/* #chart .xAxis g:nth-child(even) line,
-#chart .xAxis g:nth-child(even) text {
-    fill: transparent;
-    stroke: transparent;
-} */
+
 #chart g[data-date="1990"] line,
 #chart g[data-date="2000"] line,
 #chart g[data-date="2004"] line,
 #chart g[data-date="2016"] line,
 #chart g[data-date="2020"] line,
-#chart g[data-date="2024"] line{
+#chart g[data-date="2024"] line {
     stroke-dasharray: 0px;
 }
 
 @for $year from 1980 through 2030 {
-  g[data-date="#{$year}"] ~ g[data-date="#{$year}"] {
-    opacity: 0;
-  }
+  g[data-date="#{$year}"] ~ g[data-date="#{$year}"] { opacity: 0; }
 }
+
 .axis.yAxis.even g:nth-child(2n+1),
 .axis.yAxis.odd g:nth-child(2n+2) {
   opacity: 0;
