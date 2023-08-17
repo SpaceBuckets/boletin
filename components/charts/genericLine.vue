@@ -132,7 +132,6 @@ export default {
       dragging: false,
       defaultView: false,
       animation: true,
-      maxZoom: false,
       zoomLevel: 0,
       chartHeight: null,
       chartWidth: null,
@@ -148,15 +147,19 @@ export default {
      }
   },
   mounted() { 
+    this.$nextTick(() => {
+   
+    //Set chart dimensions based on container
     this.chartHeight = this.$refs.c.clientHeight
     this.chartWidth = this.$refs.c.clientWidth
+    
+    //Set filter defaults 
     this.filters.start = this.$state.kpidates[this.data]
     this.filters.agg = this.staticKpi.frec
-  },
-  updated() {
-    console.log(this.axisBottom)
+       });    
   },
   watch: {
+    //Refetch data based on filter change
     filters: {
       handler: 'refreshData',
       deep: true,
@@ -196,8 +199,10 @@ export default {
     refreshData() {
       const { start, end, agg } = this.filters;
 
+      //Filter by start and end date range
       const filter = (data, start, end) => data.filter(item => (!start || item.x >= start) && (!end || item.x <= end));
 
+      //Aggregate by daily, monthly and yearly
       const aggregate = (data, period, fruc) =>
         Object.entries(data.reduce((groups, { x, y }) => {
           const key = x.substr(0, period);
@@ -210,6 +215,7 @@ export default {
           y: parseFloat((fruc === 'mean' ? sum / count : sum).toFixed(2))
         }));
 
+      //Assign filtered values to kpi dimensions
       this.kpi = Object.values(this.staticKpi.dimensions).map(({ label, color, data }) => {
             let filteredData = start || end ? filter(data, start, end) : data;
             if (agg) {
@@ -219,21 +225,21 @@ export default {
             return { label, color, data: filteredData };
         });
 
-      this.generateChart();
+        this.generateChart();
+
     },
     generateChart() {
-      this.maxZoom = false
       this.zoomLevel = 0
+
       const timeIntervals = [
         {interval: d3.timeDay, format: '%Y'}, // show year at zoom level 0
         {interval: d3.timeMonth, format: '%b %Y'}, // show month at zoom level 1
         {interval: d3.timeDay, format: '%d %b %Y'} // show day at zoom level 2
       ];
- 
       //Use start and end dates to set selected domain 
       const parseTime = d3.timeParse("%Y-%m-%d")
       const scaleX = d3.scaleTime().domain([parseTime(this.kpi[0].data[0].x),parseTime(this.kpi[0].data[this.kpi[0].data.length - 1].x)]).range([0, this.$refs.c.clientWidth-50]).nice(timeIntervals[this.zoomLevel].interval)
-      console.log(scaleX)
+
       //create the x axis object with value, translate and cell width
       this.axisBottom = scaleX.ticks().flatMap((d, i, ticks) => ([{
         value: d3.timeFormat(timeIntervals[this.zoomLevel].format)(d),
@@ -251,18 +257,15 @@ export default {
       //create the y axis object with value and translate
       this.axisRight = scaleY.ticks().map(d => ({ value: d, top: scaleY(d) }));       
 
-      // create a path generator based on chart type
-
+      // create a path generator based on chart type and add it to each dimension
       let pathGenerator = d3.line().x(d => scaleX(parseTime(d.x))).y(d => scaleY(d.y)).defined(d => d.y !== null);
 
-      if (this.kpi.type === 'bar') {
-        pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(0)).y1(d => scaleY(d.y));
-      } 
-      if (this.kpi.type === 'area') {
-        pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(minValue)).y1(d => scaleY(d.y)).curve(d3.curveBasis);
-      }
+      if (this.kpi.type === 'bar') { pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(0)).y1(d => scaleY(d.y)); } 
+      if (this.kpi.type === 'area') { pathGenerator = d3.area().x(d => scaleX(parseTime(d.x))).y0(scaleY(minValue)).y1(d => scaleY(d.y)).curve(d3.curveBasis); }
   
       this.kpi = this.kpi.map(d => ({ ...d, path: pathGenerator(d.data) }));
+
+      // create a path generator based on chart type and add it to each dimension
       this.defaultView = true  
 
     },    
@@ -281,11 +284,12 @@ export default {
       this.$refs.reselecter.style.display = "none";
       this.dragDates[1] = e.target.dataset.dateEnd
       this.dragDates = this.dragDates.sort()
-      if (this.dragDates[0] !== this.dragDates[1]) {
-        this.zoomLevel = Math.min(this.zoomLevel + 1, 2);
-        this.filters.start = this.dragDates[0]
-        this.filters.end = this.dragDates[1]
-      }        
+            if (this.kpi[0].data.length > 14) {
+          this.zoomLevel = Math.min(this.zoomLevel + 1, 2);
+          this.filters.start = this.dragDates[0]
+          this.filters.end = this.dragDates[1]
+      } 
+
       this.recursor = 'crosshair'
      },
     hoverling(e) {

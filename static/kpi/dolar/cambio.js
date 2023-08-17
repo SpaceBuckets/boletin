@@ -42,7 +42,6 @@ module.exports = (async function() {
     for (let i = 0; i < payload[chosenOne].length; i++) { payload[key][i].x = payload[chosenOne][i].x }
   }
 
-  payload['ahorro'] = payload['oficial'].map(d => ({ ...d, y: d.y * 1.65}));
   payload['turista'] = payload['oficial'].map(d => ({ ...d, y: d.y * 1.75}));
   payload['qatar'] = payload['oficial'].map(d => ({ ...d, y: d.y * 2}));
  
@@ -96,12 +95,6 @@ module.exports = (async function() {
         {
           label: "Qatar",
           data: payload.qatar,
-          color: "#00996640",
-          borderWidth: 1.25,
-        },    
-        {
-          label: "Ahorro",
-          data: payload.ahorro,
           color: "#00996640",
           borderWidth: 1.25,
         },    
